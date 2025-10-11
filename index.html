@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>我的免費行動儀表板</title>
+  <title>Ping股市儀表板</title>
   <link rel="manifest" href="public/manifest.json">
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,13 +15,15 @@
     .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;}
     .muted { color:#a5b4fc; font-size:12px;}
     button.install { padding:10px 14px; border-radius:12px; background:#1f2937; color:#e5e7eb; border:1px solid #374151;}
-    canvas { width:100%; height:320px; }
+    .chart-box { position: relative; height: 320px; max-height: 320px; }
+    .chart-box canvas { width: 100% !important; height: 100% !important; display:block; }
+
     /* 表格在 app.js 也會注入簡單樣式；這裡預留容器即可 */
   </style>
 </head>
 <body>
   <header class="row">
-    <div>📊 我的免費行動儀表板</div>
+    <div>📊 Ping股市儀表板</div>
     <button class="install" id="installBtn" hidden>安裝到手機</button>
   </header>
 
@@ -40,8 +42,11 @@
       <div class="row">
         <div>連續兩日外資買超前10交集（各日淨買超對比）</div>
       </div>
-      <canvas id="chart" aria-label="兩日淨買超(張)長條圖" role="img"></canvas>
+      <div class="chart-box">
+        <canvas id="chart" aria-label="兩日淨買超(張)長條圖" role="img"></canvas>
+      </div>
     </div>
+
 
     <!-- 交集明細表 -->
     <div class="card">
