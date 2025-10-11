@@ -2,32 +2,27 @@ async function loadData() {
   const res = await fetch('./data/latest.json', { cache: 'no-store' });
   const data = await res.json();
 
-  // Meta info
-  const meta = document.getElementById('meta');
-  meta.textContent = `來源：${data.source} ｜ 產生時間(UTC)：${data.generated_at}`;
-
-  // Text stats
-  const stats = document.getElementById('stats');
-  stats.textContent = `總數量：${data.total}`;
-
-  // Chart
-  const ctx = document.getElementById('chart');
-  const labels = data.top_categories.map(d => d.Category);
-  const values = data.top_categories.map(d => d.count);
+  const [d0, d1] = data.trading_dates; // d0: 最近一天
+  const labels = data.stocks.map(s => `${s.stock_name}(${s.stock_id})`);
+  const v0 = data.stocks.map(s => s.per_day[d0].net_lots);
+  const v1 = data.stocks.map(s => s.per_day[d1].net_lots);
 
   if (window.myChart) window.myChart.destroy();
-  window.myChart = new Chart(ctx, {
+  window.myChart = new Chart(document.getElementById('chart'), {
     type: 'bar',
     data: {
       labels,
-      datasets: [{ label: 'Count', data: values }]
+      datasets: [
+        { label: `${d0} 淨買超(張)`, data: v0 },
+        { label: `${d1} 淨買超(張)`, data: v1 }
+      ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: { x: { ticks: { color: '#c7d2fe' }}, y: { ticks: { color: '#c7d2fe' }} },
-      plugins: { legend: { labels: { color: '#e5e7eb' }} }
-    }
+    options: { responsive: true, maintainAspectRatio: false }
   });
+
+  document.getElementById('meta').textContent =
+    `模式：兩日交集 ｜ 交易日：${data.trading_dates.join(', ')} ｜ 產生(UTC)：${data.generated_at_utc}`;
+  document.getElementById('stats').textContent =
+    `交集檔數：${data.count_intersection}`;
 }
 loadData();
