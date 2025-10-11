@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>我的免費行動儀表板</title>
+  <link rel="manifest" href="public/manifest.json">
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    body { margin:0; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background:#0b1220; color:#eef2ff;}
+    header { padding:16px; font-size:18px; font-weight:700; background:#0f172a; position:sticky; top:0;}
+    .wrap { padding:16px; display:grid; gap:12px; }
+    .card { background:#111827; border-radius:16px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,.35);}
+    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;}
+    .muted { color:#a5b4fc; font-size:12px;}
+    button.install { padding:10px 14px; border-radius:12px; background:#1f2937; color:#e5e7eb; border:1px solid #374151;}
+    canvas { width:100%; height:320px; }
+  </style>
+</head>
+<body>
+  <header class="row">
+    <div>📊 我的免費行動儀表板</div>
+    <button class="install" id="installBtn" hidden>安裝到手機</button>
+  </header>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="row">
+        <div>最新資料</div>
+        <div class="muted" id="meta"></div>
+      </div>
+      <pre id="stats" style="white-space:pre-wrap;"></pre>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div>Top Categories</div>
+      </div>
+      <canvas id="chart"></canvas>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    // PWA Install
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+    });
+    installBtn.addEventListener('click', async () => {
+      installBtn.hidden = true;
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      }
+    });
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
+  </script>
+</body>
+</html>
