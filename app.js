@@ -23,8 +23,16 @@ async function loadData() {
   // Meta 顯示
   const metaEl = document.getElementById('meta');
   const statsEl = document.getElementById('stats');
-  if (metaEl) metaEl.textContent =
-    `模式：兩日交集 ｜ 交易日：${dates.join(', ')} ｜ 產生(UTC)：${data.generated_at_utc || ''}`;
+  if (metaEl) {
+  const utcStr = data.generated_at_utc;
+  let localStr = '';
+  if (utcStr) {
+    const utcDate = new Date(utcStr + 'Z'); // 加 Z 告訴 JS 是 UTC
+    localStr = utcDate.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+  }
+  metaEl.textContent =
+    `模式：兩日交集 ｜ 交易日：${dates.join(', ')} ｜ 產生(UTC+8)：${localStr}`;}
+
   if (statsEl) statsEl.textContent = `交集檔數：${data.count_intersection ?? (data.stocks?.length || 0)}`;
 
   const stocks = Array.isArray(data.stocks) ? data.stocks : [];
