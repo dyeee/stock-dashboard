@@ -1,9 +1,9 @@
 const CACHE = "free-dash-v1";
 const ASSETS = [
-  "/",
-  "/index.html",
-  "/app.js",
-  "/public/manifest.json"
+  "./",
+  "./index.html",
+  "./app.js",
+  "./public/manifest.json"
 ];
 
 self.addEventListener("install", e => {
