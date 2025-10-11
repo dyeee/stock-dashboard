@@ -6,15 +6,17 @@
   <title>我的免費行動儀表板</title>
   <link rel="manifest" href="public/manifest.json">
   <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <style>
     body { margin:0; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background:#0b1220; color:#eef2ff;}
-    header { padding:16px; font-size:18px; font-weight:700; background:#0f172a; position:sticky; top:0;}
+    header { padding:16px; font-size:18px; font-weight:700; background:#0f172a; position:sticky; top:0; z-index:10;}
     .wrap { padding:16px; display:grid; gap:12px; }
     .card { background:#111827; border-radius:16px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,.35);}
     .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;}
     .muted { color:#a5b4fc; font-size:12px;}
     button.install { padding:10px 14px; border-radius:12px; background:#1f2937; color:#e5e7eb; border:1px solid #374151;}
     canvas { width:100%; height:320px; }
+    /* 表格在 app.js 也會注入簡單樣式；這裡預留容器即可 */
   </style>
 </head>
 <body>
@@ -24,19 +26,30 @@
   </header>
 
   <main class="wrap">
+    <!-- 資訊卡 -->
     <div class="card">
       <div class="row">
         <div>最新資料</div>
         <div class="muted" id="meta"></div>
       </div>
-      <pre id="stats" style="white-space:pre-wrap;"></pre>
+      <pre id="stats" style="white-space:pre-wrap; margin:0;"></pre>
     </div>
 
+    <!-- 圖表卡 -->
     <div class="card">
       <div class="row">
-        <div>Top Categories</div>
+        <div>連續兩日外資買超前10交集（各日淨買超對比）</div>
       </div>
-      <canvas id="chart"></canvas>
+      <canvas id="chart" aria-label="兩日淨買超(張)長條圖" role="img"></canvas>
+    </div>
+
+    <!-- 交集明細表 -->
+    <div class="card">
+      <div class="row" style="margin-bottom:8px;">
+        <div>交集明細</div>
+        <div class="muted">顯示代號、名稱、兩日排名與買超、變化與合計</div>
+      </div>
+      <div id="table"></div>
     </div>
   </main>
 
@@ -59,9 +72,9 @@
         deferredPrompt = null;
       }
     });
-    // Service Worker
+    // Service Worker（相對路徑，適用 GitHub Pages 專案頁）
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
+      navigator.serviceWorker.register('./service-worker.js');
     }
   </script>
 </body>
