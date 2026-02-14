@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-02-10 15:19:35",
+  "generated_at_utc": "2026-02-14 14:44:20",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -10,77 +10,23 @@
     "2026-02-10",
     "2026-02-09"
   ],
-  "count_intersection": 4,
+  "count_intersection": 1,
   "stocks": [
     {
-      "stock_id": "00878",
-      "stock_name": "國泰永續高股息  ",
-      "total_net_buy": 68416,
-      "avg_net_buy": 34208.0,
+      "stock_id": "2883",
+      "stock_name": "凱基金          ",
+      "total_net_buy": 68058,
+      "avg_net_buy": 34029.0,
       "per_day": {
         "day1": {
           "date": "2026-02-10",
+          "rank": 4,
+          "net_buy_lots": 5661
+        },
+        "day2": {
+          "date": "2026-02-09",
           "rank": 1,
-          "net_buy_lots": 28669
-        },
-        "day2": {
-          "date": "2026-02-09",
-          "rank": 2,
-          "net_buy_lots": 39747
-        }
-      }
-    },
-    {
-      "stock_id": "0050",
-      "stock_name": "元大台灣50      ",
-      "total_net_buy": 60147,
-      "avg_net_buy": 30073.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-02-10",
-          "rank": 5,
-          "net_buy_lots": 23352
-        },
-        "day2": {
-          "date": "2026-02-09",
-          "rank": 3,
-          "net_buy_lots": 36795
-        }
-      }
-    },
-    {
-      "stock_id": "00919",
-      "stock_name": "群益台灣精選高息",
-      "total_net_buy": 48765,
-      "avg_net_buy": 24382.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-02-10",
-          "rank": 2,
-          "net_buy_lots": 26894
-        },
-        "day2": {
-          "date": "2026-02-09",
-          "rank": 8,
-          "net_buy_lots": 21871
-        }
-      }
-    },
-    {
-      "stock_id": "00981A",
-      "stock_name": "主動統一台股增長",
-      "total_net_buy": 35182,
-      "avg_net_buy": 17591.0,
-      "per_day": {
-        "day1": {
-          "date": "2026-02-10",
-          "rank": 6,
-          "net_buy_lots": 21723
-        },
-        "day2": {
-          "date": "2026-02-09",
-          "rank": 10,
-          "net_buy_lots": 13459
+          "net_buy_lots": 62397
         }
       }
     }
