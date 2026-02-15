@@ -1,32 +1,68 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-02-14 14:44:20",
+  "generated_at_utc": "2026-02-15 14:45:47",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
     "top_n": 10
   },
   "trading_dates": [
-    "2026-02-10",
-    "2026-02-09"
+    "2026-02-11",
+    "2026-02-10"
   ],
-  "count_intersection": 1,
+  "count_intersection": 3,
   "stocks": [
     {
-      "stock_id": "2883",
-      "stock_name": "凱基金          ",
-      "total_net_buy": 68058,
-      "avg_net_buy": 34029.0,
+      "stock_id": "3481",
+      "stock_name": "群創            ",
+      "total_net_buy": 74557,
+      "avg_net_buy": 37278.5,
       "per_day": {
         "day1": {
-          "date": "2026-02-10",
+          "date": "2026-02-11",
           "rank": 4,
-          "net_buy_lots": 5661
+          "net_buy_lots": 50502
         },
         "day2": {
-          "date": "2026-02-09",
-          "rank": 1,
-          "net_buy_lots": 62397
+          "date": "2026-02-10",
+          "rank": 4,
+          "net_buy_lots": 24055
+        }
+      }
+    },
+    {
+      "stock_id": "00919",
+      "stock_name": "群益台灣精選高息",
+      "total_net_buy": 62210,
+      "avg_net_buy": 31105.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-02-11",
+          "rank": 9,
+          "net_buy_lots": 35316
+        },
+        "day2": {
+          "date": "2026-02-10",
+          "rank": 2,
+          "net_buy_lots": 26894
+        }
+      }
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海            ",
+      "total_net_buy": 50007,
+      "avg_net_buy": 25003.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-02-11",
+          "rank": 10,
+          "net_buy_lots": 31320
+        },
+        "day2": {
+          "date": "2026-02-10",
+          "rank": 9,
+          "net_buy_lots": 18687
         }
       }
     }
