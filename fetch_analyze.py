@@ -12,6 +12,7 @@ import requests
 import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
+from groq import Groq
 
 TPE_TZ = timezone(timedelta(hours=8))
 NOW_TPE = datetime.now(TPE_TZ)
@@ -26,10 +27,6 @@ SESSION.headers.update({
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
 })
 
-
-# ════════════════════════════════════════════════════════
-# 工具函式
-# ════════════════════════════════════════════════════════
 
 def http_get(url, params=None, retries=3, timeout=30):
     last_err = None
@@ -51,10 +48,6 @@ def to_number(x):
     try: return float(s)
     except: return 0.0
 
-
-# ════════════════════════════════════════════════════════
-# 外資資料
-# ════════════════════════════════════════════════════════
 
 def get_twse_foreign_data(date):
     url = "https://www.twse.com.tw/rwd/zh/fund/T86"
@@ -143,12 +136,10 @@ def get_consecutive_top10(days=2):
     print("🚀 外資連續買超前10名交集分析")
     print("=" * 70)
     print(f"📅 {NOW_TPE.strftime('%Y-%m-%d %H:%M')} (Asia/Taipei)\n")
-
     trading_dates = find_recent_trading_dates(days=days, lookback=30)
     if len(trading_dates) < days:
         print(f"❌ 只找到 {len(trading_dates)} 個交易日，需要 {days} 個")
         return None
-
     print(f"\n📊 分析最近 {days} 個交易日...\n")
     daily_top10_list = []
     for i, date in enumerate(trading_dates[:days], 1):
@@ -163,17 +154,14 @@ def get_consecutive_top10(days=2):
             print(f"   ✗ 無法取得資料")
             return None
         time.sleep(0.3)
-
     print(f"\n🔍 尋找連續 {days} 天都在前10名的個股...")
     common_stocks = set(daily_top10_list[0]['stock_id'])
     for i in range(1, days):
         common_stocks &= set(daily_top10_list[i]['stock_id'])
         print(f"   第 1-{i+1} 天交集: {len(common_stocks)} 檔")
-
     if not common_stocks:
         print(f"❌ 沒有個股連續 {days} 天都在前10名")
         return pd.DataFrame(), daily_top10_list
-
     print(f"\n✅ 找到 {len(common_stocks)} 檔\n")
     result_list = []
     for stock_id in common_stocks:
@@ -193,24 +181,17 @@ def get_consecutive_top10(days=2):
         stock_info['total_net_buy'] = int(total_net_buy)
         stock_info['avg_net_buy'] = float(total_net_buy / days)
         result_list.append(stock_info)
-
     result = pd.DataFrame(result_list).sort_values(
         'total_net_buy', ascending=False).reset_index(drop=True)
     return result, daily_top10_list
 
 
-# ════════════════════════════════════════════════════════
-# AI 交叉確認（全部走自動搜尋）
-# ════════════════════════════════════════════════════════
+def is_etf(ticker):
+    return ticker.startswith("00") or ticker.startswith("006")
 
-# ETF 代號前綴（00 開頭通常是 ETF，MOPS 查不到月營收）
-def is_etf(ticker: str) -> bool:
-    return ticker.startswith("00") or ticker.startswith("0050") or ticker.startswith("006")
-
-def fetch_mops_revenue(ticker: str) -> str:
-    """從 MOPS 抓任意上市公司月營收"""
+def fetch_mops_revenue(ticker):
     if is_etf(ticker):
-        return "ETF 無月營收資料（追蹤指數，不適用 MOPS）"
+        return "ETF 無月營收資料（追蹤指數）"
     now = datetime.now()
     year, month = (now.year - 1, 12) if now.month == 1 else (now.year, now.month - 1)
     try:
@@ -223,8 +204,7 @@ def fetch_mops_revenue(ticker: str) -> str:
         text = re.sub(r'<[^>]+>', ' ', resp.text)
         text = re.sub(r'\s+', ' ', text).strip()
         if len(text) < 100 or "查無資料" in text:
-            return "MOPS 查無資料（上櫃公司或尚未公布）"
-
+            return "MOPS 查無資料"
         results = [f"期間：{year}-{month:02d}"]
         nums = []
         for n in re.findall(r'[\d,]{5,}', text):
@@ -245,22 +225,19 @@ def fetch_mops_revenue(ticker: str) -> str:
         kws = ["庫存調整", "客戶調整", "GB200", "AI伺服器", "液冷", "匯率", "NVL72"]
         found = [k for k in kws if k in text]
         if found:
-            results.append(f"備註關鍵字：{'、'.join(found)}")
+            results.append(f"備註：{'、'.join(found)}")
         results.append(f"原始節錄：{text[:400]}")
         return "\n".join(results)
     except Exception as e:
         return f"MOPS 連線失敗：{e}"
 
-
-def search_news(ticker: str, name: str) -> str:
-    """Google News RSS 搜尋近期新聞"""
+def search_news(ticker, name):
     results = []
     for q in [f"{name} 財報", f"{ticker} {name} 營收"]:
         try:
             url = (f"https://news.google.com/rss/search?"
                    f"q={requests.utils.quote(q)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant")
-            resp = requests.get(url, timeout=8,
-                                headers={"User-Agent": "Mozilla/5.0"})
+            resp = requests.get(url, timeout=8, headers={"User-Agent": "Mozilla/5.0"})
             titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
             for t in titles[1:5]:
                 if any(k in t for k in [ticker, name, name[:2]]) and t not in results:
@@ -270,57 +247,46 @@ def search_news(ticker: str, name: str) -> str:
         time.sleep(0.5)
     return "\n".join(results[:5]) if results else "無近期相關新聞"
 
-
-def call_groq(client, prompt: str, retries: int = 3) -> str:
-    """呼叫 Groq，自動重試，確保回傳可解析的 JSON 字串"""
-    for attempt in range(retries):
+def call_groq(client, prompt):
+    for attempt in range(3):
         try:
             resp = client.chat.completions.create(
                 model="qwen/qwen3-32b",
                 messages=[
-                    {"role": "system",
-                     "content": "你是台灣股票分析師。只輸出純 JSON，繁體中文，不要有任何其他文字、說明、或 markdown。"},
+                    {"role": "system", "content": "你是台灣股票分析師。只輸出純 JSON，繁體中文，不要有任何其他文字。"},
                     {"role": "user", "content": prompt},
                 ],
                 temperature=0.3,
                 max_tokens=600,
             )
             raw = resp.choices[0].message.content.strip()
-            # 去掉 think 標籤、markdown 包裹
             raw = re.sub(r'<think>.*?</think>', '', raw, flags=re.DOTALL).strip()
             raw = re.sub(r'^```(?:json)?\s*', '', raw)
             raw = re.sub(r'\s*```$', '', raw).strip()
-            # 找 JSON 物件
             start, end = raw.find("{"), raw.rfind("}") + 1
             if start == -1 or end == 0:
-                raise ValueError(f"找不到 JSON，原始輸出：{raw[:100]}")
+                raise ValueError(f"找不到 JSON：{raw[:100]}")
             return raw[start:end]
         except Exception as e:
-            print(f"    ⚠️  第 {attempt+1} 次嘗試失敗：{e}")
-            if attempt < retries - 1:
+            print(f"    ⚠️ 第{attempt+1}次失敗：{e}")
+            if attempt < 2:
                 time.sleep(5)
     return ""
 
-
-def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
-    """對單一股票自動搜尋財報 + 新聞，然後 AI 判斷"""
+def ai_analyze_one(ticker, name, net_buy):
     groq_key = os.environ.get("GROQ_API_KEY", "")
     if not groq_key:
-        return {
-            "ticker": ticker, "name": name,
-            "verdict": "謹慎觀察", "confidence": "低",
-            "reasons": ["未設定 GROQ_API_KEY"],
-            "warning": None, "next_check": "設定 API Key",
-            "data_quality": "不足",
-        }
+        return {"ticker": ticker, "name": name, "verdict": "謹慎觀察",
+                "confidence": "低", "reasons": ["未設定 GROQ_API_KEY"],
+                "warning": None, "next_check": "設定 API Key",
+                "data_quality": "不足", "net_buy_lots": net_buy}
 
-    from groq import Groq
     client = Groq(api_key=groq_key)
-
     etf = is_etf(ticker)
+
     if etf:
-        print(f"    📊 ETF，跳過 MOPS，直接搜尋新聞...")
-        earnings = "此為 ETF，追蹤指數，無月營收，以資金流向和折溢價判斷。"
+        print(f"    📦 ETF，搜尋新聞...")
+        earnings = "此為 ETF，追蹤指數，無月營收。"
     else:
         print(f"    🌐 抓取 MOPS 月營收...")
         earnings = fetch_mops_revenue(ticker)
@@ -329,75 +295,71 @@ def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
     news = search_news(ticker, name)
     time.sleep(1)
 
-    if etf:
-        context = f"""這是 ETF（{ticker} {name}），不適用一般財報分析。
-外資連續兩天大量買超（合計 {net_buy:,} 張），代表機構法人在佈局。
-請根據新聞判斷市場對此 ETF 追蹤標的的看法。"""
-    else:
-        context = f"一般股票，請根據月營收和新聞判斷基本面。"
+    etf_note = ("ETF，不適用財報分析，根據新聞判斷追蹤標的走勢。"
+                if etf else "一般股票，根據月營收和新聞判斷基本面。")
 
     prompt = f"""外資連續兩天買超：{ticker} {name}（{'ETF' if etf else '股票'}）
 合計買超：{net_buy:,} 張
+{etf_note}
 
-{context}
-
-【月營收 / 基本面】
+【月營收】
 {earnings[:500]}
 
 【近期新聞】
 {news}
 
-只輸出純 JSON，不要有任何其他文字：
+只輸出純 JSON：
 {{
   "ticker": "{ticker}",
   "name": "{name}",
   "verdict": "建議買進 或 謹慎觀察 或 不建議",
   "confidence": "高 或 中 或 低",
   "reasons": ["理由1（15字內）", "理由2（15字內）"],
-  "warning": "最大風險（20字內），沒有填null",
+  "warning": "最大風險（20字內）或null",
   "next_check": "下次確認時間點（10字內）",
   "data_quality": "充足 或 有限 或 不足"
-}}
-
-判斷原則：
-ETF → 外資大量買超通常是正面訊號，但需觀察追蹤標的走勢
-股票 → 外資買超 + 財報成長 + 新聞正面 → 建議買進
-資料不足時 confidence 設「低」，verdict 設「謹慎觀察」"""
+}}"""
 
     raw_json = call_groq(client, prompt)
-
     if not raw_json:
-        return {
-            "ticker": ticker, "name": name,
-            "verdict": "謹慎觀察", "confidence": "低",
-            "reasons": ["AI 回傳解析失敗，請手動查閱"],
-            "warning": "Groq 回傳格式異常",
-            "next_check": "手動確認",
-            "data_quality": "不足",
-            "net_buy_lots": net_buy,
-        }
-
+        return {"ticker": ticker, "name": name, "verdict": "謹慎觀察",
+                "confidence": "低", "reasons": ["AI 回傳解析失敗"],
+                "warning": "請手動查閱", "next_check": "手動確認",
+                "data_quality": "不足", "net_buy_lots": net_buy, "is_etf": etf}
     try:
         result = json.loads(raw_json)
     except Exception as e:
-        return {
-            "ticker": ticker, "name": name,
-            "verdict": "謹慎觀察", "confidence": "低",
-            "reasons": ["JSON 解析失敗"],
-            "warning": str(e)[:40],
-            "next_check": "手動確認",
-            "data_quality": "不足",
-            "net_buy_lots": net_buy,
-        }
-
+        return {"ticker": ticker, "name": name, "verdict": "謹慎觀察",
+                "confidence": "低", "reasons": ["JSON 解析失敗"],
+                "warning": str(e)[:40], "next_check": "手動確認",
+                "data_quality": "不足", "net_buy_lots": net_buy, "is_etf": etf}
     result["net_buy_lots"] = net_buy
     result["is_etf"] = etf
     return result
 
-
-# ════════════════════════════════════════════════════════
-# 輸出 JSON
-# ════════════════════════════════════════════════════════
+def run_ai_cross_check(result_df):
+    if result_df is None or len(result_df) == 0:
+        return []
+    print("\n" + "=" * 55)
+    print("🤖 AI 交叉確認（MOPS + Google News）")
+    print("=" * 55)
+    analyses = []
+    for _, row in result_df.iterrows():
+        ticker = str(row["stock_id"])
+        name = str(row["stock_name"])
+        net_buy = int(row.get("total_net_buy", 0))
+        print(f"\n  📊 {ticker} {name}（買超 {net_buy:,} 張）")
+        result = ai_analyze_one(ticker, name, net_buy)
+        icon = {"建議買進": "✅", "謹慎觀察": "⚠️", "不建議": "❌"}.get(
+            result.get("verdict", ""), "❓")
+        print(f"    {icon} {result.get('verdict')} "
+              f"（信心：{result.get('confidence')}，資料：{result.get('data_quality')}）")
+        for r in result.get("reasons", []):
+            print(f"       · {r}")
+        analyses.append(result)
+        time.sleep(3)
+    print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
+    return analyses
 
 def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
     trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
@@ -419,7 +381,6 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
             }
             i += 1
         stocks.append(item)
-
     payload = {
         "mode": "intersection_top10_per_day",
         "generated_at_utc": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
@@ -431,22 +392,13 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
         "ai_analysis": ai_analyses or [],
         "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
     }
-
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
-    OUT_LATEST.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {OUT_LATEST}")
-
     last_trade = trading_dates[0].replace('-', '')
     out_history = OUT_HISTORY_DIR / f"{last_trade}.json"
-    out_history.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_history.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {out_history}")
-
-
-# ════════════════════════════════════════════════════════
-# 主程式
-# ════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
     days = int(os.getenv("DAYS", "2"))
@@ -454,7 +406,6 @@ if __name__ == "__main__":
 
     if result_data is not None:
         result, daily_top10_list = result_data
-
         print("=" * 70)
         print(f"🎉 連續 {days} 天都在外資買超前10名的個股 (交集)")
         print("=" * 70)
@@ -483,14 +434,12 @@ if __name__ == "__main__":
             pd.set_option('display.max_columns', None)
             pd.set_option('display.width', 180)
             print("\n" + display.to_string())
-
             timestamp = NOW_TPE.strftime('%Y%m%d_%H%M')
             csv_path = OUT_EXPORT_DIR / f'外資連續前10名交集_{timestamp}.csv'
             result.to_csv(csv_path, index=False, encoding='utf-8-sig')
             print(f"\n💾 CSV: {csv_path}")
             print(f"✅ 連續進榜: {len(result)} 檔")
             print(f"📊 總買超: {int(display['合計買超(張)'].sum()):,} 張")
-
             common_ids = set(result['stock_id'])
             for i, daily_data in enumerate(daily_top10_list, 1):
                 date = daily_data.iloc[0]['rank_date']
@@ -503,7 +452,6 @@ if __name__ == "__main__":
         else:
             print("❌ 沒有個股連續兩天都在前10名")
 
-        # AI 交叉確認
         ai_analyses = run_ai_cross_check(
             result if result is not None else pd.DataFrame()
         )
