@@ -1,11 +1,8 @@
 name: Fetch & Analyze (22:10 TPE)
-
 on:
   schedule:
-    # 22:10 台北 = 14:10 UTC
     - cron: "10 14 * * *"
   workflow_dispatch: {}
-
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -18,18 +15,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests pandas
-
-      - name: Fetch & analyze (intersection mode)
-        env:
-          DAYS: "2"          # 連續 2 天
-          TOP_N: "10"        # 各日 Top 10
-          ORDER_BY: "last_rank"  # last_rank / avg_rank / sum_net
-        run: python fetch_analyze.py
 
       - name: Install deps
         run: |
