@@ -12,6 +12,7 @@ import requests
 import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
+from groq import Groq
 
 TPE_TZ = timezone(timedelta(hours=8))
 NOW_TPE = datetime.now(TPE_TZ)
