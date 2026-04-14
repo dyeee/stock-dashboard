@@ -191,7 +191,7 @@ function renderAIAnalysis(data) {
       ? `<div style="font-size:11px;color:#6b7280;margin-top:4px">📅 ${a.next_check}</div>` : '';
     const srcBadge = `<span style="font-size:10px;background:#1f2937;padding:1px 6px;
       border-radius:4px;color:#6b7280;margin-left:6px">${
-      a.data_source === '本地財報資料庫' ? '📁 本地' : '🌐 即時搜尋'}</span>`;
+      a.is_etf ? '📦 ETF' : '🌐 即時搜尋'}</span>`;
     const qualityBadge = `<span style="font-size:10px;color:${qualityColor(a.data_quality)};
       margin-left:8px">資料：${a.data_quality}</span>`;
 

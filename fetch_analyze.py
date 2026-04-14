@@ -203,8 +203,14 @@ def get_consecutive_top10(days=2):
 # AI 交叉確認（全部走自動搜尋）
 # ════════════════════════════════════════════════════════
 
+# ETF 代號前綴（00 開頭通常是 ETF，MOPS 查不到月營收）
+def is_etf(ticker: str) -> bool:
+    return ticker.startswith("00") or ticker.startswith("0050") or ticker.startswith("006")
+
 def fetch_mops_revenue(ticker: str) -> str:
     """從 MOPS 抓任意上市公司月營收"""
+    if is_etf(ticker):
+        return "ETF 無月營收資料（追蹤指數，不適用 MOPS）"
     now = datetime.now()
     year, month = (now.year - 1, 12) if now.month == 1 else (now.year, now.month - 1)
     try:
@@ -228,19 +234,15 @@ def fetch_mops_revenue(ticker: str) -> str:
                     nums.append(val)
             except Exception:
                 pass
-
         if nums:
             results.append(f"當月營收：{nums[0]:,} 千元（{nums[0]/1e6:.1f} 億）")
-
         pcts = re.findall(r'[-+]?\d+\.?\d*\s*%', text)
         if pcts:
             results.append(f"成長率：{pcts[0]}")
         elif len(nums) >= 3 and nums[2] > 0:
             yoy = (nums[0] - nums[2]) / nums[2] * 100
             results.append(f"YoY（估算）：{yoy:+.1f}%")
-
-        kws = ["庫存調整", "客戶調整", "GB200", "AI伺服器", "液冷",
-               "匯率", "NVL72", "訂單能見度"]
+        kws = ["庫存調整", "客戶調整", "GB200", "AI伺服器", "液冷", "匯率", "NVL72"]
         found = [k for k in kws if k in text]
         if found:
             results.append(f"備註關鍵字：{'、'.join(found)}")
@@ -269,6 +271,37 @@ def search_news(ticker: str, name: str) -> str:
     return "\n".join(results[:5]) if results else "無近期相關新聞"
 
 
+def call_groq(client, prompt: str, retries: int = 3) -> str:
+    """呼叫 Groq，自動重試，確保回傳可解析的 JSON 字串"""
+    for attempt in range(retries):
+        try:
+            resp = client.chat.completions.create(
+                model="qwen/qwen3-32b",
+                messages=[
+                    {"role": "system",
+                     "content": "你是台灣股票分析師。只輸出純 JSON，繁體中文，不要有任何其他文字、說明、或 markdown。"},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.3,
+                max_tokens=600,
+            )
+            raw = resp.choices[0].message.content.strip()
+            # 去掉 think 標籤、markdown 包裹
+            raw = re.sub(r'<think>.*?</think>', '', raw, flags=re.DOTALL).strip()
+            raw = re.sub(r'^```(?:json)?\s*', '', raw)
+            raw = re.sub(r'\s*```$', '', raw).strip()
+            # 找 JSON 物件
+            start, end = raw.find("{"), raw.rfind("}") + 1
+            if start == -1 or end == 0:
+                raise ValueError(f"找不到 JSON，原始輸出：{raw[:100]}")
+            return raw[start:end]
+        except Exception as e:
+            print(f"    ⚠️  第 {attempt+1} 次嘗試失敗：{e}")
+            if attempt < retries - 1:
+                time.sleep(5)
+    return ""
+
+
 def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
     """對單一股票自動搜尋財報 + 新聞，然後 AI 判斷"""
     groq_key = os.environ.get("GROQ_API_KEY", "")
@@ -284,22 +317,37 @@ def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
     from groq import Groq
     client = Groq(api_key=groq_key)
 
-    print(f"    🌐 抓取 MOPS 月營收...")
-    earnings = fetch_mops_revenue(ticker)
+    etf = is_etf(ticker)
+    if etf:
+        print(f"    📊 ETF，跳過 MOPS，直接搜尋新聞...")
+        earnings = "此為 ETF，追蹤指數，無月營收，以資金流向和折溢價判斷。"
+    else:
+        print(f"    🌐 抓取 MOPS 月營收...")
+        earnings = fetch_mops_revenue(ticker)
+
     print(f"    📰 搜尋近期新聞...")
     news = search_news(ticker, name)
     time.sleep(1)
 
-    prompt = f"""外資連續兩天買超：{ticker} {name}
+    if etf:
+        context = f"""這是 ETF（{ticker} {name}），不適用一般財報分析。
+外資連續兩天大量買超（合計 {net_buy:,} 張），代表機構法人在佈局。
+請根據新聞判斷市場對此 ETF 追蹤標的的看法。"""
+    else:
+        context = f"一般股票，請根據月營收和新聞判斷基本面。"
+
+    prompt = f"""外資連續兩天買超：{ticker} {name}（{'ETF' if etf else '股票'}）
 合計買超：{net_buy:,} 張
 
-【月營收 / 基本面（MOPS）】
-{earnings[:600]}
+{context}
 
-【近期新聞（Google News）】
+【月營收 / 基本面】
+{earnings[:500]}
+
+【近期新聞】
 {news}
 
-請輸出純 JSON，使用繁體中文，不要有其他文字：
+只輸出純 JSON，不要有任何其他文字：
 {{
   "ticker": "{ticker}",
   "name": "{name}",
@@ -312,70 +360,39 @@ def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
 }}
 
 判斷原則：
-外資買超 + 財報成長 + 新聞正面 → 建議買進
-資料不明確 或 有負面新聞 → 謹慎觀察
-財報衰退 或 多篇負面新聞 → 不建議
-資料不足時 confidence 設「低」"""
+ETF → 外資大量買超通常是正面訊號，但需觀察追蹤標的走勢
+股票 → 外資買超 + 財報成長 + 新聞正面 → 建議買進
+資料不足時 confidence 設「低」，verdict 設「謹慎觀察」"""
 
-    try:
-        resp = client.chat.completions.create(
-            model="qwen/qwen3-32b",
-            messages=[
-                {"role": "system",
-                 "content": "你是台灣股票分析師。輸出純 JSON，繁體中文，不要有其他文字。"},
-                {"role": "user", "content": prompt},
-            ],
-            temperature=0.3, max_tokens=512,
-        )
-        raw = resp.choices[0].message.content.strip()
-        raw = re.sub(r'^```(?:json)?\s*', '', raw)
-        raw = re.sub(r'\s*```$', '', raw)
-        raw = re.sub(r'<think>.*?</think>', '', raw, flags=re.DOTALL).strip()
-        start, end = raw.find("{"), raw.rfind("}") + 1
-        result = json.loads(raw[start:end])
-    except Exception as e:
-        result = {
+    raw_json = call_groq(client, prompt)
+
+    if not raw_json:
+        return {
             "ticker": ticker, "name": name,
             "verdict": "謹慎觀察", "confidence": "低",
-            "reasons": ["AI 分析失敗，請手動查閱"],
-            "warning": str(e)[:30],
+            "reasons": ["AI 回傳解析失敗，請手動查閱"],
+            "warning": "Groq 回傳格式異常",
             "next_check": "手動確認",
             "data_quality": "不足",
+            "net_buy_lots": net_buy,
+        }
+
+    try:
+        result = json.loads(raw_json)
+    except Exception as e:
+        return {
+            "ticker": ticker, "name": name,
+            "verdict": "謹慎觀察", "confidence": "低",
+            "reasons": ["JSON 解析失敗"],
+            "warning": str(e)[:40],
+            "next_check": "手動確認",
+            "data_quality": "不足",
+            "net_buy_lots": net_buy,
         }
 
     result["net_buy_lots"] = net_buy
+    result["is_etf"] = etf
     return result
-
-
-def run_ai_cross_check(result_df) -> list:
-    if result_df is None or len(result_df) == 0:
-        return []
-
-    print("\n" + "=" * 55)
-    print("🤖 AI 交叉確認（MOPS + Google News）")
-    print("=" * 55)
-
-    analyses = []
-    for _, row in result_df.iterrows():
-        ticker = str(row["stock_id"])
-        name = str(row["stock_name"])
-        net_buy = int(row.get("total_net_buy", 0))
-        print(f"\n  📊 {ticker} {name}（買超 {net_buy:,} 張）")
-
-        result = ai_analyze_one(ticker, name, net_buy)
-
-        icon = {"建議買進": "✅", "謹慎觀察": "⚠️",
-                "不建議": "❌"}.get(result.get("verdict", ""), "❓")
-        print(f"    {icon} {result.get('verdict')} "
-              f"（信心：{result.get('confidence')}，資料：{result.get('data_quality')}）")
-        for r in result.get("reasons", []):
-            print(f"       · {r}")
-
-        analyses.append(result)
-        time.sleep(3)
-
-    print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
-    return analyses
 
 
 # ════════════════════════════════════════════════════════
