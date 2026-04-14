@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 11 19:24:57 2025
-
-@author: stellakao
-
-外資連續兩天都進前10名的個股分析（交集版本，含 JSON/CSV 輸出，適用 GitHub Actions）
+外資連續兩天都進前10名的個股分析
++ AI 交叉確認（自動抓取任意股票月營收 + 新聞）
 """
 import os
 import json
-import math
+import re
 import time
 import requests
 import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
-# --- 路徑與時間 ---
 TPE_TZ = timezone(timedelta(hours=8))
 NOW_TPE = datetime.now(TPE_TZ)
 OUT_LATEST = Path("data/latest.json")
@@ -25,11 +21,15 @@ OUT_EXPORT_DIR = Path("exports")
 OUT_HISTORY_DIR.mkdir(parents=True, exist_ok=True)
 OUT_EXPORT_DIR.mkdir(parents=True, exist_ok=True)
 
-# --- HTTP Session（逾時/重試/UA）---
 SESSION = requests.Session()
 SESSION.headers.update({
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
 })
+
+
+# ════════════════════════════════════════════════════════
+# 工具函式
+# ════════════════════════════════════════════════════════
 
 def http_get(url, params=None, retries=3, timeout=30):
     last_err = None
@@ -44,28 +44,19 @@ def http_get(url, params=None, retries=3, timeout=30):
     raise last_err
 
 def to_number(x):
-    """將 '1,234' / '-' / None 安全轉為 float。"""
-    if x is None:
-        return 0.0
-    if isinstance(x, (int, float)):
-        return float(x)
+    if x is None: return 0.0
+    if isinstance(x, (int, float)): return float(x)
     s = str(x).strip().replace(',', '')
-    if s in {'', '-'}:
-        return 0.0
-    try:
-        return float(s)
-    except:
-        return 0.0
+    if s in {'', '-'}: return 0.0
+    try: return float(s)
+    except: return 0.0
 
-# ---------------------------------------------------------
-# 抓資料：TWSE / TPEx
-# ---------------------------------------------------------
+
+# ════════════════════════════════════════════════════════
+# 外資資料
+# ════════════════════════════════════════════════════════
+
 def get_twse_foreign_data(date):
-    """
-    從證交所官網抓取外資買賣超資料 (完全免費!)
-    參數:
-        date: 日期字串,格式 'YYYYMMDD'
-    """
     url = "https://www.twse.com.tw/rwd/zh/fund/T86"
     params = {'date': date, 'selectType': 'ALL', 'response': 'json'}
     try:
@@ -74,7 +65,6 @@ def get_twse_foreign_data(date):
         if 'data' not in data or len(data['data']) == 0:
             return None
         df = pd.DataFrame(data['data'], columns=data['fields'])
-        # 只保留外資資料
         df = df[['證券代號', '證券名稱',
                  '外陸資買進股數(不含外資自營商)',
                  '外陸資賣出股數(不含外資自營商)',
@@ -86,21 +76,12 @@ def get_twse_foreign_data(date):
         df['market'] = 'TWSE'
         return df
     except Exception as e:
-        print(f"⚠️ 日期 {date} TWSE 查詢失敗: {e}")
+        print(f"⚠️ TWSE {date} 查詢失敗: {e}")
         return None
 
 def get_tpex_foreign_data(date):
-    """
-    從櫃買中心抓取外資買賣超資料 (上櫃股票)
-    參數:
-        date: 日期字串,格式 'YYYYMMDD'
-    """
-    # 轉換為民國年格式
     year = int(date[:4]) - 1911
-    month = date[4:6]
-    day = date[6:8]
-    date_tw = f"{year}/{month}/{day}"
-
+    date_tw = f"{year}/{date[4:6]}/{date[6:8]}"
     url = "https://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_result.php"
     params = {'l': 'zh-tw', 'd': date_tw, 'se': 'AL', 'response': 'json'}
     try:
@@ -109,7 +90,6 @@ def get_tpex_foreign_data(date):
         if 'aaData' not in data or len(data['aaData']) == 0:
             return None
         df = pd.DataFrame(data['aaData'])
-        # 欄位：0代號,1名稱,7外資買,8外資賣,9外資買賣超
         df = df[[0, 1, 7, 8, 9]].copy()
         df.columns = ['stock_id', 'stock_name', 'buy_shares', 'sell_shares', 'net_shares']
         for col in ['buy_shares', 'sell_shares', 'net_shares']:
@@ -118,46 +98,31 @@ def get_tpex_foreign_data(date):
         df['market'] = 'TPEx'
         return df
     except Exception as e:
-        print(f"⚠️ 櫃買日期 {date} 查詢失敗: {e}")
+        print(f"⚠️ TPEx {date} 查詢失敗: {e}")
         return None
 
-# ---------------------------------------------------------
-# 單日 Top10 與最近交易日尋找
-# ---------------------------------------------------------
 def get_daily_top10(date):
-    """
-    取得單日外資買超前10名
-    參數:
-        date: 日期字串,格式 'YYYYMMDD'
-    """
     all_data = []
     df_twse = get_twse_foreign_data(date)
-    if df_twse is not None:
-        all_data.append(df_twse)
+    if df_twse is not None: all_data.append(df_twse)
     time.sleep(0.3)
     df_tpex = get_tpex_foreign_data(date)
-    if df_tpex is not None:
-        all_data.append(df_tpex)
-
-    if not all_data:
-        return None
-
+    if df_tpex is not None: all_data.append(df_tpex)
+    if not all_data: return None
     combined = pd.concat(all_data, ignore_index=True)
     daily_result = combined.groupby(['stock_id', 'stock_name'], as_index=False).agg(
         buy_shares=('buy_shares', 'sum'),
         sell_shares=('sell_shares', 'sum'),
         net_shares=('net_shares', 'sum')
     )
-
-    daily_top10 = daily_result.sort_values('net_shares', ascending=False).head(10).reset_index(drop=True)
-    # 股→張
+    daily_top10 = daily_result.sort_values(
+        'net_shares', ascending=False).head(10).reset_index(drop=True)
     daily_top10['買入_張'] = (daily_top10['buy_shares'] / 1000).round(0).astype(int)
     daily_top10['賣出_張'] = (daily_top10['sell_shares'] / 1000).round(0).astype(int)
     daily_top10['淨買超_張'] = (daily_top10['net_shares'] / 1000).round(0).astype(int)
     return daily_top10
 
 def find_recent_trading_dates(days=2, lookback=20):
-    """往回找最近的可用交易日（以 TWSE 有資料為準）"""
     trading_dates = []
     check_date = NOW_TPE
     print("🔍 尋找最近的交易日...")
@@ -166,35 +131,26 @@ def find_recent_trading_dates(days=2, lookback=20):
         df_twse = get_twse_foreign_data(date_str)
         if df_twse is not None and len(df_twse) > 0:
             trading_dates.append(date_str)
-            formatted_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
-            print(f"   ✓ 找到交易日: {formatted_date}")
+            print(f"   ✓ {date_str[:4]}-{date_str[4:6]}-{date_str[6:]}")
             if len(trading_dates) >= days:
                 break
         check_date -= timedelta(days=1)
         time.sleep(0.2)
     return trading_dates
 
-# ---------------------------------------------------------
-# 主分析：連續 N 天交集
-# ---------------------------------------------------------
 def get_consecutive_top10(days=2):
-    """
-    找出連續N天都在前10名的個股(交集)
-    """
     print("=" * 70)
     print("🚀 外資連續買超前10名交集分析")
     print("=" * 70)
-    print(f"📅 今天: {NOW_TPE.strftime('%Y-%m-%d %H:%M')} (Asia/Taipei)\n")
+    print(f"📅 {NOW_TPE.strftime('%Y-%m-%d %H:%M')} (Asia/Taipei)\n")
 
     trading_dates = find_recent_trading_dates(days=days, lookback=30)
-
     if len(trading_dates) < days:
-        print(f"\n❌ 只找到 {len(trading_dates)} 個交易日,需要 {days} 個")
+        print(f"❌ 只找到 {len(trading_dates)} 個交易日，需要 {days} 個")
         return None
 
     print(f"\n📊 分析最近 {days} 個交易日...\n")
     daily_top10_list = []
-
     for i, date in enumerate(trading_dates[:days], 1):
         formatted_date = f"{date[:4]}-{date[4:6]}-{date[6:]}"
         print(f"⏳ 取得第 {i} 天前10名: {formatted_date}")
@@ -202,67 +158,232 @@ def get_consecutive_top10(days=2):
         if daily_top10 is not None:
             daily_top10['rank_date'] = formatted_date
             daily_top10_list.append(daily_top10)
-            # 顯示前五名名稱
             print(f"   ✓ 前10名: {', '.join(daily_top10['stock_name'].head(5).tolist())}...")
         else:
             print(f"   ✗ 無法取得資料")
             return None
         time.sleep(0.3)
 
-    if len(daily_top10_list) < days:
-        print(f"\n❌ 資料不完整")
-        return None
-
-    # 交集
     print(f"\n🔍 尋找連續 {days} 天都在前10名的個股...")
     common_stocks = set(daily_top10_list[0]['stock_id'])
     for i in range(1, days):
-        day_stocks = set(daily_top10_list[i]['stock_id'])
-        common_stocks &= day_stocks
+        common_stocks &= set(daily_top10_list[i]['stock_id'])
         print(f"   第 1-{i+1} 天交集: {len(common_stocks)} 檔")
 
     if not common_stocks:
-        print(f"\n❌ 沒有個股連續 {days} 天都在前10名")
-        # 仍回傳空結果與每日榜單，方便前端顯示
+        print(f"❌ 沒有個股連續 {days} 天都在前10名")
         return pd.DataFrame(), daily_top10_list
 
-    print(f"\n✅ 找到 {len(common_stocks)} 檔連續 {days} 天都在前10名的個股\n")
-
+    print(f"\n✅ 找到 {len(common_stocks)} 檔\n")
     result_list = []
     for stock_id in common_stocks:
         stock_name = daily_top10_list[0].loc[
-            daily_top10_list[0]['stock_id'] == stock_id, 'stock_name'
-        ].values[0]
-
+            daily_top10_list[0]['stock_id'] == stock_id, 'stock_name'].values[0]
         stock_info = {'stock_id': stock_id, 'stock_name': stock_name}
         total_net_buy = 0
-
         for i, daily_data in enumerate(daily_top10_list, 1):
             stock_row = daily_data[daily_data['stock_id'] == stock_id]
             if len(stock_row) > 0:
-                # 名次（依當日淨買超張數排序）
                 rank = int((daily_data['淨買超_張'] >= stock_row.iloc[0]['淨買超_張']).sum())
                 net_buy = int(stock_row.iloc[0]['淨買超_張'])
-
                 stock_info[f'day{i}_rank'] = rank
                 stock_info[f'day{i}_net_buy'] = net_buy
                 stock_info[f'day{i}_date'] = daily_data.iloc[0]['rank_date']
                 total_net_buy += net_buy
-
         stock_info['total_net_buy'] = int(total_net_buy)
         stock_info['avg_net_buy'] = float(total_net_buy / days)
         result_list.append(stock_info)
 
-    result = pd.DataFrame(result_list).sort_values('total_net_buy', ascending=False).reset_index(drop=True)
+    result = pd.DataFrame(result_list).sort_values(
+        'total_net_buy', ascending=False).reset_index(drop=True)
     return result, daily_top10_list
 
-# ---------------------------------------------------------
-# 輸出 JSON（給前端使用）
-# ---------------------------------------------------------
-def write_json_payload(result_df, daily_top10_list):
-    # trading_dates（由近到遠）
-    trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
 
+# ════════════════════════════════════════════════════════
+# AI 交叉確認（全部走自動搜尋）
+# ════════════════════════════════════════════════════════
+
+def fetch_mops_revenue(ticker: str) -> str:
+    """從 MOPS 抓任意上市公司月營收"""
+    now = datetime.now()
+    year, month = (now.year - 1, 12) if now.month == 1 else (now.year, now.month - 1)
+    try:
+        resp = requests.post(
+            "https://mopsov.twse.com.tw/mops/web/t05st10_ifrs",
+            data={"encodeURIComponent": 1, "step": 1, "firstin": 1,
+                  "co_id": ticker, "year": year - 1911, "month": str(month)},
+            timeout=12, headers={"User-Agent": "Mozilla/5.0"}
+        )
+        text = re.sub(r'<[^>]+>', ' ', resp.text)
+        text = re.sub(r'\s+', ' ', text).strip()
+        if len(text) < 100 or "查無資料" in text:
+            return "MOPS 查無資料（上櫃公司或尚未公布）"
+
+        results = [f"期間：{year}-{month:02d}"]
+        nums = []
+        for n in re.findall(r'[\d,]{5,}', text):
+            try:
+                val = int(n.replace(',', ''))
+                if 1_000_000 < val < 10_000_000_000:
+                    nums.append(val)
+            except Exception:
+                pass
+
+        if nums:
+            results.append(f"當月營收：{nums[0]:,} 千元（{nums[0]/1e6:.1f} 億）")
+
+        pcts = re.findall(r'[-+]?\d+\.?\d*\s*%', text)
+        if pcts:
+            results.append(f"成長率：{pcts[0]}")
+        elif len(nums) >= 3 and nums[2] > 0:
+            yoy = (nums[0] - nums[2]) / nums[2] * 100
+            results.append(f"YoY（估算）：{yoy:+.1f}%")
+
+        kws = ["庫存調整", "客戶調整", "GB200", "AI伺服器", "液冷",
+               "匯率", "NVL72", "訂單能見度"]
+        found = [k for k in kws if k in text]
+        if found:
+            results.append(f"備註關鍵字：{'、'.join(found)}")
+        results.append(f"原始節錄：{text[:400]}")
+        return "\n".join(results)
+    except Exception as e:
+        return f"MOPS 連線失敗：{e}"
+
+
+def search_news(ticker: str, name: str) -> str:
+    """Google News RSS 搜尋近期新聞"""
+    results = []
+    for q in [f"{name} 財報", f"{ticker} {name} 營收"]:
+        try:
+            url = (f"https://news.google.com/rss/search?"
+                   f"q={requests.utils.quote(q)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant")
+            resp = requests.get(url, timeout=8,
+                                headers={"User-Agent": "Mozilla/5.0"})
+            titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
+            for t in titles[1:5]:
+                if any(k in t for k in [ticker, name, name[:2]]) and t not in results:
+                    results.append(t)
+        except Exception:
+            pass
+        time.sleep(0.5)
+    return "\n".join(results[:5]) if results else "無近期相關新聞"
+
+
+def ai_analyze_one(ticker: str, name: str, net_buy: int) -> dict:
+    """對單一股票自動搜尋財報 + 新聞，然後 AI 判斷"""
+    groq_key = os.environ.get("GROQ_API_KEY", "")
+    if not groq_key:
+        return {
+            "ticker": ticker, "name": name,
+            "verdict": "謹慎觀察", "confidence": "低",
+            "reasons": ["未設定 GROQ_API_KEY"],
+            "warning": None, "next_check": "設定 API Key",
+            "data_quality": "不足",
+        }
+
+    from groq import Groq
+    client = Groq(api_key=groq_key)
+
+    print(f"    🌐 抓取 MOPS 月營收...")
+    earnings = fetch_mops_revenue(ticker)
+    print(f"    📰 搜尋近期新聞...")
+    news = search_news(ticker, name)
+    time.sleep(1)
+
+    prompt = f"""外資連續兩天買超：{ticker} {name}
+合計買超：{net_buy:,} 張
+
+【月營收 / 基本面（MOPS）】
+{earnings[:600]}
+
+【近期新聞（Google News）】
+{news}
+
+請輸出純 JSON，使用繁體中文，不要有其他文字：
+{{
+  "ticker": "{ticker}",
+  "name": "{name}",
+  "verdict": "建議買進 或 謹慎觀察 或 不建議",
+  "confidence": "高 或 中 或 低",
+  "reasons": ["理由1（15字內）", "理由2（15字內）"],
+  "warning": "最大風險（20字內），沒有填null",
+  "next_check": "下次確認時間點（10字內）",
+  "data_quality": "充足 或 有限 或 不足"
+}}
+
+判斷原則：
+外資買超 + 財報成長 + 新聞正面 → 建議買進
+資料不明確 或 有負面新聞 → 謹慎觀察
+財報衰退 或 多篇負面新聞 → 不建議
+資料不足時 confidence 設「低」"""
+
+    try:
+        resp = client.chat.completions.create(
+            model="qwen/qwen3-32b",
+            messages=[
+                {"role": "system",
+                 "content": "你是台灣股票分析師。輸出純 JSON，繁體中文，不要有其他文字。"},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.3, max_tokens=512,
+        )
+        raw = resp.choices[0].message.content.strip()
+        raw = re.sub(r'^```(?:json)?\s*', '', raw)
+        raw = re.sub(r'\s*```$', '', raw)
+        raw = re.sub(r'<think>.*?</think>', '', raw, flags=re.DOTALL).strip()
+        start, end = raw.find("{"), raw.rfind("}") + 1
+        result = json.loads(raw[start:end])
+    except Exception as e:
+        result = {
+            "ticker": ticker, "name": name,
+            "verdict": "謹慎觀察", "confidence": "低",
+            "reasons": ["AI 分析失敗，請手動查閱"],
+            "warning": str(e)[:30],
+            "next_check": "手動確認",
+            "data_quality": "不足",
+        }
+
+    result["net_buy_lots"] = net_buy
+    return result
+
+
+def run_ai_cross_check(result_df) -> list:
+    if result_df is None or len(result_df) == 0:
+        return []
+
+    print("\n" + "=" * 55)
+    print("🤖 AI 交叉確認（MOPS + Google News）")
+    print("=" * 55)
+
+    analyses = []
+    for _, row in result_df.iterrows():
+        ticker = str(row["stock_id"])
+        name = str(row["stock_name"])
+        net_buy = int(row.get("total_net_buy", 0))
+        print(f"\n  📊 {ticker} {name}（買超 {net_buy:,} 張）")
+
+        result = ai_analyze_one(ticker, name, net_buy)
+
+        icon = {"建議買進": "✅", "謹慎觀察": "⚠️",
+                "不建議": "❌"}.get(result.get("verdict", ""), "❓")
+        print(f"    {icon} {result.get('verdict')} "
+              f"（信心：{result.get('confidence')}，資料：{result.get('data_quality')}）")
+        for r in result.get("reasons", []):
+            print(f"       · {r}")
+
+        analyses.append(result)
+        time.sleep(3)
+
+    print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
+    return analyses
+
+
+# ════════════════════════════════════════════════════════
+# 輸出 JSON
+# ════════════════════════════════════════════════════════
+
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
+    trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
     stocks = []
     for _, r in result_df.iterrows():
         item = {
@@ -272,7 +393,6 @@ def write_json_payload(result_df, daily_top10_list):
             "avg_net_buy": float(r["avg_net_buy"]),
             "per_day": {}
         }
-        # day1/day2...
         i = 1
         while f"day{i}_date" in r:
             item["per_day"][f"day{i}"] = {
@@ -290,26 +410,29 @@ def write_json_payload(result_df, daily_top10_list):
         "params": {"days": len(daily_top10_list), "top_n": 10},
         "trading_dates": trading_dates,
         "count_intersection": int(len(result_df)),
-        "stocks": stocks
+        "stocks": stocks,
+        "ai_analysis": ai_analyses or [],
+        "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
     }
 
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
-    OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    OUT_LATEST.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {OUT_LATEST}")
 
-    # 以最近一個交易日命名歷史檔
     last_trade = trading_dates[0].replace('-', '')
     out_history = OUT_HISTORY_DIR / f"{last_trade}.json"
-    out_history.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_history.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {out_history}")
 
-# ---------------------------------------------------------
-# 主程式
-# ---------------------------------------------------------
-if __name__ == "__main__":
-    # 連續天數可由環境變數控制（預設 2）
-    days = int(os.getenv("DAYS", "2"))
 
+# ════════════════════════════════════════════════════════
+# 主程式
+# ════════════════════════════════════════════════════════
+
+if __name__ == "__main__":
+    days = int(os.getenv("DAYS", "2"))
     result_data = get_consecutive_top10(days=days)
 
     if result_data is not None:
@@ -320,7 +443,6 @@ if __name__ == "__main__":
         print("=" * 70)
 
         if result is not None and len(result) > 0:
-            # 整理終端機顯示
             display = pd.DataFrame()
             display['代號'] = result['stock_id']
             display['股票名稱'] = result['stock_name']
@@ -331,42 +453,27 @@ if __name__ == "__main__":
             display['第2天排名'] = result.get('day2_rank', pd.NA)
             display['第2天買超(張)'] = result.get('day2_net_buy', pd.NA)
             display['合計買超(張)'] = result['total_net_buy'].astype(int)
-
             display['排名變化'] = display.apply(
                 lambda row: (
                     "→" if pd.isna(row['第2天排名']) else
                     (f"↑{abs(int(row['第2天排名']) - int(row['第1天排名']))}"
                      if int(row['第2天排名']) < int(row['第1天排名'])
                      else (f"↓{int(row['第2天排名']) - int(row['第1天排名'])}"
-                           if int(row['第2天排名']) > int(row['第1天排名'])
-                           else "→"))
+                           if int(row['第2天排名']) > int(row['第1天排名']) else "→"))
                 ), axis=1
             )
-
             pd.set_option('display.unicode.east_asian_width', True)
             pd.set_option('display.max_columns', None)
             pd.set_option('display.width', 180)
-
             print("\n" + display.to_string())
 
-            # CSV 匯出（檔名中文保持 UTF-8-sig，Windows 可開）
             timestamp = NOW_TPE.strftime('%Y%m%d_%H%M')
             csv_path = OUT_EXPORT_DIR / f'外資連續前10名交集_{timestamp}.csv'
             result.to_csv(csv_path, index=False, encoding='utf-8-sig')
-            print(f"\n💾 結果已儲存: {csv_path}")
-
-            # 統計資訊
-            print("\n" + "=" * 70)
-            print("📈 統計資訊")
-            print("=" * 70)
+            print(f"\n💾 CSV: {csv_path}")
             print(f"✅ 連續進榜: {len(result)} 檔")
             print(f"📊 總買超: {int(display['合計買超(張)'].sum()):,} 張")
-            print(f"📊 平均買超: {display['合計買超(張)'].mean():,.0f} 張/檔")
 
-            # 顯示每日完整前10名（供參考）
-            print("\n" + "=" * 70)
-            print("📋 各日完整前10名 (⭐為交集個股)")
-            print("=" * 70)
             common_ids = set(result['stock_id'])
             for i, daily_data in enumerate(daily_top10_list, 1):
                 date = daily_data.iloc[0]['rank_date']
@@ -374,18 +481,21 @@ if __name__ == "__main__":
                 print("-" * 70)
                 for rank, (_, row) in enumerate(daily_data.iterrows(), 1):
                     is_common = "⭐" if row['stock_id'] in common_ids else "  "
-                    print(f"   {is_common} {rank:2d}. {row['stock_name']:8s} ({row['stock_id']}) "
-                          f"- 買超 {row['淨買超_張']:>8,} 張")
-
+                    print(f"   {is_common} {rank:2d}. {row['stock_name']:8s} "
+                          f"({row['stock_id']}) - 買超 {row['淨買超_張']:>8,} 張")
         else:
-            print("\n❌ 沒有個股連續兩天都在前10名")
+            print("❌ 沒有個股連續兩天都在前10名")
 
-        # 無論是否有交集，都寫 JSON（方便前端顯示）
-        write_json_payload(result if result is not None else pd.DataFrame(), daily_top10_list)
-
+        # AI 交叉確認
+        ai_analyses = run_ai_cross_check(
+            result if result is not None else pd.DataFrame()
+        )
+        write_json_payload(
+            result if result is not None else pd.DataFrame(),
+            daily_top10_list,
+            ai_analyses,
+        )
     else:
-        print("\n❌ 分析失敗")
-        # 失敗時：避免讓 GitHub Actions 因無輸出而中止，可視需求決定是否 exit 1
-        # import sys; sys.exit(1)
+        print("❌ 分析失敗")
 
     print("\n✨ 查詢完成!")

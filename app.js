@@ -1,5 +1,5 @@
 async function loadData() {
-  const url = `./data/latest.json?v=${Date.now()}`; // 避免快取
+  const url = `./data/latest.json?v=${Date.now()}`;
   let data;
 
   try {
@@ -15,37 +15,38 @@ async function loadData() {
     return;
   }
 
-  // 基本欄位
+  // ── 基本欄位 ──
   const dates = Array.isArray(data.trading_dates) ? data.trading_dates : [];
-  const hasDay1 = Boolean(data?.stocks?.[0]?.per_day?.day1);
   const hasDay2 = Boolean(data?.stocks?.[0]?.per_day?.day2);
 
-  // Meta 顯示
+  // ── Meta ──
   const metaEl = document.getElementById('meta');
-  const statsEl = document.getElementById('stats');
   if (metaEl) {
-  const utcStr = data.generated_at_utc;
-  let localStr = '';
-  if (utcStr) {
-    const utcDate = new Date(utcStr + 'Z'); // 加 Z 告訴 JS 是 UTC
-    localStr = utcDate.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+    const utcStr = data.generated_at_utc;
+    let localStr = '';
+    if (utcStr) {
+      const utcDate = new Date(utcStr + 'Z');
+      localStr = utcDate.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+    }
+    metaEl.textContent =
+      `模式：兩日交集 ｜ 交易日：${dates.join(', ')} ｜ 產生(UTC+8)：${localStr}`;
   }
-  metaEl.textContent =
-    `模式：兩日交集 ｜ 交易日：${dates.join(', ')} ｜ 產生(UTC+8)：${localStr}`;}
 
-  if (statsEl) statsEl.textContent = `交集檔數：${data.count_intersection ?? (data.stocks?.length || 0)}`;
+  const statsEl = document.getElementById('stats');
+  if (statsEl)
+    statsEl.textContent = `交集檔數：${data.count_intersection ?? (data.stocks?.length || 0)}`;
 
   const stocks = Array.isArray(data.stocks) ? data.stocks : [];
 
-  // 沒有交集就清畫面
   if (!stocks.length) {
     if (window.myChart) { window.myChart.destroy(); window.myChart = null; }
     const tableEl = document.getElementById('table');
     if (tableEl) tableEl.innerHTML = `<div class="muted">目前沒有連續兩天都進前十名的個股。</div>`;
+    renderAIAnalysis(data);
     return;
   }
 
-  // 依最近一天(day1)排名排序，沒有排名就退而求其次比總買超
+  // ── 排序 ──
   const sorted = [...stocks].sort((a, b) => {
     const ar = a?.per_day?.day1?.rank ?? 9999;
     const br = b?.per_day?.day1?.rank ?? 9999;
@@ -53,18 +54,16 @@ async function loadData() {
     return (b.total_net_buy ?? 0) - (a.total_net_buy ?? 0);
   });
 
-  // 準備圖表資料（注意 per_day 的 key 是 day1/day2，欄位是 net_buy_lots）
+  // ── 圖表 ──
   const d1Label = dates[0] || '第1天';
   const d2Label = dates[1] || '第2天';
   const labels = sorted.map(s => `${s.stock_name.trim()}(${s.stock_id})`);
   const d1Vals = sorted.map(s => s?.per_day?.day1?.net_buy_lots ?? 0);
   const d2Vals = sorted.map(s => s?.per_day?.day2?.net_buy_lots ?? 0);
-
-  // 繪圖
-  const ctx = document.getElementById('chart');
   const datasets = [{ label: `${d1Label} 淨買超(張)`, data: d1Vals }];
   if (hasDay2) datasets.push({ label: `${d2Label} 淨買超(張)`, data: d2Vals });
 
+  const ctx = document.getElementById('chart');
   if (window.myChart) window.myChart.destroy();
   window.myChart = new Chart(ctx, {
     type: 'bar',
@@ -80,7 +79,7 @@ async function loadData() {
     }
   });
 
-  // 表格
+  // ── 明細表 ──
   const tableEl = document.getElementById('table');
   if (tableEl) {
     const rows = sorted.map((s, idx) => {
@@ -116,17 +115,16 @@ async function loadData() {
           <td class="num">${total.toLocaleString()}</td>
           <td>${rankDelta}</td>
           <td class="num">${buyDelta}</td>
-        </tr>
-      `;
+        </tr>`;
     }).join('');
 
     tableEl.innerHTML = `
       <style>
-        #table table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        #table th, #table td { padding: 8px 10px; border-bottom: 1px solid #1f2937; }
-        #table th { text-align: left; color: #a5b4fc; font-weight: 600; }
-        #table .num { text-align: right; font-variant-numeric: tabular-nums; }
-        #table code { background: #0f172a; padding: 2px 6px; border-radius: 6px; }
+        #table table { width:100%; border-collapse:collapse; font-size:14px; }
+        #table th, #table td { padding:8px 10px; border-bottom:1px solid #1f2937; }
+        #table th { text-align:left; color:#a5b4fc; font-weight:600; }
+        #table .num { text-align:right; font-variant-numeric:tabular-nums; }
+        #table code { background:#0f172a; padding:2px 6px; border-radius:6px; }
       </style>
       <div style="overflow:auto;">
         <table>
@@ -140,9 +138,101 @@ async function loadData() {
           </thead>
           <tbody>${rows}</tbody>
         </table>
-      </div>
-    `;
+      </div>`;
   }
+
+  // ── AI 交叉確認卡片 ──
+  renderAIAnalysis(data);
+}
+
+// ════════════════════════════════════════════════════════
+// AI 交叉確認卡片渲染
+// ════════════════════════════════════════════════════════
+
+function renderAIAnalysis(data) {
+  const analyses = data.ai_analysis || [];
+  const time = data.ai_analysis_time || '';
+
+  // 找或建立卡片
+  let card = document.getElementById('ai-analysis-card');
+  if (!card) {
+    card = document.createElement('div');
+    card.id = 'ai-analysis-card';
+    card.className = 'card';
+    document.querySelector('.wrap').appendChild(card);
+  }
+
+  if (!analyses.length) {
+    card.innerHTML = `
+      <div style="color:#a5b4fc;font-size:14px;font-weight:700;margin-bottom:8px">
+        🤖 AI 交叉確認
+      </div>
+      <div style="color:#6b7280;font-size:13px">
+        今日無外資交集個股，或 GROQ_API_KEY 尚未設定。
+      </div>`;
+    return;
+  }
+
+  const verdictColor = v =>
+    v === '建議買進' ? '#34d399' : v === '不建議' ? '#f87171' : '#fbbf24';
+  const verdictIcon  = v =>
+    v === '建議買進' ? '✅' : v === '不建議' ? '❌' : '⚠️';
+  const confColor    = c =>
+    c === '高' ? '#34d399' : c === '低' ? '#f87171' : '#fbbf24';
+  const qualityColor = q =>
+    q === '充足' ? '#34d399' : q === '不足' ? '#f87171' : '#fbbf24';
+
+  const rows = analyses.map(a => {
+    const reasons = (a.reasons || []).map(r =>
+      `<li style="margin-bottom:3px">${r}</li>`).join('');
+    const warning = a.warning
+      ? `<div style="margin-top:6px;font-size:12px;color:#f87171">⚠ ${a.warning}</div>` : '';
+    const nextCheck = a.next_check
+      ? `<div style="font-size:11px;color:#6b7280;margin-top:4px">📅 ${a.next_check}</div>` : '';
+    const srcBadge = `<span style="font-size:10px;background:#1f2937;padding:1px 6px;
+      border-radius:4px;color:#6b7280;margin-left:6px">${
+      a.data_source === '本地財報資料庫' ? '📁 本地' : '🌐 即時搜尋'}</span>`;
+    const qualityBadge = `<span style="font-size:10px;color:${qualityColor(a.data_quality)};
+      margin-left:8px">資料：${a.data_quality}</span>`;
+
+    return `
+      <div style="padding:14px 0;border-bottom:1px solid #1f2937">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <span style="font-size:16px">${verdictIcon(a.verdict)}</span>
+          <span style="font-weight:700;color:#e5e7eb;font-size:15px">
+            ${a.ticker} ${a.name}</span>
+          ${srcBadge}
+          <span style="font-size:12px;color:#a5b4fc;margin-left:4px">
+            外資買超 ${(a.net_buy_lots||0).toLocaleString()} 張</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-weight:700;font-size:15px;color:${verdictColor(a.verdict)}">
+            ${a.verdict}</span>
+          <span style="font-size:12px;color:${confColor(a.confidence)}">
+            信心度：${a.confidence}</span>
+          ${qualityBadge}
+        </div>
+        <ul style="padding-left:18px;margin:0;font-size:13px;
+          color:#9ca3af;line-height:1.8">${reasons}</ul>
+        ${warning}
+        ${nextCheck}
+      </div>`;
+  }).join('');
+
+  card.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <div style="font-size:15px;font-weight:700;color:#eef2ff">🤖 AI 交叉確認</div>
+      <div style="font-size:11px;color:#6b7280">${time}</div>
+    </div>
+    <div style="font-size:12px;color:#6b7280;margin-bottom:14px">
+      用月營收 + 新聞交叉確認外資買超訊號是否可信
+      （本地資料庫優先，其他股票自動抓取 MOPS + Google News）
+    </div>
+    ${rows}
+    <div style="font-size:11px;color:#4b5563;margin-top:12px;
+      padding-top:10px;border-top:1px solid #1f2937">
+      ⚠️ 此分析僅供參考，不構成投資建議。投資前請自行評估風險。
+    </div>`;
 }
 
 loadData();

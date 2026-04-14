@@ -8,17 +8,45 @@
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <style>
-    body { margin:0; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background:#0b1220; color:#eef2ff;}
-    header { padding:16px; font-size:18px; font-weight:700; background:#0f172a; position:sticky; top:0; z-index:10;}
-    .wrap { padding:16px; display:grid; gap:12px; }
-    .card { background:#111827; border-radius:16px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,.35);}
-    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;}
-    .muted { color:#a5b4fc; font-size:12px;}
-    button.install { padding:10px 14px; border-radius:12px; background:#1f2937; color:#e5e7eb; border:1px solid #374151;}
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+      background: #0b1220;
+      color: #eef2ff;
+    }
+    header {
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      background: #0f172a;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .wrap { padding: 16px; display: grid; gap: 12px; }
+    .card {
+      background: #111827;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.35);
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .muted { color: #a5b4fc; font-size: 12px; }
+    button.install {
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid #374151;
+    }
     .chart-box { position: relative; height: 320px; max-height: 320px; }
-    .chart-box canvas { width: 100% !important; height: 100% !important; display:block; }
-
-    /* 表格在 app.js 也會注入簡單樣式；這裡預留容器即可 */
+    .chart-box canvas { width: 100% !important; height: 100% !important; display: block; }
   </style>
 </head>
 <body>
@@ -47,7 +75,6 @@
       </div>
     </div>
 
-
     <!-- 交集明細表 -->
     <div class="card">
       <div class="row" style="margin-bottom:8px;">
@@ -55,6 +82,14 @@
         <div class="muted">顯示代號、名稱、兩日排名與買超、變化與合計</div>
       </div>
       <div id="table"></div>
+    </div>
+
+    <!-- AI 交叉確認卡（由 app.js 動態注入） -->
+    <div class="card" id="ai-analysis-card">
+      <div style="color:#a5b4fc;font-size:14px;font-weight:700;margin-bottom:8px">
+        🤖 AI 交叉確認
+      </div>
+      <div style="color:#6b7280;font-size:13px">載入中...</div>
     </div>
   </main>
 
@@ -77,7 +112,6 @@
         deferredPrompt = null;
       }
     });
-    // Service Worker（相對路徑，適用 GitHub Pages 專案頁）
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js');
     }
