@@ -12,6 +12,7 @@ import requests
 import pandas as pd
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
+import feedparser
 from groq import Groq
 
 TPE_TZ = timezone(timedelta(hours=8))
@@ -231,21 +232,39 @@ def fetch_mops_revenue(ticker):
     except Exception as e:
         return f"MOPS 連線失敗：{e}"
 
+RSS_SOURCES = [
+    {"name": "Reuters",    "url": "https://news.google.com/rss/search?q=when:24h+allinurl:reuters.com&ceid=US:en&hl=en-US&gl=US"},
+    {"name": "Yahoo財經",  "url": "https://tw.stock.yahoo.com/rss?category=news"},
+    {"name": "Yahoo台股",  "url": "https://tw.stock.yahoo.com/rss?category=tw-market"},
+    {"name": "Yahoo國際",  "url": "https://tw.stock.yahoo.com/rss?category=intl-markets"},
+    {"name": "Yahoo研究",  "url": "https://tw.stock.yahoo.com/rss?category=research"},
+    {"name": "科技新報",   "url": "https://technews.tw/news-rss/"},
+    {"name": "中央社產經", "url": "https://feeds.feedburner.com/rsscna/finance"},
+    {"name": "中央社科技", "url": "https://feeds.feedburner.com/rsscna/technology"},
+    {"name": "中央社國際", "url": "https://feeds.feedburner.com/rsscna/intworld"},
+]
+
 def search_news(ticker, name):
+    """掃描多個 RSS 來源，找包含股票關鍵字的新聞"""
+    keywords = [ticker, name, name[:2]]
     results = []
-    for q in [f"{name} 財報", f"{ticker} {name} 營收"]:
+    for source in RSS_SOURCES:
         try:
-            url = (f"https://news.google.com/rss/search?"
-                   f"q={requests.utils.quote(q)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant")
-            resp = requests.get(url, timeout=8, headers={"User-Agent": "Mozilla/5.0"})
+            resp = requests.get(source["url"], timeout=8,
+                                headers={"User-Agent": "Mozilla/5.0"})
+            # 嘗試 CDATA 格式（RSS 2.0）
             titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
-            for t in titles[1:5]:
-                if any(k in t for k in [ticker, name, name[:2]]) and t not in results:
-                    results.append(t)
+            # 若無 CDATA，嘗試一般格式
+            if not titles:
+                titles = re.findall(r'<title>(.*?)</title>', resp.text)
+            for t in titles[1:30]:  # 跳過 feed 標題
+                t = re.sub(r'<[^>]+>', '', t).strip()
+                if any(k in t for k in keywords) and t not in results:
+                    results.append(f"[{source['name']}] {t}")
         except Exception:
             pass
-        time.sleep(0.5)
-    return "\n".join(results[:5]) if results else "無近期相關新聞"
+        time.sleep(0.3)
+    return "\n".join(results[:6]) if results else "無近期相關新聞"
 
 def call_groq(client, prompt):
     for attempt in range(3):
