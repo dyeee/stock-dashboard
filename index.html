@@ -15,13 +15,18 @@
       color: #eef2ff;
     }
     header {
-      padding: 16px;
+      padding: 12px 16px;
       font-size: 18px;
       font-weight: 700;
       background: #0f172a;
       position: sticky;
       top: 0;
       z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
     .wrap { padding: 16px; display: grid; gap: 12px; }
     .card {
@@ -44,59 +49,214 @@
       background: #1f2937;
       color: #e5e7eb;
       border: 1px solid #374151;
+      cursor: pointer;
     }
-    .chart-box { position: relative; height: 320px; max-height: 320px; }
+    .chart-box { position: relative; height: 260px; max-height: 260px; }
     .chart-box canvas { width: 100% !important; height: 100% !important; display: block; }
+
+    /* ── Tab 導覽 ── */
+    .tab-nav {
+      display: flex;
+      gap: 6px;
+      padding: 12px 16px 0;
+    }
+    .tab-btn {
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      background: #1f2937;
+      color: #6b7280;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: #312e81;
+      color: #a5b4fc;
+      border-color: #4338ca;
+    }
+
+    /* ── 上銀頁專屬 ── */
+    .signal-banner {
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+    .price-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .price-card {
+      background: #1f2937;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .price-label { font-size: 11px; color: #6b7280; margin-bottom: 4px; }
+    .price-val   { font-size: 20px; font-weight: 700; }
+    .price-chg   { font-size: 13px; margin-top: 2px; }
+
+    /* ── 原始圖表框（外資交集用）── */
+    .chart-box-lg { position: relative; height: 320px; max-height: 320px; }
+    .chart-box-lg canvas { width: 100% !important; height: 100% !important; display: block; }
   </style>
 </head>
 <body>
-  <header class="row">
+
+  <!-- ── Header ── -->
+  <header>
     <div>📊 Ping股市儀表板</div>
     <button class="install" id="installBtn" hidden>安裝到手機</button>
   </header>
 
-  <main class="wrap">
-    <!-- 資訊卡 -->
-    <div class="card">
-      <div class="row">
-        <div>最新資料</div>
-        <div class="muted" id="meta"></div>
-      </div>
-      <pre id="stats" style="white-space:pre-wrap; margin:0;"></pre>
-    </div>
+  <!-- ── Tab 導覽 ── -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" id="tab-main"  onclick="switchTab('main')">外資交集</button>
+    <button class="tab-btn"        id="tab-hiwin" onclick="switchTab('hiwin')">上銀監控</button>
+  </nav>
 
-    <!-- 圖表卡 -->
-    <div class="card">
-      <div class="row">
-        <div>連續兩日外資買超前10交集（各日淨買超對比）</div>
+  <!-- ════════════════════════════════════════
+       分頁 A：外資交集（原有功能）
+  ════════════════════════════════════════ -->
+  <div id="page-main">
+    <main class="wrap">
+      <!-- 資訊卡 -->
+      <div class="card">
+        <div class="row">
+          <div>最新資料</div>
+          <div class="muted" id="meta"></div>
+        </div>
+        <pre id="stats" style="white-space:pre-wrap; margin:0;"></pre>
       </div>
-      <div class="chart-box">
-        <canvas id="chart" aria-label="兩日淨買超(張)長條圖" role="img"></canvas>
-      </div>
-    </div>
 
-    <!-- 交集明細表 -->
-    <div class="card">
-      <div class="row" style="margin-bottom:8px;">
-        <div>交集明細</div>
-        <div class="muted">顯示代號、名稱、兩日排名與買超、變化與合計</div>
+      <!-- 圖表卡 -->
+      <div class="card">
+        <div class="row">
+          <div>連續兩日外資買超前10交集（各日淨買超對比）</div>
+        </div>
+        <div class="chart-box-lg">
+          <canvas id="chart" aria-label="兩日淨買超(張)長條圖" role="img"></canvas>
+        </div>
       </div>
-      <div id="table"></div>
-    </div>
 
-    <!-- AI 交叉確認卡（由 app.js 動態注入） -->
-    <div class="card" id="ai-analysis-card">
-      <div style="color:#a5b4fc;font-size:14px;font-weight:700;margin-bottom:8px">
-        🤖 AI 交叉確認
+      <!-- 交集明細表 -->
+      <div class="card">
+        <div class="row" style="margin-bottom:8px;">
+          <div>交集明細</div>
+          <div class="muted">顯示代號、名稱、兩日排名與買超、變化與合計</div>
+        </div>
+        <div id="table"></div>
       </div>
-      <div style="color:#6b7280;font-size:13px">載入中...</div>
-    </div>
-  </main>
 
+      <!-- AI 交叉確認卡 -->
+      <div class="card" id="ai-analysis-card">
+        <div style="color:#a5b4fc;font-size:14px;font-weight:700;margin-bottom:8px">
+          🤖 AI 交叉確認
+        </div>
+        <div style="color:#6b7280;font-size:13px">載入中...</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       分頁 B：上銀 vs 大銀微監控
+  ════════════════════════════════════════ -->
+  <div id="page-hiwin" style="display:none;">
+    <main class="wrap">
+
+      <!-- 錯誤 / 載入狀態 -->
+      <div id="hiwin-error"   class="card" style="display:none; color:#fca5a5;"></div>
+      <div id="hiwin-loading" class="card" style="color:#6b7280; font-size:13px;">
+        載入上銀資料中...
+      </div>
+
+      <!-- 以下為主內容，初始隱藏 -->
+      <div id="hiwin-content" style="display:none; display:contents;">
+
+        <!-- 更新時間 -->
+        <div class="card" style="padding:10px 16px;">
+          <div class="row">
+            <div style="font-size:14px; font-weight:700;">上銀科技 2049 ｜ 大銀微系統 4576</div>
+            <div class="muted" id="hiwin-update">—</div>
+          </div>
+        </div>
+
+        <!-- 訊號 banner -->
+        <div class="signal-banner card" id="hiwin-signal">計算中...</div>
+
+        <!-- 股價列 -->
+        <div class="price-row">
+          <div class="price-card">
+            <div class="price-label">上銀科技 2049</div>
+            <div class="price-val"  id="hiwin-price">—</div>
+            <div class="price-chg"  id="hiwin-prev">—</div>
+          </div>
+          <div class="price-card">
+            <div class="price-label">大銀微系統 4576</div>
+            <div class="price-val"  id="dayin-price">—</div>
+            <div class="price-chg"  id="dayin-prev">—</div>
+          </div>
+        </div>
+
+        <!-- 各期漲幅比較表 -->
+        <div class="card">
+          <div class="row" style="margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:700;">各期漲幅比較</div>
+            <div class="muted">大銀微領漲 → 上銀買進訊號</div>
+          </div>
+          <div id="hiwin-compare-table"></div>
+        </div>
+
+        <!-- 折線圖 -->
+        <div class="card">
+          <div style="font-size:13px; font-weight:700; margin-bottom:10px;">近30日走勢對比（以起始日為基準）</div>
+          <div class="chart-box">
+            <canvas id="hiwinChart" aria-label="上銀與大銀微近30日漲幅走勢對比折線圖" role="img">
+              上銀科技與大銀微系統近30日漲幅走勢對比。
+            </canvas>
+          </div>
+        </div>
+
+        <!-- 說明卡 -->
+        <div class="card" style="font-size:12px; color:#6b7280; line-height:1.8;">
+          <div style="color:#a5b4fc; font-weight:700; margin-bottom:6px;">📌 訊號邏輯說明</div>
+          <div>・上銀漲幅 ≈ 大銀微漲幅 × 2（歷史規律）</div>
+          <div>・大銀微今日漲幅 &gt; 上銀 → <span style="color:#6ee7b7;">▲ 買進</span>（上銀尚未跟上，補漲機率高）</div>
+          <div>・上銀今日漲幅 &gt; 大銀微 → <span style="color:#fca5a5;">▼ 賣出</span>（上銀已領漲，相對強勢消退）</div>
+          <div>・差距 &lt; 0.1% → <span style="color:#a5b4fc;">— 觀望</span></div>
+          <div style="margin-top:6px; color:#4b5563;">資料每日收盤後由 GitHub Actions 自動更新，僅供參考，不構成投資建議。</div>
+        </div>
+
+      </div><!-- /hiwin-content -->
+    </main>
+  </div>
+
+  <!-- ── Scripts ── -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <script src="./app.js"></script>
+  <script src="./hiwin.js"></script>
+
   <script>
-    // PWA Install
+    // ── Tab 切換 ──────────────────────────────────────────
+    function switchTab(name) {
+      ['main', 'hiwin'].forEach(t => {
+        document.getElementById('page-' + t).style.display = t === name ? 'block' : 'none';
+        document.getElementById('tab-' + t).classList.toggle('active', t === name);
+      });
+      // 第一次切到上銀分頁時才載入資料
+      if (name === 'hiwin') {
+        const content = document.getElementById('page-hiwin');
+        if (content.dataset.loaded !== 'true') {
+          content.dataset.loaded = 'true';
+          if (typeof initHiwin === 'function') initHiwin();
+        }
+      }
+    }
+
+    // ── PWA Install ───────────────────────────────────────
     let deferredPrompt;
     const installBtn = document.getElementById('installBtn');
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -112,6 +272,8 @@
         deferredPrompt = null;
       }
     });
+
+    // ── Service Worker ────────────────────────────────────
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js');
     }
