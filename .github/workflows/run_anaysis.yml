@@ -22,7 +22,7 @@ jobs:
 
       - name: Run exit analysis
         run: |
-          python analyze_exit_v2.py --dir ./exports --days 10
+          python analyse_exit.py --dir ./exports --days 10
 
       - name: Upload results
         uses: actions/upload-artifact@v4
