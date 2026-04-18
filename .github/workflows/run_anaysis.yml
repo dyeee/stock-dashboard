@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas numpy matplotlib finmind
+          pip install pandas numpy matplotlib finmind tqdm
 
       - name: Run exit analysis
         run: |
