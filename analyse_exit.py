@@ -76,6 +76,8 @@ def load_entry_list(exports_dir: str) -> pd.DataFrame:
             )
             df["stock_id"]   = df["stock_id"].str.strip()
             df["stock_name"] = df["stock_name"].str.strip()
+            # 移除表頭行（stock_id 欄位內容等於 "stock_id" 的列）
+            df = df[df["stock_id"] != "stock_id"]
             df["file_date"]  = date_str  # 檔名日期備用
             all_dfs.append(df)
         except Exception as e:
@@ -233,6 +235,11 @@ def run_tracking(entries: pd.DataFrame, days_forward: int = 10) -> pd.DataFrame:
         entry_date = row["day2_date"]   # 首次進場日
         confirm_date = row["day1_date"] # 名單確認日（從這天之後開始追蹤）
         entry_net  = row["day1_net_buy"]
+
+        # 跳過日期無效的列（例如表頭殘留）
+        if pd.isnull(entry_date) or pd.isnull(confirm_date):
+            print(f"[{i+1:>3}/{total}] {sid} 日期無效，跳過")
+            continue
 
         print(f"[{i+1:>3}/{total}] {sid} {name:<10} "
               f"進場:{entry_date.date()} 確認:{confirm_date.date()}", end="  ")
