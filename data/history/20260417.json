@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-17 15:15:01",
+  "generated_at_utc": "2026-04-18 14:57:39",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -70,15 +70,15 @@
   "ai_analysis": [
     {
       "ticker": "00878",
-      "name": "國泰永續高股息",
-      "verdict": "建議買進",
+      "name": "國泰永續高股息  ",
+      "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續兩日大買",
-        "高股息標的受資金青睞"
+        "外資連兩日買超推升動能",
+        "高股息ETF資金流向競爭者"
       ],
-      "warning": "市場反轉可能影響ETF走勢",
-      "next_check": "一周後觀察資金流向",
+      "warning": "資金流向0056等競爭ETF",
+      "next_check": "一周後確認資金動向",
       "data_quality": "有限",
       "net_buy_lots": 97680,
       "is_etf": true
@@ -90,10 +90,10 @@
       "confidence": "中",
       "reasons": [
         "外資連續兩天買超9萬張",
-        "下半年晶圓價格調漲預期"
+        "月營收維持2,024億元水準"
       ],
-      "warning": "成熟製程需求波動風險",
-      "next_check": "2024年Q2法說會",
+      "warning": "營收年增率停滯於0%",
+      "next_check": "2024年4月營收",
       "data_quality": "有限",
       "net_buy_lots": 91532,
       "is_etf": false
@@ -101,18 +101,18 @@
     {
       "ticker": "00919",
       "name": "群益台灣精選高息",
-      "verdict": "建議買進",
+      "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續兩日大買",
-        "高息ETF資金避險"
+        "外資連2日買超6萬張",
+        "高股息ETF資金流向0056"
       ],
-      "warning": "標的指數走弱風險",
-      "next_check": "一周後",
+      "warning": "資金持續轉向競爭ETF",
+      "next_check": "1週後確認資金流向",
       "data_quality": "有限",
       "net_buy_lots": 66314,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-17 23:14"
+  "ai_analysis_time": "2026-04-18 22:56"
 }
