@@ -1,0 +1,34 @@
+name: 外資出場分析（手動執行一次）
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy matplotlib finmind
+
+      - name: Run exit analysis
+        run: |
+          python analyze_exit_v2.py --dir ./exports --days 10
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: exit-analysis-results
+          path: |
+            exit_tracking_result.csv
+            output_charts/
+          retention-days: 30
