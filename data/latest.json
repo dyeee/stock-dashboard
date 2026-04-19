@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-18 14:57:39",
+  "generated_at_utc": "2026-04-19 14:57:50",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -70,14 +70,14 @@
   "ai_analysis": [
     {
       "ticker": "00878",
-      "name": "國泰永續高股息  ",
+      "name": "國泰永續高股息",
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連兩日買超推升動能",
-        "高股息ETF資金流向競爭者"
+        "外資連兩日買超97,680張",
+        "高股息ETF市場資金動態"
       ],
-      "warning": "資金流向0056等競爭ETF",
+      "warning": "資金流向0056可能衝擊表現",
       "next_check": "一周後確認資金動向",
       "data_quality": "有限",
       "net_buy_lots": 97680,
@@ -89,11 +89,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續兩天買超9萬張",
-        "月營收維持2,024億元水準"
+        "外資連續兩日買超9萬張",
+        "月營收持平但資金大量湧入"
       ],
-      "warning": "營收年增率停滯於0%",
-      "next_check": "2024年4月營收",
+      "warning": "營收成長動能尚未確立",
+      "next_check": "下月營收公布",
       "data_quality": "有限",
       "net_buy_lots": 91532,
       "is_etf": false
@@ -104,15 +104,15 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連2日買超6萬張",
-        "高股息ETF資金流向0056"
+        "外資連兩日買超",
+        "資金流向高息ETF"
       ],
-      "warning": "資金持續轉向競爭ETF",
-      "next_check": "1週後確認資金流向",
+      "warning": "資金持續流向0056",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 66314,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-18 22:56"
+  "ai_analysis_time": "2026-04-19 22:56"
 }
