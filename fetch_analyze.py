@@ -590,7 +590,7 @@ if __name__ == "__main__":
         )
 
         # ── 三大法人同時買超 ──
-        latest_date = daily_top10_list[0].iloc[0]["date"] if daily_top10_list else ""
+        latest_date = daily_top10_list[0].iloc[0]["rank_date"].replace("-", "") if daily_top10_list else ""
         three_insti = []
         if latest_date:
             three_insti = get_3insti_all_buy(str(latest_date), top_n=20)
