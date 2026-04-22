@@ -115,6 +115,7 @@
   <!-- ── Tab 導覽 ── -->
   <nav class="tab-nav">
     <button class="tab-btn active" id="tab-main"  onclick="switchTab('main')">外資交集</button>
+    <button class="tab-btn"        id="tab-3insti" onclick="switchTab('3insti')">三大法人</button>
     <button class="tab-btn"        id="tab-hiwin" onclick="switchTab('hiwin')">上銀監控</button>
   </nav>
 
@@ -158,6 +159,59 @@
         </div>
         <div style="color:#6b7280;font-size:13px">載入中...</div>
       </div>
+    </main>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       分頁 C：三大法人同時買超
+  ════════════════════════════════════════ -->
+  <div id="page-3insti" style="display:none;">
+    <main class="wrap">
+
+      <!-- 說明卡 -->
+      <div class="card" style="padding:12px 16px;">
+        <div class="row">
+          <div style="font-size:14px;font-weight:700;">三大法人同時買超</div>
+          <div class="muted" id="insti-date">—</div>
+        </div>
+        <div style="font-size:12px;color:#6b7280;margin-top:6px;">
+          外資、投信、自營商三者同時買超，通常代表法人高度共識，訊號較強。
+        </div>
+      </div>
+
+      <!-- 統計卡 -->
+      <div id="insti-stats-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div class="card" style="text-align:center;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">同時買超檔數</div>
+          <div style="font-size:24px;font-weight:700;color:#a5b4fc" id="insti-count">—</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">合計買超(張)</div>
+          <div style="font-size:24px;font-weight:700;color:#6ee7b7" id="insti-total">—</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">最大單股(張)</div>
+          <div style="font-size:24px;font-weight:700;color:#fbbf24" id="insti-max">—</div>
+        </div>
+      </div>
+
+      <!-- 長條圖 -->
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px;">
+          三大法人合計買超 Top 20（張）
+        </div>
+        <div class="chart-box-lg">
+          <canvas id="insti-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- 明細表 -->
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px;">明細</div>
+        <div id="insti-table"></div>
+      </div>
+
     </main>
   </div>
 
@@ -242,7 +296,7 @@
   <script>
     // ── Tab 切換 ──────────────────────────────────────────
     function switchTab(name) {
-      ['main', 'hiwin'].forEach(t => {
+      ['main', '3insti', 'hiwin'].forEach(t => {
         document.getElementById('page-' + t).style.display = t === name ? 'block' : 'none';
         document.getElementById('tab-' + t).classList.toggle('active', t === name);
       });
@@ -253,6 +307,9 @@
           content.dataset.loaded = 'true';
           if (typeof initHiwin === 'function') initHiwin();
         }
+      }
+      if (name === '3insti') {
+        if (typeof renderInsti === 'function') renderInsti();
       }
     }
 

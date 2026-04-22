@@ -143,6 +143,8 @@ async function loadData() {
 
   // ── AI 交叉確認卡片 ──
   renderAIAnalysis(data);
+  // 快取資料給三大法人頁籤用
+  _instiData = data;
 }
 
 // ════════════════════════════════════════════════════════
@@ -234,5 +236,103 @@ function renderAIAnalysis(data) {
       ⚠️ 此分析僅供參考，不構成投資建議。投資前請自行評估風險。
     </div>`;
 }
+
+
+// ════════════════════════════════════════════════════════
+// 三大法人頁籤渲染
+// ════════════════════════════════════════════════════════
+
+let _instiData = null;  // 快取，避免重複渲染
+
+function renderInsti() {
+  if (!_instiData) return;  // 資料還沒載入
+  const data = _instiData;
+  const stocks = data.three_insti || [];
+  const date = data.three_insti_date || '';
+
+  const dateEl = document.getElementById('insti-date');
+  if (dateEl) dateEl.textContent = date ? `資料日期：${date}` : '—';
+
+  if (!stocks.length) {
+    document.getElementById('insti-count').textContent = '0';
+    document.getElementById('insti-total').textContent = '0';
+    document.getElementById('insti-max').textContent = '0';
+    const tbl = document.getElementById('insti-table');
+    if (tbl) tbl.innerHTML = '<div class="muted" style="padding:12px">今日無三大法人同時買超個股</div>';
+    return;
+  }
+
+  // 統計
+  const total = stocks.reduce((s, r) => s + r.total_net, 0);
+  const max   = Math.max(...stocks.map(r => r.total_net));
+  document.getElementById('insti-count').textContent = stocks.length;
+  document.getElementById('insti-total').textContent = total.toLocaleString();
+  document.getElementById('insti-max').textContent   = max.toLocaleString();
+
+  // 長條圖
+  const ctx = document.getElementById('insti-chart');
+  if (ctx) {
+    if (window.instiChart) window.instiChart.destroy();
+    window.instiChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: stocks.map(s => `${s.stock_name}(${s.stock_id})`),
+        datasets: [
+          { label: '外資(張)',  data: stocks.map(s => s.foreign_net), backgroundColor: 'rgba(99,102,241,.75)' },
+          { label: '投信(張)',  data: stocks.map(s => s.trust_net),   backgroundColor: 'rgba(52,211,153,.75)' },
+          { label: '自營商(張)',data: stocks.map(s => s.dealer_net),  backgroundColor: 'rgba(251,191,36,.75)'  },
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#e5e7eb' } } },
+        scales: {
+          x: { stacked: true, ticks: { color: '#c7d2fe', font: { size: 11 } } },
+          y: { stacked: true, ticks: { color: '#c7d2fe' } }
+        }
+      }
+    });
+  }
+
+  // 明細表
+  const tbl = document.getElementById('insti-table');
+  if (tbl) {
+    const rows = stocks.map((s, i) => {
+      const fColor = s.foreign_net > 0 ? '#6ee7b7' : '#f87171';
+      const tColor = s.trust_net   > 0 ? '#6ee7b7' : '#f87171';
+      const dColor = s.dealer_net  > 0 ? '#6ee7b7' : '#f87171';
+      return `<tr>
+        <td>${i + 1}</td>
+        <td><code>${s.stock_id}</code></td>
+        <td>${s.stock_name}</td>
+        <td class="num" style="color:${fColor}">${s.foreign_net.toLocaleString()}</td>
+        <td class="num" style="color:${tColor}">${s.trust_net.toLocaleString()}</td>
+        <td class="num" style="color:${dColor}">${s.dealer_net.toLocaleString()}</td>
+        <td class="num" style="color:#fbbf24;font-weight:600">${s.total_net.toLocaleString()}</td>
+      </tr>`;
+    }).join('');
+
+    tbl.innerHTML = `
+      <style>
+        #insti-table table { width:100%; border-collapse:collapse; font-size:13px; }
+        #insti-table th, #insti-table td { padding:8px 10px; border-bottom:1px solid #1f2937; }
+        #insti-table th { text-align:left; color:#a5b4fc; font-weight:600; }
+        #insti-table .num { text-align:right; font-variant-numeric:tabular-nums; }
+        #insti-table code { background:#0f172a; padding:2px 5px; border-radius:4px; }
+      </style>
+      <div style="overflow:auto">
+        <table>
+          <thead><tr>
+            <th>#</th><th>代號</th><th>名稱</th>
+            <th>外資(張)</th><th>投信(張)</th><th>自營商(張)</th>
+            <th>合計(張)</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  }
+}
+
 
 loadData();

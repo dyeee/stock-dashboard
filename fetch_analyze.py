@@ -187,6 +187,118 @@ def get_consecutive_top10(days=2):
     return result, daily_top10_list
 
 
+
+# ════════════════════════════════════════════════════════
+# 三大法人買賣超（同時買超篩選）
+# ════════════════════════════════════════════════════════
+
+def get_3insti_twse(date: str) -> pd.DataFrame:
+    """從證交所抓三大法人買賣超（外資、投信、自營商）"""
+    url = "https://www.twse.com.tw/rwd/zh/fund/T86"
+    params = {"date": date, "selectType": "ALL", "response": "json"}
+    try:
+        resp = http_get(url, params=params)
+        data = resp.json()
+        if "data" not in data or not data["data"]:
+            return pd.DataFrame()
+        df = pd.DataFrame(data["data"], columns=data["fields"])
+        # 取出三大法人欄位
+        cols_need = [
+            "證券代號", "證券名稱",
+            "外陸資買賣超股數(不含外資自營商)",
+            "投信買賣超股數",
+            "自營商買賣超股數",
+        ]
+        df = df[cols_need].copy()
+        df.columns = ["stock_id", "stock_name", "foreign_net", "trust_net", "dealer_net"]
+        for col in ["foreign_net", "trust_net", "dealer_net"]:
+            df[col] = df[col].map(to_number)
+        # 轉為張（÷1000）
+        for col in ["foreign_net", "trust_net", "dealer_net"]:
+            df[col] = (df[col] / 1000).round(0)
+        df["total_net"] = df["foreign_net"] + df["trust_net"] + df["dealer_net"]
+        df["date"] = date
+        return df
+    except Exception as e:
+        print(f"⚠️ 三大法人 TWSE {date} 失敗: {e}")
+        return pd.DataFrame()
+
+
+def get_3insti_tpex(date: str) -> pd.DataFrame:
+    """從櫃買中心抓三大法人買賣超"""
+    year = int(date[:4]) - 1911
+    date_tw = f"{year}/{date[4:6]}/{date[6:8]}"
+    url = "https://www.tpex.org.tw/web/stock/3insti/daily_trade/3itrade_hedge_result.php"
+    params = {"l": "zh-tw", "d": date_tw, "se": "AL", "response": "json"}
+    try:
+        resp = http_get(url, params=params)
+        data = resp.json()
+        if "aaData" not in data or not data["aaData"]:
+            return pd.DataFrame()
+        df = pd.DataFrame(data["aaData"])
+        # 欄位：0代號,1名稱,7外資買賣超,10投信買賣超,13自營商買賣超
+        df = df[[0, 1, 9, 12, 15]].copy()
+        df.columns = ["stock_id", "stock_name", "foreign_net", "trust_net", "dealer_net"]
+        for col in ["foreign_net", "trust_net", "dealer_net"]:
+            df[col] = df[col].map(to_number)
+        for col in ["foreign_net", "trust_net", "dealer_net"]:
+            df[col] = (df[col] / 1000).round(0)
+        df["total_net"] = df["foreign_net"] + df["trust_net"] + df["dealer_net"]
+        df["date"] = date
+        return df
+    except Exception as e:
+        print(f"⚠️ 三大法人 TPEx {date} 失敗: {e}")
+        return pd.DataFrame()
+
+
+def get_3insti_all_buy(date: str, top_n: int = 20) -> list:
+    """
+    找出三大法人同時買超的個股（外資、投信、自營商皆 > 0）
+    回傳 list of dict，按合計買超降序
+    """
+    print(f"  📊 抓取三大法人資料 {date}...")
+    frames = []
+    df_twse = get_3insti_twse(date)
+    if not df_twse.empty:
+        frames.append(df_twse)
+    time.sleep(0.3)
+    df_tpex = get_3insti_tpex(date)
+    if not df_tpex.empty:
+        frames.append(df_tpex)
+
+    if not frames:
+        return []
+
+    combined = pd.concat(frames, ignore_index=True)
+    combined = combined.groupby(["stock_id", "stock_name"], as_index=False).agg(
+        foreign_net=("foreign_net", "sum"),
+        trust_net=("trust_net", "sum"),
+        dealer_net=("dealer_net", "sum"),
+        total_net=("total_net", "sum"),
+    )
+
+    # 篩選三大法人「同時」買超（三個都 > 0）
+    mask = (
+        (combined["foreign_net"] > 0) &
+        (combined["trust_net"] > 0) &
+        (combined["dealer_net"] > 0)
+    )
+    result = combined[mask].sort_values("total_net", ascending=False).head(top_n)
+
+    output = []
+    for _, r in result.iterrows():
+        output.append({
+            "stock_id":    r["stock_id"],
+            "stock_name":  r["stock_name"].strip(),
+            "foreign_net": int(r["foreign_net"]),
+            "trust_net":   int(r["trust_net"]),
+            "dealer_net":  int(r["dealer_net"]),
+            "total_net":   int(r["total_net"]),
+            "date":        date,
+        })
+    print(f"  ✅ 三大法人同時買超：{len(output)} 檔")
+    return output
+
 def is_etf(ticker):
     return ticker.startswith("00") or ticker.startswith("006")
 
@@ -380,7 +492,7 @@ def run_ai_cross_check(result_df):
     print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
     return analyses
 
-def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None):
     trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
     stocks = []
     for _, r in result_df.iterrows():
@@ -410,6 +522,8 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None):
         "stocks": stocks,
         "ai_analysis": ai_analyses or [],
         "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
+        "three_insti": three_insti or [],
+        "three_insti_date": trading_dates[0] if trading_dates else "",
     }
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
     OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -474,10 +588,18 @@ if __name__ == "__main__":
         ai_analyses = run_ai_cross_check(
             result if result is not None else pd.DataFrame()
         )
+
+        # ── 三大法人同時買超 ──
+        latest_date = daily_top10_list[0].iloc[0]["date"] if daily_top10_list else ""
+        three_insti = []
+        if latest_date:
+            three_insti = get_3insti_all_buy(str(latest_date), top_n=20)
+
         write_json_payload(
             result if result is not None else pd.DataFrame(),
             daily_top10_list,
             ai_analyses,
+            three_insti,
         )
     else:
         print("❌ 分析失敗")
