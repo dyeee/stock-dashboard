@@ -268,10 +268,17 @@ def get_market_insti_amount(date: str, frames: list = None) -> dict:
 
     # ── 方法一：直接抓 BFI82U（金額表，單位：元）──
     try:
-        resp = http_get(
+        resp = requests.get(
             "https://www.twse.com.tw/rwd/zh/fund/BFI82U",
             params={"dayDate": date, "type": "day", "response": "json"},
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                "Referer": "https://www.twse.com.tw/zh/trading/fund/BFI82U.html",
+                "Accept": "application/json, text/plain, */*",
+            },
+            timeout=15,
         )
+        resp.raise_for_status()
         data = resp.json()
         if data.get("stat") != "OK":
             raise ValueError(f"stat={data.get('stat')}")
