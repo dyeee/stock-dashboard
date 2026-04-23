@@ -216,8 +216,8 @@ function renderInsti() {
   if (dateEl) dateEl.textContent = date ? `資料日期：${date}` : '—';
 
   // ── 大盤法人金額 ──
-  const fNet = mkt.foreign_net;
-  const tNet = mkt.trust_net;
+  const fNet = mkt.foreign_net_bn;
+  const tNet = mkt.trust_net_bn;
   const fNetEl = document.getElementById('mkt-foreign-net');
   const tNetEl = document.getElementById('mkt-trust-net');
   const fBuyEl = document.getElementById('mkt-foreign-buy');
@@ -225,21 +225,38 @@ function renderInsti() {
   const tBuyEl = document.getElementById('mkt-trust-buy');
   const tSellEl= document.getElementById('mkt-trust-sell');
 
-  const fmt = n => n !== undefined ? (n >= 0 ? '+' : '') + n.toLocaleString() + ' 張' : '—';
-  const fmtAbs = n => n !== undefined ? Math.abs(n).toLocaleString() + ' 張' : '—';
+  const unit   = mkt.unit || '張';
+  const isAmt  = unit === '億元';
+  const fmtNet = n => {
+    if (n === undefined || n === null) return '—';
+    const sign = n >= 0 ? '+' : '';
+    return isAmt
+      ? sign + n.toLocaleString() + ' 億'
+      : sign + Math.round(n).toLocaleString() + ' 張';
+  };
+  const fmtAbs = n => {
+    if (n === undefined || n === null) return '—';
+    return isAmt
+      ? Math.abs(n).toLocaleString() + ' 億'
+      : Math.abs(Math.round(n)).toLocaleString() + ' 張';
+  };
 
   if (fNetEl && mkt.foreign_net !== undefined) {
-    fNetEl.textContent = fmt(mkt.foreign_net);
+    fNetEl.textContent = fmtNet(mkt.foreign_net);
     fNetEl.style.color = mkt.foreign_net >= 0 ? '#6ee7b7' : '#f87171';
   }
   if (tNetEl && mkt.trust_net !== undefined) {
-    tNetEl.textContent = fmt(mkt.trust_net);
+    tNetEl.textContent = fmtNet(mkt.trust_net);
     tNetEl.style.color = mkt.trust_net >= 0 ? '#6ee7b7' : '#f87171';
   }
   if (fBuyEl)  fBuyEl.textContent  = fmtAbs(mkt.foreign_buy);
   if (fSellEl) fSellEl.textContent = fmtAbs(mkt.foreign_sell);
   if (tBuyEl)  tBuyEl.textContent  = fmtAbs(mkt.trust_buy);
   if (tSellEl) tSellEl.textContent = fmtAbs(mkt.trust_sell);
+
+  // 更新標題說明單位
+  const unitLabel = document.getElementById('mkt-unit-label');
+  if (unitLabel) unitLabel.textContent = `（${unit}）`;
 
   // ── 買超表 ──
   renderInstiTable('insti-buy-table', buy, true);

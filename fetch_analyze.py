@@ -254,36 +254,68 @@ def get_3insti_tpex(date: str) -> pd.DataFrame:
 
 def get_market_insti_amount(date: str, frames: list = None) -> dict:
     """
-    從已抓取的三大法人資料加總整體市場外資、投信買賣張數
-    不需要額外 API，避免 403/404 問題
-    frames: get_3insti_twse + get_3insti_tpex 的原始 DataFrame list
+    抓大盤三大法人買賣金額（億元）
+    來源：證交所 BFI82U（三大法人買賣金額統計）
+    失敗時 fallback 用個股張數加總
     """
+
+    def parse_100mn(s):
+        """將字串金額（元）轉為億元"""
+        try:
+            return round(float(str(s).replace(",", "")) / 1e8, 2)
+        except Exception:
+            return None
+
+    # ── 方法一：直接抓 BFI82U（金額表，單位：元）──
+    try:
+        resp = http_get(
+            "https://www.twse.com.tw/rwd/zh/fund/BFI82U",
+            params={"dayDate": date, "type": "day", "response": "json"},
+        )
+        data = resp.json()
+        if data.get("stat") != "OK":
+            raise ValueError(f"stat={data.get('stat')}")
+        rows = data.get("data", [])
+        result = {"date": date, "unit": "億元"}
+        for row in rows:
+            name = str(row[0]) if row else ""
+            # 欄位：名稱, 買進金額(元), 賣出金額(元), 買賣差額(元)
+            if "外資" in name and "自營" not in name:
+                result["foreign_buy"]  = parse_100mn(row[1])
+                result["foreign_sell"] = parse_100mn(row[2])
+                result["foreign_net"]  = parse_100mn(row[3])
+            elif "投信" in name:
+                result["trust_buy"]  = parse_100mn(row[1])
+                result["trust_sell"] = parse_100mn(row[2])
+                result["trust_net"]  = parse_100mn(row[3])
+
+        if result.get("foreign_net") is not None:
+            print(f"  ✅ 大盤法人金額：外資淨 {result['foreign_net']:+.2f} 億，"
+                  f"投信淨 {result.get('trust_net', '?')} 億")
+            return result
+        raise ValueError("外資欄位未找到")
+    except Exception as e:
+        print(f"  ⚠️ BFI82U 抓取失敗（{e}），改用張數加總")
+
+    # ── 方法二：fallback — 用個股張數加總 ──
     if not frames:
         return {}
     try:
         combined = pd.concat(frames, ignore_index=True)
-        # 加總全市場
-        f_buy  = combined[combined["foreign_net"] > 0]["foreign_net"].sum()
-        f_sell = combined[combined["foreign_net"] < 0]["foreign_net"].sum()
-        f_net  = combined["foreign_net"].sum()
-        t_buy  = combined[combined["trust_net"] > 0]["trust_net"].sum()
-        t_sell = combined[combined["trust_net"] < 0]["trust_net"].sum()
-        t_net  = combined["trust_net"].sum()
-
-        result = {
-            "date":          date,
-            "foreign_buy":   int(f_buy),
-            "foreign_sell":  int(f_sell),
-            "foreign_net":   int(f_net),
-            "trust_buy":     int(t_buy),
-            "trust_sell":    int(t_sell),
-            "trust_net":     int(t_net),
-            "unit":          "張",
+        f_net  = int(combined["foreign_net"].sum())
+        f_buy  = int(combined[combined["foreign_net"] > 0]["foreign_net"].sum())
+        f_sell = int(combined[combined["foreign_net"] < 0]["foreign_net"].sum())
+        t_net  = int(combined["trust_net"].sum())
+        t_buy  = int(combined[combined["trust_net"] > 0]["trust_net"].sum())
+        t_sell = int(combined[combined["trust_net"] < 0]["trust_net"].sum())
+        print(f"  ✅ 大盤法人（張數）：外資淨 {f_net:+,} 張，投信淨 {t_net:+,} 張")
+        return {
+            "date": date, "unit": "張",
+            "foreign_buy": f_buy, "foreign_sell": f_sell, "foreign_net": f_net,
+            "trust_buy": t_buy, "trust_sell": t_sell, "trust_net": t_net,
         }
-        print(f"  ✅ 大盤法人：外資淨 {int(f_net):+,} 張，投信淨 {int(t_net):+,} 張")
-        return result
     except Exception as e:
-        print(f"  ⚠️ 大盤法人加總失敗：{e}")
+        print(f"  ⚠️ 張數加總失敗：{e}")
         return {}
 
 
