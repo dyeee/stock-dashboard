@@ -216,8 +216,8 @@ function renderInsti() {
   if (dateEl) dateEl.textContent = date ? `資料日期：${date}` : '—';
 
   // ── 大盤法人金額 ──
-  const fNet = mkt.foreign_net_bn;
-  const tNet = mkt.trust_net_bn;
+  const fNet = mkt.foreign_net;
+  const tNet = mkt.trust_net;
   const fNetEl = document.getElementById('mkt-foreign-net');
   const tNetEl = document.getElementById('mkt-trust-net');
   const fBuyEl = document.getElementById('mkt-foreign-buy');
