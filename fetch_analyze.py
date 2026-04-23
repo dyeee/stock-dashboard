@@ -252,52 +252,38 @@ def get_3insti_tpex(date: str) -> pd.DataFrame:
 
 
 
-def get_market_insti_amount(date: str) -> dict:
+def get_market_insti_amount(date: str, frames: list = None) -> dict:
     """
-    抓整體市場外資、投信買賣金額（億元）
-    來源：證交所 FMTQIK（三大法人買賣金額統計）
-    回傳：{
-      "foreign_buy_bn": 外資買進金額(億),
-      "foreign_sell_bn": 外資賣出金額(億),
-      "foreign_net_bn": 外資淨買賣(億),
-      "trust_buy_bn": 投信買進(億),
-      "trust_sell_bn": 投信賣出(億),
-      "trust_net_bn": 投信淨買賣(億),
-      "date": date
-    }
+    從已抓取的三大法人資料加總整體市場外資、投信買賣張數
+    不需要額外 API，避免 403/404 問題
+    frames: get_3insti_twse + get_3insti_tpex 的原始 DataFrame list
     """
-    url = "https://www.twse.com.tw/rwd/zh/fund/FMTQIK"
-    params = {"date": date, "response": "json"}
+    if not frames:
+        return {}
     try:
-        resp = http_get(url, params=params)
-        data = resp.json()
-        if "data" not in data or not data["data"]:
-            return {}
+        combined = pd.concat(frames, ignore_index=True)
+        # 加總全市場
+        f_buy  = combined[combined["foreign_net"] > 0]["foreign_net"].sum()
+        f_sell = combined[combined["foreign_net"] < 0]["foreign_net"].sum()
+        f_net  = combined["foreign_net"].sum()
+        t_buy  = combined[combined["trust_net"] > 0]["trust_net"].sum()
+        t_sell = combined[combined["trust_net"] < 0]["trust_net"].sum()
+        t_net  = combined["trust_net"].sum()
 
-        result = {"date": date}
-        # 找外資（外陸資）和投信的列
-        for row in data["data"]:
-            name = row[0] if row else ""
-            if "外陸資" in name and "自營" not in name:
-                # 欄位：名稱, 買進金額, 賣出金額, 買賣差額
-                def parse_bn(s):
-                    try:
-                        return round(float(str(s).replace(",", "")) / 1e8, 2)
-                    except Exception:
-                        return 0.0
-                result["foreign_buy_bn"]  = parse_bn(row[1])
-                result["foreign_sell_bn"] = parse_bn(row[2])
-                result["foreign_net_bn"]  = parse_bn(row[3])
-            elif "投信" in name:
-                result["trust_buy_bn"]  = parse_bn(row[1])
-                result["trust_sell_bn"] = parse_bn(row[2])
-                result["trust_net_bn"]  = parse_bn(row[3])
-
-        print(f"  ✅ 大盤法人金額：外資淨 {result.get('foreign_net_bn', '?')} 億，"
-              f"投信淨 {result.get('trust_net_bn', '?')} 億")
+        result = {
+            "date":          date,
+            "foreign_buy":   int(f_buy),
+            "foreign_sell":  int(f_sell),
+            "foreign_net":   int(f_net),
+            "trust_buy":     int(t_buy),
+            "trust_sell":    int(t_sell),
+            "trust_net":     int(t_net),
+            "unit":          "張",
+        }
+        print(f"  ✅ 大盤法人：外資淨 {int(f_net):+,} 張，投信淨 {int(t_net):+,} 張")
         return result
     except Exception as e:
-        print(f"  ⚠️ 大盤法人金額抓取失敗：{e}")
+        print(f"  ⚠️ 大盤法人加總失敗：{e}")
         return {}
 
 
@@ -351,7 +337,7 @@ def get_insti_signal(date: str, top_n: int = 10) -> dict:
     buy_list  = to_records(buy_top)
     sell_list = to_records(sell_top)
     print(f"  ✅ 同時買超：{len(buy_list)} 檔　同時賣超：{len(sell_list)} 檔")
-    return {"buy": buy_list, "sell": sell_list, "date": date}
+    return {"buy": buy_list, "sell": sell_list, "date": date, "_frames": frames}
 
 def is_etf(ticker):
     return ticker.startswith("00") or ticker.startswith("006")
@@ -650,7 +636,8 @@ if __name__ == "__main__":
         market_insti = {}
         if latest_date:
             three_insti  = get_insti_signal(str(latest_date), top_n=10)
-            market_insti = get_market_insti_amount(str(latest_date))
+            frames = three_insti.pop("_frames", [])
+            market_insti = get_market_insti_amount(str(latest_date), frames)
 
         write_json_payload(
             result if result is not None else pd.DataFrame(),

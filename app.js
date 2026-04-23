@@ -225,20 +225,21 @@ function renderInsti() {
   const tBuyEl = document.getElementById('mkt-trust-buy');
   const tSellEl= document.getElementById('mkt-trust-sell');
 
-  if (fNetEl && fNet !== undefined) {
-    const c = fNet >= 0 ? '#6ee7b7' : '#f87171';
-    fNetEl.textContent = (fNet >= 0 ? '+' : '') + fNet.toLocaleString() + ' 億';
-    fNetEl.style.color = c;
+  const fmt = n => n !== undefined ? (n >= 0 ? '+' : '') + n.toLocaleString() + ' 張' : '—';
+  const fmtAbs = n => n !== undefined ? Math.abs(n).toLocaleString() + ' 張' : '—';
+
+  if (fNetEl && mkt.foreign_net !== undefined) {
+    fNetEl.textContent = fmt(mkt.foreign_net);
+    fNetEl.style.color = mkt.foreign_net >= 0 ? '#6ee7b7' : '#f87171';
   }
-  if (tNetEl && tNet !== undefined) {
-    const c = tNet >= 0 ? '#6ee7b7' : '#f87171';
-    tNetEl.textContent = (tNet >= 0 ? '+' : '') + tNet.toLocaleString() + ' 億';
-    tNetEl.style.color = c;
+  if (tNetEl && mkt.trust_net !== undefined) {
+    tNetEl.textContent = fmt(mkt.trust_net);
+    tNetEl.style.color = mkt.trust_net >= 0 ? '#6ee7b7' : '#f87171';
   }
-  if (fBuyEl)  fBuyEl.textContent  = mkt.foreign_buy_bn  !== undefined ? mkt.foreign_buy_bn.toLocaleString()  + ' 億' : '—';
-  if (fSellEl) fSellEl.textContent = mkt.foreign_sell_bn !== undefined ? mkt.foreign_sell_bn.toLocaleString() + ' 億' : '—';
-  if (tBuyEl)  tBuyEl.textContent  = mkt.trust_buy_bn   !== undefined ? mkt.trust_buy_bn.toLocaleString()   + ' 億' : '—';
-  if (tSellEl) tSellEl.textContent = mkt.trust_sell_bn  !== undefined ? mkt.trust_sell_bn.toLocaleString()  + ' 億' : '—';
+  if (fBuyEl)  fBuyEl.textContent  = fmtAbs(mkt.foreign_buy);
+  if (fSellEl) fSellEl.textContent = fmtAbs(mkt.foreign_sell);
+  if (tBuyEl)  tBuyEl.textContent  = fmtAbs(mkt.trust_buy);
+  if (tSellEl) tSellEl.textContent = fmtAbs(mkt.trust_sell);
 
   // ── 買超表 ──
   renderInstiTable('insti-buy-table', buy, true);
