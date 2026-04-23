@@ -251,12 +251,12 @@ def get_3insti_tpex(date: str) -> pd.DataFrame:
         return pd.DataFrame()
 
 
-def get_3insti_all_buy(date: str, top_n: int = 20) -> list:
+def get_insti_signal(date: str, top_n: int = 10) -> dict:
     """
-    找出三大法人同時買超的個股（外資、投信、自營商皆 > 0）
-    回傳 list of dict，按合計買超降序
+    外資 + 投信同時買超前10 / 同時賣超前10
+    回傳 {"buy": [...], "sell": [...], "date": date}
     """
-    print(f"  📊 抓取三大法人資料 {date}...")
+    print(f"  📊 抓取法人資料 {date}...")
     frames = []
     df_twse = get_3insti_twse(date)
     if not df_twse.empty:
@@ -267,37 +267,41 @@ def get_3insti_all_buy(date: str, top_n: int = 20) -> list:
         frames.append(df_tpex)
 
     if not frames:
-        return []
+        return {"buy": [], "sell": [], "date": date}
 
     combined = pd.concat(frames, ignore_index=True)
     combined = combined.groupby(["stock_id", "stock_name"], as_index=False).agg(
         foreign_net=("foreign_net", "sum"),
         trust_net=("trust_net", "sum"),
         dealer_net=("dealer_net", "sum"),
-        total_net=("total_net", "sum"),
     )
+    combined["ft_net"] = combined["foreign_net"] + combined["trust_net"]
 
-    # 篩選三大法人「同時」買超（三個都 > 0）
-    mask = (
-        (combined["foreign_net"] > 0) &
-        (combined["trust_net"] > 0) &
-        (combined["dealer_net"] > 0)
-    )
-    result = combined[mask].sort_values("total_net", ascending=False).head(top_n)
+    def to_records(df):
+        out = []
+        for _, r in df.iterrows():
+            out.append({
+                "stock_id":    r["stock_id"],
+                "stock_name":  r["stock_name"].strip(),
+                "foreign_net": int(r["foreign_net"]),
+                "trust_net":   int(r["trust_net"]),
+                "ft_net":      int(r["ft_net"]),
+                "date":        date,
+            })
+        return out
 
-    output = []
-    for _, r in result.iterrows():
-        output.append({
-            "stock_id":    r["stock_id"],
-            "stock_name":  r["stock_name"].strip(),
-            "foreign_net": int(r["foreign_net"]),
-            "trust_net":   int(r["trust_net"]),
-            "dealer_net":  int(r["dealer_net"]),
-            "total_net":   int(r["total_net"]),
-            "date":        date,
-        })
-    print(f"  ✅ 三大法人同時買超：{len(output)} 檔")
-    return output
+    # 外資 + 投信同時買超（兩者皆 > 0）
+    buy_mask  = (combined["foreign_net"] > 0) & (combined["trust_net"] > 0)
+    buy_top   = combined[buy_mask].sort_values("ft_net", ascending=False).head(top_n)
+
+    # 外資 + 投信同時賣超（兩者皆 < 0）
+    sell_mask = (combined["foreign_net"] < 0) & (combined["trust_net"] < 0)
+    sell_top  = combined[sell_mask].sort_values("ft_net", ascending=True).head(top_n)
+
+    buy_list  = to_records(buy_top)
+    sell_list = to_records(sell_top)
+    print(f"  ✅ 同時買超：{len(buy_list)} 檔　同時賣超：{len(sell_list)} 檔")
+    return {"buy": buy_list, "sell": sell_list, "date": date}
 
 def is_etf(ticker):
     return ticker.startswith("00") or ticker.startswith("006")
@@ -522,8 +526,8 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
         "stocks": stocks,
         "ai_analysis": ai_analyses or [],
         "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
-        "three_insti": three_insti or [],
-        "three_insti_date": trading_dates[0] if trading_dates else "",
+        "insti_signal": three_insti or {},
+        "insti_signal_date": trading_dates[0] if trading_dates else "",
     }
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
     OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -593,7 +597,7 @@ if __name__ == "__main__":
         latest_date = daily_top10_list[0].iloc[0]["rank_date"].replace("-", "") if daily_top10_list else ""
         three_insti = []
         if latest_date:
-            three_insti = get_3insti_all_buy(str(latest_date), top_n=20)
+            three_insti = get_insti_signal(str(latest_date), top_n=10)
 
         write_json_payload(
             result if result is not None else pd.DataFrame(),
