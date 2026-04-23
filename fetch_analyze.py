@@ -251,6 +251,56 @@ def get_3insti_tpex(date: str) -> pd.DataFrame:
         return pd.DataFrame()
 
 
+
+def get_market_insti_amount(date: str) -> dict:
+    """
+    抓整體市場外資、投信買賣金額（億元）
+    來源：證交所 FMTQIK（三大法人買賣金額統計）
+    回傳：{
+      "foreign_buy_bn": 外資買進金額(億),
+      "foreign_sell_bn": 外資賣出金額(億),
+      "foreign_net_bn": 外資淨買賣(億),
+      "trust_buy_bn": 投信買進(億),
+      "trust_sell_bn": 投信賣出(億),
+      "trust_net_bn": 投信淨買賣(億),
+      "date": date
+    }
+    """
+    url = "https://www.twse.com.tw/rwd/zh/fund/FMTQIK"
+    params = {"date": date, "response": "json"}
+    try:
+        resp = http_get(url, params=params)
+        data = resp.json()
+        if "data" not in data or not data["data"]:
+            return {}
+
+        result = {"date": date}
+        # 找外資（外陸資）和投信的列
+        for row in data["data"]:
+            name = row[0] if row else ""
+            if "外陸資" in name and "自營" not in name:
+                # 欄位：名稱, 買進金額, 賣出金額, 買賣差額
+                def parse_bn(s):
+                    try:
+                        return round(float(str(s).replace(",", "")) / 1e8, 2)
+                    except Exception:
+                        return 0.0
+                result["foreign_buy_bn"]  = parse_bn(row[1])
+                result["foreign_sell_bn"] = parse_bn(row[2])
+                result["foreign_net_bn"]  = parse_bn(row[3])
+            elif "投信" in name:
+                result["trust_buy_bn"]  = parse_bn(row[1])
+                result["trust_sell_bn"] = parse_bn(row[2])
+                result["trust_net_bn"]  = parse_bn(row[3])
+
+        print(f"  ✅ 大盤法人金額：外資淨 {result.get('foreign_net_bn', '?')} 億，"
+              f"投信淨 {result.get('trust_net_bn', '?')} 億")
+        return result
+    except Exception as e:
+        print(f"  ⚠️ 大盤法人金額抓取失敗：{e}")
+        return {}
+
+
 def get_insti_signal(date: str, top_n: int = 10) -> dict:
     """
     外資 + 投信同時買超前10 / 同時賣超前10
@@ -496,7 +546,7 @@ def run_ai_cross_check(result_df):
     print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
     return analyses
 
-def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None):
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None):
     trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
     stocks = []
     for _, r in result_df.iterrows():
@@ -528,6 +578,7 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
         "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
         "insti_signal": three_insti or {},
         "insti_signal_date": trading_dates[0] if trading_dates else "",
+        "market_insti": market_insti or {},
     }
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
     OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -595,15 +646,18 @@ if __name__ == "__main__":
 
         # ── 三大法人同時買超 ──
         latest_date = daily_top10_list[0].iloc[0]["rank_date"].replace("-", "") if daily_top10_list else ""
-        three_insti = []
+        three_insti = {}
+        market_insti = {}
         if latest_date:
-            three_insti = get_insti_signal(str(latest_date), top_n=10)
+            three_insti  = get_insti_signal(str(latest_date), top_n=10)
+            market_insti = get_market_insti_amount(str(latest_date))
 
         write_json_payload(
             result if result is not None else pd.DataFrame(),
             daily_top10_list,
             ai_analyses,
             three_insti,
+            market_insti,
         )
     else:
         print("❌ 分析失敗")

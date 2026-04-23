@@ -91,6 +91,50 @@
       </div>
     </div>
 
+    <!-- 統計 -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">同時買超檔數</div>
+        <div class="stat-val" style="color:#6ee7b7" id="insti-buy-count">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">同時賣超檔數</div>
+        <div class="stat-val" style="color:#f87171" id="insti-sell-count">—</div>
+      </div>
+    </div>
+
+
+    <!-- 大盤法人買賣金額 -->
+    <div class="card">
+      <div class="section-label">📊 大盤法人買賣金額（當日整體市場）</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <!-- 外資 -->
+        <div style="background:#1f2937;border-radius:12px;padding:14px;">
+          <div style="font-size:12px;color:#6b7280;margin-bottom:8px;font-weight:600;">外資（外陸資）</div>
+          <div style="font-size:22px;font-weight:700;margin-bottom:8px;" id="mkt-foreign-net">—</div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;">
+            <span>買進</span><span id="mkt-foreign-buy" style="color:#6ee7b7;">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-top:4px;">
+            <span>賣出</span><span id="mkt-foreign-sell" style="color:#f87171;">—</span>
+          </div>
+        </div>
+
+        <!-- 投信 -->
+        <div style="background:#1f2937;border-radius:12px;padding:14px;">
+          <div style="font-size:12px;color:#6b7280;margin-bottom:8px;font-weight:600;">投信</div>
+          <div style="font-size:22px;font-weight:700;margin-bottom:8px;" id="mkt-trust-net">—</div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;">
+            <span>買進</span><span id="mkt-trust-buy" style="color:#6ee7b7;">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#6b7280;margin-top:4px;">
+            <span>賣出</span><span id="mkt-trust-sell" style="color:#f87171;">—</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
     <!-- 買超 -->
     <div class="card">

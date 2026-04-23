@@ -206,13 +206,39 @@ let _instiData = null;
 
 function renderInsti() {
   if (!_instiData) return;
-  const sig  = _instiData.insti_signal || {};
-  const date = _instiData.insti_signal_date || sig.date || '';
-  const buy  = sig.buy  || [];
-  const sell = sig.sell || [];
+  const sig    = _instiData.insti_signal || {};
+  const mkt    = _instiData.market_insti || {};
+  const date   = _instiData.insti_signal_date || sig.date || '';
+  const buy    = sig.buy  || [];
+  const sell   = sig.sell || [];
 
   const dateEl = document.getElementById('insti-date');
   if (dateEl) dateEl.textContent = date ? `資料日期：${date}` : '—';
+
+  // ── 大盤法人金額 ──
+  const fNet = mkt.foreign_net_bn;
+  const tNet = mkt.trust_net_bn;
+  const fNetEl = document.getElementById('mkt-foreign-net');
+  const tNetEl = document.getElementById('mkt-trust-net');
+  const fBuyEl = document.getElementById('mkt-foreign-buy');
+  const fSellEl= document.getElementById('mkt-foreign-sell');
+  const tBuyEl = document.getElementById('mkt-trust-buy');
+  const tSellEl= document.getElementById('mkt-trust-sell');
+
+  if (fNetEl && fNet !== undefined) {
+    const c = fNet >= 0 ? '#6ee7b7' : '#f87171';
+    fNetEl.textContent = (fNet >= 0 ? '+' : '') + fNet.toLocaleString() + ' 億';
+    fNetEl.style.color = c;
+  }
+  if (tNetEl && tNet !== undefined) {
+    const c = tNet >= 0 ? '#6ee7b7' : '#f87171';
+    tNetEl.textContent = (tNet >= 0 ? '+' : '') + tNet.toLocaleString() + ' 億';
+    tNetEl.style.color = c;
+  }
+  if (fBuyEl)  fBuyEl.textContent  = mkt.foreign_buy_bn  !== undefined ? mkt.foreign_buy_bn.toLocaleString()  + ' 億' : '—';
+  if (fSellEl) fSellEl.textContent = mkt.foreign_sell_bn !== undefined ? mkt.foreign_sell_bn.toLocaleString() + ' 億' : '—';
+  if (tBuyEl)  tBuyEl.textContent  = mkt.trust_buy_bn   !== undefined ? mkt.trust_buy_bn.toLocaleString()   + ' 億' : '—';
+  if (tSellEl) tSellEl.textContent = mkt.trust_sell_bn  !== undefined ? mkt.trust_sell_bn.toLocaleString()  + ' 億' : '—';
 
   // ── 買超表 ──
   renderInstiTable('insti-buy-table', buy, true);
