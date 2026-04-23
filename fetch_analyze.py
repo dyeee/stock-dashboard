@@ -280,7 +280,7 @@ def get_market_insti_amount(date: str, frames: list = None) -> dict:
         for row in rows:
             name = str(row[0]) if row else ""
             # 欄位：名稱, 買進金額(元), 賣出金額(元), 買賣差額(元)
-            if "外資" in name and "自營" not in name:
+            if name.strip() == "外資" or ("外資" in name and "自營" not in name and "合計" not in name):
                 result["foreign_buy"]  = parse_100mn(row[1])
                 result["foreign_sell"] = parse_100mn(row[2])
                 result["foreign_net"]  = parse_100mn(row[3])
