@@ -284,8 +284,11 @@ def get_market_insti_amount(date: str, frames: list = None) -> dict:
             raise ValueError(f"stat={data.get('stat')}")
         rows = data.get("data", [])
         result = {"date": date, "unit": "億元"}
+        # debug：印出所有列名稱
+        print(f"  [BFI82U] stat={data.get('stat')}, date={data.get('date')}, rows={len(rows)}")
         for row in rows:
             name = str(row[0]) if row else ""
+            print(f"  [BFI82U] row name='{name}'")
             # 欄位：名稱, 買進金額(元), 賣出金額(元), 買賣差額(元)
             if name.strip() == "外資" or ("外資" in name and "自營" not in name and "合計" not in name):
                 result["foreign_buy"]  = parse_100mn(row[1])
