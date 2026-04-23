@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-23 16:06:53",
+  "generated_at_utc": "2026-04-23 17:44:53",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -92,26 +92,26 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連2日大買6.7萬張",
-        "法說會喊旺目標價400元"
+        "外資連2日買超6.7萬張",
+        "法說Q1營收創新高"
       ],
-      "warning": "月營收年增率掛零需觀察",
-      "next_check": "2024年4月營收",
-      "data_quality": "有限",
+      "warning": "需觀察v8架構處理器需求能否持續",
+      "next_check": "2024年4月法說會",
+      "data_quality": "充足",
       "net_buy_lots": 67860,
       "is_etf": false
     },
     {
       "ticker": "2303",
       "name": "聯電",
-      "verdict": "謹慎觀察",
+      "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連續買超",
-        "資金流入但營收未增"
+        "外資連續兩日大買",
+        "月營收維持高基數"
       ],
-      "warning": "短線追價風險高",
-      "next_check": "下月營收確認",
+      "warning": "短線追價風險偏高",
+      "next_check": "2026年4月",
       "data_quality": "有限",
       "net_buy_lots": 62164,
       "is_etf": false
@@ -122,11 +122,11 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連續兩天買超5萬張",
-        "國泰金控海外債發行穩定"
+        "外資連續兩日大買",
+        "高股息標的受資金青睞"
       ],
-      "warning": "高股息標的可能受利率波動影響",
-      "next_check": "一周後確認",
+      "warning": "市場波動可能影響ETF表現",
+      "next_check": "一周後確認外資動向",
       "data_quality": "有限",
       "net_buy_lots": 52887,
       "is_etf": true
@@ -137,17 +137,17 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連兩日買超",
-        "缺乏新聞催化"
+        "外資連2日買超",
+        "ETF流動性佳"
       ],
-      "warning": "不動產市場反轉風險",
-      "next_check": "一周後",
+      "warning": "標的指數下跌風險",
+      "next_check": "1週後",
       "data_quality": "有限",
       "net_buy_lots": 28225,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-24 00:05",
+  "ai_analysis_time": "2026-04-24 01:43",
   "insti_signal": {
     "buy": [
       {
@@ -318,12 +318,12 @@
   "insti_signal_date": "2026-04-23",
   "market_insti": {
     "date": "20260423",
-    "unit": "張",
-    "foreign_buy": 536983,
-    "foreign_sell": -1090936,
-    "foreign_net": -553953,
-    "trust_buy": 66555,
-    "trust_sell": -166902,
-    "trust_net": -100347
+    "unit": "億元",
+    "trust_buy": 252.65,
+    "trust_sell": 239.09,
+    "trust_net": 13.56,
+    "foreign_buy": 5258.31,
+    "foreign_sell": 5285.86,
+    "foreign_net": -27.55
   }
 }
