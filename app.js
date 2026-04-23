@@ -214,9 +214,6 @@ function renderInsti() {
   const dateEl = document.getElementById('insti-date');
   if (dateEl) dateEl.textContent = date ? `資料日期：${date}` : '—';
 
-  document.getElementById('insti-buy-count').textContent  = buy.length;
-  document.getElementById('insti-sell-count').textContent = sell.length;
-
   // ── 買超表 ──
   renderInstiTable('insti-buy-table', buy, true);
 
