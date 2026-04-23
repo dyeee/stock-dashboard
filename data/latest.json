@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-23 08:55:33",
+  "generated_at_utc": "2026-04-23 16:06:53",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -92,11 +92,11 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連續兩天買超6.7萬張",
-        "月營收突破220元關卡"
+        "外資連2日大買6.7萬張",
+        "法說會喊旺目標價400元"
       ],
-      "warning": "營收年增率持平需觀察訂單能見度",
-      "next_check": "2024年3月法說會",
+      "warning": "月營收年增率掛零需觀察",
+      "next_check": "2024年4月營收",
       "data_quality": "有限",
       "net_buy_lots": 67860,
       "is_etf": false
@@ -104,14 +104,14 @@
     {
       "ticker": "2303",
       "name": "聯電",
-      "verdict": "建議買進",
+      "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續兩日大買6萬張",
-        "月營收維持2024億穩定"
+        "外資連續買超",
+        "資金流入但營收未增"
       ],
-      "warning": "短線追高風險及營收無成長",
-      "next_check": "下周法說會",
+      "warning": "短線追價風險高",
+      "next_check": "下月營收確認",
       "data_quality": "有限",
       "net_buy_lots": 62164,
       "is_etf": false
@@ -122,11 +122,11 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連兩日大買",
-        "高股息ETF受資金青睞"
+        "外資連續兩天買超5萬張",
+        "國泰金控海外債發行穩定"
       ],
-      "warning": "市場波動可能影響ETF表現",
-      "next_check": "一周後",
+      "warning": "高股息標的可能受利率波動影響",
+      "next_check": "一周後確認",
       "data_quality": "有限",
       "net_buy_lots": 52887,
       "is_etf": true
@@ -134,20 +134,20 @@
     {
       "ticker": "00712",
       "name": "復華富時不動產  ",
-      "verdict": "建議買進",
+      "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
         "外資連兩日買超",
-        "ETF無基本面風險"
+        "缺乏新聞催化"
       ],
-      "warning": "市場波動可能影響ETF走勢",
-      "next_check": "一周後確認",
+      "warning": "不動產市場反轉風險",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 28225,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-23 16:53",
+  "ai_analysis_time": "2026-04-24 00:05",
   "insti_signal": {
     "buy": [
       {
@@ -191,19 +191,19 @@
         "date": "20260423"
       },
       {
+        "stock_id": "6415",
+        "stock_name": "矽力*-KY",
+        "foreign_net": 4023,
+        "trust_net": 1250,
+        "ft_net": 5273,
+        "date": "20260423"
+      },
+      {
         "stock_id": "2388",
         "stock_name": "威盛",
         "foreign_net": 3985,
         "trust_net": 599,
         "ft_net": 4584,
-        "date": "20260423"
-      },
-      {
-        "stock_id": "6415",
-        "stock_name": "矽力*-KY",
-        "foreign_net": 4023,
-        "trust_net": 465,
-        "ft_net": 4488,
         "date": "20260423"
       },
       {
@@ -319,11 +319,11 @@
   "market_insti": {
     "date": "20260423",
     "unit": "張",
-    "foreign_buy": 536521,
+    "foreign_buy": 536983,
     "foreign_sell": -1090936,
-    "foreign_net": -554415,
-    "trust_buy": 65626,
-    "trust_sell": -167244,
-    "trust_net": -101618
+    "foreign_net": -553953,
+    "trust_buy": 66555,
+    "trust_sell": -166902,
+    "trust_net": -100347
   }
 }
