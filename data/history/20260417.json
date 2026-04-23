@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-20 15:43:24",
+  "generated_at_utc": "2026-04-22 15:48:09",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -70,15 +70,15 @@
   "ai_analysis": [
     {
       "ticker": "00878",
-      "name": "國泰永續高股息  ",
+      "name": "國泰永續高股息",
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連兩日買超9.7萬張",
-        "高股息標的具長期資金偏好"
+        "外資連續兩日買超",
+        "ETF資金流入跡象"
       ],
-      "warning": "外資動向反覆可能影響短線走勢",
-      "next_check": "3個交易日後",
+      "warning": "追踪指數波動風險",
+      "next_check": "一周後確認",
       "data_quality": "有限",
       "net_buy_lots": 97680,
       "is_etf": true
@@ -89,12 +89,12 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續買超",
-        "短線資金湧入"
+        "外資連續買超資金動能強",
+        "沾光輝達量子題材受關注"
       ],
-      "warning": "短線追價風險高",
-      "next_check": "2024年4月營收",
-      "data_quality": "有限",
+      "warning": "短期波動風險高，技術面未突破關鍵關卡",
+      "next_check": "2024年4月營收數據",
+      "data_quality": "充足",
       "net_buy_lots": 91532,
       "is_etf": false
     },
@@ -104,15 +104,126 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "外資連續兩日大買",
-        "高息標的穩定收益"
+        "外資連兩日買超",
+        "高息標的受資金青睞"
       ],
-      "warning": "市場波動可能影響ETF價格",
-      "next_check": "一周後確認",
+      "warning": "市場波動可能影響ETF表現",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 66314,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-20 23:42"
+  "ai_analysis_time": "2026-04-22 23:38",
+  "three_insti": [
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "foreign_net": 57658,
+      "trust_net": 41005,
+      "dealer_net": 2445,
+      "total_net": 101108,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "00900",
+      "stock_name": "富邦特選高股息30",
+      "foreign_net": 5979,
+      "trust_net": 3000,
+      "dealer_net": 9547,
+      "total_net": 18526,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "2454",
+      "stock_name": "聯發科",
+      "foreign_net": 5340,
+      "trust_net": 1284,
+      "dealer_net": 148,
+      "total_net": 6772,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "8070",
+      "stock_name": "長華*",
+      "foreign_net": 2101,
+      "trust_net": 6,
+      "dealer_net": 86,
+      "total_net": 2193,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "6531",
+      "stock_name": "愛普*",
+      "foreign_net": 888,
+      "trust_net": 275,
+      "dealer_net": 157,
+      "total_net": 1320,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "6271",
+      "stock_name": "同欣電",
+      "foreign_net": 972,
+      "trust_net": 279,
+      "dealer_net": 10,
+      "total_net": 1261,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "6669",
+      "stock_name": "緯穎",
+      "foreign_net": 431,
+      "trust_net": 188,
+      "dealer_net": 60,
+      "total_net": 679,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "7769",
+      "stock_name": "鴻勁",
+      "foreign_net": 562,
+      "trust_net": 14,
+      "dealer_net": 23,
+      "total_net": 599,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "8996",
+      "stock_name": "高力",
+      "foreign_net": 309,
+      "trust_net": 28,
+      "dealer_net": 10,
+      "total_net": 347,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "2501",
+      "stock_name": "國建",
+      "foreign_net": 91,
+      "trust_net": 20,
+      "dealer_net": 170,
+      "total_net": 281,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "2486",
+      "stock_name": "一詮",
+      "foreign_net": 192,
+      "trust_net": 1,
+      "dealer_net": 74,
+      "total_net": 267,
+      "date": "20260417"
+    },
+    {
+      "stock_id": "3596",
+      "stock_name": "智易",
+      "foreign_net": 119,
+      "trust_net": 1,
+      "dealer_net": 15,
+      "total_net": 135,
+      "date": "20260417"
+    }
+  ],
+  "three_insti_date": "2026-04-17"
 }
