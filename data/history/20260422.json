@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-22 09:49:31",
+  "generated_at_utc": "2026-04-23 02:04:03",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -111,10 +111,10 @@
       "confidence": "中",
       "reasons": [
         "外資連2日買超7萬張",
-        "輝達量子題材短線拉抬"
+        "輝達量子題材短期吸金"
       ],
-      "warning": "成交量過度放大恐回調",
-      "next_check": "1週後",
+      "warning": "營收年增0%缺乏成長動能",
+      "next_check": "下個月營收公布前",
       "data_quality": "有限",
       "net_buy_lots": 73459,
       "is_etf": false
@@ -126,10 +126,10 @@
       "confidence": "中",
       "reasons": [
         "外資連續兩日大買",
-        "高股息策略受資金青睞"
+        "高股息ETF避險需求"
       ],
-      "warning": "缺乏新聞支撐可能影響持續性",
-      "next_check": "一周後",
+      "warning": "市場資金流向變數",
+      "next_check": "下週一",
       "data_quality": "有限",
       "net_buy_lots": 50721,
       "is_etf": true
@@ -140,11 +140,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續買超",
-        "月營收持平"
+        "外資連續兩日買超",
+        "月營收年增率持平"
       ],
       "warning": "營收成長動能不足",
-      "next_check": "2024Q3財報",
+      "next_check": "2024年5月",
       "data_quality": "有限",
       "net_buy_lots": 38472,
       "is_etf": false
@@ -155,11 +155,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連2日買超",
-        "三星停產利多未明"
+        "外資連2日買超3.5萬張",
+        "三星停產利多存疑"
       ],
-      "warning": "營收年增率持平",
-      "next_check": "2024Q1財報",
+      "warning": "三星供應鏈影響程度不明",
+      "next_check": "2024Q2法說會",
       "data_quality": "有限",
       "net_buy_lots": 35601,
       "is_etf": false
@@ -170,198 +170,183 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連2日買超",
-        "月營收維持高基數"
+        "外資連兩日買超3.3萬張",
+        "3月營收持平無成長"
       ],
-      "warning": "營收年增率持平",
-      "next_check": "下月營收公布",
+      "warning": "營收連續兩月未突破",
+      "next_check": "4月營收數據",
       "data_quality": "有限",
       "net_buy_lots": 33628,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-22 17:47",
-  "three_insti": [
-    {
-      "stock_id": "2303",
-      "stock_name": "聯電",
-      "foreign_net": 47823,
-      "trust_net": 699,
-      "dealer_net": 4405,
-      "total_net": 52927,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2317",
-      "stock_name": "鴻海",
-      "foreign_net": 40064,
-      "trust_net": 6383,
-      "dealer_net": 2013,
-      "total_net": 48460,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2356",
-      "stock_name": "英業達",
-      "foreign_net": 12099,
-      "trust_net": 2174,
-      "dealer_net": 353,
-      "total_net": 14626,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3231",
-      "stock_name": "緯創",
-      "foreign_net": 2779,
-      "trust_net": 858,
-      "dealer_net": 1187,
-      "total_net": 4824,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3645",
-      "stock_name": "達邁",
-      "foreign_net": 4351,
-      "trust_net": 48,
-      "dealer_net": 99,
-      "total_net": 4498,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3189",
-      "stock_name": "景碩",
-      "foreign_net": 1625,
-      "trust_net": 658,
-      "dealer_net": 21,
-      "total_net": 2304,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2377",
-      "stock_name": "微星",
-      "foreign_net": 695,
-      "trust_net": 904,
-      "dealer_net": 251,
-      "total_net": 1850,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3045",
-      "stock_name": "台灣大",
-      "foreign_net": 1192,
-      "trust_net": 436,
-      "dealer_net": 198,
-      "total_net": 1826,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3034",
-      "stock_name": "聯詠",
-      "foreign_net": 1245,
-      "trust_net": 253,
-      "dealer_net": 208,
-      "total_net": 1706,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "6213",
-      "stock_name": "聯茂",
-      "foreign_net": 1212,
-      "trust_net": 95,
-      "dealer_net": 161,
-      "total_net": 1468,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3044",
-      "stock_name": "健鼎",
-      "foreign_net": 912,
-      "trust_net": 36,
-      "dealer_net": 239,
-      "total_net": 1187,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "3665",
-      "stock_name": "貿聯-KY",
-      "foreign_net": 811,
-      "trust_net": 267,
-      "dealer_net": 21,
-      "total_net": 1099,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2385",
-      "stock_name": "群光",
-      "foreign_net": 73,
-      "trust_net": 692,
-      "dealer_net": 40,
-      "total_net": 805,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2393",
-      "stock_name": "億光",
-      "foreign_net": 676,
-      "trust_net": 4,
-      "dealer_net": 120,
-      "total_net": 800,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "7769",
-      "stock_name": "鴻勁",
-      "foreign_net": 517,
-      "trust_net": 86,
-      "dealer_net": 14,
-      "total_net": 617,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2419",
-      "stock_name": "仲琦",
-      "foreign_net": 482,
-      "trust_net": 51,
-      "dealer_net": 63,
-      "total_net": 596,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2357",
-      "stock_name": "華碩",
-      "foreign_net": 436,
-      "trust_net": 133,
-      "dealer_net": 10,
-      "total_net": 579,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "9958",
-      "stock_name": "世紀鋼",
-      "foreign_net": 514,
-      "trust_net": 16,
-      "dealer_net": 19,
-      "total_net": 549,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "2360",
-      "stock_name": "致茂",
-      "foreign_net": 448,
-      "trust_net": 49,
-      "dealer_net": 36,
-      "total_net": 533,
-      "date": "20260422"
-    },
-    {
-      "stock_id": "6526",
-      "stock_name": "達發",
-      "foreign_net": 337,
-      "trust_net": 63,
-      "dealer_net": 22,
-      "total_net": 422,
-      "date": "20260422"
-    }
-  ],
-  "three_insti_date": "2026-04-22"
+  "ai_analysis_time": "2026-04-23 10:02",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "2303",
+        "stock_name": "聯電",
+        "foreign_net": 47823,
+        "trust_net": 699,
+        "ft_net": 48522,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2317",
+        "stock_name": "鴻海",
+        "foreign_net": 40064,
+        "trust_net": 6320,
+        "ft_net": 46384,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2356",
+        "stock_name": "英業達",
+        "foreign_net": 12099,
+        "trust_net": 2174,
+        "ft_net": 14273,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3645",
+        "stock_name": "達邁",
+        "foreign_net": 4351,
+        "trust_net": 48,
+        "ft_net": 4399,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3231",
+        "stock_name": "緯創",
+        "foreign_net": 2779,
+        "trust_net": 858,
+        "ft_net": 3637,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3189",
+        "stock_name": "景碩",
+        "foreign_net": 1625,
+        "trust_net": 658,
+        "ft_net": 2283,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": 1998,
+        "trust_net": 62,
+        "ft_net": 2060,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2855",
+        "stock_name": "統一證",
+        "foreign_net": 1420,
+        "trust_net": 413,
+        "ft_net": 1833,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3045",
+        "stock_name": "台灣大",
+        "foreign_net": 1192,
+        "trust_net": 596,
+        "ft_net": 1788,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3376",
+        "stock_name": "新日興",
+        "foreign_net": 1163,
+        "trust_net": 551,
+        "ft_net": 1714,
+        "date": "20260422"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2337",
+        "stock_name": "旺宏",
+        "foreign_net": -9546,
+        "trust_net": -7088,
+        "ft_net": -16634,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2367",
+        "stock_name": "燿華",
+        "foreign_net": -11066,
+        "trust_net": -393,
+        "ft_net": -11459,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "3481",
+        "stock_name": "群創",
+        "foreign_net": -3526,
+        "trust_net": -4818,
+        "ft_net": -8344,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2002",
+        "stock_name": "中鋼",
+        "foreign_net": -7576,
+        "trust_net": -109,
+        "ft_net": -7685,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2313",
+        "stock_name": "華通",
+        "foreign_net": -5371,
+        "trust_net": -1849,
+        "ft_net": -7220,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "5880",
+        "stock_name": "合庫金",
+        "foreign_net": -6665,
+        "trust_net": -144,
+        "ft_net": -6809,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "1402",
+        "stock_name": "遠東新",
+        "foreign_net": -5944,
+        "trust_net": -201,
+        "ft_net": -6145,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2027",
+        "stock_name": "大成鋼",
+        "foreign_net": -1846,
+        "trust_net": -3743,
+        "ft_net": -5589,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2882",
+        "stock_name": "國泰金",
+        "foreign_net": -4024,
+        "trust_net": -1281,
+        "ft_net": -5305,
+        "date": "20260422"
+      },
+      {
+        "stock_id": "2327",
+        "stock_name": "國巨*",
+        "foreign_net": -3956,
+        "trust_net": -1004,
+        "ft_net": -4960,
+        "date": "20260422"
+      }
+    ],
+    "date": "20260422"
+  },
+  "insti_signal_date": "2026-04-22"
 }
