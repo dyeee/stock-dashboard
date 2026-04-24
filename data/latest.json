@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-24 09:00:30",
+  "generated_at_utc": "2026-04-24 15:36:30",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -38,17 +38,17 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "外資連續兩日大買3萬張",
-        "台股四萬點戰局有利金融股"
+        "外資連2日買超3萬張",
+        "月營收維持20.4億平台"
       ],
-      "warning": "營收年增率掛零缺乏成長動能",
-      "next_check": "2026/04月營收",
+      "warning": "營收年增率已連續3月持平",
+      "next_check": "2026Q2財報",
       "data_quality": "有限",
       "net_buy_lots": 30830,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-24 16:59",
+  "ai_analysis_time": "2026-04-24 23:35",
   "insti_signal": {
     "buy": [
       {
@@ -103,8 +103,8 @@
         "stock_id": "3189",
         "stock_name": "景碩",
         "foreign_net": 6593,
-        "trust_net": 2631,
-        "ft_net": 9224,
+        "trust_net": 2534,
+        "ft_net": 9127,
         "date": "20260424"
       },
       {
@@ -220,11 +220,11 @@
   "market_insti": {
     "date": "20260424",
     "unit": "億元",
-    "trust_buy": 329.49,
-    "trust_sell": 311.48,
-    "trust_net": 18.0,
-    "foreign_buy": 3856.69,
-    "foreign_sell": 3417.61,
+    "trust_buy": 335.8,
+    "trust_sell": 313.63,
+    "trust_net": 22.17,
+    "foreign_buy": 3936.9,
+    "foreign_sell": 3497.82,
     "foreign_net": 439.08
   }
 }
