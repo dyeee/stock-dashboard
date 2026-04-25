@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-24 15:36:30",
+  "generated_at_utc": "2026-04-25 06:46:12",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -36,19 +36,19 @@
       "ticker": "2890",
       "name": "永豐金",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "外資連2日買超3萬張",
-        "月營收維持20.4億平台"
+        "3月營收年增0%動能未改善",
+        "缺乏近期新聞支撐基本面變化"
       ],
-      "warning": "營收年增率已連續3月持平",
-      "next_check": "2026Q2財報",
+      "warning": "營收持續持平可能影響獲利表現",
+      "next_check": "2024年4月營收",
       "data_quality": "有限",
       "net_buy_lots": 30830,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-24 23:35",
+  "ai_analysis_time": "2026-04-25 14:45",
   "insti_signal": {
     "buy": [
       {
