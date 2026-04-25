@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-25 06:46:12",
+  "generated_at_utc": "2026-04-25 14:59:40",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -38,17 +38,17 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "3月營收年增0%動能未改善",
-        "缺乏近期新聞支撐基本面變化"
+        "3月營收年增0%動能疲弱",
+        "無近期新聞提供基本面佐證"
       ],
-      "warning": "營收持續持平可能影響獲利表現",
-      "next_check": "2024年4月營收",
+      "warning": "金融股易受利率波動影響",
+      "next_check": "2024-04營收",
       "data_quality": "有限",
       "net_buy_lots": 30830,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-25 14:45",
+  "ai_analysis_time": "2026-04-25 22:59",
   "insti_signal": {
     "buy": [
       {
