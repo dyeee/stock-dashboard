@@ -319,9 +319,9 @@ function renderInstiChart(elId, stocks, isBuy) {
       labels: stocks.map(s => `${s.stock_name}(${s.stock_id})`),
       datasets: [
         { label: '外資(張)', data: stocks.map(s => s.foreign_net),
-          backgroundColor: isBuy ? 'rgba(239,68,68,.75)'  : 'rgba(52,211,153,.75)' },
+          backgroundColor: isBuy ? 'rgba(220,38,38,.8)'   : 'rgba(34,197,94,.8)' },
         { label: '投信(張)', data: stocks.map(s => s.trust_net),
-          backgroundColor: isBuy ? 'rgba(252,165,165,.75)' : 'rgba(110,231,183,.75)'  },
+          backgroundColor: isBuy ? 'rgba(252,165,165,.7)'  : 'rgba(134,239,172,.7)'  },
       ]
     },
     options: {
