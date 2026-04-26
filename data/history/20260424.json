@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-26 05:43:32",
+  "generated_at_utc": "2026-04-26 15:00:55",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -38,25 +38,25 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "3月營收年增0%顯示動能不足",
+        "3月營收持平無明顯成長動能",
         "缺乏近期新聞催化基本面不明朗"
       ],
-      "warning": "若Q2營收未見改善可能下修評價",
-      "next_check": "2024年4月營收",
+      "warning": "金融股易受利率政策與經濟走勢影響",
+      "next_check": "2024年4月營收公佈",
       "data_quality": "有限",
       "net_buy_lots": 30830,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-26 13:42",
+  "ai_analysis_time": "2026-04-26 23:00",
   "insti_signal": {
     "buy": [
       {
         "stock_id": "0050",
         "stock_name": "元大台灣50",
         "foreign_net": 31238,
-        "trust_net": 649,
-        "ft_net": 31887,
+        "trust_net": 777,
+        "ft_net": 32015,
         "date": "20260424"
       },
       {
@@ -124,11 +124,11 @@
         "date": "20260424"
       },
       {
-        "stock_id": "00993A",
-        "stock_name": "主動安聯台灣",
-        "foreign_net": 4286,
-        "trust_net": 52,
-        "ft_net": 4338,
+        "stock_id": "6672",
+        "stock_name": "騰輝電子-KY",
+        "foreign_net": 2954,
+        "trust_net": 1,
+        "ft_net": 2955,
         "date": "20260424"
       }
     ],
