@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-25 14:59:40",
+  "generated_at_utc": "2026-04-26 04:59:13",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -36,19 +36,19 @@
       "ticker": "2890",
       "name": "永豐金",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
-        "3月營收年增0%動能疲弱",
-        "無近期新聞提供基本面佐證"
+        "3月營收持平無顯著成長動能",
+        "缺乏近期新聞催化基本面不明確"
       ],
-      "warning": "金融股易受利率波動影響",
-      "next_check": "2024-04營收",
+      "warning": "營收持續無法突破可能影響業績表現",
+      "next_check": "2024年4月營收公佈",
       "data_quality": "有限",
       "net_buy_lots": 30830,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-25 22:59",
+  "ai_analysis_time": "2026-04-26 12:58",
   "insti_signal": {
     "buy": [
       {
@@ -226,5 +226,19 @@
     "foreign_buy": 3936.9,
     "foreign_sell": 3497.82,
     "foreign_net": 439.08
-  }
+  },
+  "watchlist": [
+    {
+      "stock_id": "2890",
+      "stock_name": "永豐金",
+      "entry_date": "2026-04-26",
+      "entry_price": 31.95,
+      "prices": {
+        "2026-04-26": 31.95
+      },
+      "pct_changes": {
+        "2026-04-26": 0.0
+      }
+    }
+  ]
 }
