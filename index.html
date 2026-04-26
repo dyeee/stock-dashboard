@@ -42,6 +42,7 @@
 <nav class="tab-nav">
   <button class="tab-btn active" id="tab-main"   onclick="switchTab('main')">外資交集</button>
   <button class="tab-btn"        id="tab-insti"  onclick="switchTab('insti')">法人買賣超</button>
+  <button class="tab-btn"        id="tab-watch"  onclick="switchTab('watch')">📌 追蹤清單</button>
 </nav>
 
 <!-- ═══════════════ 分頁 A：外資交集 ═══════════════ -->
@@ -149,15 +150,56 @@
   </main>
 </div>
 
+
+<!-- ═══════════════ 分頁 C：追蹤清單 ═══════════════ -->
+<div id="page-watch" style="display:none;">
+  <main class="wrap">
+
+    <!-- 控制列 -->
+    <div class="card">
+      <div class="row">
+        <div style="font-size:14px;font-weight:700;">📌 進榜股票10日追蹤</div>
+        <div class="muted" id="watch-update">—</div>
+      </div>
+      <div style="font-size:12px;color:#6b7280;margin-top:6px;margin-bottom:14px;">
+        外資連兩日買超進榜後自動追蹤10天，超過閾值時顯示警示。
+      </div>
+
+      <!-- 閾值滑桿 -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:13px;color:#a5b4fc;font-weight:600;">警示閾值</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="range" id="threshold-slider" min="3" max="10" step="1" value="5"
+            style="width:140px;accent-color:#6366f1;"
+            oninput="document.getElementById('threshold-val').textContent=this.value+'%';renderWatch();">
+          <span id="threshold-val" style="font-family:monospace;font-size:14px;color:#a5b4fc;font-weight:700;min-width:36px;">5%</span>
+        </div>
+        <div style="font-size:11px;color:#6b7280;">漲跌幅超過此值會觸發警示</div>
+      </div>
+    </div>
+
+    <!-- 警示區 -->
+    <div id="watch-alerts"></div>
+
+    <!-- 追蹤明細 -->
+    <div class="card">
+      <div class="section-label">追蹤明細（進榜後10日內）</div>
+      <div id="watch-table"></div>
+    </div>
+
+  </main>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script src="./app.js"></script>
 <script>
   function switchTab(name) {
-    ['main', 'insti'].forEach(t => {
+    ['main', 'insti', 'watch'].forEach(t => {
       document.getElementById('page-' + t).style.display = t === name ? 'block' : 'none';
       document.getElementById('tab-' + t).classList.toggle('active', t === name);
     });
     if (name === 'insti' && typeof renderInsti === 'function') renderInsti();
+    if (name === 'watch'  && typeof renderWatch  === 'function') renderWatch();
   }
 
   let deferredPrompt;

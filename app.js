@@ -336,3 +336,127 @@ function renderInstiChart(elId, stocks, isBuy) {
 }
 
 loadData();
+
+// ════════════════════════════════════════════════════════
+// 追蹤清單頁籤
+// ════════════════════════════════════════════════════════
+
+function renderWatch() {
+  const data = _instiData;
+  if (!data) return;
+
+  const watchlist = data.watchlist || [];
+  const genAt = data.generated_at_utc || '';
+  const upEl = document.getElementById('watch-update');
+  if (upEl && genAt) {
+    const d = new Date(genAt + 'Z');
+    upEl.textContent = '更新：' + d.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+  }
+
+  const threshold = parseFloat(document.getElementById('threshold-slider')?.value || 5);
+
+  // ── 警示區 ──
+  const alertEl = document.getElementById('watch-alerts');
+  const alerts = [];
+  watchlist.forEach(item => {
+    const pcts = item.pct_changes || {};
+    const dates = Object.keys(pcts).sort();
+    if (!dates.length) return;
+    const latest_date = dates[dates.length - 1];
+    const pct = pcts[latest_date];
+    if (typeof pct !== 'number') return;
+
+    if (Math.abs(pct) >= threshold) {
+      const isUp = pct > 0;
+      alerts.push({ item, pct, latest_date, isUp });
+    }
+  });
+
+  if (alertEl) {
+    if (alerts.length) {
+      alertEl.innerHTML = alerts.map(({ item, pct, latest_date, isUp }) => `
+        <div class="card" style="border-left:4px solid ${isUp ? '#34d399' : '#f87171'};padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:20px">${isUp ? '🚀' : '⚠️'}</span>
+            <span style="font-weight:700;font-size:15px;color:#e5e7eb;">
+              ${item.stock_id} ${item.stock_name}</span>
+            <span style="font-size:22px;font-weight:800;color:${isUp ? '#34d399' : '#f87171'};">
+              ${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%</span>
+          </div>
+          <div style="font-size:12px;color:#6b7280;margin-top:6px;">
+            進榜日：${item.entry_date}　進榜價：${item.entry_price ?? '—'} 元　
+            ${latest_date} 收盤：${item.prices?.[latest_date] ?? '—'} 元
+          </div>
+        </div>`).join('');
+    } else {
+      alertEl.innerHTML = `
+        <div class="card" style="color:#6b7280;font-size:13px;text-align:center;padding:20px;">
+          目前沒有股票漲跌幅超過 ${threshold}%
+        </div>`;
+    }
+  }
+
+  // ── 追蹤明細表 ──
+  const tblEl = document.getElementById('watch-table');
+  if (!tblEl) return;
+
+  if (!watchlist.length) {
+    tblEl.innerHTML = '<div class="muted" style="padding:12px">尚無追蹤資料，等待明日進榜股票</div>';
+    return;
+  }
+
+  // 取所有出現的日期（最多10天）
+  const allDates = [...new Set(
+    watchlist.flatMap(w => Object.keys(w.pct_changes || {}))
+  )].sort().slice(-10);
+
+  const headerCols = allDates.map(d => `<th>${d.slice(5)}</th>`).join('');
+
+  const rows = watchlist.map(item => {
+    const pcts = item.pct_changes || {};
+    const dateCols = allDates.map(d => {
+      const pct = pcts[d];
+      if (pct === undefined || pct === null) return '<td class="num" style="color:#374151">—</td>';
+      const abs = Math.abs(pct);
+      const color = abs >= threshold ? (pct > 0 ? '#34d399' : '#f87171') :
+                    pct > 0 ? '#6ee7b7' : pct < 0 ? '#fca5a5' : '#6b7280';
+      const bold = abs >= threshold ? 'font-weight:700;' : '';
+      return `<td class="num" style="color:${color};${bold}">${pct >= 0 ? '+' : ''}${pct.toFixed(1)}%</td>`;
+    }).join('');
+
+    // 最新漲跌幅
+    const sortedDates = Object.keys(pcts).sort();
+    const latestPct = sortedDates.length ? pcts[sortedDates[sortedDates.length - 1]] : null;
+    const latestColor = latestPct === null ? '#6b7280' : latestPct > 0 ? '#34d399' : '#f87171';
+
+    return `<tr>
+      <td><code>${item.stock_id}</code></td>
+      <td>${item.stock_name}</td>
+      <td style="font-size:11px;color:#6b7280;">${item.entry_date}</td>
+      <td class="num">${item.entry_price ?? '—'}</td>
+      ${dateCols}
+      <td class="num" style="color:${latestColor};font-weight:700;">
+        ${latestPct !== null ? (latestPct >= 0 ? '+' : '') + latestPct.toFixed(2) + '%' : '—'}
+      </td>
+    </tr>`;
+  }).join('');
+
+  tblEl.innerHTML = `
+    <style>
+      #watch-table table { width:100%; border-collapse:collapse; font-size:12px; }
+      #watch-table th, #watch-table td { padding:7px 8px; border-bottom:1px solid #1f2937; white-space:nowrap; }
+      #watch-table th { color:#a5b4fc; font-weight:600; text-align:left; }
+      #watch-table .num { text-align:right; }
+      #watch-table code { background:#0f172a; padding:1px 4px; border-radius:4px; }
+    </style>
+    <div style="overflow:auto;">
+      <table>
+        <thead><tr>
+          <th>代號</th><th>名稱</th><th>進榜日</th><th>進榜價</th>
+          ${headerCols}
+          <th>最新漲跌</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}

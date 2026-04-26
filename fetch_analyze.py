@@ -588,7 +588,7 @@ def run_ai_cross_check(result_df):
     print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
     return analyses
 
-def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None):
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None, watchlist=None):
     trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
     stocks = []
     for _, r in result_df.iterrows():
@@ -621,6 +621,7 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
         "insti_signal": three_insti or {},
         "insti_signal_date": trading_dates[0] if trading_dates else "",
         "market_insti": market_insti or {},
+        "watchlist": watchlist or [],
     }
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
     OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -629,6 +630,140 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
     out_history = OUT_HISTORY_DIR / f"{last_trade}.json"
     out_history.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {out_history}")
+
+
+# ════════════════════════════════════════════════════════
+# 進榜股票追蹤（10天漲跌幅監控）
+# ════════════════════════════════════════════════════════
+
+OUT_WATCHLIST = Path("data/watchlist.json")
+TRACK_DAYS = 10  # 追蹤天數
+
+
+def get_close_price(ticker: str) -> float | None:
+    """抓當日收盤價（TWSE）"""
+    try:
+        r = SESSION.get(
+            "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY",
+            params={"stockNo": ticker, "response": "json",
+                    "date": NOW_TPE.strftime("%Y%m%d")},
+            timeout=10
+        )
+        d = r.json()
+        rows = d.get("data", [])
+        if rows:
+            # 最後一列是最新一天，收盤價在 index 6
+            price_str = rows[-1][6].replace(",", "")
+            return float(price_str)
+    except Exception:
+        pass
+    # fallback: Yahoo Finance
+    try:
+        r = SESSION.get(
+            f"https://tw.stock.yahoo.com/quote/{ticker}.TW",
+            timeout=8
+        )
+        import re
+        m = re.search(r'"regularMarketPrice":{"raw":([\d.]+)', r.text)
+        if m:
+            return float(m.group(1))
+    except Exception:
+        pass
+    return None
+
+
+def load_watchlist() -> list:
+    """載入追蹤清單"""
+    if OUT_WATCHLIST.exists():
+        try:
+            return json.loads(OUT_WATCHLIST.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return []
+
+
+def save_watchlist(items: list):
+    OUT_WATCHLIST.parent.mkdir(parents=True, exist_ok=True)
+    OUT_WATCHLIST.write_text(
+        json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def update_watchlist(result_df) -> list:
+    """
+    1. 載入現有追蹤清單
+    2. 加入今日進榜的新股票（若已在清單就跳過）
+    3. 更新每筆的當日收盤價和漲跌幅
+    4. 清除超過 TRACK_DAYS 天的紀錄
+    5. 存檔並回傳
+    """
+    today_str = NOW_TPE.strftime("%Y-%m-%d")
+    watchlist = load_watchlist()
+
+    # 今日進榜的股票
+    new_stocks = []
+    if result_df is not None and len(result_df) > 0:
+        for _, row in result_df.iterrows():
+            new_stocks.append({
+                "stock_id":   str(row["stock_id"]),
+                "stock_name": str(row["stock_name"]).strip(),
+            })
+
+    # 加入新進榜股票
+    existing_ids = {w["stock_id"] for w in watchlist}
+    for s in new_stocks:
+        if s["stock_id"] not in existing_ids:
+            print(f"  📌 新增追蹤：{s['stock_id']} {s['stock_name']}")
+            watchlist.append({
+                "stock_id":     s["stock_id"],
+                "stock_name":   s["stock_name"],
+                "entry_date":   today_str,
+                "entry_price":  None,  # 今日收盤後填入
+                "prices":       {},    # {date: price}
+                "pct_changes":  {},    # {date: pct_from_entry}
+            })
+
+    # 更新收盤價
+    print(f"\n  📈 更新追蹤清單收盤價（共 {len(watchlist)} 檔）...")
+    for item in watchlist:
+        ticker = item["stock_id"]
+        if today_str in item.get("prices", {}):
+            continue  # 今天已更新過
+        price = get_close_price(ticker)
+        if price:
+            item.setdefault("prices", {})[today_str] = price
+            if item.get("entry_price") is None:
+                item["entry_price"] = price
+            # 計算漲跌幅
+            entry = item["entry_price"]
+            if entry and entry > 0:
+                pct = round((price - entry) / entry * 100, 2)
+                item.setdefault("pct_changes", {})[today_str] = pct
+            pct_val = item.get("pct_changes", {}).get(today_str)
+            if isinstance(pct_val, float):
+                print(f"    {ticker} {item['stock_name']}: {price} 元 ({pct_val:+.2f}%)")
+            else:
+                print(f"    {ticker}: {price} 元")
+        time.sleep(0.5)
+
+    # 清除超過 TRACK_DAYS 天的紀錄
+    from datetime import datetime as dt
+    cutoff = NOW_TPE.date() - timedelta(days=TRACK_DAYS)
+    kept = []
+    for item in watchlist:
+        entry = item.get("entry_date", "")
+        try:
+            if dt.strptime(entry, "%Y-%m-%d").date() >= cutoff:
+                kept.append(item)
+            else:
+                print(f"  🗑️ 清除過期追蹤：{item['stock_id']} {item['stock_name']} (進榜 {entry})")
+        except Exception:
+            kept.append(item)
+    watchlist = kept
+
+    save_watchlist(watchlist)
+    print(f"  ✅ 追蹤清單已更新，共 {len(watchlist)} 檔")
+    return watchlist
 
 if __name__ == "__main__":
     days = int(os.getenv("DAYS", "2"))
@@ -695,12 +830,16 @@ if __name__ == "__main__":
             frames = three_insti.pop("_frames", [])
             market_insti = get_market_insti_amount(str(latest_date), frames)
 
+        # ── 追蹤清單更新 ──
+        watchlist = update_watchlist(result if result is not None else pd.DataFrame())
+
         write_json_payload(
             result if result is not None else pd.DataFrame(),
             daily_top10_list,
             ai_analyses,
             three_insti,
             market_insti,
+            watchlist,
         )
     else:
         print("❌ 分析失敗")
