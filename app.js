@@ -243,11 +243,11 @@ function renderInsti() {
 
   if (fNetEl && mkt.foreign_net !== undefined) {
     fNetEl.textContent = fmtNet(mkt.foreign_net);
-    fNetEl.style.color = mkt.foreign_net >= 0 ? '#6ee7b7' : '#f87171';
+    fNetEl.style.color = mkt.foreign_net >= 0 ? '#f87171' : '#6ee7b7';
   }
   if (tNetEl && mkt.trust_net !== undefined) {
     tNetEl.textContent = fmtNet(mkt.trust_net);
-    tNetEl.style.color = mkt.trust_net >= 0 ? '#6ee7b7' : '#f87171';
+    tNetEl.style.color = mkt.trust_net   >= 0 ? '#f87171' : '#6ee7b7';
   }
   if (fBuyEl)  fBuyEl.textContent  = fmtAbs(mkt.foreign_buy);
   if (fSellEl) fSellEl.textContent = fmtAbs(mkt.foreign_sell);
@@ -278,8 +278,8 @@ function renderInstiTable(elId, stocks, isBuy) {
     el.innerHTML = `<div class="muted" style="padding:12px">今日無資料</div>`;
     return;
   }
-  const fCol = s => s.foreign_net > 0 ? '#6ee7b7' : '#f87171';
-  const tCol = s => s.trust_net   > 0 ? '#6ee7b7' : '#f87171';
+  const fCol = s => s.foreign_net > 0 ? '#f87171' : '#6ee7b7';
+  const tCol = s => s.trust_net   > 0 ? '#f87171' : '#6ee7b7';
   const rows = stocks.map((s, i) => `
     <tr>
       <td>${i+1}</td>
@@ -287,7 +287,7 @@ function renderInstiTable(elId, stocks, isBuy) {
       <td>${s.stock_name}</td>
       <td class="num" style="color:${fCol(s)}">${s.foreign_net.toLocaleString()}</td>
       <td class="num" style="color:${tCol(s)}">${s.trust_net.toLocaleString()}</td>
-      <td class="num" style="color:${isBuy?'#fbbf24':'#f87171'};font-weight:600">${s.ft_net.toLocaleString()}</td>
+      <td class="num" style="color:${isBuy?'#f87171':'#6ee7b7'};font-weight:600">${s.ft_net.toLocaleString()}</td>
     </tr>`).join('');
   el.innerHTML = `
     <style>
@@ -319,9 +319,9 @@ function renderInstiChart(elId, stocks, isBuy) {
       labels: stocks.map(s => `${s.stock_name}(${s.stock_id})`),
       datasets: [
         { label: '外資(張)', data: stocks.map(s => s.foreign_net),
-          backgroundColor: isBuy ? 'rgba(99,102,241,.75)' : 'rgba(248,113,113,.75)' },
+          backgroundColor: isBuy ? 'rgba(239,68,68,.75)'  : 'rgba(52,211,153,.75)' },
         { label: '投信(張)', data: stocks.map(s => s.trust_net),
-          backgroundColor: isBuy ? 'rgba(52,211,153,.75)'  : 'rgba(251,191,36,.75)'  },
+          backgroundColor: isBuy ? 'rgba(252,165,165,.75)' : 'rgba(110,231,183,.75)'  },
       ]
     },
     options: {
@@ -375,12 +375,12 @@ function renderWatch() {
   if (alertEl) {
     if (alerts.length) {
       alertEl.innerHTML = alerts.map(({ item, pct, latest_date, isUp }) => `
-        <div class="card" style="border-left:4px solid ${isUp ? '#34d399' : '#f87171'};padding:14px 16px;">
+        <div class="card" style="border-left:4px solid ${isUp ? '#f87171' : '#34d399'};padding:14px 16px;">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:20px">${isUp ? '🚀' : '⚠️'}</span>
+            <span style="font-size:20px">${isUp ? '🚀' : '📉'}</span>
             <span style="font-weight:700;font-size:15px;color:#e5e7eb;">
               ${item.stock_id} ${item.stock_name}</span>
-            <span style="font-size:22px;font-weight:800;color:${isUp ? '#34d399' : '#f87171'};">
+            <span style="font-size:22px;font-weight:800;color:${isUp ? '#f87171' : '#34d399'};">
               ${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%</span>
           </div>
           <div style="font-size:12px;color:#6b7280;margin-top:6px;">
@@ -418,8 +418,8 @@ function renderWatch() {
       const pct = pcts[d];
       if (pct === undefined || pct === null) return '<td class="num" style="color:#374151">—</td>';
       const abs = Math.abs(pct);
-      const color = abs >= threshold ? (pct > 0 ? '#34d399' : '#f87171') :
-                    pct > 0 ? '#6ee7b7' : pct < 0 ? '#fca5a5' : '#6b7280';
+      const color = abs >= threshold ? (pct > 0 ? '#f87171' : '#34d399') :
+                    pct > 0 ? '#fca5a5' : pct < 0 ? '#6ee7b7' : '#6b7280';
       const bold = abs >= threshold ? 'font-weight:700;' : '';
       return `<td class="num" style="color:${color};${bold}">${pct >= 0 ? '+' : ''}${pct.toFixed(1)}%</td>`;
     }).join('');
@@ -427,7 +427,7 @@ function renderWatch() {
     // 最新漲跌幅
     const sortedDates = Object.keys(pcts).sort();
     const latestPct = sortedDates.length ? pcts[sortedDates[sortedDates.length - 1]] : null;
-    const latestColor = latestPct === null ? '#6b7280' : latestPct > 0 ? '#34d399' : '#f87171';
+    const latestColor = latestPct === null ? '#6b7280' : latestPct > 0 ? '#f87171' : '#34d399';
 
     return `<tr>
       <td><code>${item.stock_id}</code></td>
