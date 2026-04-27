@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-27 15:59:36",
+  "generated_at_utc": "2026-04-27 16:23:11",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -54,13 +54,13 @@
       "ticker": "2887",
       "name": "台新新光金",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "3月營收年增0%動能未顯現",
-        "缺乏近期新聞催化劑支持"
+        "3月營收維持穩定，但年增動能不足",
+        "缺乏近期新聞催化，產業趨勢不明確"
       ],
-      "warning": "營收持平可能反映業務成長瓶頸",
-      "next_check": "2024年4月營收",
+      "warning": "營收成長停滯可能影響獲利展望",
+      "next_check": "2024年5月",
       "data_quality": "有限",
       "net_buy_lots": 51925,
       "is_etf": false
@@ -71,20 +71,182 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "3月營收持平無顯著成長動能",
-        "缺乏近期產業或政策利多催化"
+        "3月營收年增0%顯示業務動能持平",
+        "缺乏近期新聞催化基本面不明朗"
       ],
-      "warning": "金融業淨息差收縮壓力未解",
+      "warning": "營收成長性不足可能影響長期表現",
       "next_check": "2024年4月營收",
       "data_quality": "有限",
       "net_buy_lots": 23444,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-04-27 23:58",
+  "ai_analysis_time": "2026-04-28 00:22",
   "insti_signal": {
-    "buy": [],
-    "sell": [],
+    "buy": [
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": 36559,
+        "trust_net": 60,
+        "ft_net": 36619,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2337",
+        "stock_name": "旺宏",
+        "foreign_net": 29694,
+        "trust_net": 367,
+        "ft_net": 30061,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2344",
+        "stock_name": "華邦電",
+        "foreign_net": 11770,
+        "trust_net": 17767,
+        "ft_net": 29537,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2317",
+        "stock_name": "鴻海",
+        "foreign_net": 19579,
+        "trust_net": 3562,
+        "ft_net": 23141,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "1905",
+        "stock_name": "華紙",
+        "foreign_net": 4305,
+        "trust_net": 11,
+        "ft_net": 4316,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2327",
+        "stock_name": "國巨*",
+        "foreign_net": 3311,
+        "trust_net": 444,
+        "ft_net": 3755,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "6415",
+        "stock_name": "矽力*-KY",
+        "foreign_net": 1338,
+        "trust_net": 386,
+        "ft_net": 1724,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "6805",
+        "stock_name": "富世達",
+        "foreign_net": 702,
+        "trust_net": 392,
+        "ft_net": 1094,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "8103",
+        "stock_name": "瀚荃",
+        "foreign_net": 627,
+        "trust_net": 291,
+        "ft_net": 918,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "1528",
+        "stock_name": "恩德",
+        "foreign_net": 837,
+        "trust_net": 3,
+        "ft_net": 840,
+        "date": "20260427"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "00991A",
+        "stock_name": "主動復華未來50",
+        "foreign_net": -46446,
+        "trust_net": -1500,
+        "ft_net": -47946,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2002",
+        "stock_name": "中鋼",
+        "foreign_net": -37952,
+        "trust_net": -131,
+        "ft_net": -38083,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2409",
+        "stock_name": "友達",
+        "foreign_net": -37482,
+        "trust_net": -11,
+        "ft_net": -37493,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2303",
+        "stock_name": "聯電",
+        "foreign_net": -19286,
+        "trust_net": -9915,
+        "ft_net": -29201,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2356",
+        "stock_name": "英業達",
+        "foreign_net": -13230,
+        "trust_net": -558,
+        "ft_net": -13788,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2882",
+        "stock_name": "國泰金",
+        "foreign_net": -5716,
+        "trust_net": -4255,
+        "ft_net": -9971,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "6005",
+        "stock_name": "群益證",
+        "foreign_net": -5986,
+        "trust_net": -3633,
+        "ft_net": -9619,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "3035",
+        "stock_name": "智原",
+        "foreign_net": -8195,
+        "trust_net": -1,
+        "ft_net": -8196,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2834",
+        "stock_name": "臺企銀",
+        "foreign_net": -6712,
+        "trust_net": -26,
+        "ft_net": -6738,
+        "date": "20260427"
+      },
+      {
+        "stock_id": "2324",
+        "stock_name": "仁寶",
+        "foreign_net": -2485,
+        "trust_net": -3938,
+        "ft_net": -6423,
+        "date": "20260427"
+      }
+    ],
     "date": "20260427"
   },
   "insti_signal_date": "2026-04-27",
@@ -102,25 +264,25 @@
     {
       "stock_id": "2887",
       "stock_name": "台新新光金",
-      "entry_date": "2026-04-27",
+      "entry_date": "2026-04-28",
       "entry_price": 23.8,
       "prices": {
-        "2026-04-27": 23.8
+        "2026-04-28": 23.8
       },
       "pct_changes": {
-        "2026-04-27": 0.0
+        "2026-04-28": 0.0
       }
     },
     {
       "stock_id": "2884",
       "stock_name": "玉山金",
-      "entry_date": "2026-04-27",
+      "entry_date": "2026-04-28",
       "entry_price": 32.55,
       "prices": {
-        "2026-04-27": 32.55
+        "2026-04-28": 32.55
       },
       "pct_changes": {
-        "2026-04-27": 0.0
+        "2026-04-28": 0.0
       }
     }
   ]
