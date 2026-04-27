@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-04-27 16:23:11",
+  "generated_at_utc": "2026-04-27 16:47:33",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -8,80 +8,113 @@
   },
   "trading_dates": [
     "2026-04-27",
-    "2026-04-24"
+    "2026-04-23"
   ],
-  "count_intersection": 2,
+  "count_intersection": 3,
   "stocks": [
     {
-      "stock_id": "2887",
-      "stock_name": "台新新光金      ",
-      "total_net_buy": 51925,
-      "avg_net_buy": 25962.5,
+      "stock_id": "00878",
+      "stock_name": "國泰永續高股息  ",
+      "total_net_buy": 55548,
+      "avg_net_buy": 27774.0,
       "per_day": {
         "day1": {
           "date": "2026-04-27",
-          "rank": 7,
-          "net_buy_lots": 14784
+          "rank": 3,
+          "net_buy_lots": 27017
         },
         "day2": {
-          "date": "2026-04-24",
-          "rank": 2,
-          "net_buy_lots": 37141
+          "date": "2026-04-23",
+          "rank": 1,
+          "net_buy_lots": 28531
         }
       }
     },
     {
-      "stock_id": "2884",
-      "stock_name": "玉山金          ",
-      "total_net_buy": 23444,
-      "avg_net_buy": 11722.0,
+      "stock_id": "2317",
+      "stock_name": "鴻海            ",
+      "total_net_buy": 47375,
+      "avg_net_buy": 23687.5,
       "per_day": {
         "day1": {
           "date": "2026-04-27",
-          "rank": 9,
-          "net_buy_lots": 11867
+          "rank": 4,
+          "net_buy_lots": 19579
         },
         "day2": {
-          "date": "2026-04-24",
+          "date": "2026-04-23",
+          "rank": 2,
+          "net_buy_lots": 27796
+        }
+      }
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產  ",
+      "total_net_buy": 26406,
+      "avg_net_buy": 13203.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-27",
+          "rank": 5,
+          "net_buy_lots": 16829
+        },
+        "day2": {
+          "date": "2026-04-23",
           "rank": 10,
-          "net_buy_lots": 11577
+          "net_buy_lots": 9577
         }
       }
     }
   ],
   "ai_analysis": [
     {
-      "ticker": "2887",
-      "name": "台新新光金",
-      "verdict": "謹慎觀察",
-      "confidence": "低",
+      "ticker": "00878",
+      "name": "國泰永續高股息",
+      "verdict": "建議買進",
+      "confidence": "中",
       "reasons": [
-        "3月營收維持穩定，但年增動能不足",
-        "缺乏近期新聞催化，產業趨勢不明確"
+        "高殖利率吸引長期資金配置",
+        "追踪高股息指數穩定性佳"
       ],
-      "warning": "營收成長停滯可能影響獲利展望",
-      "next_check": "2024年5月",
+      "warning": "追踪指數波動可能影響收益",
+      "next_check": "一周後",
       "data_quality": "有限",
-      "net_buy_lots": 51925,
-      "is_etf": false
+      "net_buy_lots": 55548,
+      "is_etf": true
     },
     {
-      "ticker": "2884",
-      "name": "玉山金",
+      "ticker": "2317",
+      "name": "鴻海",
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "3月營收年增0%顯示業務動能持平",
-        "缺乏近期新聞催化基本面不明朗"
+        "量子電腦低溫晶片布局具產業轉型契機",
+        "股價技術面突破230元壓力位需確認多空"
       ],
-      "warning": "營收成長性不足可能影響長期表現",
-      "next_check": "2024年4月營收",
+      "warning": "3月營收年增0%顯示現有業務動能未改善",
+      "next_check": "2024Q2財報",
       "data_quality": "有限",
-      "net_buy_lots": 23444,
+      "net_buy_lots": 47375,
       "is_etf": false
+    },
+    {
+      "ticker": "00712",
+      "name": "復華富時不動產  ",
+      "verdict": "建議買進",
+      "confidence": "中",
+      "reasons": [
+        "追踪富時不動產指數，現金殖利率達4.8%具吸引力",
+        "房市政策鬆綁預期下，不動產指數長期具支撐"
+      ],
+      "warning": "利率上揚可能壓縮不動產評估值",
+      "next_check": "2024/05",
+      "data_quality": "有限",
+      "net_buy_lots": 26406,
+      "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-04-28 00:22",
+  "ai_analysis_time": "2026-04-28 00:46",
   "insti_signal": {
     "buy": [
       {
@@ -283,6 +316,76 @@
       },
       "pct_changes": {
         "2026-04-28": 0.0
+      }
+    },
+    {
+      "stock_id": "2890",
+      "stock_name": "永豐金",
+      "entry_date": "2026-04-24",
+      "entry_price": 31.95,
+      "prices": {
+        "2026-04-24": 31.95,
+        "2026-04-28": 31.75
+      },
+      "pct_changes": {
+        "2026-04-24": 0.0,
+        "2026-04-28": -0.63
+      }
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海",
+      "entry_date": "2026-04-23",
+      "entry_price": 225.0,
+      "prices": {
+        "2026-04-23": 225.0,
+        "2026-04-28": 228.0
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-28": 1.33
+      }
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-04-23",
+      "entry_price": 73.6,
+      "prices": {
+        "2026-04-23": 73.6,
+        "2026-04-28": 72.7
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-28": -1.22
+      }
+    },
+    {
+      "stock_id": "00878",
+      "stock_name": "國泰永續高股息",
+      "entry_date": "2026-04-23",
+      "entry_price": 24.66,
+      "prices": {
+        "2026-04-23": 24.66,
+        "2026-04-28": 25.0
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-28": 1.38
+      }
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
+      "entry_date": "2026-04-23",
+      "entry_price": 9.01,
+      "prices": {
+        "2026-04-23": 9.01,
+        "2026-04-28": 9.06
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-28": 0.55
       }
     }
   ]
