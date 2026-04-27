@@ -843,5 +843,18 @@ if __name__ == "__main__":
         )
     else:
         print("❌ 分析失敗")
+        # 即使今日無交易資料，仍更新追蹤清單（更新收盤價、寫入 latest.json）
+        print("\n  ⏳ 嘗試更新追蹤清單...")
+        try:
+            watchlist = update_watchlist(pd.DataFrame())
+            # 寫入最小化的 latest.json（保留舊資料，加入最新 watchlist）
+            if OUT_LATEST.exists():
+                old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
+                old_payload["watchlist"] = watchlist
+                OUT_LATEST.write_text(
+                    json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+                print("  ✅ 追蹤清單已更新到 latest.json")
+        except Exception as e:
+            print(f"  ⚠️ 追蹤清單更新失敗：{e}")
 
     print("\n✨ 查詢完成!")
