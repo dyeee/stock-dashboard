@@ -249,10 +249,10 @@ function renderInsti() {
     tNetEl.textContent = fmtNet(mkt.trust_net);
     tNetEl.style.color = mkt.trust_net   >= 0 ? '#f87171' : '#6ee7b7';
   }
-  if (fBuyEl)  { fBuyEl.textContent  = fmtAbs(mkt.foreign_buy);  fBuyEl.style.color  = '#f87171'; }
-  if (fSellEl) { fSellEl.textContent = fmtAbs(mkt.foreign_sell); fSellEl.style.color = '#6ee7b7'; }
-  if (tBuyEl)  { tBuyEl.textContent  = fmtAbs(mkt.trust_buy);   tBuyEl.style.color  = '#f87171'; }
-  if (tSellEl) { tSellEl.textContent = fmtAbs(mkt.trust_sell);  tSellEl.style.color = '#6ee7b7'; }
+  if (fBuyEl)  fBuyEl.textContent  = fmtAbs(mkt.foreign_buy);
+  if (fSellEl) fSellEl.textContent = fmtAbs(mkt.foreign_sell);
+  if (tBuyEl)  tBuyEl.textContent  = fmtAbs(mkt.trust_buy);
+  if (tSellEl) tSellEl.textContent = fmtAbs(mkt.trust_sell);
 
   // 更新標題說明單位
   const unitLabel = document.getElementById('mkt-unit-label');
@@ -319,9 +319,9 @@ function renderInstiChart(elId, stocks, isBuy) {
       labels: stocks.map(s => `${s.stock_name}(${s.stock_id})`),
       datasets: [
         { label: '外資(張)', data: stocks.map(s => s.foreign_net),
-          backgroundColor: isBuy ? 'rgba(220,38,38,.8)'   : 'rgba(34,197,94,.8)' },
+          backgroundColor: isBuy ? 'rgba(239,68,68,.75)'  : 'rgba(52,211,153,.75)' },
         { label: '投信(張)', data: stocks.map(s => s.trust_net),
-          backgroundColor: isBuy ? 'rgba(252,165,165,.7)'  : 'rgba(134,239,172,.7)'  },
+          backgroundColor: isBuy ? 'rgba(252,165,165,.75)' : 'rgba(110,231,183,.75)'  },
       ]
     },
     options: {
@@ -375,12 +375,12 @@ function renderWatch() {
   if (alertEl) {
     if (alerts.length) {
       alertEl.innerHTML = alerts.map(({ item, pct, latest_date, isUp }) => `
-        <div class="card" style="border-left:4px solid ${isUp ? '#f87171' : '#6ee7b7'};padding:14px 16px;">
+        <div class="card" style="border-left:4px solid ${isUp ? '#f87171' : '#34d399'};padding:14px 16px;">
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
             <span style="font-size:20px">${isUp ? '🚀' : '📉'}</span>
             <span style="font-weight:700;font-size:15px;color:#e5e7eb;">
               ${item.stock_id} ${item.stock_name}</span>
-            <span style="font-size:22px;font-weight:800;color:${isUp ? '#f87171' : '#6ee7b7'};">
+            <span style="font-size:22px;font-weight:800;color:${isUp ? '#f87171' : '#34d399'};">
               ${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%</span>
           </div>
           <div style="font-size:12px;color:#6b7280;margin-top:6px;">
@@ -405,46 +405,39 @@ function renderWatch() {
     return;
   }
 
-  // 取所有出現的日期（最多10天）
-  const allDates = [...new Set(
-    watchlist.flatMap(w => Object.keys(w.pct_changes || {}))
-  )].sort().slice(-10);
-
-  const headerCols = allDates.map(d => `<th>${d.slice(5)}</th>`).join('');
-
+  // 簡化表格：只顯示進榜日、進榜價、今日價、最新漲跌
   const rows = watchlist.map(item => {
-    const pcts = item.pct_changes || {};
-    const dateCols = allDates.map(d => {
-      const pct = pcts[d];
-      if (pct === undefined || pct === null) return '<td class="num" style="color:#374151">—</td>';
-      const abs = Math.abs(pct);
-      const color = abs >= threshold ? (pct > 0 ? '#f87171' : '#6ee7b7') :
-                    pct > 0 ? '#fca5a5' : pct < 0 ? '#6ee7b7' : '#6b7280';
-      const bold = abs >= threshold ? 'font-weight:700;' : '';
-      return `<td class="num" style="color:${color};${bold}">${pct >= 0 ? '+' : ''}${pct.toFixed(1)}%</td>`;
-    }).join('');
-
-    // 最新漲跌幅
+    const pcts   = item.pct_changes || {};
+    const prices = item.prices || {};
     const sortedDates = Object.keys(pcts).sort();
-    const latestPct = sortedDates.length ? pcts[sortedDates[sortedDates.length - 1]] : null;
-    const latestColor = latestPct === null ? '#6b7280' : latestPct > 0 ? '#f87171' : '#6ee7b7';
+    const latestDate  = sortedDates[sortedDates.length - 1] || '';
+    const latestPct   = latestDate ? pcts[latestDate] : null;
+    const latestPrice = latestDate ? prices[latestDate] : null;
+
+    const latestColor = latestPct === null ? '#6b7280'
+      : Math.abs(latestPct) >= threshold
+        ? (latestPct > 0 ? '#f87171' : '#6ee7b7')
+        : (latestPct > 0 ? '#fca5a5' : latestPct < 0 ? '#a7f3d0' : '#6b7280');
+    const bold = latestPct !== null && Math.abs(latestPct) >= threshold ? 'font-weight:800;font-size:14px;' : 'font-weight:700;';
+    const alert = latestPct !== null && Math.abs(latestPct) >= threshold
+      ? `<span style="margin-left:4px">${latestPct > 0 ? '🚀' : '📉'}</span>` : '';
 
     return `<tr>
       <td><code>${item.stock_id}</code></td>
       <td>${item.stock_name}</td>
       <td style="font-size:11px;color:#6b7280;">${item.entry_date}</td>
       <td class="num">${item.entry_price ?? '—'}</td>
-      ${dateCols}
-      <td class="num" style="color:${latestColor};font-weight:700;">
-        ${latestPct !== null ? (latestPct >= 0 ? '+' : '') + latestPct.toFixed(2) + '%' : '—'}
+      <td class="num" style="color:#e5e7eb;">${latestPrice ?? '—'}</td>
+      <td class="num" style="color:${latestColor};${bold}">
+        ${latestPct !== null ? (latestPct >= 0 ? '+' : '') + latestPct.toFixed(2) + '%' : '—'}${alert}
       </td>
     </tr>`;
   }).join('');
 
   tblEl.innerHTML = `
     <style>
-      #watch-table table { width:100%; border-collapse:collapse; font-size:12px; }
-      #watch-table th, #watch-table td { padding:7px 8px; border-bottom:1px solid #1f2937; white-space:nowrap; }
+      #watch-table table { width:100%; border-collapse:collapse; font-size:13px; }
+      #watch-table th, #watch-table td { padding:9px 10px; border-bottom:1px solid #1f2937; }
       #watch-table th { color:#a5b4fc; font-weight:600; text-align:left; }
       #watch-table .num { text-align:right; }
       #watch-table code { background:#0f172a; padding:1px 4px; border-radius:4px; }
@@ -452,9 +445,8 @@ function renderWatch() {
     <div style="overflow:auto;">
       <table>
         <thead><tr>
-          <th>代號</th><th>名稱</th><th>進榜日</th><th>進榜價</th>
-          ${headerCols}
-          <th>最新漲跌</th>
+          <th>代號</th><th>名稱</th><th>進榜日</th>
+          <th>進榜價</th><th>今日價</th><th>最新漲跌</th>
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
