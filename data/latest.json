@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-02 15:05:20",
+  "generated_at_utc": "2026-05-03 15:05:59",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -54,34 +54,34 @@
       "ticker": "2883",
       "name": "凱基金",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
-        "4月營收持平無顯著成長動能",
-        "缺乏近期產業利多或營運轉機消息"
+        "現金殖利率突破4%具吸引力",
+        "單月營收持平顯示經營穩定"
       ],
-      "warning": "營收年增率持續持平可能影響評價",
-      "next_check": "2024年5月",
+      "warning": "年增率0%需觀察是否為短期波動",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 45489,
       "is_etf": false
     },
     {
       "ticker": "00878",
-      "name": "國泰永續高股息  ",
-      "verdict": "謹慎觀察",
-      "confidence": "低",
+      "name": "國泰永續高股息",
+      "verdict": "建議買進",
+      "confidence": "中",
       "reasons": [
-        "ETF追蹤高股息標的，低利環境下資金配置需求穩定",
-        "無近期營收與新聞支撐，需觀察大盤走勢與殖利率變化"
+        "高殖利率吸引長期資金配置",
+        "市場避險需求推升股息ETF需求"
       ],
-      "warning": "無標的指數表現數據，難判斷後市動能",
-      "next_check": "兩週後",
-      "data_quality": "不足",
+      "warning": "市場波動可能影響成分股表現",
+      "next_check": "1個月後",
+      "data_quality": "有限",
       "net_buy_lots": 30171,
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-05-02 23:04",
+  "ai_analysis_time": "2026-05-03 23:04",
   "insti_signal": {
     "buy": [
       {
@@ -348,7 +348,7 @@
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
-      "entry_date": "2026-05-02",
+      "entry_date": "2026-05-03",
       "entry_price": null,
       "prices": {},
       "pct_changes": {}
