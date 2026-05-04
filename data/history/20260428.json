@@ -1,0 +1,497 @@
+{
+  "mode": "intersection_top10_per_day",
+  "generated_at_utc": "2026-04-28 16:21:04",
+  "timezone": "Asia/Taipei",
+  "params": {
+    "days": 2,
+    "top_n": 10
+  },
+  "trading_dates": [
+    "2026-04-28",
+    "2026-04-27"
+  ],
+  "count_intersection": 5,
+  "stocks": [
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金      ",
+      "total_net_buy": 57536,
+      "avg_net_buy": 28768.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-28",
+          "rank": 2,
+          "net_buy_lots": 42752
+        },
+        "day2": {
+          "date": "2026-04-27",
+          "rank": 7,
+          "net_buy_lots": 14784
+        }
+      }
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金          ",
+      "total_net_buy": 55017,
+      "avg_net_buy": 27508.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-28",
+          "rank": 1,
+          "net_buy_lots": 42865
+        },
+        "day2": {
+          "date": "2026-04-27",
+          "rank": 8,
+          "net_buy_lots": 12152
+        }
+      }
+    },
+    {
+      "stock_id": "00878",
+      "stock_name": "國泰永續高股息  ",
+      "total_net_buy": 50914,
+      "avg_net_buy": 25457.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-28",
+          "rank": 3,
+          "net_buy_lots": 23897
+        },
+        "day2": {
+          "date": "2026-04-27",
+          "rank": 3,
+          "net_buy_lots": 27017
+        }
+      }
+    },
+    {
+      "stock_id": "2337",
+      "stock_name": "旺宏            ",
+      "total_net_buy": 49576,
+      "avg_net_buy": 24788.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-28",
+          "rank": 5,
+          "net_buy_lots": 19882
+        },
+        "day2": {
+          "date": "2026-04-27",
+          "rank": 2,
+          "net_buy_lots": 29694
+        }
+      }
+    },
+    {
+      "stock_id": "2344",
+      "stock_name": "華邦電          ",
+      "total_net_buy": 27577,
+      "avg_net_buy": 13788.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-04-28",
+          "rank": 10,
+          "net_buy_lots": 15807
+        },
+        "day2": {
+          "date": "2026-04-27",
+          "rank": 10,
+          "net_buy_lots": 11770
+        }
+      }
+    }
+  ],
+  "ai_analysis": [
+    {
+      "ticker": "2887",
+      "name": "台新新光金",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "3月營收年增0%動能未顯現",
+        "缺乏近期產業利多或業務轉型跡象"
+      ],
+      "warning": "金控綜合經營效益尚未突破",
+      "next_check": "2024年4月營收",
+      "data_quality": "有限",
+      "net_buy_lots": 57536,
+      "is_etf": false
+    },
+    {
+      "ticker": "2883",
+      "name": "凱基金",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "3月營收持平無顯著成長動能",
+        "缺乏近期產業利多或新聞催化"
+      ],
+      "warning": "營收年增率停滯可能影響長期評價",
+      "next_check": "2024年4月營收",
+      "data_quality": "有限",
+      "net_buy_lots": 55017,
+      "is_etf": false
+    },
+    {
+      "ticker": "00878",
+      "name": "國泰永續高股息  ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 50914,
+      "is_etf": true
+    },
+    {
+      "ticker": "2337",
+      "name": "旺宏",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "記憶體產業資金回流帶動市場情緒",
+        "AI伺服器需求能見度提升產業鏈動能"
+      ],
+      "warning": "營收年增0%顯示成長動能尚未顯現",
+      "next_check": "2024Q2法說會",
+      "data_quality": "有限",
+      "net_buy_lots": 49576,
+      "is_etf": false
+    },
+    {
+      "ticker": "2344",
+      "name": "華邦電",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "3月營收持平，缺乏顯著成長動能",
+        "記憶體產業價格波動可能影響後續表現"
+      ],
+      "warning": "產業需求不確定性可能壓縮毛利率",
+      "next_check": "下次月營收公布",
+      "data_quality": "有限",
+      "net_buy_lots": 27577,
+      "is_etf": false
+    }
+  ],
+  "ai_analysis_time": "2026-04-29 00:19",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "2883",
+        "stock_name": "凱基金",
+        "foreign_net": 42865,
+        "trust_net": 1002,
+        "ft_net": 43867,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2337",
+        "stock_name": "旺宏",
+        "foreign_net": 19882,
+        "trust_net": 8877,
+        "ft_net": 28759,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2303",
+        "stock_name": "聯電",
+        "foreign_net": 23686,
+        "trust_net": 3262,
+        "ft_net": 26948,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2027",
+        "stock_name": "大成鋼",
+        "foreign_net": 19713,
+        "trust_net": 1339,
+        "ft_net": 21052,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "1303",
+        "stock_name": "南亞",
+        "foreign_net": 16907,
+        "trust_net": 412,
+        "ft_net": 17319,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": 9472,
+        "trust_net": 3348,
+        "ft_net": 12820,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2327",
+        "stock_name": "國巨*",
+        "foreign_net": 3469,
+        "trust_net": 3544,
+        "ft_net": 7013,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "6770",
+        "stock_name": "力積電",
+        "foreign_net": 5433,
+        "trust_net": 3,
+        "ft_net": 5436,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "4958",
+        "stock_name": "臻鼎-KY",
+        "foreign_net": 2308,
+        "trust_net": 1611,
+        "ft_net": 3919,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2308",
+        "stock_name": "台達電",
+        "foreign_net": 3732,
+        "trust_net": 16,
+        "ft_net": 3748,
+        "date": "20260428"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2002",
+        "stock_name": "中鋼",
+        "foreign_net": -30551,
+        "trust_net": -41,
+        "ft_net": -30592,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2880",
+        "stock_name": "華南金",
+        "foreign_net": -20921,
+        "trust_net": -273,
+        "ft_net": -21194,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2324",
+        "stock_name": "仁寶",
+        "foreign_net": -10564,
+        "trust_net": -4406,
+        "ft_net": -14970,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2412",
+        "stock_name": "中華電",
+        "foreign_net": -10321,
+        "trust_net": -973,
+        "ft_net": -11294,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "1101",
+        "stock_name": "台泥",
+        "foreign_net": -9059,
+        "trust_net": -9,
+        "ft_net": -9068,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "9904",
+        "stock_name": "寶成",
+        "foreign_net": -6323,
+        "trust_net": -986,
+        "ft_net": -7309,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2382",
+        "stock_name": "廣達",
+        "foreign_net": -5802,
+        "trust_net": -283,
+        "ft_net": -6085,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "3037",
+        "stock_name": "欣興",
+        "foreign_net": -4725,
+        "trust_net": -198,
+        "ft_net": -4923,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2481",
+        "stock_name": "強茂",
+        "foreign_net": -4299,
+        "trust_net": -513,
+        "ft_net": -4812,
+        "date": "20260428"
+      },
+      {
+        "stock_id": "2353",
+        "stock_name": "宏碁",
+        "foreign_net": -917,
+        "trust_net": -3816,
+        "ft_net": -4733,
+        "date": "20260428"
+      }
+    ],
+    "date": "20260428"
+  },
+  "insti_signal_date": "2026-04-28",
+  "market_insti": {
+    "date": "20260428",
+    "unit": "億元",
+    "trust_buy": 212.46,
+    "trust_sell": 156.05,
+    "trust_net": 56.42,
+    "foreign_buy": 3761.78,
+    "foreign_sell": 4154.76,
+    "foreign_net": -392.98
+  },
+  "watchlist": [
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-04-28",
+      "entry_price": 23.8,
+      "prices": {
+        "2026-04-28": 23.8,
+        "2026-04-29": 24.4
+      },
+      "pct_changes": {
+        "2026-04-28": 0.0,
+        "2026-04-29": 2.52
+      }
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-04-28",
+      "entry_price": 32.55,
+      "prices": {
+        "2026-04-28": 32.55,
+        "2026-04-29": 32.45
+      },
+      "pct_changes": {
+        "2026-04-28": 0.0,
+        "2026-04-29": -0.31
+      }
+    },
+    {
+      "stock_id": "2890",
+      "stock_name": "永豐金",
+      "entry_date": "2026-04-24",
+      "entry_price": 31.95,
+      "prices": {
+        "2026-04-24": 31.95,
+        "2026-04-29": 31.9
+      },
+      "pct_changes": {
+        "2026-04-24": 0.0,
+        "2026-04-29": -0.16
+      }
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海",
+      "entry_date": "2026-04-23",
+      "entry_price": 225.0,
+      "prices": {
+        "2026-04-23": 225.0,
+        "2026-04-29": 225.5
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-29": 0.22
+      }
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-04-23",
+      "entry_price": 73.6,
+      "prices": {
+        "2026-04-23": 73.6,
+        "2026-04-29": 75.1
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-29": 2.04
+      }
+    },
+    {
+      "stock_id": "00878",
+      "stock_name": "國泰永續高股息",
+      "entry_date": "2026-04-23",
+      "entry_price": 24.66,
+      "prices": {
+        "2026-04-23": 24.66,
+        "2026-04-29": 25.3
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-29": 2.6
+      }
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
+      "entry_date": "2026-04-23",
+      "entry_price": 9.01,
+      "prices": {
+        "2026-04-23": 9.01,
+        "2026-04-29": 9.18
+      },
+      "pct_changes": {
+        "2026-04-23": 0.0,
+        "2026-04-29": 1.89
+      }
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-04-29",
+      "entry_price": 21.3,
+      "prices": {
+        "2026-04-29": 21.3
+      },
+      "pct_changes": {
+        "2026-04-29": 0.0
+      }
+    },
+    {
+      "stock_id": "2337",
+      "stock_name": "旺宏",
+      "entry_date": "2026-04-29",
+      "entry_price": 159.5,
+      "prices": {
+        "2026-04-29": 159.5
+      },
+      "pct_changes": {
+        "2026-04-29": 0.0
+      }
+    },
+    {
+      "stock_id": "2344",
+      "stock_name": "華邦電",
+      "entry_date": "2026-04-29",
+      "entry_price": 95.5,
+      "prices": {
+        "2026-04-29": 95.5
+      },
+      "pct_changes": {
+        "2026-04-29": 0.0
+      }
+    }
+  ]
+}
