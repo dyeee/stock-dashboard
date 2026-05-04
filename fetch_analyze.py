@@ -641,34 +641,58 @@ TRACK_DAYS = 10  # 追蹤天數
 
 
 def get_close_price(ticker: str) -> float | None:
-    """抓當日收盤價（TWSE）"""
+    """抓當日收盤價，優先用 yfinance，fallback 用 TWSE"""
+    # ── 方法一：yfinance（GH Actions 環境最穩）──
     try:
+        import yfinance as yf
+        suffix = ".TWO" if ticker.startswith("00") and len(ticker) == 5 else ".TW"
+        t = yf.Ticker(ticker + suffix)
+        hist = t.history(period="5d")
+        if not hist.empty:
+            price = round(float(hist["Close"].iloc[-1]), 2)
+            print(f"    [yfinance] {ticker}: {price}")
+            return price
+    except Exception as e:
+        print(f"    [yfinance] {ticker} 失敗：{e}")
+
+    # ── 方法二：TWSE STOCK_DAY（當月資料）──
+    try:
+        yyyymm = NOW_TPE.strftime("%Y%m") + "01"
         r = SESSION.get(
             "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY",
-            params={"stockNo": ticker, "response": "json",
-                    "date": NOW_TPE.strftime("%Y%m%d")},
-            timeout=10
+            params={"stockNo": ticker, "date": yyyymm, "response": "json"},
+            timeout=10,
+            headers={"Referer": "https://www.twse.com.tw/"}
         )
         d = r.json()
         rows = d.get("data", [])
         if rows:
-            # 最後一列是最新一天，收盤價在 index 6
             price_str = rows[-1][6].replace(",", "")
-            return float(price_str)
-    except Exception:
-        pass
-    # fallback: Yahoo Finance
+            price = float(price_str)
+            print(f"    [TWSE] {ticker}: {price}")
+            return price
+    except Exception as e:
+        print(f"    [TWSE] {ticker} 失敗：{e}")
+
+    # ── 方法三：TPEx（上櫃股票）──
     try:
+        roc_date = f"{NOW_TPE.year - 1911}/{NOW_TPE.strftime('%m/%d')}"
         r = SESSION.get(
-            f"https://tw.stock.yahoo.com/quote/{ticker}.TW",
-            timeout=8
+            "https://www.tpex.org.tw/web/stock/aftertrading/daily_close_quotes/stk_quote_result.php",
+            params={"l": "zh-tw", "d": roc_date, "se": "AL", "s": "0,asc",
+                    "o": "json", "q": ticker},
+            timeout=10
         )
-        import re
-        m = re.search(r'"regularMarketPrice":{"raw":([\d.]+)', r.text)
-        if m:
-            return float(m.group(1))
-    except Exception:
-        pass
+        d = r.json()
+        rows = d.get("aaData", [])
+        if rows:
+            price = float(rows[0][2].replace(",", ""))
+            print(f"    [TPEx] {ticker}: {price}")
+            return price
+    except Exception as e:
+        print(f"    [TPEx] {ticker} 失敗：{e}")
+
+    print(f"    ⚠️ {ticker} 所有方法均失敗")
     return None
 
 
