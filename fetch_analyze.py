@@ -5,6 +5,7 @@
 + AI 交叉確認（自動抓取任意股票月營收 + 新聞）
 """
 import os
+import math
 import json
 import re
 import time
@@ -649,9 +650,11 @@ def get_close_price(ticker: str) -> float | None:
         t = yf.Ticker(ticker + suffix)
         hist = t.history(period="5d")
         if not hist.empty:
-            price = round(float(hist["Close"].iloc[-1]), 2)
-            print(f"    [yfinance] {ticker}: {price}")
-            return price
+            raw = float(hist["Close"].iloc[-1])
+            if not math.isnan(raw) and raw > 0:
+                price = round(raw, 2)
+                print(f"    [yfinance] {ticker}: {price}")
+                return price
     except Exception as e:
         print(f"    [yfinance] {ticker} 失敗：{e}")
 
@@ -669,8 +672,9 @@ def get_close_price(ticker: str) -> float | None:
         if rows:
             price_str = rows[-1][6].replace(",", "")
             price = float(price_str)
-            print(f"    [TWSE] {ticker}: {price}")
-            return price
+            if not math.isnan(price) and price > 0:
+                print(f"    [TWSE] {ticker}: {price}")
+                return price
     except Exception as e:
         print(f"    [TWSE] {ticker} 失敗：{e}")
 
@@ -762,7 +766,8 @@ def update_watchlist(result_df) -> list:
             entry = item["entry_price"]
             if entry and entry > 0:
                 pct = round((price - entry) / entry * 100, 2)
-                item.setdefault("pct_changes", {})[today_str] = pct
+                if not math.isnan(pct):
+                    item.setdefault("pct_changes", {})[today_str] = pct
             pct_val = item.get("pct_changes", {}).get(today_str)
             if isinstance(pct_val, float):
                 print(f"    {ticker} {item['stock_name']}: {price} 元 ({pct_val:+.2f}%)")
@@ -867,18 +872,5 @@ if __name__ == "__main__":
         )
     else:
         print("❌ 分析失敗")
-        # 即使今日無交易資料，仍更新追蹤清單（更新收盤價、寫入 latest.json）
-        print("\n  ⏳ 嘗試更新追蹤清單...")
-        try:
-            watchlist = update_watchlist(pd.DataFrame())
-            # 寫入最小化的 latest.json（保留舊資料，加入最新 watchlist）
-            if OUT_LATEST.exists():
-                old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
-                old_payload["watchlist"] = watchlist
-                OUT_LATEST.write_text(
-                    json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-                print("  ✅ 追蹤清單已更新到 latest.json")
-        except Exception as e:
-            print(f"  ⚠️ 追蹤清單更新失敗：{e}")
 
     print("\n✨ 查詢完成!")

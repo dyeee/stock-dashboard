@@ -301,11 +301,11 @@
       "entry_price": 23.8,
       "prices": {
         "2026-04-28": 23.8,
-        "2026-05-05": NaN
+        "2026-05-05": null
       },
       "pct_changes": {
         "2026-04-28": 0.0,
-        "2026-05-05": NaN
+        "2026-05-05": null
       }
     },
     {
@@ -315,20 +315,20 @@
       "entry_price": 32.55,
       "prices": {
         "2026-04-28": 32.55,
-        "2026-05-05": NaN
+        "2026-05-05": null
       },
       "pct_changes": {
         "2026-04-28": 0.0,
-        "2026-05-05": NaN
+        "2026-05-05": null
       }
     },
     {
       "stock_id": "3481",
       "stock_name": "群創",
       "entry_date": "2026-05-05",
-      "entry_price": NaN,
+      "entry_price": null,
       "prices": {
-        "2026-05-05": NaN
+        "2026-05-05": null
       },
       "pct_changes": {}
     },
@@ -336,9 +336,9 @@
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-05-05",
-      "entry_price": NaN,
+      "entry_price": null,
       "prices": {
-        "2026-05-05": NaN
+        "2026-05-05": null
       },
       "pct_changes": {}
     }
