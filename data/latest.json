@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-04 16:14:59",
+  "generated_at_utc": "2026-05-05 03:17:05",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -74,10 +74,10 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "庫藏股執行提升股東權益",
-        "4月營收持平反映市場需求未顯著改善"
+        "4月營收持平無成長，動能尚未顯現",
+        "庫藏股短期提振股價但後續能見度待觀察"
       ],
-      "warning": "半導體產業景氣循環風險",
+      "warning": "半導體產業需求波動可能影響營運表現",
       "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 77804,
@@ -87,13 +87,13 @@
       "ticker": "3481",
       "name": "群創",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
-        "4月營收年增率持平，動能尚未顯現",
-        "缺乏近期產業利多或技術突破消息"
+        "AI伺服器面板需求能見度提升",
+        "開盤爆量反映市場資金關注度"
       ],
-      "warning": "營收年增率持平，動能有待觀察",
-      "next_check": "2024年5月營收",
+      "warning": "4月營收年增率持平缺乏成長動能",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 51781,
       "is_etf": false
@@ -102,19 +102,19 @@
       "ticker": "2883",
       "name": "凱基金",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "中低",
       "reasons": [
-        "4月營收持平無顯著成長動能",
-        "產業趨勢未見明確轉向跡象"
+        "4月營收年增率持平，動能未顯著改善",
+        "產業趨勢與新聞面缺乏明確驅動力"
       ],
-      "warning": "營收年增率持續持平",
-      "next_check": "2024年5月營收",
+      "warning": "營收增長停滯可能影響長期競爭力",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 49360,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-05 00:13",
+  "ai_analysis_time": "2026-05-05 11:15",
   "insti_signal": {
     "buy": [
       {
@@ -174,14 +174,6 @@
         "date": "20260504"
       },
       {
-        "stock_id": "00983A",
-        "stock_name": "主動中信ARK創新",
-        "foreign_net": 7031,
-        "trust_net": 667,
-        "ft_net": 7698,
-        "date": "20260504"
-      },
-      {
         "stock_id": "3711",
         "stock_name": "日月光投控",
         "foreign_net": 6173,
@@ -195,6 +187,14 @@
         "foreign_net": 5486,
         "trust_net": 1040,
         "ft_net": 6526,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "00935",
+        "stock_name": "野村臺灣新科技50",
+        "foreign_net": 4234,
+        "trust_net": 150,
+        "ft_net": 4384,
         "date": "20260504"
       }
     ],
@@ -301,11 +301,11 @@
       "entry_price": 23.8,
       "prices": {
         "2026-04-28": 23.8,
-        "2026-05-05": null
+        "2026-05-05": 23.75
       },
       "pct_changes": {
         "2026-04-28": 0.0,
-        "2026-05-05": null
+        "2026-05-05": -0.21
       }
     },
     {
@@ -315,32 +315,36 @@
       "entry_price": 32.55,
       "prices": {
         "2026-04-28": 32.55,
-        "2026-05-05": null
+        "2026-05-05": 31.35
       },
       "pct_changes": {
         "2026-04-28": 0.0,
-        "2026-05-05": null
+        "2026-05-05": -3.69
       }
     },
     {
       "stock_id": "3481",
       "stock_name": "群創",
       "entry_date": "2026-05-05",
-      "entry_price": null,
+      "entry_price": 26.2,
       "prices": {
-        "2026-05-05": null
+        "2026-05-05": 26.2
       },
-      "pct_changes": {}
+      "pct_changes": {
+        "2026-05-05": 0.0
+      }
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-05-05",
-      "entry_price": null,
+      "entry_price": 21.75,
       "prices": {
-        "2026-05-05": null
+        "2026-05-05": 21.75
       },
-      "pct_changes": {}
+      "pct_changes": {
+        "2026-05-05": 0.0
+      }
     }
   ]
 }
