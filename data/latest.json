@@ -1,82 +1,362 @@
-[
-  {
-    "stock_id": "2887",
-    "stock_name": "台新新光金",
-    "entry_date": "2026-04-28",
-    "entry_price": 23.8,
-    "prices": { "2026-04-28": 23.8 },
-    "pct_changes": { "2026-04-28": 0.0 }
+{
+  "mode": "intersection_top10_per_day",
+  "generated_at_utc": "2026-05-05 03:34:56",
+  "timezone": "Asia/Taipei",
+  "params": {
+    "days": 2,
+    "top_n": 10
   },
-  {
-    "stock_id": "2884",
-    "stock_name": "玉山金",
-    "entry_date": "2026-04-28",
-    "entry_price": 32.55,
-    "prices": { "2026-04-28": 32.55 },
-    "pct_changes": { "2026-04-28": 0.0 }
+  "trading_dates": [
+    "2026-05-04",
+    "2026-04-30"
+  ],
+  "count_intersection": 3,
+  "stocks": [
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電            ",
+      "total_net_buy": 77804,
+      "avg_net_buy": 38902.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-04",
+          "rank": 4,
+          "net_buy_lots": 38612
+        },
+        "day2": {
+          "date": "2026-04-30",
+          "rank": 1,
+          "net_buy_lots": 39192
+        }
+      }
+    },
+    {
+      "stock_id": "3481",
+      "stock_name": "群創            ",
+      "total_net_buy": 51781,
+      "avg_net_buy": 25890.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-04",
+          "rank": 2,
+          "net_buy_lots": 40503
+        },
+        "day2": {
+          "date": "2026-04-30",
+          "rank": 8,
+          "net_buy_lots": 11278
+        }
+      }
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金          ",
+      "total_net_buy": 49360,
+      "avg_net_buy": 24680.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-04",
+          "rank": 6,
+          "net_buy_lots": 36943
+        },
+        "day2": {
+          "date": "2026-04-30",
+          "rank": 7,
+          "net_buy_lots": 12417
+        }
+      }
+    }
+  ],
+  "ai_analysis": [
+    {
+      "ticker": "2303",
+      "name": "聯電",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "庫藏股執行強化股東信心",
+        "開盤大漲反映市場短期樂觀預期"
+      ],
+      "warning": "4月營收年增0%顯示成長動能未顯現",
+      "next_check": "2024年5月營收公佈",
+      "data_quality": "有限",
+      "net_buy_lots": 77804,
+      "is_etf": false
+    },
+    {
+      "ticker": "3481",
+      "name": "群創",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "月營收持平無顯著成長動能",
+        "開盤異動反映短期資金關注"
+      ],
+      "warning": "面板產業庫存週期風險未解",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
+      "net_buy_lots": 51781,
+      "is_etf": false
+    },
+    {
+      "ticker": "2883",
+      "name": "凱基金",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "4月營收年增0%動能未顯現",
+        "缺乏近期產業利多或訂單能見度"
+      ],
+      "warning": "營收成長動能不足可能壓制多頭",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
+      "net_buy_lots": 49360,
+      "is_etf": false
+    }
+  ],
+  "ai_analysis_time": "2026-05-05 11:33",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "0056",
+        "stock_name": "元大高股息",
+        "foreign_net": 58594,
+        "trust_net": 175,
+        "ft_net": 58769,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2344",
+        "stock_name": "華邦電",
+        "foreign_net": 38897,
+        "trust_net": 354,
+        "ft_net": 39251,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "0050",
+        "stock_name": "元大台灣50",
+        "foreign_net": 29249,
+        "trust_net": 2100,
+        "ft_net": 31349,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": 28324,
+        "trust_net": 183,
+        "ft_net": 28507,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2317",
+        "stock_name": "鴻海",
+        "foreign_net": 27360,
+        "trust_net": 310,
+        "ft_net": 27670,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2327",
+        "stock_name": "國巨*",
+        "foreign_net": 10072,
+        "trust_net": 89,
+        "ft_net": 10161,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2330",
+        "stock_name": "台積電",
+        "foreign_net": 9112,
+        "trust_net": 809,
+        "ft_net": 9921,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "3711",
+        "stock_name": "日月光投控",
+        "foreign_net": 6173,
+        "trust_net": 924,
+        "ft_net": 7097,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "00881",
+        "stock_name": "國泰台灣科技龍頭",
+        "foreign_net": 5486,
+        "trust_net": 1040,
+        "ft_net": 6526,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "00935",
+        "stock_name": "野村臺灣新科技50",
+        "foreign_net": 4234,
+        "trust_net": 150,
+        "ft_net": 4384,
+        "date": "20260504"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2884",
+        "stock_name": "玉山金",
+        "foreign_net": -25144,
+        "trust_net": -12595,
+        "ft_net": -37739,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2337",
+        "stock_name": "旺宏",
+        "foreign_net": -27857,
+        "trust_net": -735,
+        "ft_net": -28592,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2801",
+        "stock_name": "彰銀",
+        "foreign_net": -22135,
+        "trust_net": -332,
+        "ft_net": -22467,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2002",
+        "stock_name": "中鋼",
+        "foreign_net": -19053,
+        "trust_net": -10,
+        "ft_net": -19063,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2892",
+        "stock_name": "第一金",
+        "foreign_net": -13469,
+        "trust_net": -10,
+        "ft_net": -13479,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "1101",
+        "stock_name": "台泥",
+        "foreign_net": -10416,
+        "trust_net": -8,
+        "ft_net": -10424,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "1303",
+        "stock_name": "南亞",
+        "foreign_net": -8587,
+        "trust_net": -780,
+        "ft_net": -9367,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2409",
+        "stock_name": "友達",
+        "foreign_net": -9226,
+        "trust_net": -7,
+        "ft_net": -9233,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "5880",
+        "stock_name": "合庫金",
+        "foreign_net": -7615,
+        "trust_net": -1,
+        "ft_net": -7616,
+        "date": "20260504"
+      },
+      {
+        "stock_id": "2886",
+        "stock_name": "兆豐金",
+        "foreign_net": -5692,
+        "trust_net": -302,
+        "ft_net": -5994,
+        "date": "20260504"
+      }
+    ],
+    "date": "20260504"
   },
-  {
-    "stock_id": "2890",
-    "stock_name": "永豐金",
-    "entry_date": "2026-04-24",
-    "entry_price": 31.95,
-    "prices": { "2026-04-24": 31.95 },
-    "pct_changes": { "2026-04-24": 0.0 }
+  "insti_signal_date": "2026-05-04",
+  "market_insti": {
+    "date": "20260504",
+    "unit": "億元",
+    "trust_buy": 161.95,
+    "trust_sell": 141.66,
+    "trust_net": 20.28,
+    "foreign_buy": 4020.15,
+    "foreign_sell": 3350.4,
+    "foreign_net": 669.76
   },
-  {
-    "stock_id": "2317",
-    "stock_name": "鴻海",
-    "entry_date": "2026-04-23",
-    "entry_price": 225.0,
-    "prices": { "2026-04-23": 225.0 },
-    "pct_changes": { "2026-04-23": 0.0 }
-  },
-  {
-    "stock_id": "2303",
-    "stock_name": "聯電",
-    "entry_date": "2026-04-23",
-    "entry_price": 73.6,
-    "prices": { "2026-04-23": 73.6 },
-    "pct_changes": { "2026-04-23": 0.0 }
-  },
-  {
-    "stock_id": "00878",
-    "stock_name": "國泰永續高股息",
-    "entry_date": "2026-04-23",
-    "entry_price": 24.66,
-    "prices": { "2026-04-23": 24.66 },
-    "pct_changes": { "2026-04-23": 0.0 }
-  },
-  {
-    "stock_id": "00712",
-    "stock_name": "復華富時不動產",
-    "entry_date": "2026-04-23",
-    "entry_price": 9.01,
-    "prices": { "2026-04-23": 9.01 },
-    "pct_changes": { "2026-04-23": 0.0 }
-  },
-  {
-    "stock_id": "2337",
-    "stock_name": "旺宏",
-    "entry_date": "2026-04-29",
-    "entry_price": 161.0,
-    "prices": { "2026-04-29": 161.0 },
-    "pct_changes": { "2026-04-29": 0.0 }
-  },
-  {
-    "stock_id": "2344",
-    "stock_name": "華邦電",
-    "entry_date": "2026-04-29",
-    "entry_price": 94.5,
-    "prices": { "2026-04-29": 94.5 },
-    "pct_changes": { "2026-04-29": 0.0 }
-  },
-  {
-    "stock_id": "2883",
-    "stock_name": "凱基金",
-    "entry_date": "2026-04-30",
-    "entry_price": 21.5,
-    "prices": { "2026-04-30": 21.5 },
-    "pct_changes": { "2026-04-30": 0.0 }
-  }
-]
+  "watchlist": [
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-04-28",
+      "entry_price": 23.8,
+      "prices": {
+        "2026-04-28": 23.8,
+        "2026-05-05": 23.8
+      },
+      "pct_changes": {
+        "2026-04-28": 0.0,
+        "2026-05-05": 0.0
+      }
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-04-28",
+      "entry_price": 32.55,
+      "prices": {
+        "2026-04-28": 32.55,
+        "2026-05-05": 31.4
+      },
+      "pct_changes": {
+        "2026-04-28": 0.0,
+        "2026-05-05": -3.53
+      }
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-05-05",
+      "entry_price": 84.0,
+      "prices": {
+        "2026-05-05": 84.0
+      },
+      "pct_changes": {
+        "2026-05-05": 0.0
+      }
+    },
+    {
+      "stock_id": "3481",
+      "stock_name": "群創",
+      "entry_date": "2026-05-05",
+      "entry_price": 26.3,
+      "prices": {
+        "2026-05-05": 26.3
+      },
+      "pct_changes": {
+        "2026-05-05": 0.0
+      }
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-05-05",
+      "entry_price": 21.75,
+      "prices": {
+        "2026-05-05": 21.75
+      },
+      "pct_changes": {
+        "2026-05-05": 0.0
+      }
+    }
+  ]
+}
