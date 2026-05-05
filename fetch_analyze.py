@@ -737,18 +737,19 @@ def update_watchlist(result_df) -> list:
                 "stock_name": str(row["stock_name"]).strip(),
             })
 
-    # 加入新進榜股票
-    existing_ids = {w["stock_id"] for w in watchlist}
+    # 加入新進榜股票（用 stock_id + entry_date 作唯一鍵，同股票不同進榜日都保留）
+    existing_keys = {(w["stock_id"], w["entry_date"]) for w in watchlist}
     for s in new_stocks:
-        if s["stock_id"] not in existing_ids:
-            print(f"  📌 新增追蹤：{s['stock_id']} {s['stock_name']}")
+        key = (s["stock_id"], today_str)
+        if key not in existing_keys:
+            print(f"  📌 新增追蹤：{s['stock_id']} {s['stock_name']} ({today_str})")
             watchlist.append({
                 "stock_id":     s["stock_id"],
                 "stock_name":   s["stock_name"],
                 "entry_date":   today_str,
-                "entry_price":  None,  # 今日收盤後填入
-                "prices":       {},    # {date: price}
-                "pct_changes":  {},    # {date: pct_from_entry}
+                "entry_price":  None,
+                "prices":       {},
+                "pct_changes":  {},
             })
 
     # 更新收盤價
