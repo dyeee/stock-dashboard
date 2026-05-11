@@ -341,16 +341,29 @@ loadData();
 // 追蹤清單頁籤
 // ════════════════════════════════════════════════════════
 
-function renderWatch() {
-  const data = _instiData;
-  if (!data) return;
+async function renderWatch() {
+  // 直接讀 watchlist.json（持久化來源），latest.json.watchlist 僅作 fallback
+  let watchlist = [];
+  try {
+    const res = await fetch(`./data/watchlist.json?v=${Date.now()}`, { cache: 'no-store' });
+    if (res.ok) watchlist = await res.json();
+  } catch (_) {}
+  if (!Array.isArray(watchlist) || !watchlist.length) {
+    watchlist = _instiData?.watchlist || [];
+  }
 
-  const watchlist = data.watchlist || [];
-  const genAt = data.generated_at_utc || '';
+  // 顯示最新資料日期（取所有 prices 裡最新的那天）
   const upEl = document.getElementById('watch-update');
-  if (upEl && genAt) {
-    const d = new Date(genAt + 'Z');
-    upEl.textContent = '更新：' + d.toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+  if (upEl) {
+    let latestDataDate = '';
+    watchlist.forEach(item => {
+      const dates = Object.keys(item.prices || {}).sort();
+      if (dates.length) {
+        const d = dates[dates.length - 1];
+        if (d > latestDataDate) latestDataDate = d;
+      }
+    });
+    upEl.textContent = latestDataDate ? `最新資料：${latestDataDate}` : '—';
   }
 
   const threshold = parseFloat(document.getElementById('threshold-slider')?.value || 5);
@@ -365,10 +378,8 @@ function renderWatch() {
     const latest_date = dates[dates.length - 1];
     const pct = pcts[latest_date];
     if (typeof pct !== 'number') return;
-
     if (Math.abs(pct) >= threshold) {
-      const isUp = pct > 0;
-      alerts.push({ item, pct, latest_date, isUp });
+      alerts.push({ item, pct, latest_date, isUp: pct > 0 });
     }
   });
 
@@ -384,7 +395,7 @@ function renderWatch() {
               ${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%</span>
           </div>
           <div style="font-size:12px;color:#6b7280;margin-top:6px;">
-            進榜日：${item.entry_date}　進榜價：${item.entry_price ?? '—'} 元　
+            進榜日：${item.entry_date}　進榜價：${item.entry_price ?? '—'} 元
             ${latest_date} 收盤：${item.prices?.[latest_date] ?? '—'} 元
           </div>
         </div>`).join('');
@@ -405,8 +416,10 @@ function renderWatch() {
     return;
   }
 
-  // 簡化表格：只顯示進榜日、進榜價、今日價、最新漲跌
-  const rows = watchlist.map(item => {
+  // 依進榜日降冪排序（最新進榜的在上方）
+  const sorted = [...watchlist].sort((a, b) => (b.entry_date || '').localeCompare(a.entry_date || ''));
+
+  const rows = sorted.map(item => {
     const pcts   = item.pct_changes || {};
     const prices = item.prices || {};
     const sortedDates = Object.keys(pcts).sort();
@@ -414,22 +427,34 @@ function renderWatch() {
     const latestPct   = latestDate ? pcts[latestDate] : null;
     const latestPrice = latestDate ? prices[latestDate] : null;
 
+    // 已追蹤天數（日曆天）
+    const daysTracked = item.entry_date
+      ? Math.floor((Date.now() - new Date(item.entry_date)) / 86400000)
+      : null;
+    const daysLabel = daysTracked !== null
+      ? `<span style="font-size:10px;color:#4b5563;margin-left:4px">+${daysTracked}天</span>` : '';
+
     const latestColor = latestPct === null ? '#6b7280'
       : Math.abs(latestPct) >= threshold
         ? (latestPct > 0 ? '#f87171' : '#6ee7b7')
         : (latestPct > 0 ? '#fca5a5' : latestPct < 0 ? '#a7f3d0' : '#6b7280');
-    const bold = latestPct !== null && Math.abs(latestPct) >= threshold ? 'font-weight:800;font-size:14px;' : 'font-weight:700;';
-    const alert = latestPct !== null && Math.abs(latestPct) >= threshold
+    const bold = latestPct !== null && Math.abs(latestPct) >= threshold
+      ? 'font-weight:800;font-size:14px;' : 'font-weight:700;';
+    const alertIcon = latestPct !== null && Math.abs(latestPct) >= threshold
       ? `<span style="margin-left:4px">${latestPct > 0 ? '🚀' : '📉'}</span>` : '';
+
+    // 最新資料日期（若非今天顯示提示）
+    const dataDateLabel = latestDate
+      ? `<div style="font-size:10px;color:#4b5563;margin-top:2px;">${latestDate}</div>` : '';
 
     return `<tr>
       <td><code>${item.stock_id}</code></td>
       <td>${item.stock_name}</td>
-      <td style="font-size:11px;color:#6b7280;">${item.entry_date}</td>
+      <td style="font-size:11px;color:#6b7280;">${item.entry_date}${daysLabel}</td>
       <td class="num">${item.entry_price ?? '—'}</td>
-      <td class="num" style="color:#e5e7eb;">${latestPrice ?? '—'}</td>
+      <td class="num" style="color:#e5e7eb;">${latestPrice ?? '—'}${dataDateLabel}</td>
       <td class="num" style="color:${latestColor};${bold}">
-        ${latestPct !== null ? (latestPct >= 0 ? '+' : '') + latestPct.toFixed(2) + '%' : '—'}${alert}
+        ${latestPct !== null ? (latestPct >= 0 ? '+' : '') + latestPct.toFixed(2) + '%' : '—'}${alertIcon}
       </td>
     </tr>`;
   }).join('');
