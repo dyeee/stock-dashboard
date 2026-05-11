@@ -646,7 +646,7 @@ def get_close_price(ticker: str) -> float | None:
     # ── 方法一：yfinance（GH Actions 環境最穩）──
     try:
         import yfinance as yf
-        suffix = ".TWO" if ticker.startswith("00") and len(ticker) == 5 else ".TW"
+        suffix = ".TW"  # ETF（00開頭5位）也用 .TW，不用 .TWO
         t = yf.Ticker(ticker + suffix)
         hist = t.history(period="5d")
         if not hist.empty:
@@ -872,6 +872,17 @@ if __name__ == "__main__":
             watchlist,
         )
     else:
-        print("❌ 分析失敗")
+        print("⚠️ 無交易日資料（休市 / 假日 / 查詢失敗），仍更新追蹤清單收盤價...")
+        watchlist = update_watchlist(pd.DataFrame())
+        if OUT_LATEST.exists():
+            try:
+                payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
+                payload["watchlist"] = watchlist
+                OUT_LATEST.write_text(
+                    json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
+                print(f"[OK] 更新 {OUT_LATEST} watchlist 欄位")
+            except Exception as e:
+                print(f"⚠️ 更新 latest.json 失敗: {e}")
 
     print("\n✨ 查詢完成!")
