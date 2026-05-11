@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-11 14:34:11",
+  "generated_at_utc": "2026-05-11 16:46:33",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -8,12 +8,113 @@
   },
   "trading_dates": [
     "2026-05-11",
-    "2026-05-08"
+    "2026-05-07"
   ],
-  "count_intersection": 0,
-  "stocks": [],
-  "ai_analysis": [],
-  "ai_analysis_time": "",
+  "count_intersection": 3,
+  "stocks": [
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "total_net_buy": 175469,
+      "avg_net_buy": 87734.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-11",
+          "rank": 1,
+          "net_buy_lots": 87337
+        },
+        "day2": {
+          "date": "2026-05-07",
+          "rank": 2,
+          "net_buy_lots": 88132
+        }
+      }
+    },
+    {
+      "stock_id": "00992A",
+      "stock_name": "主動群益科技創新",
+      "total_net_buy": 80244,
+      "avg_net_buy": 40122.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-11",
+          "rank": 2,
+          "net_buy_lots": 32079
+        },
+        "day2": {
+          "date": "2026-05-07",
+          "rank": 4,
+          "net_buy_lots": 48165
+        }
+      }
+    },
+    {
+      "stock_id": "2344",
+      "stock_name": "華邦電          ",
+      "total_net_buy": 52073,
+      "avg_net_buy": 26036.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-05-11",
+          "rank": 10,
+          "net_buy_lots": 17494
+        },
+        "day2": {
+          "date": "2026-05-07",
+          "rank": 7,
+          "net_buy_lots": 34579
+        }
+      }
+    }
+  ],
+  "ai_analysis": [
+    {
+      "ticker": "00981A",
+      "name": "主動統一台股增長",
+      "verdict": "建議買進",
+      "confidence": "中",
+      "reasons": [
+        "台股4萬點熱潮帶動資金流入",
+        "滿周年漲3倍顯示長期追蹤標的強勢"
+      ],
+      "warning": "法人倒貨43萬張可能影響後市動能",
+      "next_check": "一周後",
+      "data_quality": "有限",
+      "net_buy_lots": 175469,
+      "is_etf": true
+    },
+    {
+      "ticker": "00992A",
+      "name": "主動群益科技創新",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "無月營收與新聞支撐判斷依據",
+        "需觀察科技股本益比修正風險"
+      ],
+      "warning": "科技ETF易受美中科技戰影響",
+      "next_check": "一周後",
+      "data_quality": "不足",
+      "net_buy_lots": 80244,
+      "is_etf": true
+    },
+    {
+      "ticker": "2344",
+      "name": "華邦電",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "IC設計產業動能強勁，法說會獲分析師看多",
+        "股價連6日上漲，技術面有突破跡象"
+      ],
+      "warning": "營收年增率持平，尚未見獲利轉強",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
+      "net_buy_lots": 52073,
+      "is_etf": false
+    }
+  ],
+  "ai_analysis_time": "2026-05-12 00:45",
   "insti_signal": {
     "buy": [
       {
@@ -192,5 +293,42 @@
     "foreign_sell": 4397.9,
     "foreign_net": -109.84
   },
-  "watchlist": []
+  "watchlist": [
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-05-12",
+      "entry_price": 29.69,
+      "prices": {
+        "2026-05-12": 29.69
+      },
+      "pct_changes": {
+        "2026-05-12": 0.0
+      }
+    },
+    {
+      "stock_id": "00992A",
+      "stock_name": "主動群益科技創新",
+      "entry_date": "2026-05-12",
+      "entry_price": 18.5,
+      "prices": {
+        "2026-05-12": 18.5
+      },
+      "pct_changes": {
+        "2026-05-12": 0.0
+      }
+    },
+    {
+      "stock_id": "2344",
+      "stock_name": "華邦電",
+      "entry_date": "2026-05-12",
+      "entry_price": 117.5,
+      "prices": {
+        "2026-05-12": 117.5
+      },
+      "pct_changes": {
+        "2026-05-12": 0.0
+      }
+    }
+  ]
 }
