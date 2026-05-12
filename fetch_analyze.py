@@ -622,7 +622,7 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
         "insti_signal": three_insti or {},
         "insti_signal_date": trading_dates[0] if trading_dates else "",
         "market_insti": market_insti or {},
-        "watchlist": watchlist or [],
+        "watchlist_summary": _build_watchlist_summary(watchlist or []),
     }
     OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
     OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -646,7 +646,7 @@ def get_close_price(ticker: str) -> float | None:
     # ── 方法一：yfinance（GH Actions 環境最穩）──
     try:
         import yfinance as yf
-        suffix = ".TW"  # ETF（00開頭5位）也用 .TW，不用 .TWO
+        suffix = ".TWO" if ticker.startswith("00") and len(ticker) == 5 else ".TW"
         t = yf.Ticker(ticker + suffix)
         hist = t.history(period="5d")
         if not hist.empty:
@@ -795,6 +795,47 @@ def update_watchlist(result_df) -> list:
     print(f"  ✅ 追蹤清單已更新，共 {len(watchlist)} 檔")
     return watchlist
 
+
+def _build_watchlist_summary(watchlist: list) -> list:
+    """
+    從完整 watchlist 建立摘要，寫入 latest.json
+    每筆只包含：stock_id, stock_name, entry_date, entry_price,
+                latest_price, latest_pct, latest_date, days_tracked
+    """
+    from datetime import datetime as dt
+    today = NOW_TPE.date()
+    summary = []
+    for item in watchlist:
+        pcts   = item.get("pct_changes", {})
+        prices = item.get("prices", {})
+        sorted_dates = sorted(pcts.keys())
+        if not sorted_dates:
+            continue
+        latest_date = sorted_dates[-1]
+        latest_pct  = pcts[latest_date]
+        latest_price = prices.get(latest_date)
+
+        try:
+            entry_dt = dt.strptime(item["entry_date"], "%Y-%m-%d").date()
+            days = (today - entry_dt).days
+        except Exception:
+            days = 0
+
+        summary.append({
+            "stock_id":    item["stock_id"],
+            "stock_name":  item["stock_name"],
+            "entry_date":  item["entry_date"],
+            "entry_price": item.get("entry_price"),
+            "latest_price": latest_price,
+            "latest_pct":  latest_pct,
+            "latest_date": latest_date,
+            "days_tracked": days,
+        })
+
+    # 按進榜日降序排序（最新的在前）
+    summary.sort(key=lambda x: x["entry_date"], reverse=True)
+    return summary
+
 if __name__ == "__main__":
     days = int(os.getenv("DAYS", "2"))
     result_data = get_consecutive_top10(days=days)
@@ -872,17 +913,6 @@ if __name__ == "__main__":
             watchlist,
         )
     else:
-        print("⚠️ 無交易日資料（休市 / 假日 / 查詢失敗），仍更新追蹤清單收盤價...")
-        watchlist = update_watchlist(pd.DataFrame())
-        if OUT_LATEST.exists():
-            try:
-                payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
-                payload["watchlist"] = watchlist
-                OUT_LATEST.write_text(
-                    json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
-                )
-                print(f"[OK] 更新 {OUT_LATEST} watchlist 欄位")
-            except Exception as e:
-                print(f"⚠️ 更新 latest.json 失敗: {e}")
+        print("❌ 分析失敗")
 
     print("\n✨ 查詢完成!")
