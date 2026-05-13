@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-13 08:24:02",
+  "generated_at_utc": "2026-05-13 16:37:00",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -110,11 +110,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "與台積電合作潛力受市場關注",
-        "4月營收持平未顯現成長動能"
+        "與台積電合作議題帶動市場預期",
+        "4月營收維持20.24億台幣穩定水準"
       ],
-      "warning": "營收年增率持平需確認訂單能見度",
-      "next_check": "2024Q2法說會",
+      "warning": "合作案尚未反映在實際營收成長",
+      "next_check": "2024年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 209235,
       "is_etf": false
@@ -125,12 +125,12 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "4月營收年增0%顯示動能疲弱",
-        "面板產業需求未見明顯回升"
+        "4月營收年增0%動能未改善",
+        "面板產業需求疲弱壓縮利潤"
       ],
-      "warning": "價格競爭可能壓縮毛利率",
+      "warning": "產業庫存調整可能延續",
       "next_check": "2024/5月營收",
-      "data_quality": "有限",
+      "data_quality": "不足",
       "net_buy_lots": 167417,
       "is_etf": false
     },
@@ -140,12 +140,12 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "月營收資料無法取得",
-        "缺乏近期新聞佐證"
+        "4月營收年增率估算為0%顯示動能疲弱",
+        "缺乏近期新聞催化劑支撐股價上漲"
       ],
-      "warning": "MOPS資料異常影響判斷",
-      "next_check": "一周後",
-      "data_quality": "不足",
+      "warning": "金融業易受經濟環境與利率變動影響",
+      "next_check": "2024年6月",
+      "data_quality": "有限",
       "net_buy_lots": 105105,
       "is_etf": false
     },
@@ -155,10 +155,10 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "追蹤納斯達克指數需觀察美股科技股基本面",
-        "近期無重大財務數據或產業消息可參考"
+        "追蹤納斯達克指數，需觀察美股科技股季報表現",
+        "近期台股資金流向不明確，ETF流動性存疑"
       ],
-      "warning": "納指波動可能受美聯準會利率政策影響",
+      "warning": "外資同步大賣台股ETF，資金動能不穩定",
       "next_check": "一周後",
       "data_quality": "不足",
       "net_buy_lots": 54601,
@@ -170,265 +170,123 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "量子運算合作強化技術布局",
-        "非洲AI市場擴張具長期潛力"
+        "AI散熱專利數量超車輝達、Google，技術能見度提升",
+        "COMPUTEX 2026前瞻點名為潛力股，黃仁勳加持議題受關注"
       ],
-      "warning": "駭客事件可能影響客戶信任",
-      "next_check": "下個月",
-      "data_quality": "不足",
+      "warning": "4月營收年增0%缺乏成長動能",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
       "net_buy_lots": 53250,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-13 16:21",
+  "ai_analysis_time": "2026-05-14 00:35",
   "insti_signal": {
-    "buy": [
-      {
-        "stock_id": "3481",
-        "stock_name": "群創",
-        "foreign_net": 127240,
-        "trust_net": 657,
-        "ft_net": 127897,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2409",
-        "stock_name": "友達",
-        "foreign_net": 56470,
-        "trust_net": 25,
-        "ft_net": 56495,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2337",
-        "stock_name": "旺宏",
-        "foreign_net": 40228,
-        "trust_net": 9302,
-        "ft_net": 49530,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "4958",
-        "stock_name": "臻鼎-KY",
-        "foreign_net": 23972,
-        "trust_net": 1183,
-        "ft_net": 25155,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2891",
-        "stock_name": "中信金",
-        "foreign_net": 16659,
-        "trust_net": 2185,
-        "ft_net": 18844,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "009816",
-        "stock_name": "凱基台灣TOP50",
-        "foreign_net": 16886,
-        "trust_net": 300,
-        "ft_net": 17186,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "1216",
-        "stock_name": "統一",
-        "foreign_net": 13102,
-        "trust_net": 1040,
-        "ft_net": 14142,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2344",
-        "stock_name": "華邦電",
-        "foreign_net": 4229,
-        "trust_net": 8723,
-        "ft_net": 12952,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "1605",
-        "stock_name": "華新",
-        "foreign_net": 9569,
-        "trust_net": 1145,
-        "ft_net": 10714,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2412",
-        "stock_name": "中華電",
-        "foreign_net": 5909,
-        "trust_net": 1708,
-        "ft_net": 7617,
-        "date": "20260513"
-      }
-    ],
-    "sell": [
-      {
-        "stock_id": "2313",
-        "stock_name": "華通",
-        "foreign_net": -40696,
-        "trust_net": -1355,
-        "ft_net": -42051,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2301",
-        "stock_name": "光寶科",
-        "foreign_net": -13076,
-        "trust_net": -5641,
-        "ft_net": -18717,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "1303",
-        "stock_name": "南亞",
-        "foreign_net": -13333,
-        "trust_net": -618,
-        "ft_net": -13951,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2609",
-        "stock_name": "陽明",
-        "foreign_net": -10580,
-        "trust_net": -7,
-        "ft_net": -10587,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2801",
-        "stock_name": "彰銀",
-        "foreign_net": -10509,
-        "trust_net": -27,
-        "ft_net": -10536,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "5388",
-        "stock_name": "中磊",
-        "foreign_net": -8839,
-        "trust_net": -1,
-        "ft_net": -8840,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2615",
-        "stock_name": "萬海",
-        "foreign_net": -7871,
-        "trust_net": -18,
-        "ft_net": -7889,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "1717",
-        "stock_name": "長興",
-        "foreign_net": -7430,
-        "trust_net": -6,
-        "ft_net": -7436,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2354",
-        "stock_name": "鴻準",
-        "foreign_net": -7096,
-        "trust_net": -2,
-        "ft_net": -7098,
-        "date": "20260513"
-      },
-      {
-        "stock_id": "2812",
-        "stock_name": "台中銀",
-        "foreign_net": -7052,
-        "trust_net": -6,
-        "ft_net": -7058,
-        "date": "20260513"
-      }
-    ],
+    "buy": [],
+    "sell": [],
     "date": "20260513"
   },
   "insti_signal_date": "2026-05-13",
   "market_insti": {
     "date": "20260513",
     "unit": "億元",
-    "trust_buy": 511.04,
-    "trust_sell": 254.59,
-    "trust_net": 256.45,
-    "foreign_buy": 4160.89,
-    "foreign_sell": 4595.19,
+    "trust_buy": 518.77,
+    "trust_sell": 258.16,
+    "trust_net": 260.62,
+    "foreign_buy": 4293.55,
+    "foreign_sell": 4727.85,
     "foreign_net": -434.29
   },
   "watchlist_summary": [
+    {
+      "stock_id": "3481",
+      "stock_name": "群創",
+      "entry_date": "2026-05-14",
+      "entry_price": 37.5,
+      "latest_price": 37.5,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2409",
+      "stock_name": "友達",
+      "entry_date": "2026-05-14",
+      "entry_price": 20.2,
+      "latest_price": 20.2,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-05-14",
+      "entry_price": 23.15,
+      "latest_price": 23.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "009820",
+      "stock_name": "元大納斯達克精選",
+      "entry_date": "2026-05-14",
+      "entry_price": 10.02,
+      "latest_price": 10.02,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2317",
+      "stock_name": "鴻海",
+      "entry_date": "2026-05-14",
+      "entry_price": 251.0,
+      "latest_price": 251.0,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-14",
+      "days_tracked": 0
+    },
     {
       "stock_id": "2409",
       "stock_name": "友達",
       "entry_date": "2026-05-13",
       "entry_price": 20.7,
-      "latest_price": 20.7,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
+      "latest_price": 20.2,
+      "latest_pct": -2.42,
+      "latest_date": "2026-05-14",
+      "days_tracked": 1
     },
     {
       "stock_id": "2303",
       "stock_name": "聯電",
       "entry_date": "2026-05-13",
       "entry_price": 104.5,
-      "latest_price": 104.5,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
+      "latest_price": 98.4,
+      "latest_pct": -5.84,
+      "latest_date": "2026-05-14",
+      "days_tracked": 1
     },
     {
       "stock_id": "009820",
       "stock_name": "元大納斯達克精選",
       "entry_date": "2026-05-13",
       "entry_price": 9.99,
-      "latest_price": 9.99,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
+      "latest_price": 10.02,
+      "latest_pct": 0.3,
+      "latest_date": "2026-05-14",
+      "days_tracked": 1
     },
     {
       "stock_id": "2344",
       "stock_name": "華邦電",
       "entry_date": "2026-05-13",
       "entry_price": 121.5,
-      "latest_price": 121.5,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
-    },
-    {
-      "stock_id": "3481",
-      "stock_name": "群創",
-      "entry_date": "2026-05-13",
-      "entry_price": 37.5,
-      "latest_price": 37.5,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
-    },
-    {
-      "stock_id": "2887",
-      "stock_name": "台新新光金",
-      "entry_date": "2026-05-13",
-      "entry_price": 23.15,
-      "latest_price": 23.15,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
-    },
-    {
-      "stock_id": "2317",
-      "stock_name": "鴻海",
-      "entry_date": "2026-05-13",
-      "entry_price": 251.0,
-      "latest_price": 251.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-13",
-      "days_tracked": 0
+      "latest_price": 122.0,
+      "latest_pct": 0.41,
+      "latest_date": "2026-05-14",
+      "days_tracked": 1
     },
     {
       "stock_id": "00981A",
@@ -437,8 +295,8 @@
       "entry_price": 29.69,
       "latest_price": 29.28,
       "latest_pct": -1.38,
-      "latest_date": "2026-05-13",
-      "days_tracked": 2
+      "latest_date": "2026-05-14",
+      "days_tracked": 3
     },
     {
       "stock_id": "00992A",
@@ -447,8 +305,8 @@
       "entry_price": 18.67,
       "latest_price": 18.25,
       "latest_pct": -2.25,
-      "latest_date": "2026-05-13",
-      "days_tracked": 2
+      "latest_date": "2026-05-14",
+      "days_tracked": 3
     },
     {
       "stock_id": "3481",
@@ -457,8 +315,8 @@
       "entry_price": 36.9,
       "latest_price": 37.5,
       "latest_pct": 1.63,
-      "latest_date": "2026-05-13",
-      "days_tracked": 5
+      "latest_date": "2026-05-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "0056",
@@ -467,8 +325,8 @@
       "entry_price": 45.58,
       "latest_price": 45.15,
       "latest_pct": -0.94,
-      "latest_date": "2026-05-13",
-      "days_tracked": 5
+      "latest_date": "2026-05-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "00919",
@@ -477,8 +335,8 @@
       "entry_price": 25.52,
       "latest_price": 25.55,
       "latest_pct": 0.12,
-      "latest_date": "2026-05-13",
-      "days_tracked": 5
+      "latest_date": "2026-05-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "2887",
@@ -487,18 +345,18 @@
       "entry_price": 24.2,
       "latest_price": 23.15,
       "latest_pct": -4.34,
-      "latest_date": "2026-05-13",
-      "days_tracked": 5
+      "latest_date": "2026-05-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-05-04",
       "entry_price": 21.65,
-      "latest_price": 21.95,
-      "latest_pct": 1.39,
-      "latest_date": "2026-05-13",
-      "days_tracked": 9
+      "latest_price": null,
+      "latest_pct": 0.0,
+      "latest_date": "2026-05-11",
+      "days_tracked": 10
     }
   ]
 }
