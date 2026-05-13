@@ -797,11 +797,7 @@ def update_watchlist(result_df) -> list:
 
 
 def _build_watchlist_summary(watchlist: list) -> list:
-    """
-    從完整 watchlist 建立摘要，寫入 latest.json
-    每筆只含：stock_id, stock_name, entry_date, entry_price,
-              latest_price, latest_pct, latest_date, days_tracked
-    """
+    """從完整 watchlist 建立摘要寫入 latest.json"""
     from datetime import datetime as dt
     today = NOW_TPE.date()
     summary = []
@@ -910,14 +906,12 @@ if __name__ == "__main__":
         )
     else:
         print("❌ 分析失敗")
-        # 週末/假日/無資料：仍更新追蹤清單並寫回 latest.json
         print("\n  ⏳ 更新追蹤清單（無交易資料）...")
         try:
             watchlist = update_watchlist(pd.DataFrame())
             if OUT_LATEST.exists():
                 old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
                 old_payload["watchlist_summary"] = _build_watchlist_summary(watchlist)
-                # 移除舊的 watchlist 欄位（如果有）
                 old_payload.pop("watchlist", None)
                 OUT_LATEST.write_text(
                     json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")

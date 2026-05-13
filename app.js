@@ -412,7 +412,6 @@ function renderWatch() {
 
   // 簡化表格：只顯示進榜日、進榜價、今日價、最新漲跌
   const rows = watchlist.map(item => {
-    // 支援摘要版（latest_pct）和舊版（pct_changes）
     let latestPct, latestPrice, latestDate;
     if (item.latest_pct !== undefined) {
       latestPct   = item.latest_pct;
