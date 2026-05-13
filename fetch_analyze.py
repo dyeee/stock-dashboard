@@ -646,15 +646,19 @@ def get_close_price(ticker: str) -> float | None:
     # ── 方法一：yfinance（GH Actions 環境最穩）──
     try:
         import yfinance as yf
-        suffix = ".TWO" if ticker.startswith("00") and len(ticker) == 5 else ".TW"
-        t = yf.Ticker(ticker + suffix)
-        hist = t.history(period="5d")
-        if not hist.empty:
-            raw = float(hist["Close"].iloc[-1])
-            if not math.isnan(raw) and raw > 0:
-                price = round(raw, 2)
-                print(f"    [yfinance] {ticker}: {price}")
-                return price
+        # 先試 .TW（上市），失敗再試 .TWO（上櫃）
+        for suffix in [".TW", ".TWO"]:
+            try:
+                t = yf.Ticker(ticker + suffix)
+                hist = t.history(period="5d")
+                if not hist.empty:
+                    raw = float(hist["Close"].iloc[-1])
+                    if not math.isnan(raw) and raw > 0:
+                        price = round(raw, 2)
+                        print(f"    [yfinance] {ticker}{suffix}: {price}")
+                        return price
+            except Exception:
+                continue
     except Exception as e:
         print(f"    [yfinance] {ticker} 失敗：{e}")
 
