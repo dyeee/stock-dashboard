@@ -799,8 +799,8 @@ def update_watchlist(result_df) -> list:
 def _build_watchlist_summary(watchlist: list) -> list:
     """
     從完整 watchlist 建立摘要，寫入 latest.json
-    每筆只包含：stock_id, stock_name, entry_date, entry_price,
-                latest_price, latest_pct, latest_date, days_tracked
+    每筆只含：stock_id, stock_name, entry_date, entry_price,
+              latest_price, latest_pct, latest_date, days_tracked
     """
     from datetime import datetime as dt
     today = NOW_TPE.date()
@@ -811,16 +811,14 @@ def _build_watchlist_summary(watchlist: list) -> list:
         sorted_dates = sorted(pcts.keys())
         if not sorted_dates:
             continue
-        latest_date = sorted_dates[-1]
-        latest_pct  = pcts[latest_date]
+        latest_date  = sorted_dates[-1]
+        latest_pct   = pcts[latest_date]
         latest_price = prices.get(latest_date)
-
         try:
             entry_dt = dt.strptime(item["entry_date"], "%Y-%m-%d").date()
             days = (today - entry_dt).days
         except Exception:
             days = 0
-
         summary.append({
             "stock_id":    item["stock_id"],
             "stock_name":  item["stock_name"],
@@ -831,8 +829,6 @@ def _build_watchlist_summary(watchlist: list) -> list:
             "latest_date": latest_date,
             "days_tracked": days,
         })
-
-    # 按進榜日降序排序（最新的在前）
     summary.sort(key=lambda x: x["entry_date"], reverse=True)
     return summary
 
@@ -914,5 +910,19 @@ if __name__ == "__main__":
         )
     else:
         print("❌ 分析失敗")
+        # 週末/假日/無資料：仍更新追蹤清單並寫回 latest.json
+        print("\n  ⏳ 更新追蹤清單（無交易資料）...")
+        try:
+            watchlist = update_watchlist(pd.DataFrame())
+            if OUT_LATEST.exists():
+                old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
+                old_payload["watchlist_summary"] = _build_watchlist_summary(watchlist)
+                # 移除舊的 watchlist 欄位（如果有）
+                old_payload.pop("watchlist", None)
+                OUT_LATEST.write_text(
+                    json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+                print("  ✅ latest.json watchlist_summary 已更新")
+        except Exception as e:
+            print(f"  ⚠️ 追蹤清單更新失敗：{e}")
 
     print("\n✨ 查詢完成!")

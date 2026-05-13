@@ -345,7 +345,6 @@ function renderWatch() {
   const data = _instiData;
   if (!data) return;
 
-  // 從 watchlist_summary 讀（新架構：完整資料在 watchlist.json）
   const watchlist = data.watchlist_summary || data.watchlist || [];
   const genAt = data.generated_at_utc || '';
   const upEl = document.getElementById('watch-update');
@@ -360,11 +359,21 @@ function renderWatch() {
   const alertEl = document.getElementById('watch-alerts');
   const alerts = [];
   watchlist.forEach(item => {
-    const pct = item.latest_pct;
+    let pct, latest_date;
+    if (item.latest_pct !== undefined) {
+      pct = item.latest_pct;
+      latest_date = item.latest_date || '';
+    } else {
+      const pcts = item.pct_changes || {};
+      const dates = Object.keys(pcts).sort();
+      if (!dates.length) return;
+      latest_date = dates[dates.length - 1];
+      pct = pcts[latest_date];
+    }
     if (typeof pct !== 'number') return;
     if (Math.abs(pct) >= threshold) {
       const isUp = pct > 0;
-      alerts.push({ item, pct, latest_date: item.latest_date || '', isUp });
+      alerts.push({ item, pct, latest_date, isUp });
     }
   });
 
@@ -403,9 +412,20 @@ function renderWatch() {
 
   // 簡化表格：只顯示進榜日、進榜價、今日價、最新漲跌
   const rows = watchlist.map(item => {
-    const latestPct   = item.latest_pct   ?? null;
-    const latestPrice = item.latest_price ?? null;
-    const latestDate  = item.latest_date  || '';
+    // 支援摘要版（latest_pct）和舊版（pct_changes）
+    let latestPct, latestPrice, latestDate;
+    if (item.latest_pct !== undefined) {
+      latestPct   = item.latest_pct;
+      latestPrice = item.latest_price;
+      latestDate  = item.latest_date || '';
+    } else {
+      const pcts   = item.pct_changes || {};
+      const prices = item.prices || {};
+      const sortedDates = Object.keys(pcts).sort();
+      latestDate  = sortedDates[sortedDates.length - 1] || '';
+      latestPct   = latestDate ? pcts[latestDate] : null;
+      latestPrice = latestDate ? prices[latestDate] : null;
+    }
 
     const latestColor = latestPct === null ? '#6b7280'
       : Math.abs(latestPct) >= threshold
