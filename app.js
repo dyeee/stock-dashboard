@@ -326,6 +326,7 @@ function renderInstiChart(elId, stocks, isBuy) {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      animation: { duration: 400 },
       plugins: { legend: { labels: { color: '#e5e7eb' } } },
       scales: {
         x: { stacked: true, ticks: { color: '#c7d2fe', font: { size: 10 } } },
@@ -333,6 +334,8 @@ function renderInstiChart(elId, stocks, isBuy) {
       }
     }
   });
+  // canvas 從隱藏狀態切換出來時需要強制 resize
+  setTimeout(() => { if (window[key]) window[key].resize(); }, 50);
 }
 
 loadData();

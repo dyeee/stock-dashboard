@@ -198,8 +198,8 @@
       document.getElementById('page-' + t).style.display = t === name ? 'block' : 'none';
       document.getElementById('tab-' + t).classList.toggle('active', t === name);
     });
-    if (name === 'insti' && typeof renderInsti === 'function') renderInsti();
-    if (name === 'watch'  && typeof renderWatch  === 'function') renderWatch();
+    if (name === 'insti' && typeof renderInsti === 'function') setTimeout(renderInsti, 0);
+    if (name === 'watch'  && typeof renderWatch  === 'function') setTimeout(renderWatch, 0);
   }
 
   let deferredPrompt;
