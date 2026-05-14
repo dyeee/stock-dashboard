@@ -310,7 +310,13 @@ function renderInstiTable(elId, stocks, isBuy) {
 
 function renderInstiChart(elId, stocks, isBuy) {
   const ctx = document.getElementById(elId);
-  if (!ctx || !stocks.length) return;
+  if (!ctx) return;
+  if (!stocks.length) {
+    // 空資料時隱藏 canvas，避免留下空白區塊
+    ctx.style.display = 'none';
+    return;
+  }
+  ctx.style.display = 'block';
   const key = elId + '_chart_obj';
   if (window[key]) window[key].destroy();
   window[key] = new Chart(ctx, {
