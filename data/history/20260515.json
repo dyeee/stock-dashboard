@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-15 16:16:15",
+  "generated_at_utc": "2026-05-16 15:16:26",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -108,13 +108,13 @@
       "ticker": "2887",
       "name": "台新新光金",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "4月營收年增0%動能未顯現",
-        "缺乏近期新聞催化劑"
+        "4月營收年增率持平，缺乏成長動能",
+        "近期無重大利多新聞發酵"
       ],
-      "warning": "金融業存貸利差收斂風險",
-      "next_check": "2026Q2財報",
+      "warning": "金融業淨息差收縮風險",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 100412,
       "is_etf": false
@@ -123,12 +123,12 @@
       "ticker": "6770",
       "name": "力積電",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "4月營收持平，動能尚未顯現成長",
-        "缺乏近期產業利多或訂單能見度"
+        "4月營收持平無顯著成長動能",
+        "缺乏近期產業利多或技術突破消息"
       ],
-      "warning": "若Q2營收無法季增，需重新評估",
+      "warning": "半導體產業需求復甦時程不確定",
       "next_check": "2024年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 72970,
@@ -137,14 +137,14 @@
     {
       "ticker": "009820",
       "name": "元大納斯達克精選",
-      "verdict": "謹慎觀察",
+      "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "東元轉攻電力能源與資料中心，間接利多科技股需求",
-        "納斯達克科技權值股長期受AI議題支撐"
+        "納斯達克科技股受AI需求帶動表現強勁",
+        "ETF折價幅度收斂反映資金回流跡象"
       ],
-      "warning": "納指若受美聯準會政策急轉直下可能急跌",
-      "next_check": "2024/05/15",
+      "warning": "科技股本益比偏高可能影響上漲空間",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 69979,
       "is_etf": true
@@ -155,12 +155,12 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "4月營收持平缺乏成長動能",
-        "無近期新聞支撐基本面判斷"
+        "月營收資料無法取得",
+        "缺乏近期新聞與產業動能佐證"
       ],
-      "warning": "營收持續無法突破可能影響後市",
-      "next_check": "2026年5月營收",
-      "data_quality": "有限",
+      "warning": "營收成長動能與產業需求不明確",
+      "next_check": "一週後",
+      "data_quality": "不足",
       "net_buy_lots": 57711,
       "is_etf": false
     },
@@ -168,19 +168,19 @@
       "ticker": "2344",
       "name": "華邦電",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "4月營收年增0%動能疲弱",
-        "未納入MSCI引發市場失望性賣壓"
+        "未被納入MSCI引發短期市場情緒修正",
+        "缺乏近期營收數據支撐基本面判斷"
       ],
-      "warning": "半導體產業需求不確定性仍高",
-      "next_check": "2026年5月營收",
-      "data_quality": "有限",
+      "warning": "未納入MSCI可能影響長期資金配置意願",
+      "next_check": "10月營收公布",
+      "data_quality": "不足",
       "net_buy_lots": 40059,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-16 00:14",
+  "ai_analysis_time": "2026-05-16 23:14",
   "insti_signal": {
     "buy": [
       {
