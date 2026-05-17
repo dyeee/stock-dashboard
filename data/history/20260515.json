@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-16 15:16:26",
+  "generated_at_utc": "2026-05-17 15:17:37",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -108,13 +108,13 @@
       "ticker": "2887",
       "name": "台新新光金",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
-        "4月營收年增率持平，缺乏成長動能",
-        "近期無重大利多新聞發酵"
+        "4月營收年增0%動能未顯現",
+        "缺乏近期產業利多或轉型明確訊號"
       ],
-      "warning": "金融業淨息差收縮風險",
-      "next_check": "2026年5月營收",
+      "warning": "金控整併效益尚未完全發酵",
+      "next_check": "2024年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 100412,
       "is_etf": false
@@ -123,12 +123,12 @@
       "ticker": "6770",
       "name": "力積電",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
         "4月營收持平無顯著成長動能",
-        "缺乏近期產業利多或技術突破消息"
+        "半導體產業需求復甦時程仍不確定"
       ],
-      "warning": "半導體產業需求復甦時程不確定",
+      "warning": "若5月營收續弱可能下修預期",
       "next_check": "2024年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 72970,
@@ -137,13 +137,13 @@
     {
       "ticker": "009820",
       "name": "元大納斯達克精選",
-      "verdict": "建議買進",
-      "confidence": "中",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
       "reasons": [
-        "納斯達克科技股受AI需求帶動表現強勁",
-        "ETF折價幅度收斂反映資金回流跡象"
+        "追蹤納斯達克100指數，科技股AI應用題材受關注",
+        "近期無基本面數據支撐，需觀察美股科技股動能"
       ],
-      "warning": "科技股本益比偏高可能影響上漲空間",
+      "warning": "納指波動性高，易受美聯準會政策影響",
       "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 69979,
@@ -155,12 +155,12 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "月營收資料無法取得",
-        "缺乏近期新聞與產業動能佐證"
+        "4月營收年增0%動能疲弱",
+        "缺乏近期新聞催化基本面不明"
       ],
-      "warning": "營收成長動能與產業需求不明確",
-      "next_check": "一週後",
-      "data_quality": "不足",
+      "warning": "若Q2營收續弱可能拖累股價",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
       "net_buy_lots": 57711,
       "is_etf": false
     },
@@ -168,19 +168,19 @@
       "ticker": "2344",
       "name": "華邦電",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
-        "未被納入MSCI引發短期市場情緒修正",
-        "缺乏近期營收數據支撐基本面判斷"
+        "4月營收年增率持平，缺乏成長動能",
+        "未納入MSCI引發市場情緒性賣壓"
       ],
-      "warning": "未納入MSCI可能影響長期資金配置意願",
-      "next_check": "10月營收公布",
-      "data_quality": "不足",
+      "warning": "半導體產業庫存調整風險尚未解除",
+      "next_check": "2026年5月營收",
+      "data_quality": "有限",
       "net_buy_lots": 40059,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-16 23:14",
+  "ai_analysis_time": "2026-05-17 23:15",
   "insti_signal": {
     "buy": [
       {
@@ -363,51 +363,51 @@
     {
       "stock_id": "2887",
       "stock_name": "台新新光金",
-      "entry_date": "2026-05-16",
+      "entry_date": "2026-05-17",
       "entry_price": 23.8,
       "latest_price": 23.8,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-16",
+      "latest_date": "2026-05-17",
       "days_tracked": 0
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
-      "entry_date": "2026-05-16",
+      "entry_date": "2026-05-17",
       "entry_price": 62.8,
       "latest_price": 62.8,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-16",
+      "latest_date": "2026-05-17",
       "days_tracked": 0
     },
     {
       "stock_id": "009820",
       "stock_name": "元大納斯達克精選",
-      "entry_date": "2026-05-16",
+      "entry_date": "2026-05-17",
       "entry_price": 10.15,
       "latest_price": 10.15,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-16",
+      "latest_date": "2026-05-17",
       "days_tracked": 0
     },
     {
       "stock_id": "2027",
       "stock_name": "大成鋼",
-      "entry_date": "2026-05-16",
+      "entry_date": "2026-05-17",
       "entry_price": 39.85,
       "latest_price": 39.85,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-16",
+      "latest_date": "2026-05-17",
       "days_tracked": 0
     },
     {
       "stock_id": "2344",
       "stock_name": "華邦電",
-      "entry_date": "2026-05-16",
+      "entry_date": "2026-05-17",
       "entry_price": 129.5,
       "latest_price": 129.5,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-16",
+      "latest_date": "2026-05-17",
       "days_tracked": 0
     },
     {
@@ -417,8 +417,8 @@
       "entry_price": 20.7,
       "latest_price": 19.05,
       "latest_pct": -7.97,
-      "latest_date": "2026-05-16",
-      "days_tracked": 3
+      "latest_date": "2026-05-17",
+      "days_tracked": 4
     },
     {
       "stock_id": "2303",
@@ -427,8 +427,8 @@
       "entry_price": 104.5,
       "latest_price": 110.0,
       "latest_pct": 5.26,
-      "latest_date": "2026-05-16",
-      "days_tracked": 3
+      "latest_date": "2026-05-17",
+      "days_tracked": 4
     },
     {
       "stock_id": "009820",
@@ -437,8 +437,8 @@
       "entry_price": 9.99,
       "latest_price": 10.15,
       "latest_pct": 1.6,
-      "latest_date": "2026-05-16",
-      "days_tracked": 3
+      "latest_date": "2026-05-17",
+      "days_tracked": 4
     },
     {
       "stock_id": "2344",
@@ -447,8 +447,8 @@
       "entry_price": 121.5,
       "latest_price": 129.5,
       "latest_pct": 6.58,
-      "latest_date": "2026-05-16",
-      "days_tracked": 3
+      "latest_date": "2026-05-17",
+      "days_tracked": 4
     },
     {
       "stock_id": "00981A",
@@ -457,8 +457,8 @@
       "entry_price": 29.69,
       "latest_price": 28.42,
       "latest_pct": -4.28,
-      "latest_date": "2026-05-16",
-      "days_tracked": 5
+      "latest_date": "2026-05-17",
+      "days_tracked": 6
     },
     {
       "stock_id": "00992A",
@@ -467,8 +467,8 @@
       "entry_price": 18.67,
       "latest_price": 17.42,
       "latest_pct": -6.7,
-      "latest_date": "2026-05-16",
-      "days_tracked": 5
+      "latest_date": "2026-05-17",
+      "days_tracked": 6
     },
     {
       "stock_id": "3481",
@@ -477,8 +477,8 @@
       "entry_price": 36.9,
       "latest_price": 36.1,
       "latest_pct": -2.17,
-      "latest_date": "2026-05-16",
-      "days_tracked": 8
+      "latest_date": "2026-05-17",
+      "days_tracked": 9
     },
     {
       "stock_id": "0056",
@@ -487,8 +487,8 @@
       "entry_price": 45.58,
       "latest_price": 44.45,
       "latest_pct": -2.48,
-      "latest_date": "2026-05-16",
-      "days_tracked": 8
+      "latest_date": "2026-05-17",
+      "days_tracked": 9
     },
     {
       "stock_id": "00919",
@@ -497,8 +497,8 @@
       "entry_price": 25.52,
       "latest_price": 25.76,
       "latest_pct": 0.94,
-      "latest_date": "2026-05-16",
-      "days_tracked": 8
+      "latest_date": "2026-05-17",
+      "days_tracked": 9
     },
     {
       "stock_id": "2887",
@@ -507,8 +507,8 @@
       "entry_price": 24.2,
       "latest_price": 23.8,
       "latest_pct": -1.65,
-      "latest_date": "2026-05-16",
-      "days_tracked": 8
+      "latest_date": "2026-05-17",
+      "days_tracked": 9
     }
   ]
 }
