@@ -512,8 +512,7 @@ def ai_analyze_one(ticker, name, net_buy):
     etf_note = ("ETF，不適用財報分析，根據新聞判斷追蹤標的走勢。"
                 if etf else "一般股票，根據月營收和新聞判斷基本面。")
 
-    etf_label = 'ETF' if etf else '股票'
-    prompt = f"""外資連續兩天買超：{ticker} {name}（{etf_label}）
+    prompt = f"""外資連續兩天買超：{ticker} {name}（{'ETF' if etf else '股票'}）
 合計買超：{net_buy:,} 張
 {etf_note}
 
@@ -727,8 +726,7 @@ def update_watchlist(result_df) -> list:
     1. 載入現有追蹤清單
     2. 加入今日進榜的新股票（若已在清單就跳過）
     3. 更新每筆的當日收盤價和漲跌幅
-    4. 清除超過 TRACK_DAYS 天的紀錄
-    5. 存檔並回傳
+    4. 存檔並回傳（永久保留，前端只顯示10天內）
     """
     today_str = NOW_TPE.strftime("%Y-%m-%d")
     watchlist = load_watchlist()
@@ -781,21 +779,7 @@ def update_watchlist(result_df) -> list:
                 print(f"    {ticker}: {price} 元")
         time.sleep(0.5)
 
-    # 清除超過 TRACK_DAYS 天的紀錄
-    from datetime import datetime as dt
-    cutoff = NOW_TPE.date() - timedelta(days=TRACK_DAYS)
-    kept = []
-    for item in watchlist:
-        entry = item.get("entry_date", "")
-        try:
-            if dt.strptime(entry, "%Y-%m-%d").date() >= cutoff:
-                kept.append(item)
-            else:
-                print(f"  🗑️ 清除過期追蹤：{item['stock_id']} {item['stock_name']} (進榜 {entry})")
-        except Exception:
-            kept.append(item)
-    watchlist = kept
-
+    # 全部保留，不清除（前端只顯示10天內）
     save_watchlist(watchlist)
     print(f"  ✅ 追蹤清單已更新，共 {len(watchlist)} 檔")
     return watchlist
@@ -830,6 +814,8 @@ def _build_watchlist_summary(watchlist: list) -> list:
             "latest_date": latest_date,
             "days_tracked": days,
         })
+    # 只輸出10天內的到 latest.json（完整歷史留在 watchlist.json）
+    summary = [s for s in summary if s["days_tracked"] <= 10]
     summary.sort(key=lambda x: x["entry_date"], reverse=True)
     return summary
 
