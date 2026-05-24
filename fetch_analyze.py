@@ -512,5 +512,416 @@ def ai_analyze_one(ticker, name, net_buy):
     etf_note = ("ETF，不適用財報分析，根據新聞判斷追蹤標的走勢。"
                 if etf else "一般股票，根據月營收和新聞判斷基本面。")
 
-    prompt = f"""外資連續兩天買超：{ticker} {name}（{'ETF' if etf else '股票'}）
+    etf_label = 'ETF' if etf else '股票'
+    prompt = f"""外資連續兩天買超：{ticker} {name}（{etf_label}）
 合計買超：{net_buy:,} 張
+{etf_note}
+
+【月營收】
+{earnings[:500]}
+
+【近期新聞】
+{news}
+
+只輸出純 JSON：
+{{
+  "ticker": "{ticker}",
+  "name": "{name}",
+  "verdict": "建議買進 或 可以買進 或 謹慎觀察 或 不建議",
+  "confidence": "高 或 中高 或 中 或 低",
+  "reasons": ["理由1（50字內）", "理由2（50字內）"],
+  "warning": "最大風險（50字內）或null",
+  "next_check": "下次確認時間點（10字內）",
+  "data_quality": "充足 或 有限 或 不足"
+}}
+
+【reasons 嚴格規則】
+- 絕對禁止說「外資連2日買超」「外資連續買超」「外資大買」「外資持續買超」任何外資買超相關語句
+  因為這個列表裡每支股票都符合這個條件，說了等於廢話
+- 必須根據月營收數字、新聞內容、產業趨勢說具體理由
+- 好的理由範例：「3月營收年增47%動能強」「AI伺服器訂單能見度佳」「毛利率季增改善」「高殖利率吸引存股族」
+- 壞的理由範例（禁止）：「外資連2日大買」「ETF流動性佳」「高股息受資金青睞」（太泛）
+
+【判斷原則】
+ETF → 根據追蹤標的走勢、近期殖利率水準、大盤環境判斷
+股票 → 財報年增顯著 + 新聞正面 → 建議買進；資料不足 → 謹慎觀察
+confidence：資料充足且理由明確→高；有部分資料→中；資料不足→低
+
+"""
+
+    raw_json = call_groq(client, prompt)
+    if not raw_json:
+        return {"ticker": ticker, "name": name, "verdict": "謹慎觀察",
+                "confidence": "低", "reasons": ["AI 回傳解析失敗"],
+                "warning": "請手動查閱", "next_check": "手動確認",
+                "data_quality": "不足", "net_buy_lots": net_buy, "is_etf": etf}
+    try:
+        result = json.loads(raw_json)
+    except Exception as e:
+        return {"ticker": ticker, "name": name, "verdict": "謹慎觀察",
+                "confidence": "低", "reasons": ["JSON 解析失敗"],
+                "warning": str(e)[:40], "next_check": "手動確認",
+                "data_quality": "不足", "net_buy_lots": net_buy, "is_etf": etf}
+    result["net_buy_lots"] = net_buy
+    result["is_etf"] = etf
+    return result
+
+def run_ai_cross_check(result_df):
+    if result_df is None or len(result_df) == 0:
+        return []
+    print("\n" + "=" * 55)
+    print("🤖 AI 交叉確認（MOPS + Google News）")
+    print("=" * 55)
+    analyses = []
+    for _, row in result_df.iterrows():
+        ticker = str(row["stock_id"])
+        name = str(row["stock_name"])
+        net_buy = int(row.get("total_net_buy", 0))
+        print(f"\n  📊 {ticker} {name}（買超 {net_buy:,} 張）")
+        result = ai_analyze_one(ticker, name, net_buy)
+        icon = {"建議買進": "✅", "謹慎觀察": "⚠️", "不建議": "❌"}.get(
+            result.get("verdict", ""), "❓")
+        print(f"    {icon} {result.get('verdict')} "
+              f"（信心：{result.get('confidence')}，資料：{result.get('data_quality')}）")
+        for r in result.get("reasons", []):
+            print(f"       · {r}")
+        analyses.append(result)
+        time.sleep(3)
+    print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
+    return analyses
+
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None, watchlist=None):
+    trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
+    stocks = []
+    for _, r in result_df.iterrows():
+        item = {
+            "stock_id": r["stock_id"],
+            "stock_name": r["stock_name"],
+            "total_net_buy": int(r["total_net_buy"]),
+            "avg_net_buy": float(r["avg_net_buy"]),
+            "per_day": {}
+        }
+        i = 1
+        while f"day{i}_date" in r:
+            item["per_day"][f"day{i}"] = {
+                "date": r[f"day{i}_date"],
+                "rank": int(r[f"day{i}_rank"]),
+                "net_buy_lots": int(r[f"day{i}_net_buy"])
+            }
+            i += 1
+        stocks.append(item)
+    payload = {
+        "mode": "intersection_top10_per_day",
+        "generated_at_utc": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S"),
+        "timezone": "Asia/Taipei",
+        "params": {"days": len(daily_top10_list), "top_n": 10},
+        "trading_dates": trading_dates,
+        "count_intersection": int(len(result_df)),
+        "stocks": stocks,
+        "ai_analysis": ai_analyses or [],
+        "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
+        "insti_signal": three_insti or {},
+        "insti_signal_date": trading_dates[0] if trading_dates else "",
+        "market_insti": market_insti or {},
+        "watchlist_summary": _build_watchlist_summary(watchlist or []),
+    }
+    OUT_LATEST.parent.mkdir(parents=True, exist_ok=True)
+    OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[OK] 寫入 {OUT_LATEST}")
+    last_trade = trading_dates[0].replace('-', '')
+    out_history = OUT_HISTORY_DIR / f"{last_trade}.json"
+    out_history.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[OK] 寫入 {out_history}")
+
+
+# ════════════════════════════════════════════════════════
+# 進榜股票追蹤（10天漲跌幅監控）
+# ════════════════════════════════════════════════════════
+
+OUT_WATCHLIST = Path("data/watchlist.json")
+TRACK_DAYS = 10  # 追蹤天數
+
+
+def get_close_price(ticker: str) -> float | None:
+    """抓當日收盤價，優先用 yfinance，fallback 用 TWSE"""
+    # ── 方法一：yfinance（GH Actions 環境最穩）──
+    try:
+        import yfinance as yf
+        # 先試 .TW（上市），失敗再試 .TWO（上櫃）
+        for suffix in [".TW", ".TWO"]:
+            try:
+                t = yf.Ticker(ticker + suffix)
+                hist = t.history(period="5d")
+                if not hist.empty:
+                    raw = float(hist["Close"].iloc[-1])
+                    if not math.isnan(raw) and raw > 0:
+                        price = round(raw, 2)
+                        print(f"    [yfinance] {ticker}{suffix}: {price}")
+                        return price
+            except Exception:
+                continue
+    except Exception as e:
+        print(f"    [yfinance] {ticker} 失敗：{e}")
+
+    # ── 方法二：TWSE STOCK_DAY（當月資料）──
+    try:
+        yyyymm = NOW_TPE.strftime("%Y%m") + "01"
+        r = SESSION.get(
+            "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY",
+            params={"stockNo": ticker, "date": yyyymm, "response": "json"},
+            timeout=10,
+            headers={"Referer": "https://www.twse.com.tw/"}
+        )
+        d = r.json()
+        rows = d.get("data", [])
+        if rows:
+            price_str = rows[-1][6].replace(",", "")
+            price = float(price_str)
+            if not math.isnan(price) and price > 0:
+                print(f"    [TWSE] {ticker}: {price}")
+                return price
+    except Exception as e:
+        print(f"    [TWSE] {ticker} 失敗：{e}")
+
+    # ── 方法三：TPEx（上櫃股票）──
+    try:
+        roc_date = f"{NOW_TPE.year - 1911}/{NOW_TPE.strftime('%m/%d')}"
+        r = SESSION.get(
+            "https://www.tpex.org.tw/web/stock/aftertrading/daily_close_quotes/stk_quote_result.php",
+            params={"l": "zh-tw", "d": roc_date, "se": "AL", "s": "0,asc",
+                    "o": "json", "q": ticker},
+            timeout=10
+        )
+        d = r.json()
+        rows = d.get("aaData", [])
+        if rows:
+            price = float(rows[0][2].replace(",", ""))
+            print(f"    [TPEx] {ticker}: {price}")
+            return price
+    except Exception as e:
+        print(f"    [TPEx] {ticker} 失敗：{e}")
+
+    print(f"    ⚠️ {ticker} 所有方法均失敗")
+    return None
+
+
+def load_watchlist() -> list:
+    """載入追蹤清單"""
+    if OUT_WATCHLIST.exists():
+        try:
+            return json.loads(OUT_WATCHLIST.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return []
+
+
+def save_watchlist(items: list):
+    OUT_WATCHLIST.parent.mkdir(parents=True, exist_ok=True)
+    OUT_WATCHLIST.write_text(
+        json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def update_watchlist(result_df) -> list:
+    """
+    1. 載入現有追蹤清單
+    2. 加入今日進榜的新股票（若已在清單就跳過）
+    3. 更新每筆的當日收盤價和漲跌幅
+    4. 清除超過 TRACK_DAYS 天的紀錄
+    5. 存檔並回傳
+    """
+    today_str = NOW_TPE.strftime("%Y-%m-%d")
+    watchlist = load_watchlist()
+
+    # 今日進榜的股票
+    new_stocks = []
+    if result_df is not None and len(result_df) > 0:
+        for _, row in result_df.iterrows():
+            new_stocks.append({
+                "stock_id":   str(row["stock_id"]),
+                "stock_name": str(row["stock_name"]).strip(),
+            })
+
+    # 加入新進榜股票（用 stock_id + entry_date 作唯一鍵，同股票不同進榜日都保留）
+    existing_keys = {(w["stock_id"], w["entry_date"]) for w in watchlist}
+    for s in new_stocks:
+        key = (s["stock_id"], today_str)
+        if key not in existing_keys:
+            print(f"  📌 新增追蹤：{s['stock_id']} {s['stock_name']} ({today_str})")
+            watchlist.append({
+                "stock_id":     s["stock_id"],
+                "stock_name":   s["stock_name"],
+                "entry_date":   today_str,
+                "entry_price":  None,
+                "prices":       {},
+                "pct_changes":  {},
+            })
+
+    # 更新收盤價
+    print(f"\n  📈 更新追蹤清單收盤價（共 {len(watchlist)} 檔）...")
+    for item in watchlist:
+        ticker = item["stock_id"]
+        if today_str in item.get("prices", {}):
+            continue  # 今天已更新過
+        price = get_close_price(ticker)
+        if price:
+            item.setdefault("prices", {})[today_str] = price
+            if item.get("entry_price") is None:
+                item["entry_price"] = price
+            # 計算漲跌幅
+            entry = item["entry_price"]
+            if entry and entry > 0:
+                pct = round((price - entry) / entry * 100, 2)
+                if not math.isnan(pct):
+                    item.setdefault("pct_changes", {})[today_str] = pct
+            pct_val = item.get("pct_changes", {}).get(today_str)
+            if isinstance(pct_val, float):
+                print(f"    {ticker} {item['stock_name']}: {price} 元 ({pct_val:+.2f}%)")
+            else:
+                print(f"    {ticker}: {price} 元")
+        time.sleep(0.5)
+
+    # 清除超過 TRACK_DAYS 天的紀錄
+    from datetime import datetime as dt
+    cutoff = NOW_TPE.date() - timedelta(days=TRACK_DAYS)
+    kept = []
+    for item in watchlist:
+        entry = item.get("entry_date", "")
+        try:
+            if dt.strptime(entry, "%Y-%m-%d").date() >= cutoff:
+                kept.append(item)
+            else:
+                print(f"  🗑️ 清除過期追蹤：{item['stock_id']} {item['stock_name']} (進榜 {entry})")
+        except Exception:
+            kept.append(item)
+    watchlist = kept
+
+    save_watchlist(watchlist)
+    print(f"  ✅ 追蹤清單已更新，共 {len(watchlist)} 檔")
+    return watchlist
+
+
+def _build_watchlist_summary(watchlist: list) -> list:
+    """從完整 watchlist 建立摘要寫入 latest.json"""
+    from datetime import datetime as dt
+    today = NOW_TPE.date()
+    summary = []
+    for item in watchlist:
+        pcts   = item.get("pct_changes", {})
+        prices = item.get("prices", {})
+        sorted_dates = sorted(pcts.keys())
+        if not sorted_dates:
+            continue
+        latest_date  = sorted_dates[-1]
+        latest_pct   = pcts[latest_date]
+        latest_price = prices.get(latest_date)
+        try:
+            entry_dt = dt.strptime(item["entry_date"], "%Y-%m-%d").date()
+            days = (today - entry_dt).days
+        except Exception:
+            days = 0
+        summary.append({
+            "stock_id":    item["stock_id"],
+            "stock_name":  item["stock_name"],
+            "entry_date":  item["entry_date"],
+            "entry_price": item.get("entry_price"),
+            "latest_price": latest_price,
+            "latest_pct":  latest_pct,
+            "latest_date": latest_date,
+            "days_tracked": days,
+        })
+    summary.sort(key=lambda x: x["entry_date"], reverse=True)
+    return summary
+
+if __name__ == "__main__":
+    days = int(os.getenv("DAYS", "2"))
+    result_data = get_consecutive_top10(days=days)
+
+    if result_data is not None:
+        result, daily_top10_list = result_data
+        print("=" * 70)
+        print(f"🎉 連續 {days} 天都在外資買超前10名的個股 (交集)")
+        print("=" * 70)
+
+        if result is not None and len(result) > 0:
+            display = pd.DataFrame()
+            display['代號'] = result['stock_id']
+            display['股票名稱'] = result['stock_name']
+            display['第1天日期'] = result['day1_date']
+            display['第1天排名'] = result['day1_rank'].astype(int)
+            display['第1天買超(張)'] = result['day1_net_buy'].astype(int)
+            display['第2天日期'] = result.get('day2_date', pd.NA)
+            display['第2天排名'] = result.get('day2_rank', pd.NA)
+            display['第2天買超(張)'] = result.get('day2_net_buy', pd.NA)
+            display['合計買超(張)'] = result['total_net_buy'].astype(int)
+            display['排名變化'] = display.apply(
+                lambda row: (
+                    "→" if pd.isna(row['第2天排名']) else
+                    (f"↑{abs(int(row['第2天排名']) - int(row['第1天排名']))}"
+                     if int(row['第2天排名']) < int(row['第1天排名'])
+                     else (f"↓{int(row['第2天排名']) - int(row['第1天排名'])}"
+                           if int(row['第2天排名']) > int(row['第1天排名']) else "→"))
+                ), axis=1
+            )
+            pd.set_option('display.unicode.east_asian_width', True)
+            pd.set_option('display.max_columns', None)
+            pd.set_option('display.width', 180)
+            print("\n" + display.to_string())
+            timestamp = NOW_TPE.strftime('%Y%m%d_%H%M')
+            csv_path = OUT_EXPORT_DIR / f'外資連續前10名交集_{timestamp}.csv'
+            result.to_csv(csv_path, index=False, encoding='utf-8-sig')
+            print(f"\n💾 CSV: {csv_path}")
+            print(f"✅ 連續進榜: {len(result)} 檔")
+            print(f"📊 總買超: {int(display['合計買超(張)'].sum()):,} 張")
+            common_ids = set(result['stock_id'])
+            for i, daily_data in enumerate(daily_top10_list, 1):
+                date = daily_data.iloc[0]['rank_date']
+                print(f"\n【第 {i} 天】{date}")
+                print("-" * 70)
+                for rank, (_, row) in enumerate(daily_data.iterrows(), 1):
+                    is_common = "⭐" if row['stock_id'] in common_ids else "  "
+                    print(f"   {is_common} {rank:2d}. {row['stock_name']:8s} "
+                          f"({row['stock_id']}) - 買超 {row['淨買超_張']:>8,} 張")
+        else:
+            print("❌ 沒有個股連續兩天都在前10名")
+
+        ai_analyses = run_ai_cross_check(
+            result if result is not None else pd.DataFrame()
+        )
+
+        # ── 三大法人同時買超 ──
+        latest_date = daily_top10_list[0].iloc[0]["rank_date"].replace("-", "") if daily_top10_list else ""
+        three_insti = {}
+        market_insti = {}
+        if latest_date:
+            three_insti  = get_insti_signal(str(latest_date), top_n=10)
+            frames = three_insti.pop("_frames", [])
+            market_insti = get_market_insti_amount(str(latest_date), frames)
+
+        # ── 追蹤清單更新 ──
+        watchlist = update_watchlist(result if result is not None else pd.DataFrame())
+
+        write_json_payload(
+            result if result is not None else pd.DataFrame(),
+            daily_top10_list,
+            ai_analyses,
+            three_insti,
+            market_insti,
+            watchlist,
+        )
+    else:
+        print("❌ 分析失敗")
+        print("\n  ⏳ 更新追蹤清單（無交易資料）...")
+        try:
+            watchlist = update_watchlist(pd.DataFrame())
+            if OUT_LATEST.exists():
+                old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
+                old_payload["watchlist_summary"] = _build_watchlist_summary(watchlist)
+                old_payload.pop("watchlist", None)
+                OUT_LATEST.write_text(
+                    json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+                print("  ✅ latest.json watchlist_summary 已更新")
+        except Exception as e:
+            print(f"  ⚠️ 追蹤清單更新失敗：{e}")
+
+    print("\n✨ 查詢完成!")
