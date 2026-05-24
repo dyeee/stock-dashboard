@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-22 16:37:46",
+  "generated_at_utc": "2026-05-24 07:27:31",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -74,11 +74,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "面板產業需求回暖跡象初現",
-        "法人看好後市買單掛高量"
+        "布局矽光子技術具未來成長性",
+        "面板產業需求復甦能見度待確認"
       ],
-      "warning": "4月營收年增率掛零缺乏成長動能",
-      "next_check": "2026年5月營收",
+      "warning": "矽光子業務尚未貢獻顯著營收",
+      "next_check": "2026Q2財報",
       "data_quality": "有限",
       "net_buy_lots": 185223,
       "is_etf": false
@@ -89,11 +89,11 @@
       "verdict": "建議買進",
       "confidence": "中",
       "reasons": [
-        "高股息殖利率具長期資金配置價值",
-        "台股低本益比環境有利被動式投資"
+        "高殖利率吸引長期資金配置",
+        "市場資金避險偏好推升股息ETF需求"
       ],
-      "warning": "台股波動可能影響ETF淨值表現",
-      "next_check": "下個月15日",
+      "warning": "市場波動可能影響ETF流動性",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 81498,
       "is_etf": true
@@ -102,19 +102,19 @@
       "ticker": "3231",
       "name": "緯創",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "4月營收持平無顯著成長動能",
-        "缺乏近期產業利多或訂單能見度"
+        "4月營收年增0%顯示動能疲弱",
+        "缺乏近期新聞支撐基本面改善"
       ],
-      "warning": "營收持續無法突破可能影響後市",
+      "warning": "營收無法突破前高存在壓力",
       "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 60583,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-23 00:36",
+  "ai_analysis_time": "2026-05-24 15:26",
   "insti_signal": {
     "buy": [
       {
@@ -297,72 +297,32 @@
     {
       "stock_id": "2409",
       "stock_name": "友達",
-      "entry_date": "2026-05-23",
+      "entry_date": "2026-05-24",
       "entry_price": 22.2,
       "latest_price": 22.2,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-23",
+      "latest_date": "2026-05-24",
       "days_tracked": 0
     },
     {
       "stock_id": "00878",
       "stock_name": "國泰永續高股息",
-      "entry_date": "2026-05-23",
+      "entry_date": "2026-05-24",
       "entry_price": 28.27,
       "latest_price": 28.27,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-23",
+      "latest_date": "2026-05-24",
       "days_tracked": 0
     },
     {
       "stock_id": "3231",
       "stock_name": "緯創",
-      "entry_date": "2026-05-23",
+      "entry_date": "2026-05-24",
       "entry_price": 144.5,
       "latest_price": 144.5,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-23",
+      "latest_date": "2026-05-24",
       "days_tracked": 0
-    },
-    {
-      "stock_id": "2409",
-      "stock_name": "友達",
-      "entry_date": "2026-05-13",
-      "entry_price": 20.7,
-      "latest_price": 22.2,
-      "latest_pct": 7.25,
-      "latest_date": "2026-05-23",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2303",
-      "stock_name": "聯電",
-      "entry_date": "2026-05-13",
-      "entry_price": 104.5,
-      "latest_price": 114.0,
-      "latest_pct": 9.09,
-      "latest_date": "2026-05-23",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "009820",
-      "stock_name": "元大納斯達克精選",
-      "entry_date": "2026-05-13",
-      "entry_price": 9.99,
-      "latest_price": 10.22,
-      "latest_pct": 2.3,
-      "latest_date": "2026-05-23",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2344",
-      "stock_name": "華邦電",
-      "entry_date": "2026-05-13",
-      "entry_price": 121.5,
-      "latest_price": 125.0,
-      "latest_pct": 2.88,
-      "latest_date": "2026-05-23",
-      "days_tracked": 10
     }
   ]
 }
