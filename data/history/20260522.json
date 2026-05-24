@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-24 07:27:31",
+  "generated_at_utc": "2026-05-24 07:46:00",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -74,11 +74,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "布局矽光子技術具未來成長性",
-        "面板產業需求復甦能見度待確認"
+        "矽光子布局具長期技術優勢",
+        "面板產業復甦能見度待確認"
       ],
-      "warning": "矽光子業務尚未貢獻顯著營收",
-      "next_check": "2026Q2財報",
+      "warning": "新事業占比過低難支撐股價",
+      "next_check": "2024Q3法說會",
       "data_quality": "有限",
       "net_buy_lots": 185223,
       "is_etf": false
@@ -86,14 +86,14 @@
     {
       "ticker": "00878",
       "name": "國泰永續高股息",
-      "verdict": "建議買進",
+      "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "高殖利率吸引長期資金配置",
-        "市場資金避險偏好推升股息ETF需求"
+        "高股息策略在低利環境具防守性優勢",
+        "資金避險需求可能推升穩定收益資產"
       ],
-      "warning": "市場波動可能影響ETF流動性",
-      "next_check": "一周後",
+      "warning": "利率上揚可能壓縮高股息標的評價",
+      "next_check": "2024/06",
       "data_quality": "有限",
       "net_buy_lots": 81498,
       "is_etf": true
@@ -104,17 +104,17 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "4月營收年增0%顯示動能疲弱",
-        "缺乏近期新聞支撐基本面改善"
+        "4月營收持平無顯著成長動能",
+        "產業需求未見明確回升跡象"
       ],
-      "warning": "營收無法突破前高存在壓力",
-      "next_check": "2026年5月營收",
+      "warning": "電子代工產業價格競爭壓力未減",
+      "next_check": "2024年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 60583,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-24 15:26",
+  "ai_analysis_time": "2026-05-24 15:44",
   "insti_signal": {
     "buy": [
       {
