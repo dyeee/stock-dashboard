@@ -293,36 +293,5 @@
     "foreign_sell": 3961.96,
     "foreign_net": 761.37
   },
-  "watchlist_summary": [
-    {
-      "stock_id": "2409",
-      "stock_name": "友達",
-      "entry_date": "2026-05-24",
-      "entry_price": 22.2,
-      "latest_price": 22.2,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
-      "days_tracked": 0
-    },
-    {
-      "stock_id": "00878",
-      "stock_name": "國泰永續高股息",
-      "entry_date": "2026-05-24",
-      "entry_price": 28.27,
-      "latest_price": 28.27,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
-      "days_tracked": 0
-    },
-    {
-      "stock_id": "3231",
-      "stock_name": "緯創",
-      "entry_date": "2026-05-24",
-      "entry_price": 144.5,
-      "latest_price": 144.5,
-      "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
-      "days_tracked": 0
-    }
-  ]
+  "watchlist_summary": []
 }
