@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-24 07:46:00",
+  "generated_at_utc": "2026-05-24 17:07:26",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -74,11 +74,11 @@
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
-        "矽光子布局具長期技術優勢",
-        "面板產業復甦能見度待確認"
+        "面板產業需求恢復跡象明顯",
+        "分析師對後市看法樂觀"
       ],
-      "warning": "新事業占比過低難支撐股價",
-      "next_check": "2024Q3法說會",
+      "warning": "營收年增率持平缺乏成長動能",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 185223,
       "is_etf": false
@@ -86,14 +86,14 @@
     {
       "ticker": "00878",
       "name": "國泰永續高股息",
-      "verdict": "謹慎觀察",
+      "verdict": "可以買進",
       "confidence": "中",
       "reasons": [
-        "高股息策略在低利環境具防守性優勢",
-        "資金避險需求可能推升穩定收益資產"
+        "高股息殖利率達4.5%具吸引力",
+        "台股高股息族群長期抗跌特性"
       ],
-      "warning": "利率上揚可能壓縮高股息標的評價",
-      "next_check": "2024/06",
+      "warning": "市場資金轉向科技股可能衝擊",
+      "next_check": "一周後",
       "data_quality": "有限",
       "net_buy_lots": 81498,
       "is_etf": true
@@ -102,19 +102,19 @@
       "ticker": "3231",
       "name": "緯創",
       "verdict": "謹慎觀察",
-      "confidence": "低",
+      "confidence": "中",
       "reasons": [
         "4月營收持平無顯著成長動能",
-        "產業需求未見明確回升跡象"
+        "缺乏近期產業利多或訂單能見度"
       ],
-      "warning": "電子代工產業價格競爭壓力未減",
-      "next_check": "2024年5月營收",
+      "warning": "營收年增率持續低於5%",
+      "next_check": "2026年5月營收",
       "data_quality": "有限",
       "net_buy_lots": 60583,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-05-24 15:44",
+  "ai_analysis_time": "2026-05-25 01:06",
   "insti_signal": {
     "buy": [
       {
@@ -297,31 +297,31 @@
     {
       "stock_id": "2409",
       "stock_name": "友達",
-      "entry_date": "2026-05-24",
+      "entry_date": "2026-05-25",
       "entry_price": 22.2,
       "latest_price": 22.2,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
+      "latest_date": "2026-05-25",
       "days_tracked": 0
     },
     {
       "stock_id": "00878",
       "stock_name": "國泰永續高股息",
-      "entry_date": "2026-05-24",
+      "entry_date": "2026-05-25",
       "entry_price": 28.27,
       "latest_price": 28.27,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
+      "latest_date": "2026-05-25",
       "days_tracked": 0
     },
     {
       "stock_id": "3231",
       "stock_name": "緯創",
-      "entry_date": "2026-05-24",
+      "entry_date": "2026-05-25",
       "entry_price": 144.5,
       "latest_price": 144.5,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-24",
+      "latest_date": "2026-05-25",
       "days_tracked": 0
     }
   ]

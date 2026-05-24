@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "stock_id": "2409",
+    "stock_name": "友達",
+    "entry_date": "2026-05-25",
+    "entry_price": 22.2,
+    "prices": {
+      "2026-05-25": 22.2
+    },
+    "pct_changes": {
+      "2026-05-25": 0.0
+    }
+  },
+  {
+    "stock_id": "00878",
+    "stock_name": "國泰永續高股息",
+    "entry_date": "2026-05-25",
+    "entry_price": 28.27,
+    "prices": {
+      "2026-05-25": 28.27
+    },
+    "pct_changes": {
+      "2026-05-25": 0.0
+    }
+  },
+  {
+    "stock_id": "3231",
+    "stock_name": "緯創",
+    "entry_date": "2026-05-25",
+    "entry_price": 144.5,
+    "prices": {
+      "2026-05-25": 144.5
+    },
+    "pct_changes": {
+      "2026-05-25": 0.0
+    }
+  }
+]
