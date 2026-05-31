@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-05-30 15:35:51",
+  "generated_at_utc": "2026-05-31 15:40:40",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -10,111 +10,10 @@
     "2026-05-29",
     "2026-05-28"
   ],
-  "count_intersection": 3,
-  "stocks": [
-    {
-      "stock_id": "2324",
-      "stock_name": "仁寶            ",
-      "total_net_buy": 96629,
-      "avg_net_buy": 48314.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-05-29",
-          "rank": 4,
-          "net_buy_lots": 77122
-        },
-        "day2": {
-          "date": "2026-05-28",
-          "rank": 7,
-          "net_buy_lots": 19507
-        }
-      }
-    },
-    {
-      "stock_id": "2317",
-      "stock_name": "鴻海            ",
-      "total_net_buy": 93205,
-      "avg_net_buy": 46602.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-05-29",
-          "rank": 3,
-          "net_buy_lots": 80339
-        },
-        "day2": {
-          "date": "2026-05-28",
-          "rank": 10,
-          "net_buy_lots": 12866
-        }
-      }
-    },
-    {
-      "stock_id": "1402",
-      "stock_name": "遠東新          ",
-      "total_net_buy": 56579,
-      "avg_net_buy": 28289.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-05-29",
-          "rank": 8,
-          "net_buy_lots": 37671
-        },
-        "day2": {
-          "date": "2026-05-28",
-          "rank": 8,
-          "net_buy_lots": 18908
-        }
-      }
-    }
-  ],
-  "ai_analysis": [
-    {
-      "ticker": "2324",
-      "name": "仁寶",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "4月營收持平於2,024億元，動能尚未顯現",
-        "AI伺服器需求能見度仍待觀察"
-      ],
-      "warning": "量子概念股熱潮退燒可能影響市場情緒",
-      "next_check": "2024/05營收",
-      "data_quality": "有限",
-      "net_buy_lots": 96629,
-      "is_etf": false
-    },
-    {
-      "ticker": "2317",
-      "name": "鴻海",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "AI伺服器與超級電腦供應鏈能見度提升",
-        "高股利殖利率7.2元具資金吸引力"
-      ],
-      "warning": "4月營收年增0%顯示現階段動能未顯現",
-      "next_check": "2026Q3法說會",
-      "data_quality": "有限",
-      "net_buy_lots": 93205,
-      "is_etf": false
-    },
-    {
-      "ticker": "1402",
-      "name": "遠東新",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "4月營收持平無顯著成長動能",
-        "缺乏近期產業利多或新聞催化"
-      ],
-      "warning": "營收無法突破可能影響後市表現",
-      "next_check": "2026年5月營收",
-      "data_quality": "有限",
-      "net_buy_lots": 56579,
-      "is_etf": false
-    }
-  ],
-  "ai_analysis_time": "2026-05-30 23:34",
+  "count_intersection": 0,
+  "stocks": [],
+  "ai_analysis": [],
+  "ai_analysis_time": "",
   "insti_signal": {
     "buy": [
       {
@@ -256,14 +155,6 @@
         "date": "20260529"
       },
       {
-        "stock_id": "2633",
-        "stock_name": "台灣高鐵",
-        "foreign_net": -4598,
-        "trust_net": -45,
-        "ft_net": -4643,
-        "date": "20260529"
-      },
-      {
         "stock_id": "2441",
         "stock_name": "超豐",
         "foreign_net": -4357,
@@ -278,6 +169,14 @@
         "trust_net": -135,
         "ft_net": -4179,
         "date": "20260529"
+      },
+      {
+        "stock_id": "6257",
+        "stock_name": "矽格",
+        "foreign_net": -3609,
+        "trust_net": -198,
+        "ft_net": -3807,
+        "date": "20260529"
       }
     ],
     "date": "20260529"
@@ -285,13 +184,13 @@
   "insti_signal_date": "2026-05-29",
   "market_insti": {
     "date": "20260529",
-    "unit": "億元",
-    "trust_buy": 463.4,
-    "trust_sell": 393.22,
-    "trust_net": 70.18,
-    "foreign_buy": 10008.66,
-    "foreign_sell": 9207.2,
-    "foreign_net": 801.45
+    "unit": "張",
+    "foreign_buy": 1464751,
+    "foreign_sell": -645729,
+    "foreign_net": 819022,
+    "trust_buy": 292296,
+    "trust_sell": -186920,
+    "trust_net": 105376
   },
   "watchlist_summary": [
     {
@@ -301,8 +200,8 @@
       "entry_price": 36.7,
       "latest_price": 36.7,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-30",
-      "days_tracked": 0
+      "latest_date": "2026-05-31",
+      "days_tracked": 1
     },
     {
       "stock_id": "2317",
@@ -311,8 +210,8 @@
       "entry_price": 289.0,
       "latest_price": 289.0,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-30",
-      "days_tracked": 0
+      "latest_date": "2026-05-31",
+      "days_tracked": 1
     },
     {
       "stock_id": "1402",
@@ -321,8 +220,8 @@
       "entry_price": 25.65,
       "latest_price": 25.65,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-30",
-      "days_tracked": 0
+      "latest_date": "2026-05-31",
+      "days_tracked": 1
     },
     {
       "stock_id": "6770",
@@ -331,8 +230,8 @@
       "entry_price": 80.7,
       "latest_price": 88.7,
       "latest_pct": 9.91,
-      "latest_date": "2026-05-30",
-      "days_tracked": 1
+      "latest_date": "2026-05-31",
+      "days_tracked": 2
     },
     {
       "stock_id": "2881",
@@ -341,8 +240,8 @@
       "entry_price": 110.0,
       "latest_price": 110.0,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-30",
-      "days_tracked": 1
+      "latest_date": "2026-05-31",
+      "days_tracked": 2
     },
     {
       "stock_id": "2882",
@@ -351,8 +250,8 @@
       "entry_price": 84.8,
       "latest_price": 85.7,
       "latest_pct": 1.06,
-      "latest_date": "2026-05-30",
-      "days_tracked": 1
+      "latest_date": "2026-05-31",
+      "days_tracked": 2
     },
     {
       "stock_id": "00403A",
@@ -361,8 +260,8 @@
       "entry_price": 10.78,
       "latest_price": 10.7,
       "latest_pct": -0.74,
-      "latest_date": "2026-05-30",
-      "days_tracked": 2
+      "latest_date": "2026-05-31",
+      "days_tracked": 3
     },
     {
       "stock_id": "6770",
@@ -371,8 +270,8 @@
       "entry_price": 74.8,
       "latest_price": 88.7,
       "latest_pct": 18.58,
-      "latest_date": "2026-05-30",
-      "days_tracked": 2
+      "latest_date": "2026-05-31",
+      "days_tracked": 3
     },
     {
       "stock_id": "2881",
@@ -381,8 +280,8 @@
       "entry_price": 110.0,
       "latest_price": 110.0,
       "latest_pct": 0.0,
-      "latest_date": "2026-05-30",
-      "days_tracked": 2
+      "latest_date": "2026-05-31",
+      "days_tracked": 3
     },
     {
       "stock_id": "1303",
@@ -391,8 +290,8 @@
       "entry_price": 95.5,
       "latest_price": 98.1,
       "latest_pct": 2.72,
-      "latest_date": "2026-05-30",
-      "days_tracked": 2
+      "latest_date": "2026-05-31",
+      "days_tracked": 3
     },
     {
       "stock_id": "2882",
@@ -401,8 +300,8 @@
       "entry_price": 85.4,
       "latest_price": 85.7,
       "latest_pct": 0.35,
-      "latest_date": "2026-05-30",
-      "days_tracked": 2
+      "latest_date": "2026-05-31",
+      "days_tracked": 3
     },
     {
       "stock_id": "00403A",
@@ -411,8 +310,8 @@
       "entry_price": 10.64,
       "latest_price": 10.7,
       "latest_pct": 0.56,
-      "latest_date": "2026-05-30",
-      "days_tracked": 3
+      "latest_date": "2026-05-31",
+      "days_tracked": 4
     },
     {
       "stock_id": "6770",
@@ -421,8 +320,8 @@
       "entry_price": 70.8,
       "latest_price": 88.7,
       "latest_pct": 25.28,
-      "latest_date": "2026-05-30",
-      "days_tracked": 3
+      "latest_date": "2026-05-31",
+      "days_tracked": 4
     },
     {
       "stock_id": "2303",
@@ -431,8 +330,8 @@
       "entry_price": 130.5,
       "latest_price": 144.5,
       "latest_pct": 10.73,
-      "latest_date": "2026-05-30",
-      "days_tracked": 3
+      "latest_date": "2026-05-31",
+      "days_tracked": 4
     },
     {
       "stock_id": "2344",
@@ -441,8 +340,8 @@
       "entry_price": 141.0,
       "latest_price": 158.0,
       "latest_pct": 12.06,
-      "latest_date": "2026-05-30",
-      "days_tracked": 3
+      "latest_date": "2026-05-31",
+      "days_tracked": 4
     },
     {
       "stock_id": "00403A",
@@ -451,8 +350,8 @@
       "entry_price": 10.58,
       "latest_price": 10.7,
       "latest_pct": 1.13,
-      "latest_date": "2026-05-30",
-      "days_tracked": 4
+      "latest_date": "2026-05-31",
+      "days_tracked": 5
     },
     {
       "stock_id": "6770",
@@ -461,8 +360,8 @@
       "entry_price": 67.6,
       "latest_price": 88.7,
       "latest_pct": 31.21,
-      "latest_date": "2026-05-30",
-      "days_tracked": 4
+      "latest_date": "2026-05-31",
+      "days_tracked": 5
     },
     {
       "stock_id": "2344",
@@ -471,8 +370,8 @@
       "entry_price": 128.5,
       "latest_price": 158.0,
       "latest_pct": 22.96,
-      "latest_date": "2026-05-30",
-      "days_tracked": 4
+      "latest_date": "2026-05-31",
+      "days_tracked": 5
     },
     {
       "stock_id": "00878",
@@ -481,8 +380,8 @@
       "entry_price": 29.48,
       "latest_price": 30.76,
       "latest_pct": 4.34,
-      "latest_date": "2026-05-30",
-      "days_tracked": 4
+      "latest_date": "2026-05-31",
+      "days_tracked": 5
     },
     {
       "stock_id": "1802",
@@ -491,8 +390,8 @@
       "entry_price": 73.9,
       "latest_price": 71.9,
       "latest_pct": -2.71,
-      "latest_date": "2026-05-30",
-      "days_tracked": 4
+      "latest_date": "2026-05-31",
+      "days_tracked": 5
     },
     {
       "stock_id": "2409",
@@ -501,8 +400,8 @@
       "entry_price": 22.2,
       "latest_price": 23.0,
       "latest_pct": 3.6,
-      "latest_date": "2026-05-30",
-      "days_tracked": 5
+      "latest_date": "2026-05-31",
+      "days_tracked": 6
     },
     {
       "stock_id": "00878",
@@ -511,8 +410,8 @@
       "entry_price": 28.27,
       "latest_price": 30.76,
       "latest_pct": 8.81,
-      "latest_date": "2026-05-30",
-      "days_tracked": 5
+      "latest_date": "2026-05-31",
+      "days_tracked": 6
     },
     {
       "stock_id": "3231",
@@ -521,8 +420,8 @@
       "entry_price": 144.5,
       "latest_price": 158.5,
       "latest_pct": 9.69,
-      "latest_date": "2026-05-30",
-      "days_tracked": 5
+      "latest_date": "2026-05-31",
+      "days_tracked": 6
     }
   ]
 }
