@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-06-05 16:40:41",
+  "generated_at_utc": "2026-06-06 15:39:25",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -72,14 +72,14 @@
       "ticker": "2303",
       "name": "聯電",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "5月營收創三年半新高，年增17.78%顯示AI伺服器需求動能",
-        "技術面突破壓力位後外資回補倉位，資金流向具反轉跡象"
+        "月營收資料無法取得，動能評估受限",
+        "被踢出成分股指數後技術面走弱"
       ],
-      "warning": "遭ETF踢出成分股可能影響中長期資金配置",
-      "next_check": "2024/06月營收",
-      "data_quality": "有限",
+      "warning": "成分股調整效應尚未消化",
+      "next_check": "2026年6月營收",
+      "data_quality": "不足",
       "net_buy_lots": 229078,
       "is_etf": false
     },
@@ -87,14 +87,14 @@
       "ticker": "2609",
       "name": "陽明",
       "verdict": "謹慎觀察",
-      "confidence": "中",
+      "confidence": "低",
       "reasons": [
-        "5月營收持平無成長動能",
-        "產業需求未見顯著改善跡象"
+        "月營收資料無法取得無法評估動能",
+        "無近期新聞無法判斷產業脈動"
       ],
-      "warning": "營收持續無法突破現有水準",
-      "next_check": "2026年6月營收",
-      "data_quality": "有限",
+      "warning": "缺乏基本面數據無法評估風險",
+      "next_check": "一周後",
+      "data_quality": "不足",
       "net_buy_lots": 60821,
       "is_etf": false
     },
@@ -104,182 +104,20 @@
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "5月營收年增0%動能疲軟",
-        "缺乏近期新聞支撐基本面"
+        "缺乏2026年5月營收數據無法評估業績動能",
+        "無近期新聞提供基本面正向或負面線索"
       ],
-      "warning": "金融股易受利率波動影響",
-      "next_check": "2024年6月營收",
-      "data_quality": "有限",
+      "warning": "最大風險為缺乏最新營收數據與正面新聞支撐",
+      "next_check": "2026年6月30日",
+      "data_quality": "不足",
       "net_buy_lots": 35850,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-06-06 00:37",
+  "ai_analysis_time": "2026-06-06 23:38",
   "insti_signal": {
-    "buy": [
-      {
-        "stock_id": "2887",
-        "stock_name": "台新新光金",
-        "foreign_net": 15793,
-        "trust_net": 15676,
-        "ft_net": 31469,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "6770",
-        "stock_name": "力積電",
-        "foreign_net": 13159,
-        "trust_net": 18,
-        "ft_net": 13177,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "3481",
-        "stock_name": "群創",
-        "foreign_net": 12947,
-        "trust_net": 10,
-        "ft_net": 12957,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2353",
-        "stock_name": "宏碁",
-        "foreign_net": 7798,
-        "trust_net": 2060,
-        "ft_net": 9858,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2890",
-        "stock_name": "永豐金",
-        "foreign_net": 9107,
-        "trust_net": 399,
-        "ft_net": 9506,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2002",
-        "stock_name": "中鋼",
-        "foreign_net": 5924,
-        "trust_net": 282,
-        "ft_net": 6206,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2637",
-        "stock_name": "慧洋-KY",
-        "foreign_net": 5606,
-        "trust_net": 150,
-        "ft_net": 5756,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "3231",
-        "stock_name": "緯創",
-        "foreign_net": 4080,
-        "trust_net": 138,
-        "ft_net": 4218,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "1303",
-        "stock_name": "南亞",
-        "foreign_net": 3182,
-        "trust_net": 986,
-        "ft_net": 4168,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "9933",
-        "stock_name": "中鼎",
-        "foreign_net": 3080,
-        "trust_net": 56,
-        "ft_net": 3136,
-        "date": "20260605"
-      }
-    ],
-    "sell": [
-      {
-        "stock_id": "00981A",
-        "stock_name": "主動統一台股增長",
-        "foreign_net": -76728,
-        "trust_net": -5750,
-        "ft_net": -82478,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2344",
-        "stock_name": "華邦電",
-        "foreign_net": -33721,
-        "trust_net": -9514,
-        "ft_net": -43235,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "00988A",
-        "stock_name": "主動統一全球創新",
-        "foreign_net": -17431,
-        "trust_net": -9233,
-        "ft_net": -26664,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2891",
-        "stock_name": "中信金",
-        "foreign_net": -13432,
-        "trust_net": -6756,
-        "ft_net": -20188,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2880",
-        "stock_name": "華南金",
-        "foreign_net": -15823,
-        "trust_net": -3558,
-        "ft_net": -19381,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2618",
-        "stock_name": "長榮航",
-        "foreign_net": -12124,
-        "trust_net": -3070,
-        "ft_net": -15194,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2408",
-        "stock_name": "南亞科",
-        "foreign_net": -11331,
-        "trust_net": -332,
-        "ft_net": -11663,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "8112",
-        "stock_name": "至上",
-        "foreign_net": -10566,
-        "trust_net": -625,
-        "ft_net": -11191,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "1802",
-        "stock_name": "台玻",
-        "foreign_net": -8981,
-        "trust_net": -3,
-        "ft_net": -8984,
-        "date": "20260605"
-      },
-      {
-        "stock_id": "2449",
-        "stock_name": "京元電子",
-        "foreign_net": -6619,
-        "trust_net": -412,
-        "ft_net": -7031,
-        "date": "20260605"
-      }
-    ],
+    "buy": [],
+    "sell": [],
     "date": "20260605"
   },
   "insti_signal_date": "2026-06-05",
