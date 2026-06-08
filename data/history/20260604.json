@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-06-04 17:22:58",
+  "generated_at_utc": "2026-06-08 02:01:26",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -8,179 +8,80 @@
   },
   "trading_dates": [
     "2026-06-04",
-    "2026-06-03"
+    "2026-05-28"
   ],
-  "count_intersection": 5,
+  "count_intersection": 2,
   "stocks": [
     {
-      "stock_id": "2303",
-      "stock_name": "聯電            ",
-      "total_net_buy": 223193,
-      "avg_net_buy": 111596.5,
+      "stock_id": "2881",
+      "stock_name": "富邦金          ",
+      "total_net_buy": 52933,
+      "avg_net_buy": 26466.5,
       "per_day": {
         "day1": {
           "date": "2026-06-04",
-          "rank": 1,
-          "net_buy_lots": 149148
+          "rank": 10,
+          "net_buy_lots": 19027
         },
         "day2": {
-          "date": "2026-06-03",
-          "rank": 2,
-          "net_buy_lots": 74045
+          "date": "2026-05-28",
+          "rank": 4,
+          "net_buy_lots": 33906
         }
       }
     },
     {
-      "stock_id": "2834",
-      "stock_name": "臺企銀          ",
-      "total_net_buy": 78202,
-      "avg_net_buy": 39101.0,
+      "stock_id": "2882",
+      "stock_name": "國泰金          ",
+      "total_net_buy": 42766,
+      "avg_net_buy": 21383.0,
       "per_day": {
         "day1": {
           "date": "2026-06-04",
-          "rank": 2,
-          "net_buy_lots": 31854
+          "rank": 5,
+          "net_buy_lots": 25039
         },
         "day2": {
-          "date": "2026-06-03",
-          "rank": 6,
-          "net_buy_lots": 46348
-        }
-      }
-    },
-    {
-      "stock_id": "2890",
-      "stock_name": "永豐金          ",
-      "total_net_buy": 77345,
-      "avg_net_buy": 38672.5,
-      "per_day": {
-        "day1": {
-          "date": "2026-06-04",
-          "rank": 7,
-          "net_buy_lots": 21936
-        },
-        "day2": {
-          "date": "2026-06-03",
-          "rank": 3,
-          "net_buy_lots": 55409
-        }
-      }
-    },
-    {
-      "stock_id": "2892",
-      "stock_name": "第一金          ",
-      "total_net_buy": 63364,
-      "avg_net_buy": 31682.0,
-      "per_day": {
-        "day1": {
-          "date": "2026-06-04",
-          "rank": 3,
-          "net_buy_lots": 31431
-        },
-        "day2": {
-          "date": "2026-06-03",
-          "rank": 7,
-          "net_buy_lots": 31933
-        }
-      }
-    },
-    {
-      "stock_id": "2609",
-      "stock_name": "陽明            ",
-      "total_net_buy": 48072,
-      "avg_net_buy": 24036.0,
-      "per_day": {
-        "day1": {
-          "date": "2026-06-04",
-          "rank": 8,
-          "net_buy_lots": 20266
-        },
-        "day2": {
-          "date": "2026-06-03",
+          "date": "2026-05-28",
           "rank": 9,
-          "net_buy_lots": 27806
+          "net_buy_lots": 17727
         }
       }
     }
   ],
   "ai_analysis": [
     {
-      "ticker": "2303",
-      "name": "聯電",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "5月營收年增0%顯示動能持平",
-        "遭ETF剔除成分股影響短期情緒"
-      ],
-      "warning": "半導體產業需求復甦不確定性",
-      "next_check": "2024年6月營收",
-      "data_quality": "有限",
-      "net_buy_lots": 223193,
-      "is_etf": false
-    },
-    {
-      "ticker": "2834",
-      "name": "臺企銀",
+      "ticker": "2881",
+      "name": "富邦金",
       "verdict": "謹慎觀察",
       "confidence": "中",
       "reasons": [
         "5月營收持平無顯著成長動能",
-        "缺乏近期產業利多或營運轉機新聞"
+        "缺乏近期產業利多或轉型催化"
       ],
-      "warning": "銀行業淨息差收斂風險",
-      "next_check": "2024Q2財報",
-      "data_quality": "有限",
-      "net_buy_lots": 78202,
-      "is_etf": false
-    },
-    {
-      "ticker": "2890",
-      "name": "永豐金",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "5月營收持平無成長動能",
-        "缺乏近期正面新聞催化"
-      ],
-      "warning": "金融業淨息差收斂風險",
+      "warning": "金融業淨息差收斂壓力未解",
       "next_check": "2026年6月營收",
       "data_quality": "有限",
-      "net_buy_lots": 77345,
+      "net_buy_lots": 52933,
       "is_etf": false
     },
     {
-      "ticker": "2892",
-      "name": "第一金",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
+      "ticker": "2882",
+      "name": "國泰金",
+      "verdict": "不建議",
+      "confidence": "低",
       "reasons": [
-        "5月營收持平無顯著成長動能",
-        "缺乏近期產業利多或營運轉機訊號"
+        "5月營收年增0%動能疲弱",
+        "產業環境未見明顯改善跡象"
       ],
-      "warning": "若6月營收續呈疲軟可能影響後市",
-      "next_check": "2024/06營收公告",
+      "warning": "金融業利差收斂壓力",
+      "next_check": "2026年6月",
       "data_quality": "有限",
-      "net_buy_lots": 63364,
-      "is_etf": false
-    },
-    {
-      "ticker": "2609",
-      "name": "陽明",
-      "verdict": "謹慎觀察",
-      "confidence": "中",
-      "reasons": [
-        "5月營收持平無顯著成長動能",
-        "缺乏近期產業利多或訂單能見度"
-      ],
-      "warning": "航運產業 cyclical 風險需留意",
-      "next_check": "2026年6月營收",
-      "data_quality": "有限",
-      "net_buy_lots": 48072,
+      "net_buy_lots": 42766,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-06-05 01:21",
+  "ai_analysis_time": "2026-06-08 09:59",
   "insti_signal": {
     "buy": [
       {
@@ -195,8 +96,8 @@
         "stock_id": "2884",
         "stock_name": "玉山金",
         "foreign_net": 26987,
-        "trust_net": 631,
-        "ft_net": 27618,
+        "trust_net": 804,
+        "ft_net": 27791,
         "date": "20260604"
       },
       {
@@ -243,8 +144,8 @@
         "stock_id": "2449",
         "stock_name": "京元電子",
         "foreign_net": 7927,
-        "trust_net": 540,
-        "ft_net": 8467,
+        "trust_net": 223,
+        "ft_net": 8150,
         "date": "20260604"
       },
       {
@@ -361,204 +262,284 @@
   },
   "watchlist_summary": [
     {
+      "stock_id": "2881",
+      "stock_name": "富邦金",
+      "entry_date": "2026-06-08",
+      "entry_price": 113.0,
+      "latest_price": 113.0,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-08",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2882",
+      "stock_name": "國泰金",
+      "entry_date": "2026-06-08",
+      "entry_price": 94.3,
+      "latest_price": 94.3,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-08",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-06-07",
+      "entry_price": 131.5,
+      "latest_price": 120.5,
+      "latest_pct": -8.37,
+      "latest_date": "2026-06-08",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2609",
+      "stock_name": "陽明",
+      "entry_date": "2026-06-07",
+      "entry_price": 54.5,
+      "latest_price": 51.8,
+      "latest_pct": -4.95,
+      "latest_date": "2026-06-08",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2882",
+      "stock_name": "國泰金",
+      "entry_date": "2026-06-07",
+      "entry_price": 100.0,
+      "latest_price": 94.3,
+      "latest_pct": -5.7,
+      "latest_date": "2026-06-08",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-06-06",
+      "entry_price": 131.5,
+      "latest_price": 120.5,
+      "latest_pct": -8.37,
+      "latest_date": "2026-06-08",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2609",
+      "stock_name": "陽明",
+      "entry_date": "2026-06-06",
+      "entry_price": 54.5,
+      "latest_price": 51.8,
+      "latest_pct": -4.95,
+      "latest_date": "2026-06-08",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2882",
+      "stock_name": "國泰金",
+      "entry_date": "2026-06-06",
+      "entry_price": 100.0,
+      "latest_price": 94.3,
+      "latest_pct": -5.7,
+      "latest_date": "2026-06-08",
+      "days_tracked": 2
+    },
+    {
       "stock_id": "2303",
       "stock_name": "聯電",
       "entry_date": "2026-06-05",
       "entry_price": 125.0,
-      "latest_price": 125.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-06-05",
-      "days_tracked": 0
+      "latest_price": 120.5,
+      "latest_pct": -3.6,
+      "latest_date": "2026-06-08",
+      "days_tracked": 3
     },
     {
       "stock_id": "2834",
       "stock_name": "臺企銀",
       "entry_date": "2026-06-05",
       "entry_price": 17.1,
-      "latest_price": 17.1,
-      "latest_pct": 0.0,
-      "latest_date": "2026-06-05",
-      "days_tracked": 0
+      "latest_price": 16.35,
+      "latest_pct": -4.39,
+      "latest_date": "2026-06-08",
+      "days_tracked": 3
     },
     {
       "stock_id": "2890",
       "stock_name": "永豐金",
       "entry_date": "2026-06-05",
       "entry_price": 33.15,
-      "latest_price": 33.15,
-      "latest_pct": 0.0,
-      "latest_date": "2026-06-05",
-      "days_tracked": 0
+      "latest_price": 31.45,
+      "latest_pct": -5.13,
+      "latest_date": "2026-06-08",
+      "days_tracked": 3
     },
     {
       "stock_id": "2892",
       "stock_name": "第一金",
       "entry_date": "2026-06-05",
       "entry_price": 29.55,
-      "latest_price": 29.55,
-      "latest_pct": 0.0,
-      "latest_date": "2026-06-05",
-      "days_tracked": 0
+      "latest_price": 28.55,
+      "latest_pct": -3.38,
+      "latest_date": "2026-06-08",
+      "days_tracked": 3
     },
     {
       "stock_id": "2609",
       "stock_name": "陽明",
       "entry_date": "2026-06-05",
       "entry_price": 53.2,
-      "latest_price": 53.2,
-      "latest_pct": 0.0,
-      "latest_date": "2026-06-05",
-      "days_tracked": 0
+      "latest_price": 51.8,
+      "latest_pct": -2.63,
+      "latest_date": "2026-06-08",
+      "days_tracked": 3
     },
     {
       "stock_id": "2303",
       "stock_name": "聯電",
       "entry_date": "2026-06-04",
       "entry_price": 130.5,
-      "latest_price": 125.0,
-      "latest_pct": -4.21,
-      "latest_date": "2026-06-05",
-      "days_tracked": 1
+      "latest_price": 120.5,
+      "latest_pct": -7.66,
+      "latest_date": "2026-06-08",
+      "days_tracked": 4
     },
     {
       "stock_id": "2890",
       "stock_name": "永豐金",
       "entry_date": "2026-06-04",
       "entry_price": 33.0,
-      "latest_price": 33.15,
-      "latest_pct": 0.45,
-      "latest_date": "2026-06-05",
-      "days_tracked": 1
+      "latest_price": 31.45,
+      "latest_pct": -4.7,
+      "latest_date": "2026-06-08",
+      "days_tracked": 4
     },
     {
       "stock_id": "2317",
       "stock_name": "鴻海",
       "entry_date": "2026-06-04",
       "entry_price": 309.0,
-      "latest_price": 293.0,
-      "latest_pct": -5.18,
-      "latest_date": "2026-06-05",
-      "days_tracked": 1
+      "latest_price": 261.5,
+      "latest_pct": -15.37,
+      "latest_date": "2026-06-08",
+      "days_tracked": 4
     },
     {
       "stock_id": "2609",
       "stock_name": "陽明",
       "entry_date": "2026-06-04",
       "entry_price": 53.7,
-      "latest_price": 53.2,
-      "latest_pct": -0.93,
-      "latest_date": "2026-06-05",
-      "days_tracked": 1
+      "latest_price": 51.8,
+      "latest_pct": -3.54,
+      "latest_date": "2026-06-08",
+      "days_tracked": 4
     },
     {
       "stock_id": "3231",
       "stock_name": "緯創",
       "entry_date": "2026-06-03",
       "entry_price": 191.0,
-      "latest_price": 176.0,
-      "latest_pct": -7.85,
-      "latest_date": "2026-06-05",
-      "days_tracked": 2
+      "latest_price": 159.5,
+      "latest_pct": -16.49,
+      "latest_date": "2026-06-08",
+      "days_tracked": 5
     },
     {
       "stock_id": "3481",
       "stock_name": "群創",
       "entry_date": "2026-06-02",
       "entry_price": 56.1,
-      "latest_price": 55.8,
-      "latest_pct": -0.53,
-      "latest_date": "2026-06-05",
-      "days_tracked": 3
+      "latest_price": 48.35,
+      "latest_pct": -13.81,
+      "latest_date": "2026-06-08",
+      "days_tracked": 6
     },
     {
       "stock_id": "00403A",
       "stock_name": "主動統一升級50",
       "entry_date": "2026-06-02",
       "entry_price": 10.82,
-      "latest_price": 10.59,
-      "latest_pct": -2.13,
-      "latest_date": "2026-06-05",
-      "days_tracked": 3
+      "latest_price": 9.89,
+      "latest_pct": -8.6,
+      "latest_date": "2026-06-08",
+      "days_tracked": 6
     },
     {
       "stock_id": "2324",
       "stock_name": "仁寶",
       "entry_date": "2026-06-01",
       "entry_price": 40.35,
-      "latest_price": 42.35,
-      "latest_pct": 4.96,
-      "latest_date": "2026-06-05",
-      "days_tracked": 4
+      "latest_price": 37.3,
+      "latest_pct": -7.56,
+      "latest_date": "2026-06-08",
+      "days_tracked": 7
     },
     {
       "stock_id": "2317",
       "stock_name": "鴻海",
       "entry_date": "2026-06-01",
       "entry_price": 301.5,
-      "latest_price": 293.0,
-      "latest_pct": -2.82,
-      "latest_date": "2026-06-05",
-      "days_tracked": 4
+      "latest_price": 261.5,
+      "latest_pct": -13.27,
+      "latest_date": "2026-06-08",
+      "days_tracked": 7
     },
     {
       "stock_id": "1402",
       "stock_name": "遠東新",
       "entry_date": "2026-06-01",
       "entry_price": 25.2,
-      "latest_price": 27.55,
-      "latest_pct": 9.33,
-      "latest_date": "2026-06-05",
-      "days_tracked": 4
+      "latest_price": 26.7,
+      "latest_pct": 5.95,
+      "latest_date": "2026-06-08",
+      "days_tracked": 7
     },
     {
       "stock_id": "2324",
       "stock_name": "仁寶",
       "entry_date": "2026-05-30",
       "entry_price": 36.7,
-      "latest_price": 42.35,
-      "latest_pct": 15.4,
-      "latest_date": "2026-06-05",
-      "days_tracked": 6
+      "latest_price": 37.3,
+      "latest_pct": 1.63,
+      "latest_date": "2026-06-08",
+      "days_tracked": 9
     },
     {
       "stock_id": "2317",
       "stock_name": "鴻海",
       "entry_date": "2026-05-30",
       "entry_price": 289.0,
-      "latest_price": 293.0,
-      "latest_pct": 1.38,
-      "latest_date": "2026-06-05",
-      "days_tracked": 6
+      "latest_price": 261.5,
+      "latest_pct": -9.52,
+      "latest_date": "2026-06-08",
+      "days_tracked": 9
     },
     {
       "stock_id": "1402",
       "stock_name": "遠東新",
       "entry_date": "2026-05-30",
       "entry_price": 25.65,
-      "latest_price": 27.55,
-      "latest_pct": 7.41,
-      "latest_date": "2026-06-05",
-      "days_tracked": 6
+      "latest_price": 26.7,
+      "latest_pct": 4.09,
+      "latest_date": "2026-06-08",
+      "days_tracked": 9
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
       "entry_date": "2026-05-29",
       "entry_price": 80.7,
-      "latest_price": 81.0,
-      "latest_pct": 0.37,
-      "latest_date": "2026-06-05",
-      "days_tracked": 7
+      "latest_price": 67.2,
+      "latest_pct": -16.73,
+      "latest_date": "2026-06-08",
+      "days_tracked": 10
     },
     {
       "stock_id": "2881",
       "stock_name": "富邦金",
       "entry_date": "2026-05-29",
       "entry_price": 110.0,
-      "latest_price": 114.0,
-      "latest_pct": 3.64,
-      "latest_date": "2026-06-05",
-      "days_tracked": 7
+      "latest_price": 112.5,
+      "latest_pct": 2.27,
+      "latest_date": "2026-06-08",
+      "days_tracked": 10
     },
     {
       "stock_id": "2882",
@@ -567,147 +548,7 @@
       "entry_price": 84.8,
       "latest_price": 94.4,
       "latest_pct": 11.32,
-      "latest_date": "2026-06-05",
-      "days_tracked": 7
-    },
-    {
-      "stock_id": "00403A",
-      "stock_name": "主動統一升級50",
-      "entry_date": "2026-05-28",
-      "entry_price": 10.78,
-      "latest_price": 10.59,
-      "latest_pct": -1.76,
-      "latest_date": "2026-06-05",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "6770",
-      "stock_name": "力積電",
-      "entry_date": "2026-05-28",
-      "entry_price": 74.8,
-      "latest_price": 81.0,
-      "latest_pct": 8.29,
-      "latest_date": "2026-06-05",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "2881",
-      "stock_name": "富邦金",
-      "entry_date": "2026-05-28",
-      "entry_price": 110.0,
-      "latest_price": 114.0,
-      "latest_pct": 3.64,
-      "latest_date": "2026-06-05",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "1303",
-      "stock_name": "南亞",
-      "entry_date": "2026-05-28",
-      "entry_price": 95.5,
-      "latest_price": 111.0,
-      "latest_pct": 16.23,
-      "latest_date": "2026-06-05",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "2882",
-      "stock_name": "國泰金",
-      "entry_date": "2026-05-28",
-      "entry_price": 85.4,
-      "latest_price": 94.4,
-      "latest_pct": 10.54,
-      "latest_date": "2026-06-05",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "00403A",
-      "stock_name": "主動統一升級50",
-      "entry_date": "2026-05-27",
-      "entry_price": 10.64,
-      "latest_price": 10.59,
-      "latest_pct": -0.47,
-      "latest_date": "2026-06-05",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "6770",
-      "stock_name": "力積電",
-      "entry_date": "2026-05-27",
-      "entry_price": 70.8,
-      "latest_price": 81.0,
-      "latest_pct": 14.41,
-      "latest_date": "2026-06-05",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "2303",
-      "stock_name": "聯電",
-      "entry_date": "2026-05-27",
-      "entry_price": 130.5,
-      "latest_price": 125.0,
-      "latest_pct": -4.21,
-      "latest_date": "2026-06-05",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "2344",
-      "stock_name": "華邦電",
-      "entry_date": "2026-05-27",
-      "entry_price": 141.0,
-      "latest_price": 179.5,
-      "latest_pct": 27.3,
-      "latest_date": "2026-06-05",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "00403A",
-      "stock_name": "主動統一升級50",
-      "entry_date": "2026-05-26",
-      "entry_price": 10.58,
-      "latest_price": 10.59,
-      "latest_pct": 0.09,
-      "latest_date": "2026-06-05",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "6770",
-      "stock_name": "力積電",
-      "entry_date": "2026-05-26",
-      "entry_price": 67.6,
-      "latest_price": 81.0,
-      "latest_pct": 19.82,
-      "latest_date": "2026-06-05",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2344",
-      "stock_name": "華邦電",
-      "entry_date": "2026-05-26",
-      "entry_price": 128.5,
-      "latest_price": 179.5,
-      "latest_pct": 39.69,
-      "latest_date": "2026-06-05",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "00878",
-      "stock_name": "國泰永續高股息",
-      "entry_date": "2026-05-26",
-      "entry_price": 29.48,
-      "latest_price": 32.68,
-      "latest_pct": 10.85,
-      "latest_date": "2026-06-05",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "1802",
-      "stock_name": "台玻",
-      "entry_date": "2026-05-26",
-      "entry_price": 73.9,
-      "latest_price": 68.9,
-      "latest_pct": -6.77,
-      "latest_date": "2026-06-05",
+      "latest_date": "2026-06-08",
       "days_tracked": 10
     }
   ]
