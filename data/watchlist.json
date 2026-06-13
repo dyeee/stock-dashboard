@@ -1760,5 +1760,29 @@
     "pct_changes": {
       "2026-06-13": 0.0
     }
+  },
+  {
+    "stock_id": "2892",
+    "stock_name": "第一金",
+    "entry_date": "2026-06-13",
+    "entry_price": 31.0,
+    "prices": {
+      "2026-06-13": 31.0
+    },
+    "pct_changes": {
+      "2026-06-13": 0.0
+    }
+  },
+  {
+    "stock_id": "2801",
+    "stock_name": "彰銀",
+    "entry_date": "2026-06-13",
+    "entry_price": 22.6,
+    "prices": {
+      "2026-06-13": 22.6
+    },
+    "pct_changes": {
+      "2026-06-13": 0.0
+    }
   }
 ]
