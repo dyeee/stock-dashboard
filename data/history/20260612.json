@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-06-12 17:14:52",
+  "generated_at_utc": "2026-06-14 15:59:19",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -8,15 +8,51 @@
   },
   "trading_dates": [
     "2026-06-12",
-    "2026-06-11"
+    "2026-05-19"
   ],
-  "count_intersection": 1,
+  "count_intersection": 3,
   "stocks": [
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金      ",
+      "total_net_buy": 117624,
+      "avg_net_buy": 58812.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-06-12",
+          "rank": 2,
+          "net_buy_lots": 85214
+        },
+        "day2": {
+          "date": "2026-05-19",
+          "rank": 1,
+          "net_buy_lots": 32410
+        }
+      }
+    },
+    {
+      "stock_id": "2891",
+      "stock_name": "中信金          ",
+      "total_net_buy": 71585,
+      "avg_net_buy": 35792.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-06-12",
+          "rank": 5,
+          "net_buy_lots": 40901
+        },
+        "day2": {
+          "date": "2026-05-19",
+          "rank": 3,
+          "net_buy_lots": 30684
+        }
+      }
+    },
     {
       "stock_id": "2890",
       "stock_name": "永豐金          ",
-      "total_net_buy": 44466,
-      "avg_net_buy": 22233.0,
+      "total_net_buy": 61720,
+      "avg_net_buy": 30860.0,
       "per_day": {
         "day1": {
           "date": "2026-06-12",
@@ -24,196 +60,64 @@
           "net_buy_lots": 30858
         },
         "day2": {
-          "date": "2026-06-11",
-          "rank": 7,
-          "net_buy_lots": 13608
+          "date": "2026-05-19",
+          "rank": 2,
+          "net_buy_lots": 30862
         }
       }
     }
   ],
   "ai_analysis": [
     {
+      "ticker": "2887",
+      "name": "台新新光金",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "月營收資料無法取得，無法評估業績動能",
+        "缺乏近期新聞揭露，基本面變化不明"
+      ],
+      "warning": "最大風險：缺乏最新營收數據無法評估表現",
+      "next_check": "2026/06",
+      "data_quality": "不足",
+      "net_buy_lots": 117624,
+      "is_etf": false
+    },
+    {
+      "ticker": "2891",
+      "name": "中信金",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "月營收資料無法取得無法判斷動能",
+        "缺乏近期新聞無法評估基本面變化"
+      ],
+      "warning": "基本面評估資料不足，需待財報確認",
+      "next_check": "2026年10月",
+      "data_quality": "不足",
+      "net_buy_lots": 71585,
+      "is_etf": false
+    },
+    {
       "ticker": "2890",
       "name": "永豐金",
       "verdict": "謹慎觀察",
       "confidence": "低",
       "reasons": [
-        "5月營收年增0%動能不足",
-        "缺乏近期產業利多或業務轉機"
+        "缺乏2026年5月營收數據無法評估業績表現",
+        "近期無重大新聞揭露基本面動能不明"
       ],
-      "warning": "金控業淨息差收斂壓力未解",
-      "next_check": "2024Q3財報",
-      "data_quality": "有限",
-      "net_buy_lots": 44466,
+      "warning": "最大風險為金控整併進度未明可能影響戰略方向",
+      "next_check": "2026年6月",
+      "data_quality": "不足",
+      "net_buy_lots": 61720,
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-06-13 01:13",
+  "ai_analysis_time": "2026-06-14 23:57",
   "insti_signal": {
-    "buy": [
-      {
-        "stock_id": "2887",
-        "stock_name": "台新新光金",
-        "foreign_net": 85214,
-        "trust_net": 10101,
-        "ft_net": 95315,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "00981A",
-        "stock_name": "主動統一台股增長",
-        "foreign_net": 80638,
-        "trust_net": 8860,
-        "ft_net": 89498,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2610",
-        "stock_name": "華航",
-        "foreign_net": 41603,
-        "trust_net": 1249,
-        "ft_net": 42852,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2344",
-        "stock_name": "華邦電",
-        "foreign_net": 33574,
-        "trust_net": 3179,
-        "ft_net": 36753,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2303",
-        "stock_name": "聯電",
-        "foreign_net": 15230,
-        "trust_net": 17459,
-        "ft_net": 32689,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2002",
-        "stock_name": "中鋼",
-        "foreign_net": 28338,
-        "trust_net": 95,
-        "ft_net": 28433,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "1605",
-        "stock_name": "華新",
-        "foreign_net": 27618,
-        "trust_net": 145,
-        "ft_net": 27763,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2408",
-        "stock_name": "南亞科",
-        "foreign_net": 25213,
-        "trust_net": 944,
-        "ft_net": 26157,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "1303",
-        "stock_name": "南亞",
-        "foreign_net": 20882,
-        "trust_net": 402,
-        "ft_net": 21284,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "0056",
-        "stock_name": "元大高股息",
-        "foreign_net": 12931,
-        "trust_net": 80,
-        "ft_net": 13011,
-        "date": "20260612"
-      }
-    ],
-    "sell": [
-      {
-        "stock_id": "2883",
-        "stock_name": "凱基金",
-        "foreign_net": -25786,
-        "trust_net": -4041,
-        "ft_net": -29827,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2409",
-        "stock_name": "友達",
-        "foreign_net": -26060,
-        "trust_net": -47,
-        "ft_net": -26107,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2324",
-        "stock_name": "仁寶",
-        "foreign_net": -20369,
-        "trust_net": -27,
-        "ft_net": -20396,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2313",
-        "stock_name": "華通",
-        "foreign_net": -15375,
-        "trust_net": -819,
-        "ft_net": -16194,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "1402",
-        "stock_name": "遠東新",
-        "foreign_net": -15352,
-        "trust_net": -28,
-        "ft_net": -15380,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2353",
-        "stock_name": "宏碁",
-        "foreign_net": -9280,
-        "trust_net": -108,
-        "ft_net": -9388,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2356",
-        "stock_name": "英業達",
-        "foreign_net": -9039,
-        "trust_net": -93,
-        "ft_net": -9132,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "2105",
-        "stock_name": "正新",
-        "foreign_net": -8360,
-        "trust_net": -94,
-        "ft_net": -8454,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "3481",
-        "stock_name": "群創",
-        "foreign_net": -6463,
-        "trust_net": -40,
-        "ft_net": -6503,
-        "date": "20260612"
-      },
-      {
-        "stock_id": "3706",
-        "stock_name": "神達",
-        "foreign_net": -5308,
-        "trust_net": -9,
-        "ft_net": -5317,
-        "date": "20260612"
-      }
-    ],
+    "buy": [],
+    "sell": [],
     "date": "20260612"
   },
   "insti_signal_date": "2026-06-12",
@@ -229,14 +133,64 @@
   },
   "watchlist_summary": [
     {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-06-14",
+      "entry_price": 30.2,
+      "latest_price": 30.2,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2891",
+      "stock_name": "中信金",
+      "entry_date": "2026-06-14",
+      "entry_price": 67.6,
+      "latest_price": 67.6,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-14",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2890",
+      "stock_name": "永豐金",
+      "entry_date": "2026-06-14",
+      "entry_price": 34.15,
+      "latest_price": 34.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-14",
+      "days_tracked": 0
+    },
+    {
       "stock_id": "2890",
       "stock_name": "永豐金",
       "entry_date": "2026-06-13",
       "entry_price": 34.15,
       "latest_price": 34.15,
       "latest_pct": 0.0,
-      "latest_date": "2026-06-13",
-      "days_tracked": 0
+      "latest_date": "2026-06-14",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2892",
+      "stock_name": "第一金",
+      "entry_date": "2026-06-13",
+      "entry_price": 31.0,
+      "latest_price": 31.0,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-14",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2801",
+      "stock_name": "彰銀",
+      "entry_date": "2026-06-13",
+      "entry_price": 22.6,
+      "latest_price": 22.6,
+      "latest_pct": 0.0,
+      "latest_date": "2026-06-14",
+      "days_tracked": 1
     },
     {
       "stock_id": "2303",
@@ -245,8 +199,8 @@
       "entry_price": 133.5,
       "latest_price": 133.5,
       "latest_pct": 0.0,
-      "latest_date": "2026-06-13",
-      "days_tracked": 1
+      "latest_date": "2026-06-14",
+      "days_tracked": 2
     },
     {
       "stock_id": "2609",
@@ -255,8 +209,8 @@
       "entry_price": 52.4,
       "latest_price": 52.4,
       "latest_pct": 0.0,
-      "latest_date": "2026-06-13",
-      "days_tracked": 1
+      "latest_date": "2026-06-14",
+      "days_tracked": 2
     },
     {
       "stock_id": "3481",
@@ -265,8 +219,8 @@
       "entry_price": 48.55,
       "latest_price": 48.55,
       "latest_pct": 0.0,
-      "latest_date": "2026-06-13",
-      "days_tracked": 1
+      "latest_date": "2026-06-14",
+      "days_tracked": 2
     },
     {
       "stock_id": "2887",
@@ -275,8 +229,8 @@
       "entry_price": 30.2,
       "latest_price": 30.2,
       "latest_pct": 0.0,
-      "latest_date": "2026-06-13",
-      "days_tracked": 1
+      "latest_date": "2026-06-14",
+      "days_tracked": 2
     },
     {
       "stock_id": "2892",
@@ -285,8 +239,8 @@
       "entry_price": 30.55,
       "latest_price": 31.0,
       "latest_pct": 1.47,
-      "latest_date": "2026-06-13",
-      "days_tracked": 2
+      "latest_date": "2026-06-14",
+      "days_tracked": 3
     },
     {
       "stock_id": "2801",
@@ -295,8 +249,8 @@
       "entry_price": 22.35,
       "latest_price": 22.6,
       "latest_pct": 1.12,
-      "latest_date": "2026-06-13",
-      "days_tracked": 2
+      "latest_date": "2026-06-14",
+      "days_tracked": 3
     },
     {
       "stock_id": "2890",
@@ -305,8 +259,8 @@
       "entry_price": 34.25,
       "latest_price": 34.15,
       "latest_pct": -0.29,
-      "latest_date": "2026-06-13",
-      "days_tracked": 3
+      "latest_date": "2026-06-14",
+      "days_tracked": 4
     },
     {
       "stock_id": "2303",
@@ -315,8 +269,8 @@
       "entry_price": 121.0,
       "latest_price": 133.5,
       "latest_pct": 10.33,
-      "latest_date": "2026-06-13",
-      "days_tracked": 4
+      "latest_date": "2026-06-14",
+      "days_tracked": 5
     },
     {
       "stock_id": "00953B",
@@ -325,8 +279,8 @@
       "entry_price": 9.55,
       "latest_price": 9.6,
       "latest_pct": 0.52,
-      "latest_date": "2026-06-13",
-      "days_tracked": 4
+      "latest_date": "2026-06-14",
+      "days_tracked": 5
     },
     {
       "stock_id": "2609",
@@ -335,8 +289,8 @@
       "entry_price": 51.7,
       "latest_price": 52.4,
       "latest_pct": 1.35,
-      "latest_date": "2026-06-13",
-      "days_tracked": 4
+      "latest_date": "2026-06-14",
+      "days_tracked": 5
     },
     {
       "stock_id": "2881",
@@ -345,8 +299,8 @@
       "entry_price": 113.0,
       "latest_price": 122.0,
       "latest_pct": 7.96,
-      "latest_date": "2026-06-13",
-      "days_tracked": 5
+      "latest_date": "2026-06-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "2882",
@@ -355,8 +309,8 @@
       "entry_price": 94.3,
       "latest_price": 100.5,
       "latest_pct": 6.57,
-      "latest_date": "2026-06-13",
-      "days_tracked": 5
+      "latest_date": "2026-06-14",
+      "days_tracked": 6
     },
     {
       "stock_id": "2303",
@@ -365,8 +319,8 @@
       "entry_price": 131.5,
       "latest_price": 133.5,
       "latest_pct": 1.52,
-      "latest_date": "2026-06-13",
-      "days_tracked": 6
+      "latest_date": "2026-06-14",
+      "days_tracked": 7
     },
     {
       "stock_id": "2609",
@@ -375,8 +329,8 @@
       "entry_price": 54.5,
       "latest_price": 52.4,
       "latest_pct": -3.85,
-      "latest_date": "2026-06-13",
-      "days_tracked": 6
+      "latest_date": "2026-06-14",
+      "days_tracked": 7
     },
     {
       "stock_id": "2882",
@@ -385,8 +339,8 @@
       "entry_price": 100.0,
       "latest_price": 100.5,
       "latest_pct": 0.5,
-      "latest_date": "2026-06-13",
-      "days_tracked": 6
+      "latest_date": "2026-06-14",
+      "days_tracked": 7
     },
     {
       "stock_id": "2303",
@@ -395,8 +349,8 @@
       "entry_price": 131.5,
       "latest_price": 133.5,
       "latest_pct": 1.52,
-      "latest_date": "2026-06-13",
-      "days_tracked": 7
+      "latest_date": "2026-06-14",
+      "days_tracked": 8
     },
     {
       "stock_id": "2609",
@@ -405,8 +359,8 @@
       "entry_price": 54.5,
       "latest_price": 52.4,
       "latest_pct": -3.85,
-      "latest_date": "2026-06-13",
-      "days_tracked": 7
+      "latest_date": "2026-06-14",
+      "days_tracked": 8
     },
     {
       "stock_id": "2882",
@@ -415,8 +369,8 @@
       "entry_price": 100.0,
       "latest_price": 100.5,
       "latest_pct": 0.5,
-      "latest_date": "2026-06-13",
-      "days_tracked": 7
+      "latest_date": "2026-06-14",
+      "days_tracked": 8
     },
     {
       "stock_id": "2303",
@@ -425,8 +379,8 @@
       "entry_price": 125.0,
       "latest_price": 133.5,
       "latest_pct": 6.8,
-      "latest_date": "2026-06-13",
-      "days_tracked": 8
+      "latest_date": "2026-06-14",
+      "days_tracked": 9
     },
     {
       "stock_id": "2834",
@@ -435,8 +389,8 @@
       "entry_price": 17.1,
       "latest_price": 17.3,
       "latest_pct": 1.17,
-      "latest_date": "2026-06-13",
-      "days_tracked": 8
+      "latest_date": "2026-06-14",
+      "days_tracked": 9
     },
     {
       "stock_id": "2890",
@@ -445,8 +399,8 @@
       "entry_price": 33.15,
       "latest_price": 34.15,
       "latest_pct": 3.02,
-      "latest_date": "2026-06-13",
-      "days_tracked": 8
+      "latest_date": "2026-06-14",
+      "days_tracked": 9
     },
     {
       "stock_id": "2892",
@@ -455,8 +409,8 @@
       "entry_price": 29.55,
       "latest_price": 31.0,
       "latest_pct": 4.91,
-      "latest_date": "2026-06-13",
-      "days_tracked": 8
+      "latest_date": "2026-06-14",
+      "days_tracked": 9
     },
     {
       "stock_id": "2609",
@@ -465,8 +419,8 @@
       "entry_price": 53.2,
       "latest_price": 52.4,
       "latest_pct": -1.5,
-      "latest_date": "2026-06-13",
-      "days_tracked": 8
+      "latest_date": "2026-06-14",
+      "days_tracked": 9
     },
     {
       "stock_id": "2303",
@@ -475,8 +429,8 @@
       "entry_price": 130.5,
       "latest_price": 133.5,
       "latest_pct": 2.3,
-      "latest_date": "2026-06-13",
-      "days_tracked": 9
+      "latest_date": "2026-06-14",
+      "days_tracked": 10
     },
     {
       "stock_id": "2890",
@@ -485,8 +439,8 @@
       "entry_price": 33.0,
       "latest_price": 34.15,
       "latest_pct": 3.48,
-      "latest_date": "2026-06-13",
-      "days_tracked": 9
+      "latest_date": "2026-06-14",
+      "days_tracked": 10
     },
     {
       "stock_id": "2317",
@@ -495,8 +449,8 @@
       "entry_price": 309.0,
       "latest_price": 260.5,
       "latest_pct": -15.7,
-      "latest_date": "2026-06-13",
-      "days_tracked": 9
+      "latest_date": "2026-06-14",
+      "days_tracked": 10
     },
     {
       "stock_id": "2609",
@@ -505,17 +459,7 @@
       "entry_price": 53.7,
       "latest_price": 52.4,
       "latest_pct": -2.42,
-      "latest_date": "2026-06-13",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "3231",
-      "stock_name": "緯創",
-      "entry_date": "2026-06-03",
-      "entry_price": 191.0,
-      "latest_price": 156.0,
-      "latest_pct": -18.32,
-      "latest_date": "2026-06-13",
+      "latest_date": "2026-06-14",
       "days_tracked": 10
     }
   ]
