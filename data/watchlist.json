@@ -3820,5 +3820,29 @@
     "pct_changes": {
       "2026-06-27": 0.0
     }
+  },
+  {
+    "stock_id": "2801",
+    "stock_name": "彰銀",
+    "entry_date": "2026-06-27",
+    "entry_price": 23.4,
+    "prices": {
+      "2026-06-27": 23.4
+    },
+    "pct_changes": {
+      "2026-06-27": 0.0
+    }
+  },
+  {
+    "stock_id": "2618",
+    "stock_name": "長榮航",
+    "entry_date": "2026-06-27",
+    "entry_price": 43.8,
+    "prices": {
+      "2026-06-27": 43.8
+    },
+    "pct_changes": {
+      "2026-06-27": 0.0
+    }
   }
 ]
