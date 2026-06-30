@@ -4242,5 +4242,29 @@
     "pct_changes": {
       "2026-06-30": 0.0
     }
+  },
+  {
+    "stock_id": "2409",
+    "stock_name": "友達",
+    "entry_date": "2026-07-01",
+    "entry_price": null,
+    "prices": {},
+    "pct_changes": {}
+  },
+  {
+    "stock_id": "00631L",
+    "stock_name": "元大台灣50正2",
+    "entry_date": "2026-07-01",
+    "entry_price": null,
+    "prices": {},
+    "pct_changes": {}
+  },
+  {
+    "stock_id": "2303",
+    "stock_name": "聯電",
+    "entry_date": "2026-07-01",
+    "entry_price": null,
+    "prices": {},
+    "pct_changes": {}
   }
 ]
