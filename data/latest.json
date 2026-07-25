@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-07-24 15:43:37",
+  "generated_at_utc": "2026-07-25 15:20:35",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -111,7 +111,7 @@
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-07-24 23:42",
+  "ai_analysis_time": "2026-07-25 23:17",
   "insti_signal": {
     "buy": [
       {
@@ -294,32 +294,62 @@
     {
       "stock_id": "3231",
       "stock_name": "緯創",
+      "entry_date": "2026-07-25",
+      "entry_price": 179.0,
+      "latest_price": 179.0,
+      "latest_pct": 0.0,
+      "latest_date": "2026-07-25",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2002",
+      "stock_name": "中鋼",
+      "entry_date": "2026-07-25",
+      "entry_price": 19.15,
+      "latest_price": 19.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-07-25",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-07-25",
+      "entry_price": 30.65,
+      "latest_price": 30.65,
+      "latest_pct": 0.0,
+      "latest_date": "2026-07-25",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "3231",
+      "stock_name": "緯創",
       "entry_date": "2026-07-24",
       "entry_price": 173.5,
-      "latest_price": 173.5,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 0
+      "latest_price": 179.0,
+      "latest_pct": 3.17,
+      "latest_date": "2026-07-25",
+      "days_tracked": 1
     },
     {
       "stock_id": "00981A",
       "stock_name": "主動統一台股增長",
       "entry_date": "2026-07-24",
       "entry_price": 28.69,
-      "latest_price": 28.69,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 0
+      "latest_price": 27.54,
+      "latest_pct": -4.01,
+      "latest_date": "2026-07-25",
+      "days_tracked": 1
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-07-24",
       "entry_price": 30.85,
-      "latest_price": 30.85,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 0
+      "latest_price": 30.65,
+      "latest_pct": -0.65,
+      "latest_date": "2026-07-25",
+      "days_tracked": 1
     },
     {
       "stock_id": "2002",
@@ -328,247 +358,227 @@
       "entry_price": 19.15,
       "latest_price": 19.15,
       "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 0
+      "latest_date": "2026-07-25",
+      "days_tracked": 1
     },
     {
       "stock_id": "00403A",
       "stock_name": "主動統一升級50",
       "entry_date": "2026-07-22",
       "entry_price": 9.99,
-      "latest_price": 9.97,
-      "latest_pct": -0.2,
-      "latest_date": "2026-07-24",
-      "days_tracked": 2
+      "latest_price": 9.63,
+      "latest_pct": -3.6,
+      "latest_date": "2026-07-25",
+      "days_tracked": 3
     },
     {
       "stock_id": "00981A",
       "stock_name": "主動統一台股增長",
       "entry_date": "2026-07-22",
       "entry_price": 28.5,
-      "latest_price": 28.69,
-      "latest_pct": 0.67,
-      "latest_date": "2026-07-24",
-      "days_tracked": 2
+      "latest_price": 27.54,
+      "latest_pct": -3.37,
+      "latest_date": "2026-07-25",
+      "days_tracked": 3
     },
     {
       "stock_id": "009816",
       "stock_name": "凱基台灣TOP50",
       "entry_date": "2026-07-22",
       "entry_price": 15.04,
-      "latest_price": 15.08,
-      "latest_pct": 0.27,
-      "latest_date": "2026-07-24",
-      "days_tracked": 2
+      "latest_price": 14.72,
+      "latest_pct": -2.13,
+      "latest_date": "2026-07-25",
+      "days_tracked": 3
     },
     {
       "stock_id": "2885",
       "stock_name": "元大金",
       "entry_date": "2026-07-22",
       "entry_price": 63.1,
-      "latest_price": 63.3,
-      "latest_pct": 0.32,
-      "latest_date": "2026-07-24",
-      "days_tracked": 2
+      "latest_price": 63.1,
+      "latest_pct": 0.0,
+      "latest_date": "2026-07-25",
+      "days_tracked": 3
     },
     {
       "stock_id": "3481",
       "stock_name": "群創",
       "entry_date": "2026-07-21",
       "entry_price": 50.4,
-      "latest_price": 51.9,
-      "latest_pct": 2.98,
-      "latest_date": "2026-07-24",
-      "days_tracked": 3
+      "latest_price": 49.5,
+      "latest_pct": -1.79,
+      "latest_date": "2026-07-25",
+      "days_tracked": 4
     },
     {
       "stock_id": "2884",
       "stock_name": "玉山金",
       "entry_date": "2026-07-21",
       "entry_price": 35.85,
-      "latest_price": 35.65,
-      "latest_pct": -0.56,
-      "latest_date": "2026-07-24",
-      "days_tracked": 3
+      "latest_price": 35.95,
+      "latest_pct": 0.28,
+      "latest_date": "2026-07-25",
+      "days_tracked": 4
     },
     {
       "stock_id": "2618",
       "stock_name": "長榮航",
       "entry_date": "2026-07-21",
       "entry_price": 42.3,
-      "latest_price": 40.85,
-      "latest_pct": -3.43,
-      "latest_date": "2026-07-24",
-      "days_tracked": 3
+      "latest_price": 40.7,
+      "latest_pct": -3.78,
+      "latest_date": "2026-07-25",
+      "days_tracked": 4
     },
     {
       "stock_id": "00712",
       "stock_name": "復華富時不動產",
       "entry_date": "2026-07-19",
       "entry_price": 9.06,
-      "latest_price": 8.85,
-      "latest_pct": -2.32,
-      "latest_date": "2026-07-24",
-      "days_tracked": 5
+      "latest_price": 8.78,
+      "latest_pct": -3.09,
+      "latest_date": "2026-07-25",
+      "days_tracked": 6
     },
     {
       "stock_id": "2891",
       "stock_name": "中信金",
       "entry_date": "2026-07-19",
       "entry_price": 62.1,
-      "latest_price": 63.5,
-      "latest_pct": 2.25,
-      "latest_date": "2026-07-24",
-      "days_tracked": 5
+      "latest_price": 63.6,
+      "latest_pct": 2.42,
+      "latest_date": "2026-07-25",
+      "days_tracked": 6
     },
     {
       "stock_id": "2002",
       "stock_name": "中鋼",
       "entry_date": "2026-07-19",
       "entry_price": 18.65,
-      "latest_price": 19.1,
-      "latest_pct": 2.41,
-      "latest_date": "2026-07-24",
-      "days_tracked": 5
+      "latest_price": 19.15,
+      "latest_pct": 2.68,
+      "latest_date": "2026-07-25",
+      "days_tracked": 6
     },
     {
       "stock_id": "2412",
       "stock_name": "中華電",
       "entry_date": "2026-07-19",
       "entry_price": 138.0,
-      "latest_price": 138.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 5
+      "latest_price": 139.0,
+      "latest_pct": 0.72,
+      "latest_date": "2026-07-25",
+      "days_tracked": 6
     },
     {
       "stock_id": "00712",
       "stock_name": "復華富時不動產",
       "entry_date": "2026-07-18",
       "entry_price": 9.06,
-      "latest_price": 8.85,
-      "latest_pct": -2.32,
-      "latest_date": "2026-07-24",
-      "days_tracked": 6
+      "latest_price": 8.78,
+      "latest_pct": -3.09,
+      "latest_date": "2026-07-25",
+      "days_tracked": 7
     },
     {
       "stock_id": "2891",
       "stock_name": "中信金",
       "entry_date": "2026-07-18",
       "entry_price": 62.1,
-      "latest_price": 63.5,
-      "latest_pct": 2.25,
-      "latest_date": "2026-07-24",
-      "days_tracked": 6
+      "latest_price": 63.6,
+      "latest_pct": 2.42,
+      "latest_date": "2026-07-25",
+      "days_tracked": 7
     },
     {
       "stock_id": "2002",
       "stock_name": "中鋼",
       "entry_date": "2026-07-18",
       "entry_price": 18.65,
-      "latest_price": 19.1,
-      "latest_pct": 2.41,
-      "latest_date": "2026-07-24",
-      "days_tracked": 6
+      "latest_price": 19.15,
+      "latest_pct": 2.68,
+      "latest_date": "2026-07-25",
+      "days_tracked": 7
     },
     {
       "stock_id": "2412",
       "stock_name": "中華電",
       "entry_date": "2026-07-18",
       "entry_price": 138.0,
-      "latest_price": 138.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 6
+      "latest_price": 139.0,
+      "latest_pct": 0.72,
+      "latest_date": "2026-07-25",
+      "days_tracked": 7
     },
     {
       "stock_id": "00712",
       "stock_name": "復華富時不動產",
       "entry_date": "2026-07-17",
       "entry_price": 9.06,
-      "latest_price": 8.85,
-      "latest_pct": -2.32,
-      "latest_date": "2026-07-24",
-      "days_tracked": 7
+      "latest_price": 8.78,
+      "latest_pct": -3.09,
+      "latest_date": "2026-07-25",
+      "days_tracked": 8
     },
     {
       "stock_id": "2891",
       "stock_name": "中信金",
       "entry_date": "2026-07-17",
       "entry_price": 62.1,
-      "latest_price": 63.5,
-      "latest_pct": 2.25,
-      "latest_date": "2026-07-24",
-      "days_tracked": 7
+      "latest_price": 63.6,
+      "latest_pct": 2.42,
+      "latest_date": "2026-07-25",
+      "days_tracked": 8
     },
     {
       "stock_id": "2002",
       "stock_name": "中鋼",
       "entry_date": "2026-07-17",
       "entry_price": 18.65,
-      "latest_price": 19.1,
-      "latest_pct": 2.41,
-      "latest_date": "2026-07-24",
-      "days_tracked": 7
+      "latest_price": 19.15,
+      "latest_pct": 2.68,
+      "latest_date": "2026-07-25",
+      "days_tracked": 8
     },
     {
       "stock_id": "2412",
       "stock_name": "中華電",
       "entry_date": "2026-07-17",
       "entry_price": 138.0,
-      "latest_price": 138.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-07-24",
-      "days_tracked": 7
+      "latest_price": 139.0,
+      "latest_pct": 0.72,
+      "latest_date": "2026-07-25",
+      "days_tracked": 8
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
       "entry_date": "2026-07-16",
       "entry_price": 76.5,
-      "latest_price": 66.0,
-      "latest_pct": -13.73,
-      "latest_date": "2026-07-24",
-      "days_tracked": 8
+      "latest_price": 61.6,
+      "latest_pct": -19.48,
+      "latest_date": "2026-07-25",
+      "days_tracked": 9
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-07-16",
       "entry_price": 30.55,
-      "latest_price": 30.85,
-      "latest_pct": 0.98,
-      "latest_date": "2026-07-24",
-      "days_tracked": 8
+      "latest_price": 30.65,
+      "latest_pct": 0.33,
+      "latest_date": "2026-07-25",
+      "days_tracked": 9
     },
     {
       "stock_id": "2618",
       "stock_name": "長榮航",
       "entry_date": "2026-07-15",
       "entry_price": 42.15,
-      "latest_price": 40.85,
-      "latest_pct": -3.08,
-      "latest_date": "2026-07-24",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "2618",
-      "stock_name": "長榮航",
-      "entry_date": "2026-07-14",
-      "entry_price": 40.75,
-      "latest_price": 40.85,
-      "latest_pct": 0.25,
-      "latest_date": "2026-07-24",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2891",
-      "stock_name": "中信金",
-      "entry_date": "2026-07-14",
-      "entry_price": 65.0,
-      "latest_price": 63.5,
-      "latest_pct": -2.31,
-      "latest_date": "2026-07-24",
+      "latest_price": 40.7,
+      "latest_pct": -3.44,
+      "latest_date": "2026-07-25",
       "days_tracked": 10
     }
   ]
