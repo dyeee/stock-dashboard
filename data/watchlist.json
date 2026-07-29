@@ -11454,5 +11454,53 @@
     "pct_changes": {
       "2026-07-29": 0.0
     }
+  },
+  {
+    "stock_id": "2610",
+    "stock_name": "華航",
+    "entry_date": "2026-07-29",
+    "entry_price": 21.7,
+    "prices": {
+      "2026-07-29": 21.7
+    },
+    "pct_changes": {
+      "2026-07-29": 0.0
+    }
+  },
+  {
+    "stock_id": "2409",
+    "stock_name": "友達",
+    "entry_date": "2026-07-29",
+    "entry_price": 23.65,
+    "prices": {
+      "2026-07-29": 23.65
+    },
+    "pct_changes": {
+      "2026-07-29": 0.0
+    }
+  },
+  {
+    "stock_id": "2412",
+    "stock_name": "中華電",
+    "entry_date": "2026-07-29",
+    "entry_price": 140.5,
+    "prices": {
+      "2026-07-29": 140.5
+    },
+    "pct_changes": {
+      "2026-07-29": 0.0
+    }
+  },
+  {
+    "stock_id": "5876",
+    "stock_name": "上海商銀",
+    "entry_date": "2026-07-29",
+    "entry_price": 44.35,
+    "prices": {
+      "2026-07-29": 44.35
+    },
+    "pct_changes": {
+      "2026-07-29": 0.0
+    }
   }
 ]
