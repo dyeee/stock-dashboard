@@ -11888,5 +11888,21 @@
     "pct_changes": {
       "2026-07-30": 0.0
     }
+  },
+  {
+    "stock_id": "009816",
+    "stock_name": "凱基台灣TOP50",
+    "entry_date": "2026-08-01",
+    "entry_price": null,
+    "prices": {},
+    "pct_changes": {}
+  },
+  {
+    "stock_id": "00992A",
+    "stock_name": "主動群益科技創新",
+    "entry_date": "2026-08-01",
+    "entry_price": null,
+    "prices": {},
+    "pct_changes": {}
   }
 ]
