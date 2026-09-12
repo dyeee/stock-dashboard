@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-09-11 17:50:02",
+  "generated_at_utc": "2026-09-12 17:12:16",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -111,7 +111,7 @@
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-09-12 01:44",
+  "ai_analysis_time": "2026-09-13 01:06",
   "insti_signal": {
     "buy": [
       {
@@ -294,12 +294,42 @@
     {
       "stock_id": "2812",
       "stock_name": "台中銀",
+      "entry_date": "2026-09-13",
+      "entry_price": 19.5,
+      "latest_price": 19.5,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-13",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-09-13",
+      "entry_price": 37.85,
+      "latest_price": 37.85,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-13",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2892",
+      "stock_name": "第一金",
+      "entry_date": "2026-09-13",
+      "entry_price": 38.9,
+      "latest_price": 38.9,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-13",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2812",
+      "stock_name": "台中銀",
       "entry_date": "2026-09-12",
       "entry_price": 19.5,
       "latest_price": 19.5,
       "latest_pct": 0.0,
-      "latest_date": "2026-09-12",
-      "days_tracked": 0
+      "latest_date": "2026-09-13",
+      "days_tracked": 1
     },
     {
       "stock_id": "2883",
@@ -308,8 +338,8 @@
       "entry_price": 37.85,
       "latest_price": 37.85,
       "latest_pct": 0.0,
-      "latest_date": "2026-09-12",
-      "days_tracked": 0
+      "latest_date": "2026-09-13",
+      "days_tracked": 1
     },
     {
       "stock_id": "2892",
@@ -318,8 +348,8 @@
       "entry_price": 38.9,
       "latest_price": 38.9,
       "latest_pct": 0.0,
-      "latest_date": "2026-09-12",
-      "days_tracked": 0
+      "latest_date": "2026-09-13",
+      "days_tracked": 1
     },
     {
       "stock_id": "2409",
@@ -328,8 +358,8 @@
       "entry_price": 31.2,
       "latest_price": 30.2,
       "latest_pct": -3.21,
-      "latest_date": "2026-09-12",
-      "days_tracked": 1
+      "latest_date": "2026-09-13",
+      "days_tracked": 2
     },
     {
       "stock_id": "1101",
@@ -338,8 +368,8 @@
       "entry_price": 24.8,
       "latest_price": 24.5,
       "latest_pct": -1.21,
-      "latest_date": "2026-09-12",
-      "days_tracked": 1
+      "latest_date": "2026-09-13",
+      "days_tracked": 2
     },
     {
       "stock_id": "2834",
@@ -348,8 +378,8 @@
       "entry_price": 17.9,
       "latest_price": 18.0,
       "latest_pct": 0.56,
-      "latest_date": "2026-09-12",
-      "days_tracked": 1
+      "latest_date": "2026-09-13",
+      "days_tracked": 2
     },
     {
       "stock_id": "2409",
@@ -358,8 +388,8 @@
       "entry_price": 30.5,
       "latest_price": 30.2,
       "latest_pct": -0.98,
-      "latest_date": "2026-09-12",
-      "days_tracked": 2
+      "latest_date": "2026-09-13",
+      "days_tracked": 3
     },
     {
       "stock_id": "2834",
@@ -368,8 +398,8 @@
       "entry_price": 17.95,
       "latest_price": 18.0,
       "latest_pct": 0.28,
-      "latest_date": "2026-09-12",
-      "days_tracked": 2
+      "latest_date": "2026-09-13",
+      "days_tracked": 3
     },
     {
       "stock_id": "2409",
@@ -378,8 +408,8 @@
       "entry_price": 29.6,
       "latest_price": 30.2,
       "latest_pct": 2.03,
-      "latest_date": "2026-09-12",
-      "days_tracked": 3
+      "latest_date": "2026-09-13",
+      "days_tracked": 4
     },
     {
       "stock_id": "2344",
@@ -388,8 +418,8 @@
       "entry_price": 188.0,
       "latest_price": 171.5,
       "latest_pct": -8.78,
-      "latest_date": "2026-09-12",
-      "days_tracked": 3
+      "latest_date": "2026-09-13",
+      "days_tracked": 4
     },
     {
       "stock_id": "0050",
@@ -398,8 +428,8 @@
       "entry_price": 109.65,
       "latest_price": 107.7,
       "latest_pct": -1.78,
-      "latest_date": "2026-09-12",
-      "days_tracked": 3
+      "latest_date": "2026-09-13",
+      "days_tracked": 4
     },
     {
       "stock_id": "00403A",
@@ -408,8 +438,8 @@
       "entry_price": 10.39,
       "latest_price": 10.17,
       "latest_pct": -2.12,
-      "latest_date": "2026-09-12",
-      "days_tracked": 4
+      "latest_date": "2026-09-13",
+      "days_tracked": 5
     },
     {
       "stock_id": "2303",
@@ -418,8 +448,8 @@
       "entry_price": 143.0,
       "latest_price": 140.5,
       "latest_pct": -1.75,
-      "latest_date": "2026-09-12",
-      "days_tracked": 4
+      "latest_date": "2026-09-13",
+      "days_tracked": 5
     },
     {
       "stock_id": "2303",
@@ -428,8 +458,8 @@
       "entry_price": 130.0,
       "latest_price": 140.5,
       "latest_pct": 8.08,
-      "latest_date": "2026-09-12",
-      "days_tracked": 5
+      "latest_date": "2026-09-13",
+      "days_tracked": 6
     },
     {
       "stock_id": "2892",
@@ -438,8 +468,8 @@
       "entry_price": 37.3,
       "latest_price": 38.9,
       "latest_pct": 4.29,
-      "latest_date": "2026-09-12",
-      "days_tracked": 5
+      "latest_date": "2026-09-13",
+      "days_tracked": 6
     },
     {
       "stock_id": "2303",
@@ -448,8 +478,8 @@
       "entry_price": 130.0,
       "latest_price": 140.5,
       "latest_pct": 8.08,
-      "latest_date": "2026-09-12",
-      "days_tracked": 6
+      "latest_date": "2026-09-13",
+      "days_tracked": 7
     },
     {
       "stock_id": "2892",
@@ -458,8 +488,8 @@
       "entry_price": 37.3,
       "latest_price": 38.9,
       "latest_pct": 4.29,
-      "latest_date": "2026-09-12",
-      "days_tracked": 6
+      "latest_date": "2026-09-13",
+      "days_tracked": 7
     },
     {
       "stock_id": "2303",
@@ -468,8 +498,8 @@
       "entry_price": 130.0,
       "latest_price": 140.5,
       "latest_pct": 8.08,
-      "latest_date": "2026-09-12",
-      "days_tracked": 7
+      "latest_date": "2026-09-13",
+      "days_tracked": 8
     },
     {
       "stock_id": "2892",
@@ -478,8 +508,8 @@
       "entry_price": 37.3,
       "latest_price": 38.9,
       "latest_pct": 4.29,
-      "latest_date": "2026-09-12",
-      "days_tracked": 7
+      "latest_date": "2026-09-13",
+      "days_tracked": 8
     },
     {
       "stock_id": "2409",
@@ -488,8 +518,8 @@
       "entry_price": 26.55,
       "latest_price": 30.2,
       "latest_pct": 13.75,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     },
     {
       "stock_id": "5880",
@@ -498,8 +528,8 @@
       "entry_price": 26.7,
       "latest_price": 27.2,
       "latest_pct": 1.87,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     },
     {
       "stock_id": "2845",
@@ -508,8 +538,8 @@
       "entry_price": 13.65,
       "latest_price": 13.7,
       "latest_pct": 0.37,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     },
     {
       "stock_id": "2886",
@@ -518,8 +548,8 @@
       "entry_price": 50.4,
       "latest_price": 51.7,
       "latest_pct": 2.58,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     },
     {
       "stock_id": "2889",
@@ -528,8 +558,8 @@
       "entry_price": 16.45,
       "latest_price": 16.75,
       "latest_pct": 1.82,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     },
     {
       "stock_id": "2892",
@@ -538,28 +568,8 @@
       "entry_price": 36.85,
       "latest_price": 38.9,
       "latest_pct": 5.56,
-      "latest_date": "2026-09-12",
-      "days_tracked": 8
-    },
-    {
-      "stock_id": "00403A",
-      "stock_name": "主動統一升級50",
-      "entry_date": "2026-09-02",
-      "entry_price": 10.45,
-      "latest_price": 10.17,
-      "latest_pct": -2.68,
-      "latest_date": "2026-09-12",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "1326",
-      "stock_name": "台化",
-      "entry_date": "2026-09-02",
-      "entry_price": 74.3,
-      "latest_price": 70.2,
-      "latest_pct": -5.52,
-      "latest_date": "2026-09-12",
-      "days_tracked": 10
+      "latest_date": "2026-09-13",
+      "days_tracked": 9
     }
   ]
 }
