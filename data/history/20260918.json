@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-09-19 17:20:52",
+  "generated_at_utc": "2026-09-20 17:31:47",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -111,7 +111,7 @@
       "is_etf": true
     }
   ],
-  "ai_analysis_time": "2026-09-20 01:15",
+  "ai_analysis_time": "2026-09-21 01:27",
   "insti_signal": {
     "buy": [
       {
@@ -294,62 +294,92 @@
     {
       "stock_id": "00403A",
       "stock_name": "主動統一升級50",
+      "entry_date": "2026-09-21",
+      "entry_price": 10.24,
+      "latest_price": 10.24,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-21",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "6770",
+      "stock_name": "力積電",
+      "entry_date": "2026-09-21",
+      "entry_price": 72.5,
+      "latest_price": 72.5,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-21",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "00631L",
+      "stock_name": "元大台灣50正2",
+      "entry_date": "2026-09-21",
+      "entry_price": 37.44,
+      "latest_price": 37.44,
+      "latest_pct": 0.0,
+      "latest_date": "2026-09-21",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50",
       "entry_date": "2026-09-20",
       "entry_price": 10.33,
-      "latest_price": 10.33,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 0
+      "latest_price": 10.24,
+      "latest_pct": -0.87,
+      "latest_date": "2026-09-21",
+      "days_tracked": 1
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
       "entry_date": "2026-09-20",
       "entry_price": 74.0,
-      "latest_price": 74.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 0
+      "latest_price": 72.5,
+      "latest_pct": -2.03,
+      "latest_date": "2026-09-21",
+      "days_tracked": 1
     },
     {
       "stock_id": "00631L",
       "stock_name": "元大台灣50正2",
       "entry_date": "2026-09-20",
       "entry_price": 37.65,
-      "latest_price": 37.65,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 0
+      "latest_price": 37.44,
+      "latest_pct": -0.56,
+      "latest_date": "2026-09-21",
+      "days_tracked": 1
     },
     {
       "stock_id": "00403A",
       "stock_name": "主動統一升級50",
       "entry_date": "2026-09-19",
       "entry_price": 10.33,
-      "latest_price": 10.33,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 1
+      "latest_price": 10.24,
+      "latest_pct": -0.87,
+      "latest_date": "2026-09-21",
+      "days_tracked": 2
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
       "entry_date": "2026-09-19",
       "entry_price": 74.0,
-      "latest_price": 74.0,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 1
+      "latest_price": 72.5,
+      "latest_pct": -2.03,
+      "latest_date": "2026-09-21",
+      "days_tracked": 2
     },
     {
       "stock_id": "00631L",
       "stock_name": "元大台灣50正2",
       "entry_date": "2026-09-19",
       "entry_price": 37.65,
-      "latest_price": 37.65,
-      "latest_pct": 0.0,
-      "latest_date": "2026-09-20",
-      "days_tracked": 1
+      "latest_price": 37.44,
+      "latest_pct": -0.56,
+      "latest_date": "2026-09-21",
+      "days_tracked": 2
     },
     {
       "stock_id": "2409",
@@ -358,68 +388,68 @@
       "entry_price": 30.0,
       "latest_price": 30.35,
       "latest_pct": 1.17,
-      "latest_date": "2026-09-20",
-      "days_tracked": 2
+      "latest_date": "2026-09-21",
+      "days_tracked": 3
     },
     {
       "stock_id": "6770",
       "stock_name": "力積電",
       "entry_date": "2026-09-18",
       "entry_price": 71.2,
-      "latest_price": 74.0,
-      "latest_pct": 3.93,
-      "latest_date": "2026-09-20",
-      "days_tracked": 2
+      "latest_price": 72.5,
+      "latest_pct": 1.83,
+      "latest_date": "2026-09-21",
+      "days_tracked": 3
     },
     {
       "stock_id": "2834",
       "stock_name": "臺企銀",
       "entry_date": "2026-09-18",
       "entry_price": 18.75,
-      "latest_price": 18.35,
-      "latest_pct": -2.13,
-      "latest_date": "2026-09-20",
-      "days_tracked": 2
+      "latest_price": 18.7,
+      "latest_pct": -0.27,
+      "latest_date": "2026-09-21",
+      "days_tracked": 3
     },
     {
       "stock_id": "2609",
       "stock_name": "陽明",
       "entry_date": "2026-09-18",
       "entry_price": 62.0,
-      "latest_price": 61.0,
-      "latest_pct": -1.61,
-      "latest_date": "2026-09-20",
-      "days_tracked": 2
+      "latest_price": 62.2,
+      "latest_pct": 0.32,
+      "latest_date": "2026-09-21",
+      "days_tracked": 3
     },
     {
       "stock_id": "2609",
       "stock_name": "陽明",
       "entry_date": "2026-09-17",
       "entry_price": 60.2,
-      "latest_price": 61.0,
-      "latest_pct": 1.33,
-      "latest_date": "2026-09-20",
-      "days_tracked": 3
+      "latest_price": 62.2,
+      "latest_pct": 3.32,
+      "latest_date": "2026-09-21",
+      "days_tracked": 4
     },
     {
       "stock_id": "2412",
       "stock_name": "中華電",
       "entry_date": "2026-09-16",
       "entry_price": 143.5,
-      "latest_price": 145.5,
-      "latest_pct": 1.39,
-      "latest_date": "2026-09-20",
-      "days_tracked": 4
+      "latest_price": 142.0,
+      "latest_pct": -1.05,
+      "latest_date": "2026-09-21",
+      "days_tracked": 5
     },
     {
       "stock_id": "2412",
       "stock_name": "中華電",
       "entry_date": "2026-09-15",
       "entry_price": 142.5,
-      "latest_price": 145.5,
-      "latest_pct": 2.11,
-      "latest_date": "2026-09-20",
-      "days_tracked": 5
+      "latest_price": 142.0,
+      "latest_pct": -0.35,
+      "latest_date": "2026-09-21",
+      "days_tracked": 6
     },
     {
       "stock_id": "5880",
@@ -428,18 +458,18 @@
       "entry_price": 27.45,
       "latest_price": 27.3,
       "latest_pct": -0.55,
-      "latest_date": "2026-09-20",
-      "days_tracked": 5
+      "latest_date": "2026-09-21",
+      "days_tracked": 6
     },
     {
       "stock_id": "2892",
       "stock_name": "第一金",
       "entry_date": "2026-09-15",
       "entry_price": 39.85,
-      "latest_price": 39.8,
-      "latest_pct": -0.13,
-      "latest_date": "2026-09-20",
-      "days_tracked": 5
+      "latest_price": 40.85,
+      "latest_pct": 2.51,
+      "latest_date": "2026-09-21",
+      "days_tracked": 6
     },
     {
       "stock_id": "2887",
@@ -448,108 +478,108 @@
       "entry_price": 43.55,
       "latest_price": 44.4,
       "latest_pct": 1.95,
-      "latest_date": "2026-09-20",
-      "days_tracked": 5
+      "latest_date": "2026-09-21",
+      "days_tracked": 6
     },
     {
       "stock_id": "2889",
       "stock_name": "國票金",
       "entry_date": "2026-09-15",
       "entry_price": 17.05,
-      "latest_price": 17.15,
-      "latest_pct": 0.59,
-      "latest_date": "2026-09-20",
-      "days_tracked": 5
+      "latest_price": 17.3,
+      "latest_pct": 1.47,
+      "latest_date": "2026-09-21",
+      "days_tracked": 6
     },
     {
       "stock_id": "2812",
       "stock_name": "台中銀",
       "entry_date": "2026-09-14",
       "entry_price": 19.5,
-      "latest_price": 19.35,
-      "latest_pct": -0.77,
-      "latest_date": "2026-09-20",
-      "days_tracked": 6
+      "latest_price": 19.4,
+      "latest_pct": -0.51,
+      "latest_date": "2026-09-21",
+      "days_tracked": 7
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-09-14",
       "entry_price": 37.85,
-      "latest_price": 39.3,
-      "latest_pct": 3.83,
-      "latest_date": "2026-09-20",
-      "days_tracked": 6
+      "latest_price": 39.5,
+      "latest_pct": 4.36,
+      "latest_date": "2026-09-21",
+      "days_tracked": 7
     },
     {
       "stock_id": "2892",
       "stock_name": "第一金",
       "entry_date": "2026-09-14",
       "entry_price": 38.9,
-      "latest_price": 39.8,
-      "latest_pct": 2.31,
-      "latest_date": "2026-09-20",
-      "days_tracked": 6
+      "latest_price": 40.85,
+      "latest_pct": 5.01,
+      "latest_date": "2026-09-21",
+      "days_tracked": 7
     },
     {
       "stock_id": "2812",
       "stock_name": "台中銀",
       "entry_date": "2026-09-13",
       "entry_price": 19.5,
-      "latest_price": 19.35,
-      "latest_pct": -0.77,
-      "latest_date": "2026-09-20",
-      "days_tracked": 7
+      "latest_price": 19.4,
+      "latest_pct": -0.51,
+      "latest_date": "2026-09-21",
+      "days_tracked": 8
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-09-13",
       "entry_price": 37.85,
-      "latest_price": 39.3,
-      "latest_pct": 3.83,
-      "latest_date": "2026-09-20",
-      "days_tracked": 7
+      "latest_price": 39.5,
+      "latest_pct": 4.36,
+      "latest_date": "2026-09-21",
+      "days_tracked": 8
     },
     {
       "stock_id": "2892",
       "stock_name": "第一金",
       "entry_date": "2026-09-13",
       "entry_price": 38.9,
-      "latest_price": 39.8,
-      "latest_pct": 2.31,
-      "latest_date": "2026-09-20",
-      "days_tracked": 7
+      "latest_price": 40.85,
+      "latest_pct": 5.01,
+      "latest_date": "2026-09-21",
+      "days_tracked": 8
     },
     {
       "stock_id": "2812",
       "stock_name": "台中銀",
       "entry_date": "2026-09-12",
       "entry_price": 19.5,
-      "latest_price": 19.35,
-      "latest_pct": -0.77,
-      "latest_date": "2026-09-20",
-      "days_tracked": 8
+      "latest_price": 19.4,
+      "latest_pct": -0.51,
+      "latest_date": "2026-09-21",
+      "days_tracked": 9
     },
     {
       "stock_id": "2883",
       "stock_name": "凱基金",
       "entry_date": "2026-09-12",
       "entry_price": 37.85,
-      "latest_price": 39.3,
-      "latest_pct": 3.83,
-      "latest_date": "2026-09-20",
-      "days_tracked": 8
+      "latest_price": 39.5,
+      "latest_pct": 4.36,
+      "latest_date": "2026-09-21",
+      "days_tracked": 9
     },
     {
       "stock_id": "2892",
       "stock_name": "第一金",
       "entry_date": "2026-09-12",
       "entry_price": 38.9,
-      "latest_price": 39.8,
-      "latest_pct": 2.31,
-      "latest_date": "2026-09-20",
-      "days_tracked": 8
+      "latest_price": 40.85,
+      "latest_pct": 5.01,
+      "latest_date": "2026-09-21",
+      "days_tracked": 9
     },
     {
       "stock_id": "2409",
@@ -558,47 +588,27 @@
       "entry_price": 31.2,
       "latest_price": 30.35,
       "latest_pct": -2.72,
-      "latest_date": "2026-09-20",
-      "days_tracked": 9
+      "latest_date": "2026-09-21",
+      "days_tracked": 10
     },
     {
       "stock_id": "1101",
       "stock_name": "台泥",
       "entry_date": "2026-09-11",
       "entry_price": 24.8,
-      "latest_price": 24.35,
-      "latest_pct": -1.81,
-      "latest_date": "2026-09-20",
-      "days_tracked": 9
+      "latest_price": 26.75,
+      "latest_pct": 7.86,
+      "latest_date": "2026-09-21",
+      "days_tracked": 10
     },
     {
       "stock_id": "2834",
       "stock_name": "臺企銀",
       "entry_date": "2026-09-11",
       "entry_price": 17.9,
-      "latest_price": 18.35,
-      "latest_pct": 2.51,
-      "latest_date": "2026-09-20",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "2409",
-      "stock_name": "友達",
-      "entry_date": "2026-09-10",
-      "entry_price": 30.5,
-      "latest_price": 30.35,
-      "latest_pct": -0.49,
-      "latest_date": "2026-09-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2834",
-      "stock_name": "臺企銀",
-      "entry_date": "2026-09-10",
-      "entry_price": 17.95,
-      "latest_price": 18.35,
-      "latest_pct": 2.23,
-      "latest_date": "2026-09-20",
+      "latest_price": 18.7,
+      "latest_pct": 4.47,
+      "latest_date": "2026-09-21",
       "days_tracked": 10
     }
   ]
