@@ -1,0 +1,495 @@
+{
+  "mode": "intersection_top10_per_day",
+  "generated_at_utc": "2026-10-27 19:31:05",
+  "timezone": "Asia/Taipei",
+  "params": {
+    "days": 2,
+    "top_n": 10
+  },
+  "trading_dates": [
+    "2026-10-27",
+    "2026-10-22"
+  ],
+  "count_intersection": 3,
+  "stocks": [
+    {
+      "stock_id": "2002",
+      "stock_name": "中鋼            ",
+      "total_net_buy": 54263,
+      "avg_net_buy": 27131.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-10-27",
+          "rank": 2,
+          "net_buy_lots": 29598
+        },
+        "day2": {
+          "date": "2026-10-22",
+          "rank": 3,
+          "net_buy_lots": 24665
+        }
+      }
+    },
+    {
+      "stock_id": "2353",
+      "stock_name": "宏碁            ",
+      "total_net_buy": 22031,
+      "avg_net_buy": 11015.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-10-27",
+          "rank": 6,
+          "net_buy_lots": 12810
+        },
+        "day2": {
+          "date": "2026-10-22",
+          "rank": 10,
+          "net_buy_lots": 9221
+        }
+      }
+    },
+    {
+      "stock_id": "4526",
+      "stock_name": "東台            ",
+      "total_net_buy": 19857,
+      "avg_net_buy": 9928.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-10-27",
+          "rank": 9,
+          "net_buy_lots": 9879
+        },
+        "day2": {
+          "date": "2026-10-22",
+          "rank": 7,
+          "net_buy_lots": 9978
+        }
+      }
+    }
+  ],
+  "ai_analysis": [
+    {
+      "ticker": "2002",
+      "name": "中鋼            ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 54263,
+      "is_etf": false
+    },
+    {
+      "ticker": "2353",
+      "name": "宏碁            ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 22031,
+      "is_etf": false
+    },
+    {
+      "ticker": "4526",
+      "name": "東台            ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 19857,
+      "is_etf": false
+    }
+  ],
+  "ai_analysis_time": "2026-10-28 03:25",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "6770",
+        "stock_name": "力積電",
+        "foreign_net": 56012,
+        "trust_net": 4937,
+        "ft_net": 60949,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2356",
+        "stock_name": "英業達",
+        "foreign_net": 16601,
+        "trust_net": 969,
+        "ft_net": 17570,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": 11566,
+        "trust_net": 491,
+        "ft_net": 12057,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "5880",
+        "stock_name": "合庫金",
+        "foreign_net": 10719,
+        "trust_net": 1043,
+        "ft_net": 11762,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "1326",
+        "stock_name": "台化",
+        "foreign_net": 9102,
+        "trust_net": 2000,
+        "ft_net": 11102,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2324",
+        "stock_name": "仁寶",
+        "foreign_net": 8081,
+        "trust_net": 84,
+        "ft_net": 8165,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2885",
+        "stock_name": "元大金",
+        "foreign_net": 6058,
+        "trust_net": 1391,
+        "ft_net": 7449,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2317",
+        "stock_name": "鴻海",
+        "foreign_net": 4972,
+        "trust_net": 828,
+        "ft_net": 5800,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2327",
+        "stock_name": "國巨*",
+        "foreign_net": 5328,
+        "trust_net": 470,
+        "ft_net": 5798,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2449",
+        "stock_name": "京元電子",
+        "foreign_net": 4801,
+        "trust_net": 744,
+        "ft_net": 5545,
+        "date": "20261027"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2834",
+        "stock_name": "臺企銀",
+        "foreign_net": -2979,
+        "trust_net": -37,
+        "ft_net": -3016,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "6005",
+        "stock_name": "群益證",
+        "foreign_net": -2615,
+        "trust_net": -9,
+        "ft_net": -2624,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "1504",
+        "stock_name": "東元",
+        "foreign_net": -1130,
+        "trust_net": -9,
+        "ft_net": -1139,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "3026",
+        "stock_name": "禾伸堂",
+        "foreign_net": -552,
+        "trust_net": -492,
+        "ft_net": -1044,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2615",
+        "stock_name": "萬海",
+        "foreign_net": -867,
+        "trust_net": -9,
+        "ft_net": -876,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "1708",
+        "stock_name": "東鹼",
+        "foreign_net": -679,
+        "trust_net": -116,
+        "ft_net": -795,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "5469",
+        "stock_name": "瀚宇博",
+        "foreign_net": -418,
+        "trust_net": -286,
+        "ft_net": -704,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "1444",
+        "stock_name": "力麗",
+        "foreign_net": -43,
+        "trust_net": -419,
+        "ft_net": -462,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "2406",
+        "stock_name": "國碩",
+        "foreign_net": -241,
+        "trust_net": -176,
+        "ft_net": -417,
+        "date": "20261027"
+      },
+      {
+        "stock_id": "1319",
+        "stock_name": "東陽",
+        "foreign_net": -331,
+        "trust_net": -27,
+        "ft_net": -358,
+        "date": "20261027"
+      }
+    ],
+    "date": "20261027"
+  },
+  "insti_signal_date": "2026-10-27",
+  "market_insti": {
+    "date": "20261027",
+    "unit": "億元",
+    "trust_buy": 383.92,
+    "trust_sell": 147.88,
+    "trust_net": 236.05,
+    "foreign_buy": 5141.23,
+    "foreign_sell": 5221.62,
+    "foreign_net": -80.39
+  },
+  "watchlist_summary": [
+    {
+      "stock_id": "2002",
+      "stock_name": "中鋼",
+      "entry_date": "2026-10-28",
+      "entry_price": 19.75,
+      "latest_price": 19.75,
+      "latest_pct": 0.0,
+      "latest_date": "2026-10-28",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2353",
+      "stock_name": "宏碁",
+      "entry_date": "2026-10-28",
+      "entry_price": 33.15,
+      "latest_price": 33.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-10-28",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "4526",
+      "stock_name": "東台",
+      "entry_date": "2026-10-28",
+      "entry_price": 45.15,
+      "latest_price": 45.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-10-28",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-27",
+      "entry_price": 106.5,
+      "latest_price": 106.0,
+      "latest_pct": -0.47,
+      "latest_date": "2026-10-28",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-26",
+      "entry_price": 106.5,
+      "latest_price": 106.0,
+      "latest_pct": -0.47,
+      "latest_date": "2026-10-28",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-25",
+      "entry_price": 106.5,
+      "latest_price": 106.0,
+      "latest_pct": -0.47,
+      "latest_date": "2026-10-28",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-24",
+      "entry_price": 106.5,
+      "latest_price": 106.0,
+      "latest_pct": -0.47,
+      "latest_date": "2026-10-28",
+      "days_tracked": 4
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-23",
+      "entry_price": 106.5,
+      "latest_price": 106.0,
+      "latest_pct": -0.47,
+      "latest_date": "2026-10-28",
+      "days_tracked": 5
+    },
+    {
+      "stock_id": "3231",
+      "stock_name": "緯創",
+      "entry_date": "2026-10-22",
+      "entry_price": 195.0,
+      "latest_price": 190.5,
+      "latest_pct": -2.31,
+      "latest_date": "2026-10-28",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2324",
+      "stock_name": "仁寶",
+      "entry_date": "2026-10-22",
+      "entry_price": 37.7,
+      "latest_price": 37.6,
+      "latest_pct": -0.27,
+      "latest_date": "2026-10-28",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "6505",
+      "stock_name": "台塑化",
+      "entry_date": "2026-10-22",
+      "entry_price": 109.5,
+      "latest_price": 106.0,
+      "latest_pct": -3.2,
+      "latest_date": "2026-10-28",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2002",
+      "stock_name": "中鋼",
+      "entry_date": "2026-10-21",
+      "entry_price": 19.6,
+      "latest_price": 19.75,
+      "latest_pct": 0.77,
+      "latest_date": "2026-10-28",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "4938",
+      "stock_name": "和碩",
+      "entry_date": "2026-10-21",
+      "entry_price": 105.0,
+      "latest_price": 105.0,
+      "latest_pct": 0.0,
+      "latest_date": "2026-10-28",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "2542",
+      "stock_name": "興富發",
+      "entry_date": "2026-10-21",
+      "entry_price": 40.15,
+      "latest_price": 40.15,
+      "latest_pct": 0.0,
+      "latest_date": "2026-10-28",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "2002",
+      "stock_name": "中鋼",
+      "entry_date": "2026-10-20",
+      "entry_price": 19.5,
+      "latest_price": 19.75,
+      "latest_pct": 1.28,
+      "latest_date": "2026-10-28",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "2409",
+      "stock_name": "友達",
+      "entry_date": "2026-10-20",
+      "entry_price": 36.7,
+      "latest_price": 33.45,
+      "latest_pct": -8.86,
+      "latest_date": "2026-10-28",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "5880",
+      "stock_name": "合庫金",
+      "entry_date": "2026-10-19",
+      "entry_price": 28.15,
+      "latest_price": 28.8,
+      "latest_pct": 2.31,
+      "latest_date": "2026-10-28",
+      "days_tracked": 9
+    },
+    {
+      "stock_id": "2886",
+      "stock_name": "兆豐金",
+      "entry_date": "2026-10-19",
+      "entry_price": 53.7,
+      "latest_price": 55.0,
+      "latest_pct": 2.42,
+      "latest_date": "2026-10-28",
+      "days_tracked": 9
+    },
+    {
+      "stock_id": "5880",
+      "stock_name": "合庫金",
+      "entry_date": "2026-10-18",
+      "entry_price": 28.15,
+      "latest_price": 28.8,
+      "latest_pct": 2.31,
+      "latest_date": "2026-10-28",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2886",
+      "stock_name": "兆豐金",
+      "entry_date": "2026-10-18",
+      "entry_price": 53.7,
+      "latest_price": 55.0,
+      "latest_pct": 2.42,
+      "latest_date": "2026-10-28",
+      "days_tracked": 10
+    }
+  ]
+}
