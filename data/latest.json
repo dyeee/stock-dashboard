@@ -1,6 +1,6 @@
 {
   "mode": "intersection_top10_per_day",
-  "generated_at_utc": "2026-10-30 19:24:59",
+  "generated_at_utc": "2026-10-31 18:35:41",
   "timezone": "Asia/Taipei",
   "params": {
     "days": 2,
@@ -79,7 +79,7 @@
       "is_etf": false
     }
   ],
-  "ai_analysis_time": "2026-10-31 03:18",
+  "ai_analysis_time": "2026-11-01 02:30",
   "insti_signal": {
     "buy": [
       {
@@ -262,12 +262,32 @@
     {
       "stock_id": "00712",
       "stock_name": "復華富時不動產",
+      "entry_date": "2026-11-01",
+      "entry_price": 7.26,
+      "latest_price": 7.26,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-01",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "9904",
+      "stock_name": "寶成",
+      "entry_date": "2026-11-01",
+      "entry_price": 25.8,
+      "latest_price": 25.8,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-01",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
       "entry_date": "2026-10-31",
       "entry_price": 7.26,
       "latest_price": 7.26,
       "latest_pct": 0.0,
-      "latest_date": "2026-10-31",
-      "days_tracked": 0
+      "latest_date": "2026-11-01",
+      "days_tracked": 1
     },
     {
       "stock_id": "9904",
@@ -276,8 +296,8 @@
       "entry_price": 25.8,
       "latest_price": 25.8,
       "latest_pct": 0.0,
-      "latest_date": "2026-10-31",
-      "days_tracked": 0
+      "latest_date": "2026-11-01",
+      "days_tracked": 1
     },
     {
       "stock_id": "2344",
@@ -286,8 +306,8 @@
       "entry_price": 170.5,
       "latest_price": 164.5,
       "latest_pct": -3.52,
-      "latest_date": "2026-10-31",
-      "days_tracked": 1
+      "latest_date": "2026-11-01",
+      "days_tracked": 2
     },
     {
       "stock_id": "6770",
@@ -296,8 +316,8 @@
       "entry_price": 71.3,
       "latest_price": 66.6,
       "latest_pct": -6.59,
-      "latest_date": "2026-10-31",
-      "days_tracked": 2
+      "latest_date": "2026-11-01",
+      "days_tracked": 3
     },
     {
       "stock_id": "2344",
@@ -306,8 +326,8 @@
       "entry_price": 172.0,
       "latest_price": 164.5,
       "latest_pct": -4.36,
-      "latest_date": "2026-10-31",
-      "days_tracked": 2
+      "latest_date": "2026-11-01",
+      "days_tracked": 3
     },
     {
       "stock_id": "2002",
@@ -316,8 +336,8 @@
       "entry_price": 19.75,
       "latest_price": 19.25,
       "latest_pct": -2.53,
-      "latest_date": "2026-10-31",
-      "days_tracked": 3
+      "latest_date": "2026-11-01",
+      "days_tracked": 4
     },
     {
       "stock_id": "2353",
@@ -326,8 +346,8 @@
       "entry_price": 33.15,
       "latest_price": 30.4,
       "latest_pct": -8.3,
-      "latest_date": "2026-10-31",
-      "days_tracked": 3
+      "latest_date": "2026-11-01",
+      "days_tracked": 4
     },
     {
       "stock_id": "4526",
@@ -336,8 +356,8 @@
       "entry_price": 45.15,
       "latest_price": 56.0,
       "latest_pct": 24.03,
-      "latest_date": "2026-10-31",
-      "days_tracked": 3
+      "latest_date": "2026-11-01",
+      "days_tracked": 4
     },
     {
       "stock_id": "6505",
@@ -346,8 +366,8 @@
       "entry_price": 106.5,
       "latest_price": 98.3,
       "latest_pct": -7.7,
-      "latest_date": "2026-10-31",
-      "days_tracked": 4
+      "latest_date": "2026-11-01",
+      "days_tracked": 5
     },
     {
       "stock_id": "6505",
@@ -356,8 +376,8 @@
       "entry_price": 106.5,
       "latest_price": 98.3,
       "latest_pct": -7.7,
-      "latest_date": "2026-10-31",
-      "days_tracked": 5
+      "latest_date": "2026-11-01",
+      "days_tracked": 6
     },
     {
       "stock_id": "6505",
@@ -366,8 +386,8 @@
       "entry_price": 106.5,
       "latest_price": 98.3,
       "latest_pct": -7.7,
-      "latest_date": "2026-10-31",
-      "days_tracked": 6
+      "latest_date": "2026-11-01",
+      "days_tracked": 7
     },
     {
       "stock_id": "6505",
@@ -376,8 +396,8 @@
       "entry_price": 106.5,
       "latest_price": 98.3,
       "latest_pct": -7.7,
-      "latest_date": "2026-10-31",
-      "days_tracked": 7
+      "latest_date": "2026-11-01",
+      "days_tracked": 8
     },
     {
       "stock_id": "6505",
@@ -386,8 +406,8 @@
       "entry_price": 106.5,
       "latest_price": 98.3,
       "latest_pct": -7.7,
-      "latest_date": "2026-10-31",
-      "days_tracked": 8
+      "latest_date": "2026-11-01",
+      "days_tracked": 9
     },
     {
       "stock_id": "3231",
@@ -396,8 +416,8 @@
       "entry_price": 195.0,
       "latest_price": 183.5,
       "latest_pct": -5.9,
-      "latest_date": "2026-10-31",
-      "days_tracked": 9
+      "latest_date": "2026-11-01",
+      "days_tracked": 10
     },
     {
       "stock_id": "2324",
@@ -406,8 +426,8 @@
       "entry_price": 37.7,
       "latest_price": 35.2,
       "latest_pct": -6.63,
-      "latest_date": "2026-10-31",
-      "days_tracked": 9
+      "latest_date": "2026-11-01",
+      "days_tracked": 10
     },
     {
       "stock_id": "6505",
@@ -416,37 +436,7 @@
       "entry_price": 109.5,
       "latest_price": 98.3,
       "latest_pct": -10.23,
-      "latest_date": "2026-10-31",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "2002",
-      "stock_name": "中鋼",
-      "entry_date": "2026-10-21",
-      "entry_price": 19.6,
-      "latest_price": 19.25,
-      "latest_pct": -1.79,
-      "latest_date": "2026-10-31",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "4938",
-      "stock_name": "和碩",
-      "entry_date": "2026-10-21",
-      "entry_price": 105.0,
-      "latest_price": 102.5,
-      "latest_pct": -2.38,
-      "latest_date": "2026-10-31",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2542",
-      "stock_name": "興富發",
-      "entry_date": "2026-10-21",
-      "entry_price": 40.15,
-      "latest_price": 39.3,
-      "latest_pct": -2.12,
-      "latest_date": "2026-10-31",
+      "latest_date": "2026-11-01",
       "days_tracked": 10
     }
   ]
