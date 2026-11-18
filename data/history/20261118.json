@@ -1,0 +1,643 @@
+{
+  "mode": "intersection_top10_per_day",
+  "generated_at_utc": "2026-11-18 22:01:18",
+  "timezone": "Asia/Taipei",
+  "params": {
+    "days": 2,
+    "top_n": 10
+  },
+  "trading_dates": [
+    "2026-11-18",
+    "2026-11-17"
+  ],
+  "count_intersection": 2,
+  "stocks": [
+    {
+      "stock_id": "9933",
+      "stock_name": "中鼎            ",
+      "total_net_buy": 36769,
+      "avg_net_buy": 18384.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-18",
+          "rank": 3,
+          "net_buy_lots": 11996
+        },
+        "day2": {
+          "date": "2026-11-17",
+          "rank": 1,
+          "net_buy_lots": 24773
+        }
+      }
+    },
+    {
+      "stock_id": "3481",
+      "stock_name": "群創            ",
+      "total_net_buy": 22301,
+      "avg_net_buy": 11150.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-18",
+          "rank": 2,
+          "net_buy_lots": 14465
+        },
+        "day2": {
+          "date": "2026-11-17",
+          "rank": 8,
+          "net_buy_lots": 7836
+        }
+      }
+    }
+  ],
+  "ai_analysis": [
+    {
+      "ticker": "9933",
+      "name": "中鼎            ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 36769,
+      "is_etf": false
+    },
+    {
+      "ticker": "3481",
+      "name": "群創            ",
+      "verdict": "謹慎觀察",
+      "confidence": "低",
+      "reasons": [
+        "AI 回傳解析失敗"
+      ],
+      "warning": "請手動查閱",
+      "next_check": "手動確認",
+      "data_quality": "不足",
+      "net_buy_lots": 22301,
+      "is_etf": false
+    }
+  ],
+  "ai_analysis_time": "2026-11-19 05:54",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "3481",
+        "stock_name": "群創",
+        "foreign_net": 14465,
+        "trust_net": 6234,
+        "ft_net": 20699,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2610",
+        "stock_name": "華航",
+        "foreign_net": 4146,
+        "trust_net": 2665,
+        "ft_net": 6811,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "00980A",
+        "stock_name": "主動野村臺灣優選",
+        "foreign_net": 3000,
+        "trust_net": 3411,
+        "ft_net": 6411,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2323",
+        "stock_name": "中環",
+        "foreign_net": 4118,
+        "trust_net": 41,
+        "ft_net": 4159,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "0056",
+        "stock_name": "元大高股息",
+        "foreign_net": 3475,
+        "trust_net": 370,
+        "ft_net": 3845,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "1402",
+        "stock_name": "遠東新",
+        "foreign_net": 1473,
+        "trust_net": 362,
+        "ft_net": 1835,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2455",
+        "stock_name": "全新",
+        "foreign_net": 815,
+        "trust_net": 124,
+        "ft_net": 939,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "00935",
+        "stock_name": "野村臺灣新科技50",
+        "foreign_net": 711,
+        "trust_net": 174,
+        "ft_net": 885,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2385",
+        "stock_name": "群光",
+        "foreign_net": 575,
+        "trust_net": 100,
+        "ft_net": 675,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "5388",
+        "stock_name": "中磊",
+        "foreign_net": 421,
+        "trust_net": 150,
+        "ft_net": 571,
+        "date": "20261118"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2884",
+        "stock_name": "玉山金",
+        "foreign_net": -42999,
+        "trust_net": -8188,
+        "ft_net": -51187,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2887",
+        "stock_name": "台新新光金",
+        "foreign_net": -24982,
+        "trust_net": -6435,
+        "ft_net": -31417,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2885",
+        "stock_name": "元大金",
+        "foreign_net": -3026,
+        "trust_net": -9649,
+        "ft_net": -12675,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2355",
+        "stock_name": "敬鵬",
+        "foreign_net": -8090,
+        "trust_net": -130,
+        "ft_net": -8220,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "3189",
+        "stock_name": "景碩",
+        "foreign_net": -5874,
+        "trust_net": -1902,
+        "ft_net": -7776,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2834",
+        "stock_name": "臺企銀",
+        "foreign_net": -6416,
+        "trust_net": -7,
+        "ft_net": -6423,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "1605",
+        "stock_name": "華新",
+        "foreign_net": -5789,
+        "trust_net": -608,
+        "ft_net": -6397,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2801",
+        "stock_name": "彰銀",
+        "foreign_net": -1765,
+        "trust_net": -3980,
+        "ft_net": -5745,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2408",
+        "stock_name": "南亞科",
+        "foreign_net": -4399,
+        "trust_net": -252,
+        "ft_net": -4651,
+        "date": "20261118"
+      },
+      {
+        "stock_id": "2344",
+        "stock_name": "華邦電",
+        "foreign_net": -2831,
+        "trust_net": -1160,
+        "ft_net": -3991,
+        "date": "20261118"
+      }
+    ],
+    "date": "20261118"
+  },
+  "insti_signal_date": "2026-11-18",
+  "market_insti": {
+    "date": "20261118",
+    "unit": "億元",
+    "trust_buy": 407.78,
+    "trust_sell": 241.67,
+    "trust_net": 166.12,
+    "foreign_buy": 4387.58,
+    "foreign_sell": 5153.22,
+    "foreign_net": -765.64
+  },
+  "watchlist_summary": [
+    {
+      "stock_id": "9933",
+      "stock_name": "中鼎",
+      "entry_date": "2026-11-19",
+      "entry_price": 57.5,
+      "latest_price": 57.5,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-19",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "3481",
+      "stock_name": "群創",
+      "entry_date": "2026-11-19",
+      "entry_price": 36.55,
+      "latest_price": 36.55,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-19",
+      "days_tracked": 0
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-11-18",
+      "entry_price": 39.3,
+      "latest_price": 37.1,
+      "latest_pct": -5.6,
+      "latest_date": "2026-11-19",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-18",
+      "entry_price": 23.1,
+      "latest_price": 22.9,
+      "latest_pct": -0.87,
+      "latest_date": "2026-11-19",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-11-17",
+      "entry_price": 95.2,
+      "latest_price": 93.0,
+      "latest_pct": -2.31,
+      "latest_date": "2026-11-19",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-11-17",
+      "entry_price": 38.6,
+      "latest_price": 37.1,
+      "latest_pct": -3.89,
+      "latest_date": "2026-11-19",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-11-17",
+      "entry_price": 34.55,
+      "latest_price": 33.75,
+      "latest_pct": -2.32,
+      "latest_date": "2026-11-19",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2885",
+      "stock_name": "元大金",
+      "entry_date": "2026-11-17",
+      "entry_price": 68.7,
+      "latest_price": 64.9,
+      "latest_pct": -5.53,
+      "latest_date": "2026-11-19",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-11-17",
+      "entry_price": 48.3,
+      "latest_price": 42.15,
+      "latest_pct": -12.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-16",
+      "entry_price": 24.7,
+      "latest_price": 22.05,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "2885",
+      "stock_name": "元大金",
+      "entry_date": "2026-11-16",
+      "entry_price": 72.7,
+      "latest_price": 64.9,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-11-16",
+      "entry_price": 48.3,
+      "latest_price": 42.15,
+      "latest_pct": -12.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-11-16",
+      "entry_price": 36.3,
+      "latest_price": 33.75,
+      "latest_pct": -7.02,
+      "latest_date": "2026-11-19",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-15",
+      "entry_price": 24.7,
+      "latest_price": 22.05,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 4
+    },
+    {
+      "stock_id": "2885",
+      "stock_name": "元大金",
+      "entry_date": "2026-11-15",
+      "entry_price": 72.7,
+      "latest_price": 64.9,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 4
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-11-15",
+      "entry_price": 48.3,
+      "latest_price": 42.15,
+      "latest_pct": -12.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 4
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-11-15",
+      "entry_price": 36.3,
+      "latest_price": 33.75,
+      "latest_pct": -7.02,
+      "latest_date": "2026-11-19",
+      "days_tracked": 4
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-14",
+      "entry_price": 24.7,
+      "latest_price": 22.05,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 5
+    },
+    {
+      "stock_id": "2885",
+      "stock_name": "元大金",
+      "entry_date": "2026-11-14",
+      "entry_price": 72.7,
+      "latest_price": 64.9,
+      "latest_pct": -10.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 5
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-11-14",
+      "entry_price": 48.3,
+      "latest_price": 42.15,
+      "latest_pct": -12.73,
+      "latest_date": "2026-11-19",
+      "days_tracked": 5
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-11-14",
+      "entry_price": 36.3,
+      "latest_price": 33.75,
+      "latest_pct": -7.02,
+      "latest_date": "2026-11-19",
+      "days_tracked": 5
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-13",
+      "entry_price": 24.02,
+      "latest_price": 22.05,
+      "latest_pct": -8.2,
+      "latest_date": "2026-11-19",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-13",
+      "entry_price": 22.8,
+      "latest_price": 22.9,
+      "latest_pct": 0.44,
+      "latest_date": "2026-11-19",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2409",
+      "stock_name": "友達",
+      "entry_date": "2026-11-13",
+      "entry_price": 29.2,
+      "latest_price": 27.4,
+      "latest_pct": -6.16,
+      "latest_date": "2026-11-19",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50",
+      "entry_date": "2026-11-12",
+      "entry_price": 9.19,
+      "latest_price": 8.08,
+      "latest_pct": -12.08,
+      "latest_date": "2026-11-19",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-12",
+      "entry_price": 25.33,
+      "latest_price": 22.05,
+      "latest_pct": -12.95,
+      "latest_date": "2026-11-19",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-12",
+      "entry_price": 23.5,
+      "latest_price": 22.9,
+      "latest_pct": -2.55,
+      "latest_date": "2026-11-19",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "2618",
+      "stock_name": "長榮航",
+      "entry_date": "2026-11-12",
+      "entry_price": 47.6,
+      "latest_price": 46.8,
+      "latest_pct": -1.68,
+      "latest_date": "2026-11-19",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "00991A",
+      "stock_name": "主動復華未來50",
+      "entry_date": "2026-11-12",
+      "entry_price": 14.99,
+      "latest_price": 12.61,
+      "latest_pct": -15.88,
+      "latest_date": "2026-11-19",
+      "days_tracked": 7
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50",
+      "entry_date": "2026-11-11",
+      "entry_price": 8.87,
+      "latest_price": 8.08,
+      "latest_pct": -8.91,
+      "latest_date": "2026-11-19",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-11",
+      "entry_price": 24.27,
+      "latest_price": 22.05,
+      "latest_pct": -9.15,
+      "latest_date": "2026-11-19",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "1802",
+      "stock_name": "台玻",
+      "entry_date": "2026-11-11",
+      "entry_price": 69.8,
+      "latest_price": 65.2,
+      "latest_pct": -6.59,
+      "latest_date": "2026-11-19",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-11",
+      "entry_price": 22.8,
+      "latest_price": 22.9,
+      "latest_pct": 0.44,
+      "latest_date": "2026-11-19",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-10",
+      "entry_price": 21.75,
+      "latest_price": 22.9,
+      "latest_pct": 5.29,
+      "latest_date": "2026-11-19",
+      "days_tracked": 9
+    },
+    {
+      "stock_id": "00953B",
+      "stock_name": "群益優選非投等債",
+      "entry_date": "2026-11-09",
+      "entry_price": 9.67,
+      "latest_price": 9.64,
+      "latest_pct": -0.31,
+      "latest_date": "2026-11-19",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
+      "entry_date": "2026-11-09",
+      "entry_price": 7.22,
+      "latest_price": 6.57,
+      "latest_pct": -9.0,
+      "latest_date": "2026-11-19",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-09",
+      "entry_price": 21.2,
+      "latest_price": 22.9,
+      "latest_pct": 8.02,
+      "latest_date": "2026-11-19",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "00984D",
+      "stock_name": "主動聯博全球非投",
+      "entry_date": "2026-11-09",
+      "entry_price": 9.75,
+      "latest_price": 9.69,
+      "latest_pct": -0.62,
+      "latest_date": "2026-11-19",
+      "days_tracked": 10
+    }
+  ]
+}
