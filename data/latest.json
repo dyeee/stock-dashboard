@@ -86,15 +86,15 @@
     }
   ],
   "news_trend": {
-    "summary": "近期新聞聚焦三大主線：其一，美國AI熱潮與資金外流加劇，NVDA、Anthropic等股價波動劇烈，導致美股AI板塊大幅拋售，進一步推升美國恐慌指數，並影響全球風險偏好；其二，台灣資本市場受外資與國安基金介入影響，金管會連續推出平盤禁空等穩市措施，顯示市場流動性緊縮與政策干預升高，台股短期波動劇烈但仍受政策支撐；其三，產業層面AI與先進製程持續升溫，技嘉、矽科宏晟、Hugging Face等公司加碼AI伺服器與微調技術，且美國對中國AI晶片出口管制加碼，提升本土半導體與AI應用需求。整體而言，資金在美國AI股與台灣防禦性資產間輪動，市場情緒偏向謹慎，短期內台股仍受政策穩市與外資動向左右。",
+    "summary": "近期新聞聚焦三大主線：其一，金管會連續加碼禁空與平盤下放空措施，顯示台灣當局正以強硬政策穩定市場，短期內可能抑制賣壓但亦提升波動性；其二，AI與半導體產業持續受關注，從輝達股價劇烈波動、Anthropic上市到台灣晶片廠面臨美國出口管制與資本支出壓力，顯示高階製程與AI伺服器需求仍是資金聚焦點，同時也帶來估值與信任危機；其三，地緣政治與宏觀風險升溫，歐盟針對科技巨頭課稅、俄烏衝突延伸至能源供應、以及美中關係的間接影響，使全球資金風險偏好下降，台股情緒受外資撤退與本土資金防禦性操作左右。綜合而言，市場在政策穩定與產業創新之間呈現拉鋸，短期情緒偏謹慎，資金流向將受政策訊號與AI產業前景主導。",
     "themes": [
-      "美股AI資金外流",
-      "台股政策干預",
-      "AI與先進製程投資"
+      "禁空政策衝擊",
+      "AI與半導體風險",
+      "地緣政治風險"
     ],
-    "headline_count": 90,
+    "headline_count": 88,
     "source_count": 8,
-    "time": "2026-11-21 19:31"
+    "time": "2026-11-22 04:29"
   },
   "ai_analysis": [
     {
@@ -346,7 +346,7 @@
       "latest_price": 80.3,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "stock_id": "00712",
@@ -356,7 +356,7 @@
       "latest_price": 6.5,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "stock_id": "2409",
@@ -366,7 +366,7 @@
       "latest_price": 23.25,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "stock_id": "2887",
@@ -376,7 +376,7 @@
       "latest_price": 33.95,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 1
+      "days_tracked": 2
     },
     {
       "stock_id": "9933",
@@ -386,7 +386,7 @@
       "latest_price": 51.5,
       "latest_pct": -10.43,
       "latest_date": "2026-11-20",
-      "days_tracked": 3
+      "days_tracked": 4
     },
     {
       "stock_id": "3481",
@@ -396,7 +396,7 @@
       "latest_price": 29.95,
       "latest_pct": -18.06,
       "latest_date": "2026-11-20",
-      "days_tracked": 3
+      "days_tracked": 4
     },
     {
       "stock_id": "2887",
@@ -406,7 +406,7 @@
       "latest_price": 33.95,
       "latest_pct": -13.61,
       "latest_date": "2026-11-20",
-      "days_tracked": 4
+      "days_tracked": 5
     },
     {
       "stock_id": "2610",
@@ -416,7 +416,7 @@
       "latest_price": 21.3,
       "latest_pct": -7.79,
       "latest_date": "2026-11-20",
-      "days_tracked": 4
+      "days_tracked": 5
     },
     {
       "stock_id": "2303",
@@ -426,7 +426,7 @@
       "latest_price": 80.3,
       "latest_pct": -15.65,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2887",
@@ -436,7 +436,7 @@
       "latest_price": 33.95,
       "latest_pct": -12.05,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2883",
@@ -446,7 +446,7 @@
       "latest_price": 29.9,
       "latest_pct": -13.46,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2885",
@@ -456,7 +456,7 @@
       "latest_price": 59.3,
       "latest_pct": -13.68,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2884",
@@ -466,7 +466,7 @@
       "latest_price": 39.6,
       "latest_pct": -18.01,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "00981A",
@@ -476,7 +476,7 @@
       "latest_price": 18.58,
       "latest_pct": -24.78,
       "latest_date": "2026-11-20",
-      "days_tracked": 8
+      "days_tracked": 9
     },
     {
       "stock_id": "2885",
@@ -486,7 +486,7 @@
       "latest_price": 59.3,
       "latest_pct": -18.43,
       "latest_date": "2026-11-20",
-      "days_tracked": 8
+      "days_tracked": 9
     },
     {
       "stock_id": "2884",
@@ -496,7 +496,7 @@
       "latest_price": 39.6,
       "latest_pct": -18.01,
       "latest_date": "2026-11-20",
-      "days_tracked": 8
+      "days_tracked": 9
     },
     {
       "stock_id": "2883",
@@ -506,7 +506,7 @@
       "latest_price": 29.9,
       "latest_pct": -17.63,
       "latest_date": "2026-11-20",
-      "days_tracked": 8
+      "days_tracked": 9
     },
     {
       "stock_id": "00981A",
@@ -516,7 +516,7 @@
       "latest_price": 18.58,
       "latest_pct": -22.65,
       "latest_date": "2026-11-20",
-      "days_tracked": 9
+      "days_tracked": 10
     },
     {
       "stock_id": "2610",
@@ -526,7 +526,7 @@
       "latest_price": 21.3,
       "latest_pct": -6.58,
       "latest_date": "2026-11-20",
-      "days_tracked": 9
+      "days_tracked": 10
     },
     {
       "stock_id": "2409",
@@ -535,56 +535,6 @@
       "entry_price": 29.2,
       "latest_price": 23.25,
       "latest_pct": -20.38,
-      "latest_date": "2026-11-20",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "00403A",
-      "stock_name": "主動統一升級50",
-      "entry_date": "2026-11-11",
-      "entry_price": 9.19,
-      "latest_price": 7.02,
-      "latest_pct": -23.61,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "00981A",
-      "stock_name": "主動統一台股增長",
-      "entry_date": "2026-11-11",
-      "entry_price": 25.33,
-      "latest_price": 18.58,
-      "latest_pct": -26.65,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2610",
-      "stock_name": "華航",
-      "entry_date": "2026-11-11",
-      "entry_price": 23.5,
-      "latest_price": 21.3,
-      "latest_pct": -9.36,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2618",
-      "stock_name": "長榮航",
-      "entry_date": "2026-11-11",
-      "entry_price": 47.6,
-      "latest_price": 44.65,
-      "latest_pct": -6.2,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "00991A",
-      "stock_name": "主動復華未來50",
-      "entry_date": "2026-11-11",
-      "entry_price": 14.99,
-      "latest_price": 10.27,
-      "latest_pct": -31.49,
       "latest_date": "2026-11-20",
       "days_tracked": 10
     }
