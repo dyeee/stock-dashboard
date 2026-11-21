@@ -40,6 +40,7 @@ async function loadData() {
     if (window.myChart) { window.myChart.destroy(); window.myChart = null; }
     const tableEl = document.getElementById('table');
     if (tableEl) tableEl.innerHTML = `<div class="muted">目前沒有連續兩天都進前十名的個股。</div>`;
+    renderNewsTrend(data);
     renderAIAnalysis(data);
     _instiData = data;
     return;
@@ -130,8 +131,50 @@ async function loadData() {
       </div>`;
   }
 
+  renderNewsTrend(data);
   renderAIAnalysis(data);
   _instiData = data;
+}
+
+// ════════════════════════════════════════════════════════
+// AI 新聞趨勢卡片（不限個股）
+// ════════════════════════════════════════════════════════
+
+function escapeHTML(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+
+function renderNewsTrend(data) {
+  const card = document.getElementById('news-trend-card');
+  if (!card) return;
+  const t = data.news_trend || {};
+  const title = `<div style="font-size:15px;font-weight:700;color:#eef2ff">📰 AI 新聞趨勢</div>`;
+
+  if (!t.summary) {
+    card.innerHTML = `${title}
+      <div style="color:#6b7280;font-size:13px;margin-top:8px">今日尚無新聞趨勢總結，或 GROQ_API_KEY 尚未設定。</div>`;
+    return;
+  }
+
+  const themes = (t.themes || []).map(th =>
+    `<span style="font-size:12px;background:#1f2937;color:#fcd34d;padding:2px 8px;border-radius:999px">#${escapeHTML(th)}</span>`
+  ).join('');
+  const src = t.headline_count
+    ? `彙整 ${t.source_count || '-'} 個來源、${t.headline_count} 則標題` : '';
+
+  card.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      ${title}
+      <div style="font-size:11px;color:#6b7280">${escapeHTML(t.time || '')}</div>
+    </div>
+    <div style="font-size:12px;color:#6b7280;margin-bottom:10px">總經、政治、科技新聞主線一覽${src ? '｜' + src : ''}</div>
+    ${themes ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">${themes}</div>` : ''}
+    <p style="margin:0;font-size:14px;line-height:1.85;color:#d1d5db">${escapeHTML(t.summary)}</p>
+    <div style="font-size:11px;color:#4b5563;margin-top:12px;padding-top:10px;border-top:1px solid #1f2937">
+      ⚠️ 由 AI 依新聞標題歸納，僅供參考，不構成投資建議。
+    </div>`;
 }
 
 // ════════════════════════════════════════════════════════

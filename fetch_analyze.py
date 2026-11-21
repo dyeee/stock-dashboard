@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 外資連續兩天都進前10名的個股分析
++ AI 新聞趨勢總結（不限個股）
 + AI 交叉確認（自動抓取任意股票月營收 + 新聞）
 """
 import os
@@ -439,41 +440,95 @@ RSS_SOURCES = [
     {"name": "中央社國際", "url": "https://feeds.feedburner.com/rsscna/intworld"},
 ]
 
+def fetch_rss_titles(source, limit=30):
+    """抓單一 RSS 來源的標題（跳過 feed 本身的標題）"""
+    try:
+        resp = requests.get(source["url"], timeout=8,
+                            headers={"User-Agent": "Mozilla/5.0"})
+        # 嘗試 CDATA 格式（RSS 2.0）
+        titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
+        # 若無 CDATA，嘗試一般格式
+        if not titles:
+            titles = re.findall(r'<title>(.*?)</title>', resp.text)
+        out = []
+        for t in titles[1:limit]:  # 跳過 feed 標題
+            t = re.sub(r'<[^>]+>', '', t).strip()
+            if t and t != "Google News":
+                out.append(t)
+        return out
+    except Exception:
+        return []
+
 def search_news(ticker, name):
     """掃描多個 RSS 來源，找包含股票關鍵字的新聞"""
     keywords = [ticker, name, name[:2]]
     results = []
     for source in RSS_SOURCES:
-        try:
-            resp = requests.get(source["url"], timeout=8,
-                                headers={"User-Agent": "Mozilla/5.0"})
-            # 嘗試 CDATA 格式（RSS 2.0）
-            titles = re.findall(r'<title><!\[CDATA\[(.*?)\]\]></title>', resp.text)
-            # 若無 CDATA，嘗試一般格式
-            if not titles:
-                titles = re.findall(r'<title>(.*?)</title>', resp.text)
-            for t in titles[1:30]:  # 跳過 feed 標題
-                t = re.sub(r'<[^>]+>', '', t).strip()
-                if any(k in t for k in keywords) and t not in results:
-                    results.append(f"[{source['name']}] {t}")
-        except Exception:
-            pass
+        for t in fetch_rss_titles(source):
+            line = f"[{source['name']}] {t}"
+            if any(k in t for k in keywords) and line not in results:
+                results.append(line)
         time.sleep(0.3)
     return "\n".join(results[:6]) if results else "無近期相關新聞"
 
-def call_groq(client, prompt):
-    for attempt in range(3):
+# Groq 會下架模型（例：qwen/qwen3-32b 回 404 model_not_found），
+# 所以準備候選清單：可用 GROQ_MODEL 指定優先模型，失效就自動換下一個。
+GROQ_MODEL_CANDIDATES = [m for m in [
+    os.environ.get("GROQ_MODEL", "").strip(),
+    "openai/gpt-oss-120b",
+    "llama-3.3-70b-versatile",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3-32b",
+    "llama-3.1-8b-instant",
+] if m]
+_groq_model = None          # 本次執行確認可用的模型（找到後就固定用它）
+_groq_dead_models = set()   # 已確認不存在 / 無權限的模型
+
+def _is_model_missing(e: Exception) -> bool:
+    msg = str(e)
+    return "model_not_found" in msg or "model_decommissioned" in msg or "does not exist" in msg
+
+def _discover_groq_model(client):
+    """候選都失效時，向 Groq 查目前可用的模型，挑一個合適的"""
+    try:
+        ids = [m.id for m in client.models.list().data]
+    except Exception as e:
+        print(f"    ⚠️ 無法取得 Groq 模型清單：{e}")
+        return None
+    for pref in ("gpt-oss-120b", "llama-3.3-70b", "gpt-oss", "qwen", "llama"):
+        for mid in ids:
+            if pref in mid and mid not in _groq_dead_models and "guard" not in mid:
+                return mid
+    return None
+
+def _groq_create(client, model, system, prompt, max_tokens):
+    kwargs = dict(
+        model=model,
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.3,
+        max_tokens=max_tokens,
+    )
+    if "gpt-oss" in model:
+        kwargs["reasoning_effort"] = "low"   # 推理模型：少花 token 在思考上
+    return client.chat.completions.create(**kwargs)
+
+def call_groq(client, prompt, system="你是台灣股票分析師。只輸出純 JSON，繁體中文，不要有任何其他文字。", max_tokens=1500):
+    global _groq_model
+    failures = 0
+    while failures < 3:
+        model = _groq_model or next(
+            (m for m in GROQ_MODEL_CANDIDATES if m not in _groq_dead_models), None
+        ) or _discover_groq_model(client)
+        if not model:
+            print("    ⚠️ 找不到可用的 Groq 模型")
+            return ""
         try:
-            resp = client.chat.completions.create(
-                model="qwen/qwen3-32b",
-                messages=[
-                    {"role": "system", "content": "你是台灣股票分析師。只輸出純 JSON，繁體中文，不要有任何其他文字。"},
-                    {"role": "user", "content": prompt},
-                ],
-                temperature=0.3,
-                max_tokens=600,
-            )
-            raw = resp.choices[0].message.content.strip()
+            resp = _groq_create(client, model, system, prompt, max_tokens)
+            _groq_model = model
+            raw = (resp.choices[0].message.content or "").strip()
             raw = re.sub(r'<think>.*?</think>', '', raw, flags=re.DOTALL).strip()
             raw = re.sub(r'^```(?:json)?\s*', '', raw)
             raw = re.sub(r'\s*```$', '', raw).strip()
@@ -482,8 +537,15 @@ def call_groq(client, prompt):
                 raise ValueError(f"找不到 JSON：{raw[:100]}")
             return raw[start:end]
         except Exception as e:
-            print(f"    ⚠️ 第{attempt+1}次失敗：{e}")
-            if attempt < 2:
+            if _is_model_missing(e):
+                print(f"    ⚠️ 模型 {model} 已下架或無權限，改用下一個")
+                _groq_dead_models.add(model)
+                if _groq_model == model:
+                    _groq_model = None
+                continue  # 換模型不算一次失敗等待
+            failures += 1
+            print(f"    ⚠️ 第{failures}次失敗（{model}）：{e}")
+            if failures < 3:
                 time.sleep(5)
     return ""
 
@@ -589,7 +651,137 @@ def run_ai_cross_check(result_df):
     print(f"\n✅ AI 分析完成，共 {len(analyses)} 檔")
     return analyses
 
-def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None, watchlist=None):
+# ════════════════════════════════════════════════════════
+# AI 新聞趨勢總結（不限個股，看整體財經 / 政治 / 科技脈動）
+# ════════════════════════════════════════════════════════
+
+NEWS_TREND_PER_SOURCE = 12     # 每個來源取幾則標題
+NEWS_TREND_MAX_CHARS = 3500    # 餵給模型的標題總字數上限（避免超過 Groq TPM）
+
+def collect_trend_headlines():
+    seen, lines, used_sources = set(), [], 0
+    for source in RSS_SOURCES:
+        titles = fetch_rss_titles(source, limit=NEWS_TREND_PER_SOURCE + 1)
+        if titles:
+            used_sources += 1
+        for t in titles:
+            if t in seen:
+                continue
+            seen.add(t)
+            lines.append(f"[{source['name']}] {t}")
+        time.sleep(0.3)
+    text, total = [], 0
+    for ln in lines:
+        if total + len(ln) > NEWS_TREND_MAX_CHARS:
+            break
+        text.append(ln)
+        total += len(ln) + 1
+    return "\n".join(text), len(text), used_sources
+
+def run_news_trend():
+    print("\n" + "=" * 55)
+    print("📰 AI 新聞趨勢總結")
+    print("=" * 55)
+    groq_key = os.environ.get("GROQ_API_KEY", "")
+    if not groq_key:
+        print("  ⚠️ 未設定 GROQ_API_KEY，略過")
+        return {}
+
+    headlines, n_items, n_sources = collect_trend_headlines()
+    if not headlines:
+        print("  ⚠️ 抓不到任何新聞標題，略過")
+        return {}
+    print(f"  📥 取得 {n_items} 則標題（{n_sources} 個來源）")
+
+    prompt = f"""以下是最近 24 小時各大財經、政治、科技新聞標題（含英文 Reuters）：
+
+{headlines}
+
+請歸納「最近的整體新聞趨勢」，不要只談單一個股，而是看總體經濟、地緣政治、產業科技與市場資金面的主線。
+
+只輸出純 JSON：
+{{
+  "summary": "150 到 250 個中文字的趨勢總結",
+  "themes": ["主題1", "主題2", "主題3"]
+}}
+
+【summary 寫作規則】
+- 長度嚴格控制在 150～250 個中文字，單一段落
+- 簡明易懂，但正確使用金融、政治與科技術語（例如：升降息、殖利率、美元指數、關稅、出口管制、地緣政治風險、AI 伺服器、先進製程、CoWoS、資本支出、風險偏好）
+- 先點出最主要的 2～3 條主線，再說明對台股或市場情緒可能的影響方向
+- 只根據提供的標題歸納，不要捏造標題中沒有的數字或事件
+- 不給買賣建議
+
+【themes 規則】
+- 3～5 個，每個 8 字以內，例如「聯準會降息預期」「美中科技戰」「AI 資本支出」
+"""
+    client = Groq(api_key=groq_key)
+    raw = call_groq(
+        client, prompt,
+        system="你是資深財經記者兼總體經濟分析師。只輸出純 JSON，繁體中文，不要有任何其他文字。",
+        max_tokens=2000,
+    )
+    if not raw:
+        print("  ⚠️ AI 回傳失敗")
+        return {}
+    try:
+        result = json.loads(raw)
+    except Exception as e:
+        print(f"  ⚠️ JSON 解析失敗：{e}")
+        return {}
+
+    summary = str(result.get("summary", "")).strip()
+    if not summary:
+        return {}
+    themes = [str(t).strip() for t in (result.get("themes") or []) if str(t).strip()][:5]
+    print(f"  ✅ 完成（{len(summary)} 字）：{'、'.join(themes)}")
+    return {
+        "summary": summary,
+        "themes": themes,
+        "headline_count": n_items,
+        "source_count": n_sources,
+        "time": NOW_TPE.strftime("%Y-%m-%d %H:%M"),
+    }
+
+def _ai_log_entry(payload: dict) -> dict:
+    """從 payload 取出這次執行的 AI 紀錄（交叉確認 + 新聞趨勢）"""
+    run_date = (payload.get("ai_analysis_time")
+                or (payload.get("news_trend") or {}).get("time")
+                or NOW_TPE.strftime("%Y-%m-%d"))[:10]
+    return {
+        "run_date": run_date,
+        "ai_analysis_time": payload.get("ai_analysis_time", ""),
+        "ai_analysis": payload.get("ai_analysis") or [],
+        "news_trend": payload.get("news_trend") or {},
+    }
+
+def merge_ai_log(history_path: Path, payload: dict, entry: dict | None = None) -> list:
+    """
+    history 檔以「最後交易日」命名，週末/假日重跑會覆寫同一檔。
+    這裡把每次執行的 AI 紀錄依 run_date 累積到 ai_log，同一天重跑則取代。
+    """
+    log = []
+    if history_path.exists():
+        try:
+            old = json.loads(history_path.read_text(encoding="utf-8"))
+            log = old.get("ai_log")
+            if log is None:  # 舊格式：把原本頂層的 AI 紀錄當成第一筆保留
+                log = []
+                if old.get("ai_analysis") or old.get("news_trend"):
+                    first = _ai_log_entry(old)
+                    if not old.get("ai_analysis_time") and not old.get("news_trend"):
+                        first["run_date"] = (old.get("trading_dates") or [first["run_date"]])[0]
+                    log.append(first)
+        except Exception as e:
+            print(f"  ⚠️ 讀取舊 history 失敗，ai_log 重新開始：{e}")
+            log = []
+    entry = entry or _ai_log_entry(payload)
+    if entry["ai_analysis"] or entry["news_trend"]:
+        log = [e for e in log if e.get("run_date") != entry["run_date"]] + [entry]
+        log.sort(key=lambda e: e.get("run_date", ""))
+    return log
+
+def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_insti=None, market_insti=None, watchlist=None, news_trend=None):
     trading_dates = [d.iloc[0]['rank_date'] for d in daily_top10_list]
     stocks = []
     for _, r in result_df.iterrows():
@@ -617,6 +809,7 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
         "trading_dates": trading_dates,
         "count_intersection": int(len(result_df)),
         "stocks": stocks,
+        "news_trend": news_trend or {},
         "ai_analysis": ai_analyses or [],
         "ai_analysis_time": NOW_TPE.strftime("%Y-%m-%d %H:%M") if ai_analyses else "",
         "insti_signal": three_insti or {},
@@ -629,7 +822,9 @@ def write_json_payload(result_df, daily_top10_list, ai_analyses=None, three_inst
     print(f"[OK] 寫入 {OUT_LATEST}")
     last_trade = trading_dates[0].replace('-', '')
     out_history = OUT_HISTORY_DIR / f"{last_trade}.json"
-    out_history.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    history_payload = dict(payload)
+    history_payload["ai_log"] = merge_ai_log(out_history, payload)
+    out_history.write_text(json.dumps(history_payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[OK] 寫入 {out_history}")
 
 
@@ -721,14 +916,15 @@ def save_watchlist(items: list):
     )
 
 
-def update_watchlist(result_df) -> list:
+def update_watchlist(result_df, trade_date: str | None = None) -> list:
     """
     1. 載入現有追蹤清單
     2. 加入今日進榜的新股票（若已在清單就跳過）
     3. 更新每筆的當日收盤價和漲跌幅
     4. 存檔並回傳（永久保留，前端只顯示10天內）
     """
-    today_str = NOW_TPE.strftime("%Y-%m-%d")
+    # 排程常延遲到隔天清晨才跑，所以用「資料所屬交易日」而非執行當下日期
+    today_str = trade_date or NOW_TPE.strftime("%Y-%m-%d")
     watchlist = load_watchlist()
 
     # 今日進榜的股票
@@ -819,7 +1015,65 @@ def _build_watchlist_summary(watchlist: list) -> list:
     summary.sort(key=lambda x: x["entry_date"], reverse=True)
     return summary
 
+def append_news_to_history(latest_payload: dict, news_trend: dict):
+    """把新聞趨勢記到最後交易日的 history 檔 ai_log"""
+    last_dates = latest_payload.get("trading_dates") or []
+    if not news_trend or not last_dates:
+        return
+    hpath = OUT_HISTORY_DIR / f"{last_dates[0].replace('-', '')}.json"
+    if not hpath.exists():
+        return
+    hist = json.loads(hpath.read_text(encoding="utf-8"))
+    entry = {"run_date": NOW_TPE.strftime("%Y-%m-%d"),
+             "ai_analysis_time": "", "ai_analysis": [],
+             "news_trend": news_trend}
+    hist["ai_log"] = merge_ai_log(hpath, hist, entry)
+    hpath.write_text(json.dumps(hist, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"  ✅ {hpath} ai_log 已更新")
+
+def refresh_latest_without_trading(watchlist: list):
+    """不重跑外資分析：只更新 latest.json 的追蹤摘要 + 新聞趨勢，並記到 history"""
+    if not OUT_LATEST.exists():
+        return
+    payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
+    payload["watchlist_summary"] = _build_watchlist_summary(watchlist)
+    payload.pop("watchlist", None)
+    news_trend = run_news_trend()
+    if news_trend:
+        payload["news_trend"] = news_trend
+    OUT_LATEST.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print("  ✅ latest.json 已更新（追蹤摘要 / 新聞趨勢）")
+    append_news_to_history(payload, news_trend)
+
+def find_latest_trading_date(lookback: int = 15) -> str | None:
+    """從現在往回找最近一個 TWSE 有外資資料的交易日（YYYYMMDD）"""
+    d = NOW_TPE
+    for _ in range(lookback):
+        ds = d.strftime("%Y%m%d")
+        if get_twse_foreign_data(ds) is not None:
+            return ds
+        d -= timedelta(days=1)
+        time.sleep(0.2)
+    return None
+
+def already_processed(trade_date: str) -> bool:
+    """該交易日的 history 檔已存在 → 已分析過（週末 / 假日 / 重複執行）"""
+    return (OUT_HISTORY_DIR / f"{trade_date}.json").exists()
+
 if __name__ == "__main__":
+    # GitHub 排程常延遲到隔天清晨（台北時間）才執行，不能用「今天是不是交易日」判斷；
+    # 改看「最近一個交易日是否已經處理過」：沒處理過才跑完整分析。
+    latest_trade = find_latest_trading_date()
+    force = os.getenv("FORCE_RUN", "") == "1"
+    if latest_trade and already_processed(latest_trade) and not force:
+        print(f"📅 最近交易日 {latest_trade} 已分析過（休市或重複執行）")
+        print("   → 不重跑外資分析 / AI 交叉確認 / 追蹤清單收盤價，只更新新聞趨勢")
+        refresh_latest_without_trading(load_watchlist())
+        print("\n✨ 查詢完成!")
+        raise SystemExit(0)
+    trade_date_iso = (f"{latest_trade[:4]}-{latest_trade[4:6]}-{latest_trade[6:]}"
+                      if latest_trade else None)
+
     days = int(os.getenv("DAYS", "2"))
     result_data = get_consecutive_top10(days=days)
 
@@ -871,6 +1125,8 @@ if __name__ == "__main__":
         else:
             print("❌ 沒有個股連續兩天都在前10名")
 
+        news_trend = run_news_trend()
+
         ai_analyses = run_ai_cross_check(
             result if result is not None else pd.DataFrame()
         )
@@ -885,7 +1141,7 @@ if __name__ == "__main__":
             market_insti = get_market_insti_amount(str(latest_date), frames)
 
         # ── 追蹤清單更新 ──
-        watchlist = update_watchlist(result if result is not None else pd.DataFrame())
+        watchlist = update_watchlist(result if result is not None else pd.DataFrame(), trade_date_iso)
 
         write_json_payload(
             result if result is not None else pd.DataFrame(),
@@ -894,19 +1150,14 @@ if __name__ == "__main__":
             three_insti,
             market_insti,
             watchlist,
+            news_trend,
         )
     else:
         print("❌ 分析失敗")
         print("\n  ⏳ 更新追蹤清單（無交易資料）...")
         try:
-            watchlist = update_watchlist(pd.DataFrame())
-            if OUT_LATEST.exists():
-                old_payload = json.loads(OUT_LATEST.read_text(encoding="utf-8"))
-                old_payload["watchlist_summary"] = _build_watchlist_summary(watchlist)
-                old_payload.pop("watchlist", None)
-                OUT_LATEST.write_text(
-                    json.dumps(old_payload, ensure_ascii=False, indent=2), encoding="utf-8")
-                print("  ✅ latest.json watchlist_summary 已更新")
+            watchlist = update_watchlist(pd.DataFrame(), trade_date_iso)
+            refresh_latest_without_trading(watchlist)
         except Exception as e:
             print(f"  ⚠️ 追蹤清單更新失敗：{e}")
 
