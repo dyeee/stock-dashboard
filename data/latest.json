@@ -86,15 +86,15 @@
     }
   ],
   "news_trend": {
-    "summary": "近期新聞聚焦三大主線：其一，金管會連續加碼禁空與平盤下放空措施，顯示台灣當局正以強硬政策穩定市場，短期內可能抑制賣壓但亦提升波動性；其二，AI與半導體產業持續受關注，從輝達股價劇烈波動、Anthropic上市到台灣晶片廠面臨美國出口管制與資本支出壓力，顯示高階製程與AI伺服器需求仍是資金聚焦點，同時也帶來估值與信任危機；其三，地緣政治與宏觀風險升溫，歐盟針對科技巨頭課稅、俄烏衝突延伸至能源供應、以及美中關係的間接影響，使全球資金風險偏好下降，台股情緒受外資撤退與本土資金防禦性操作左右。綜合而言，市場在政策穩定與產業創新之間呈現拉鋸，短期情緒偏謹慎，資金流向將受政策訊號與AI產業前景主導。",
+    "summary": "近期新聞聚焦三大主線：一是全球股市大幅波動與資金緊縮，受美國通膨升溫、PCE 走高及美聯儲升息預期影響，導致台股出現斷崖式下跌，融資追繳與斷頭潮警訊升高；二是AI 與半導體產業持續受到地緣政治與供應鏈安全關注，輝達晶片走私、俄烏衝突及中國對AI晶片的監控加劇市場風險，同時AI 伺服器與先進製程資本支出仍是資金流入焦點；三是氣候與能源政策不確定性提升，COP31 談判受阻、歐盟數位稅與碳市場推動，使企業面臨成本上升與合規壓力。整體而言，資金偏好趨向防禦性資產，台股短期情緒偏弱，但長期仍受科技與綠能投資支撐。",
     "themes": [
-      "禁空政策衝擊",
-      "AI與半導體風險",
-      "地緣政治風險"
+      "資金緊縮風險",
+      "AI 供應鏈安全",
+      "氣候政策不確定"
     ],
-    "headline_count": 88,
+    "headline_count": 91,
     "source_count": 8,
-    "time": "2026-11-22 04:29"
+    "time": "2026-11-23 04:42"
   },
   "ai_analysis": [
     {
@@ -346,7 +346,7 @@
       "latest_price": 80.3,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 2
+      "days_tracked": 3
     },
     {
       "stock_id": "00712",
@@ -356,7 +356,7 @@
       "latest_price": 6.5,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 2
+      "days_tracked": 3
     },
     {
       "stock_id": "2409",
@@ -366,7 +366,7 @@
       "latest_price": 23.25,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 2
+      "days_tracked": 3
     },
     {
       "stock_id": "2887",
@@ -376,7 +376,7 @@
       "latest_price": 33.95,
       "latest_pct": 0.0,
       "latest_date": "2026-11-20",
-      "days_tracked": 2
+      "days_tracked": 3
     },
     {
       "stock_id": "9933",
@@ -386,7 +386,7 @@
       "latest_price": 51.5,
       "latest_pct": -10.43,
       "latest_date": "2026-11-20",
-      "days_tracked": 4
+      "days_tracked": 5
     },
     {
       "stock_id": "3481",
@@ -396,7 +396,7 @@
       "latest_price": 29.95,
       "latest_pct": -18.06,
       "latest_date": "2026-11-20",
-      "days_tracked": 4
+      "days_tracked": 5
     },
     {
       "stock_id": "2887",
@@ -406,7 +406,7 @@
       "latest_price": 33.95,
       "latest_pct": -13.61,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2610",
@@ -416,7 +416,7 @@
       "latest_price": 21.3,
       "latest_pct": -7.79,
       "latest_date": "2026-11-20",
-      "days_tracked": 5
+      "days_tracked": 6
     },
     {
       "stock_id": "2303",
@@ -426,7 +426,7 @@
       "latest_price": 80.3,
       "latest_pct": -15.65,
       "latest_date": "2026-11-20",
-      "days_tracked": 6
+      "days_tracked": 7
     },
     {
       "stock_id": "2887",
@@ -436,7 +436,7 @@
       "latest_price": 33.95,
       "latest_pct": -12.05,
       "latest_date": "2026-11-20",
-      "days_tracked": 6
+      "days_tracked": 7
     },
     {
       "stock_id": "2883",
@@ -446,7 +446,7 @@
       "latest_price": 29.9,
       "latest_pct": -13.46,
       "latest_date": "2026-11-20",
-      "days_tracked": 6
+      "days_tracked": 7
     },
     {
       "stock_id": "2885",
@@ -456,7 +456,7 @@
       "latest_price": 59.3,
       "latest_pct": -13.68,
       "latest_date": "2026-11-20",
-      "days_tracked": 6
+      "days_tracked": 7
     },
     {
       "stock_id": "2884",
@@ -466,7 +466,7 @@
       "latest_price": 39.6,
       "latest_pct": -18.01,
       "latest_date": "2026-11-20",
-      "days_tracked": 6
+      "days_tracked": 7
     },
     {
       "stock_id": "00981A",
@@ -476,7 +476,7 @@
       "latest_price": 18.58,
       "latest_pct": -24.78,
       "latest_date": "2026-11-20",
-      "days_tracked": 9
+      "days_tracked": 10
     },
     {
       "stock_id": "2885",
@@ -486,7 +486,7 @@
       "latest_price": 59.3,
       "latest_pct": -18.43,
       "latest_date": "2026-11-20",
-      "days_tracked": 9
+      "days_tracked": 10
     },
     {
       "stock_id": "2884",
@@ -496,7 +496,7 @@
       "latest_price": 39.6,
       "latest_pct": -18.01,
       "latest_date": "2026-11-20",
-      "days_tracked": 9
+      "days_tracked": 10
     },
     {
       "stock_id": "2883",
@@ -505,36 +505,6 @@
       "entry_price": 36.3,
       "latest_price": 29.9,
       "latest_pct": -17.63,
-      "latest_date": "2026-11-20",
-      "days_tracked": 9
-    },
-    {
-      "stock_id": "00981A",
-      "stock_name": "主動統一台股增長",
-      "entry_date": "2026-11-12",
-      "entry_price": 24.02,
-      "latest_price": 18.58,
-      "latest_pct": -22.65,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2610",
-      "stock_name": "華航",
-      "entry_date": "2026-11-12",
-      "entry_price": 22.8,
-      "latest_price": 21.3,
-      "latest_pct": -6.58,
-      "latest_date": "2026-11-20",
-      "days_tracked": 10
-    },
-    {
-      "stock_id": "2409",
-      "stock_name": "友達",
-      "entry_date": "2026-11-12",
-      "entry_price": 29.2,
-      "latest_price": 23.25,
-      "latest_pct": -20.38,
       "latest_date": "2026-11-20",
       "days_tracked": 10
     }
