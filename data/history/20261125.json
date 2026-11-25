@@ -1,0 +1,641 @@
+{
+  "mode": "intersection_top10_per_day",
+  "generated_at_utc": "2026-11-25 23:08:34",
+  "timezone": "Asia/Taipei",
+  "params": {
+    "days": 2,
+    "top_n": 10
+  },
+  "trading_dates": [
+    "2026-11-25",
+    "2026-11-24"
+  ],
+  "count_intersection": 4,
+  "stocks": [
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "total_net_buy": 393003,
+      "avg_net_buy": 196501.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-25",
+          "rank": 1,
+          "net_buy_lots": 365380
+        },
+        "day2": {
+          "date": "2026-11-24",
+          "rank": 3,
+          "net_buy_lots": 27623
+        }
+      }
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50  ",
+      "total_net_buy": 382180,
+      "avg_net_buy": 191090.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-25",
+          "rank": 3,
+          "net_buy_lots": 146461
+        },
+        "day2": {
+          "date": "2026-11-24",
+          "rank": 1,
+          "net_buy_lots": 235719
+        }
+      }
+    },
+    {
+      "stock_id": "00991A",
+      "stock_name": "主動復華未來50  ",
+      "total_net_buy": 232518,
+      "avg_net_buy": 116259.0,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-25",
+          "rank": 2,
+          "net_buy_lots": 168398
+        },
+        "day2": {
+          "date": "2026-11-24",
+          "rank": 2,
+          "net_buy_lots": 64120
+        }
+      }
+    },
+    {
+      "stock_id": "00405A",
+      "stock_name": "主動富邦台灣龍耀",
+      "total_net_buy": 36941,
+      "avg_net_buy": 18470.5,
+      "per_day": {
+        "day1": {
+          "date": "2026-11-25",
+          "rank": 10,
+          "net_buy_lots": 13544
+        },
+        "day2": {
+          "date": "2026-11-24",
+          "rank": 4,
+          "net_buy_lots": 23397
+        }
+      }
+    }
+  ],
+  "news_trend": {
+    "summary": "近期新聞聚焦美國301調查與新關稅提案，台灣面臨最高15%關稅上限，提升地緣政治風險與出口成本；同時AI與半導體產業持續受賣壓，輝達等龍頭股跌幅擴大，市場資金偏好轉弱，導致台股波動加劇且出現短線拋售；此外美國GDP上修與通膨未降溫加劇升息預期，美元指數走強，資金流向美債與美元資產，進一步抑制新興市場資金流入，台股整體情緒偏空。",
+    "themes": [
+      "關稅與貿易風險",
+      "AI與半導體賣壓",
+      "升息與美元走強"
+    ],
+    "headline_count": 85,
+    "source_count": 8,
+    "time": "2026-11-26 07:03"
+  },
+  "ai_analysis": [
+    {
+      "ticker": "00981A",
+      "name": "主動統一台股增長",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "追蹤指數近期受益於台股整體上揚，資金流向偏好成長型ETF",
+        "ETF本身無營收，需依賴標的成分股表現，缺乏具體基本面支撐"
+      ],
+      "warning": "若大盤回檔或成分股表現不佳，ETF淨值易受波動",
+      "next_check": "一週後",
+      "data_quality": "有限",
+      "net_buy_lots": 393003,
+      "is_etf": true
+    },
+    {
+      "ticker": "00403A",
+      "name": "主動統一升級50",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "追蹤標的為台灣50指數，近期大盤波動較大，短期走勢不明朗",
+        "ETF殖利率相對穩定，但缺乏明顯的升值動能"
+      ],
+      "warning": "若大盤持續震盪，淨值可能受壓",
+      "next_check": "一週後",
+      "data_quality": "有限",
+      "net_buy_lots": 382180,
+      "is_etf": true
+    },
+    {
+      "ticker": "00991A",
+      "name": "主動復華未來50",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "追蹤指數涵蓋台灣高成長科技與新興產業，近期受AI與半導體需求帶動上揚",
+        "大盤波動較大，ETF流動性雖佳但缺乏明確收益率支撐"
+      ],
+      "warning": "市場波動可能導致短期淨值波動",
+      "next_check": "一週後",
+      "data_quality": "有限",
+      "net_buy_lots": 232518,
+      "is_etf": true
+    },
+    {
+      "ticker": "00405A",
+      "name": "主動富邦台灣龍耀",
+      "verdict": "謹慎觀察",
+      "confidence": "中",
+      "reasons": [
+        "缺乏月營收與新聞資訊，難以評估標的基本面",
+        "ETF追蹤指數表現受大盤波動影響，需觀察整體市場走勢"
+      ],
+      "warning": null,
+      "next_check": "一週後",
+      "data_quality": "有限",
+      "net_buy_lots": 36941,
+      "is_etf": true
+    }
+  ],
+  "ai_analysis_time": "2026-11-26 07:03",
+  "insti_signal": {
+    "buy": [
+      {
+        "stock_id": "2610",
+        "stock_name": "華航",
+        "foreign_net": 12063,
+        "trust_net": 238,
+        "ft_net": 12301,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2449",
+        "stock_name": "京元電子",
+        "foreign_net": 3450,
+        "trust_net": 2883,
+        "ft_net": 6333,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "3706",
+        "stock_name": "神達",
+        "foreign_net": 1659,
+        "trust_net": 1840,
+        "ft_net": 3499,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "9933",
+        "stock_name": "中鼎",
+        "foreign_net": 3093,
+        "trust_net": 1,
+        "ft_net": 3094,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "3189",
+        "stock_name": "景碩",
+        "foreign_net": 2266,
+        "trust_net": 408,
+        "ft_net": 2674,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "00713",
+        "stock_name": "元大台灣高息低波",
+        "foreign_net": 692,
+        "trust_net": 1490,
+        "ft_net": 2182,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "00935",
+        "stock_name": "野村臺灣新科技50",
+        "foreign_net": 664,
+        "trust_net": 1150,
+        "ft_net": 1814,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "009828",
+        "stock_name": "中信台日韓PCB",
+        "foreign_net": 1052,
+        "trust_net": 260,
+        "ft_net": 1312,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "3037",
+        "stock_name": "欣興",
+        "foreign_net": 644,
+        "trust_net": 546,
+        "ft_net": 1190,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "3035",
+        "stock_name": "智原",
+        "foreign_net": 1045,
+        "trust_net": 4,
+        "ft_net": 1049,
+        "date": "20261125"
+      }
+    ],
+    "sell": [
+      {
+        "stock_id": "2880",
+        "stock_name": "華南金",
+        "foreign_net": -7301,
+        "trust_net": -5553,
+        "ft_net": -12854,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2887",
+        "stock_name": "台新新光金",
+        "foreign_net": -7360,
+        "trust_net": -4932,
+        "ft_net": -12292,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2618",
+        "stock_name": "長榮航",
+        "foreign_net": -3537,
+        "trust_net": -2853,
+        "ft_net": -6390,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2105",
+        "stock_name": "正新",
+        "foreign_net": -5654,
+        "trust_net": -87,
+        "ft_net": -5741,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2891",
+        "stock_name": "中信金",
+        "foreign_net": -4259,
+        "trust_net": -512,
+        "ft_net": -4771,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "00929",
+        "stock_name": "復華台灣科技優息",
+        "foreign_net": -1942,
+        "trust_net": -2500,
+        "ft_net": -4442,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2801",
+        "stock_name": "彰銀",
+        "foreign_net": -4057,
+        "trust_net": -329,
+        "ft_net": -4386,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "2356",
+        "stock_name": "英業達",
+        "foreign_net": -425,
+        "trust_net": -2825,
+        "ft_net": -3250,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "1101",
+        "stock_name": "台泥",
+        "foreign_net": -2252,
+        "trust_net": -4,
+        "ft_net": -2256,
+        "date": "20261125"
+      },
+      {
+        "stock_id": "1102",
+        "stock_name": "亞泥",
+        "foreign_net": -1865,
+        "trust_net": -87,
+        "ft_net": -1952,
+        "date": "20261125"
+      }
+    ],
+    "date": "20261125"
+  },
+  "insti_signal_date": "2026-11-25",
+  "market_insti": {
+    "date": "20261125",
+    "unit": "億元",
+    "trust_buy": 717.44,
+    "trust_sell": 167.09,
+    "trust_net": 550.35,
+    "foreign_buy": 4578.32,
+    "foreign_sell": 5814.87,
+    "foreign_net": -1236.55
+  },
+  "watchlist_summary": [
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-25",
+      "entry_price": 20.53,
+      "latest_price": 20.53,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-25",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50",
+      "entry_date": "2026-11-25",
+      "entry_price": 7.48,
+      "latest_price": 7.48,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-25",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "00991A",
+      "stock_name": "主動復華未來50",
+      "entry_date": "2026-11-25",
+      "entry_price": 11.67,
+      "latest_price": 11.67,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-25",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "00405A",
+      "stock_name": "主動富邦台灣龍耀",
+      "entry_date": "2026-11-25",
+      "entry_price": 6.08,
+      "latest_price": 6.08,
+      "latest_pct": 0.0,
+      "latest_date": "2026-11-25",
+      "days_tracked": 1
+    },
+    {
+      "stock_id": "00403A",
+      "stock_name": "主動統一升級50",
+      "entry_date": "2026-11-24",
+      "entry_price": 8.04,
+      "latest_price": 7.48,
+      "latest_pct": -6.97,
+      "latest_date": "2026-11-25",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "00981A",
+      "stock_name": "主動統一台股增長",
+      "entry_date": "2026-11-24",
+      "entry_price": 22.04,
+      "latest_price": 20.53,
+      "latest_pct": -6.85,
+      "latest_date": "2026-11-25",
+      "days_tracked": 2
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
+      "entry_date": "2026-11-23",
+      "entry_price": 6.61,
+      "latest_price": 6.76,
+      "latest_pct": 2.27,
+      "latest_date": "2026-11-25",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "00953B",
+      "stock_name": "群益優選非投等債",
+      "entry_date": "2026-11-23",
+      "entry_price": 9.59,
+      "latest_price": 9.63,
+      "latest_pct": 0.42,
+      "latest_date": "2026-11-25",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "6770",
+      "stock_name": "力積電",
+      "entry_date": "2026-11-23",
+      "entry_price": 53.3,
+      "latest_price": 48.0,
+      "latest_pct": -9.94,
+      "latest_date": "2026-11-25",
+      "days_tracked": 3
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-11-20",
+      "entry_price": 80.3,
+      "latest_price": 87.4,
+      "latest_pct": 8.84,
+      "latest_date": "2026-11-25",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "00712",
+      "stock_name": "復華富時不動產",
+      "entry_date": "2026-11-20",
+      "entry_price": 6.5,
+      "latest_price": 6.76,
+      "latest_pct": 4.0,
+      "latest_date": "2026-11-25",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2409",
+      "stock_name": "友達",
+      "entry_date": "2026-11-20",
+      "entry_price": 23.25,
+      "latest_price": 24.15,
+      "latest_pct": 3.87,
+      "latest_date": "2026-11-25",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-11-20",
+      "entry_price": 33.95,
+      "latest_price": 34.0,
+      "latest_pct": 0.15,
+      "latest_date": "2026-11-25",
+      "days_tracked": 6
+    },
+    {
+      "stock_id": "9933",
+      "stock_name": "中鼎",
+      "entry_date": "2026-11-18",
+      "entry_price": 57.5,
+      "latest_price": 52.5,
+      "latest_pct": -8.7,
+      "latest_date": "2026-11-25",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "3481",
+      "stock_name": "群創",
+      "entry_date": "2026-11-18",
+      "entry_price": 36.55,
+      "latest_price": 30.55,
+      "latest_pct": -16.42,
+      "latest_date": "2026-11-25",
+      "days_tracked": 8
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-11-17",
+      "entry_price": 39.3,
+      "latest_price": 34.0,
+      "latest_pct": -13.49,
+      "latest_date": "2026-11-25",
+      "days_tracked": 9
+    },
+    {
+      "stock_id": "2610",
+      "stock_name": "華航",
+      "entry_date": "2026-11-17",
+      "entry_price": 23.1,
+      "latest_price": 22.0,
+      "latest_pct": -4.76,
+      "latest_date": "2026-11-25",
+      "days_tracked": 9
+    },
+    {
+      "stock_id": "2303",
+      "stock_name": "聯電",
+      "entry_date": "2026-11-16",
+      "entry_price": 95.2,
+      "latest_price": 87.4,
+      "latest_pct": -8.19,
+      "latest_date": "2026-11-25",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2887",
+      "stock_name": "台新新光金",
+      "entry_date": "2026-11-16",
+      "entry_price": 38.6,
+      "latest_price": 34.0,
+      "latest_pct": -11.92,
+      "latest_date": "2026-11-25",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2883",
+      "stock_name": "凱基金",
+      "entry_date": "2026-11-16",
+      "entry_price": 34.55,
+      "latest_price": 30.05,
+      "latest_pct": -13.02,
+      "latest_date": "2026-11-25",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2885",
+      "stock_name": "元大金",
+      "entry_date": "2026-11-16",
+      "entry_price": 68.7,
+      "latest_price": 61.5,
+      "latest_pct": -10.48,
+      "latest_date": "2026-11-25",
+      "days_tracked": 10
+    },
+    {
+      "stock_id": "2884",
+      "stock_name": "玉山金",
+      "entry_date": "2026-11-16",
+      "entry_price": 48.3,
+      "latest_price": 38.95,
+      "latest_pct": -19.36,
+      "latest_date": "2026-11-25",
+      "days_tracked": 10
+    }
+  ],
+  "ai_log": [
+    {
+      "run_date": "2026-11-26",
+      "ai_analysis_time": "2026-11-26 07:03",
+      "ai_analysis": [
+        {
+          "ticker": "00981A",
+          "name": "主動統一台股增長",
+          "verdict": "謹慎觀察",
+          "confidence": "中",
+          "reasons": [
+            "追蹤指數近期受益於台股整體上揚，資金流向偏好成長型ETF",
+            "ETF本身無營收，需依賴標的成分股表現，缺乏具體基本面支撐"
+          ],
+          "warning": "若大盤回檔或成分股表現不佳，ETF淨值易受波動",
+          "next_check": "一週後",
+          "data_quality": "有限",
+          "net_buy_lots": 393003,
+          "is_etf": true
+        },
+        {
+          "ticker": "00403A",
+          "name": "主動統一升級50",
+          "verdict": "謹慎觀察",
+          "confidence": "中",
+          "reasons": [
+            "追蹤標的為台灣50指數，近期大盤波動較大，短期走勢不明朗",
+            "ETF殖利率相對穩定，但缺乏明顯的升值動能"
+          ],
+          "warning": "若大盤持續震盪，淨值可能受壓",
+          "next_check": "一週後",
+          "data_quality": "有限",
+          "net_buy_lots": 382180,
+          "is_etf": true
+        },
+        {
+          "ticker": "00991A",
+          "name": "主動復華未來50",
+          "verdict": "謹慎觀察",
+          "confidence": "中",
+          "reasons": [
+            "追蹤指數涵蓋台灣高成長科技與新興產業，近期受AI與半導體需求帶動上揚",
+            "大盤波動較大，ETF流動性雖佳但缺乏明確收益率支撐"
+          ],
+          "warning": "市場波動可能導致短期淨值波動",
+          "next_check": "一週後",
+          "data_quality": "有限",
+          "net_buy_lots": 232518,
+          "is_etf": true
+        },
+        {
+          "ticker": "00405A",
+          "name": "主動富邦台灣龍耀",
+          "verdict": "謹慎觀察",
+          "confidence": "中",
+          "reasons": [
+            "缺乏月營收與新聞資訊，難以評估標的基本面",
+            "ETF追蹤指數表現受大盤波動影響，需觀察整體市場走勢"
+          ],
+          "warning": null,
+          "next_check": "一週後",
+          "data_quality": "有限",
+          "net_buy_lots": 36941,
+          "is_etf": true
+        }
+      ],
+      "news_trend": {
+        "summary": "近期新聞聚焦美國301調查與新關稅提案，台灣面臨最高15%關稅上限，提升地緣政治風險與出口成本；同時AI與半導體產業持續受賣壓，輝達等龍頭股跌幅擴大，市場資金偏好轉弱，導致台股波動加劇且出現短線拋售；此外美國GDP上修與通膨未降溫加劇升息預期，美元指數走強，資金流向美債與美元資產，進一步抑制新興市場資金流入，台股整體情緒偏空。",
+        "themes": [
+          "關稅與貿易風險",
+          "AI與半導體賣壓",
+          "升息與美元走強"
+        ],
+        "headline_count": 85,
+        "source_count": 8,
+        "time": "2026-11-26 07:03"
+      }
+    }
+  ]
+}
